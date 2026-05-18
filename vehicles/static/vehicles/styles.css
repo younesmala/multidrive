@@ -69,8 +69,24 @@ textarea {
 }
 
 .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     color: var(--blue);
     font-size: 1.45rem;
+    font-weight: 800;
+}
+
+.brand-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    color: var(--white);
+    background: var(--blue);
+    border-radius: 8px;
+    font-size: 0.95rem;
     font-weight: 800;
 }
 
@@ -160,6 +176,13 @@ textarea {
     padding: 78px 0 66px;
 }
 
+.hero-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    gap: 28px;
+    align-items: start;
+}
+
 .eyebrow,
 .vehicle-category {
     margin: 0 0 10px;
@@ -213,6 +236,81 @@ h3 {
     flex-wrap: wrap;
     gap: 12px;
     margin-top: 28px;
+}
+
+.hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 30px;
+}
+
+.hero-stat {
+    min-width: 170px;
+    padding: 16px 18px;
+    background: var(--light);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.hero-stat strong {
+    display: block;
+    color: var(--blue);
+    font-size: 1.5rem;
+    font-weight: 800;
+}
+
+.hero-stat span {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.hero-panel {
+    padding: 28px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.hero-panel h2 {
+    margin-bottom: 10px;
+    font-size: 1.35rem;
+}
+
+.search-form {
+    display: grid;
+    gap: 14px;
+}
+
+.search-form label {
+    display: grid;
+    gap: 8px;
+    color: var(--dark);
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.search-form input {
+    min-height: 46px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+}
+
+.search-form button {
+    min-height: 46px;
+    color: var(--white);
+    background: var(--blue);
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background: var(--blue-dark);
+    border-color: var(--blue-dark);
 }
 
 .button,
@@ -345,11 +443,39 @@ h3 {
     color: var(--blue);
 }
 
+.vehicle-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.vehicle-highlights span {
+    padding: 6px 10px;
+    color: var(--muted);
+    background: var(--light);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
 .vehicle-meta {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
+}
+
+.card-button {
+    width: 100%;
+    margin-top: 16px;
+    color: var(--blue);
+    background: var(--white);
+}
+
+.card-button:hover {
+    color: var(--white);
+    background: var(--blue);
 }
 
 .vehicle-meta strong,
@@ -388,7 +514,7 @@ h3 {
 
 .filter-form {
     display: grid;
-    grid-template-columns: repeat(3, minmax(160px, 1fr));
+    grid-template-columns: repeat(4, minmax(160px, 1fr));
     gap: 14px;
     padding: 18px;
     background: var(--white);
@@ -615,6 +741,38 @@ h3 {
     background: var(--success);
 }
 
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.step-card {
+    padding: 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.step-card span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin-bottom: 16px;
+    color: var(--white);
+    background: var(--blue);
+    border-radius: 999px;
+    font-weight: 800;
+}
+
+.step-card p {
+    color: var(--muted);
+    margin-bottom: 0;
+}
+
 .account-section {
     padding-top: 30px;
 }
@@ -802,6 +960,12 @@ body::after {
     font-weight: 700;
 }
 
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
 @media (max-width: 760px) {
     .nav,
     .nav-links,
@@ -820,7 +984,9 @@ body::after {
         padding: 52px 0 44px;
     }
 
+    .hero-shell,
     .filter-form,
+    .steps-grid,
     .account-grid,
     .stats-grid,
     .detail-layout,

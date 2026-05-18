@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
 from django.db.models import Avg
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import ReviewForm
 from .models import Review, Vehicle, VehicleCategory
@@ -12,7 +12,16 @@ def attach_main_images(vehicles):
             vehicle.images.filter(is_main=True).first()
             or vehicle.images.first()
         )
+        vehicle.display_year = extract_vehicle_year(vehicle.title)
+        vehicle.deposit_amount = round(float(vehicle.price) * 0.2, 2)
     return vehicles
+
+
+def extract_vehicle_year(title):
+    for token in reversed(title.split()):
+        if token.isdigit() and len(token) == 4:
+            return token
+    return "N/A"
 
 
 def home(request):
@@ -22,6 +31,12 @@ def home(request):
         .filter(status=Vehicle.STATUS_AVAILABLE)
         .order_by("-created_at")[:8]
     )
+    popular_vehicles = attach_main_images(
+        Vehicle.objects.select_related("category")
+        .prefetch_related("images")
+        .filter(status=Vehicle.STATUS_AVAILABLE)
+        .order_by("price", "-created_at")[:4]
+    )
     categories = VehicleCategory.objects.order_by("name")
 
     return render(
@@ -29,7 +44,9 @@ def home(request):
         "vehicles/home.html",
         {
             "latest_vehicles": latest_vehicles,
+            "popular_vehicles": popular_vehicles,
             "categories": categories,
+            "available_count": Vehicle.objects.filter(status=Vehicle.STATUS_AVAILABLE).count(),
         },
     )
 
@@ -37,6 +54,7 @@ def home(request):
 def vehicle_list(request):
     selected_category = request.GET.get("category")
     selected_status = request.GET.get("status", Vehicle.STATUS_AVAILABLE)
+    selected_query = request.GET.get("q", "").strip()
 
     vehicles = (
         Vehicle.objects.select_related("category")
@@ -50,6 +68,9 @@ def vehicle_list(request):
     if selected_status:
         vehicles = vehicles.filter(status=selected_status)
 
+    if selected_query:
+        vehicles = vehicles.filter(title__icontains=selected_query)
+
     vehicles = attach_main_images(vehicles)
     categories = VehicleCategory.objects.order_by("name")
 
@@ -61,6 +82,7 @@ def vehicle_list(request):
             "categories": categories,
             "selected_category": selected_category,
             "selected_status": selected_status,
+            "selected_query": selected_query,
             "status_choices": Vehicle.STATUS_CHOICES,
         },
     )
