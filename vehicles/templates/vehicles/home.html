@@ -20,7 +20,7 @@
                     {% elif request.user.is_authenticated %}
                         <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
                     {% else %}
-                        <a class="button secondary" href="{% url 'accounts:register' %}">Creer un compte</a>
+                        <a class="button secondary" href="{% url 'accounts:register' %}">Inscription</a>
                     {% endif %}
                 </div>
                 <div class="hero-stats">
@@ -36,59 +36,33 @@
             </div>
 
             <div class="hero-panel">
-                <h2>Trouver rapidement un vehicule</h2>
-                <form method="get" action="{% url 'vehicles:vehicle_list' %}" class="search-form">
-                    <label>
-                        Recherche
-                        <input type="text" name="q" placeholder="Ex. velo, scooter, Peugeot..." />
-                    </label>
-                    <button type="submit">Rechercher</button>
-                </form>
+                <p class="eyebrow">Comment utiliser MultiDrive</p>
+                <h2>Un parcours simple pour trouver, reserver et suivre ton vehicule.</h2>
+                <div class="hero-steps">
+                    <article class="hero-step">
+                        <span>1</span>
+                        <div>
+                            <h3>Choisir un vehicule</h3>
+                            <p>Explore le catalogue et compare les prix, categories et disponibilites.</p>
+                        </div>
+                    </article>
+                    <article class="hero-step">
+                        <span>2</span>
+                        <div>
+                            <h3>Reserver</h3>
+                            <p>Connecte-toi et envoie une demande de reservation en quelques clics.</p>
+                        </div>
+                    </article>
+                    <article class="hero-step">
+                        <span>3</span>
+                        <div>
+                            <h3>Suivre ton dossier</h3>
+                            <p>Consulte ensuite tes reservations et paiements dans ton espace membre.</p>
+                        </div>
+                    </article>
+                </div>
             </div>
         </div>
-    </div>
-</section>
-
-<section class="section">
-    <div class="section-heading">
-        <h2>Vehicules populaires</h2>
-        <p>Une selection de vehicules accessibles pour demarrer rapidement.</p>
-    </div>
-    <div class="vehicle-grid">
-        {% for vehicle in popular_vehicles %}
-            {% include "vehicles/partials/vehicle_card.html" %}
-        {% empty %}
-            <p>Aucun vehicule populaire disponible pour le moment.</p>
-        {% endfor %}
-    </div>
-</section>
-
-<section class="section">
-    <div class="section-heading">
-        <h2>Comment ca fonctionne</h2>
-        <p>Un parcours simple pour un MVP clair et rassurant.</p>
-    </div>
-    <div class="steps-grid">
-        <article class="step-card">
-            <span>1</span>
-            <h3>Choisir un vehicule</h3>
-            <p>Parcours le catalogue et compare les categories, les prix et la disponibilite.</p>
-        </article>
-        <article class="step-card">
-            <span>2</span>
-            <h3>Reserver</h3>
-            <p>Connecte-toi et envoie une demande de reservation en quelques clics.</p>
-        </article>
-        <article class="step-card">
-            <span>3</span>
-            <h3>Payer l'acompte</h3>
-            <p>Le module de paiement sera relie a Stripe pour securiser l'acompte.</p>
-        </article>
-        <article class="step-card">
-            <span>4</span>
-            <h3>Confirmation</h3>
-            <p>Le suivi des reservations et paiements reste centralise dans ton espace membre.</p>
-        </article>
     </div>
 </section>
 
@@ -104,6 +78,20 @@
             </a>
         {% empty %}
             <p>Aucune categorie disponible.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <h2>Vehicules populaires</h2>
+        <p>Une selection de vehicules accessibles pour demarrer rapidement.</p>
+    </div>
+    <div class="vehicle-grid">
+        {% for vehicle in popular_vehicles %}
+            {% include "vehicles/partials/vehicle_card.html" %}
+        {% empty %}
+            <p>Aucun vehicule populaire disponible pour le moment.</p>
         {% endfor %}
     </div>
 </section>

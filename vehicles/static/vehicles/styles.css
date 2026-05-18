@@ -71,22 +71,8 @@ textarea {
 .brand {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
     color: var(--blue);
     font-size: 1.45rem;
-    font-weight: 800;
-}
-
-.brand-mark {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    color: var(--white);
-    background: var(--blue);
-    border-radius: 8px;
-    font-size: 0.95rem;
     font-weight: 800;
 }
 
@@ -116,12 +102,12 @@ textarea {
 }
 
 .user-menu-button {
-    min-height: 38px;
-    padding: 0 12px;
+    min-height: 42px;
+    padding: 0 16px;
     color: var(--blue);
     background: var(--white);
     border: 1px solid var(--line);
-    border-radius: 6px;
+    border-radius: 999px;
     font-weight: 700;
     cursor: pointer;
 }
@@ -156,10 +142,10 @@ textarea {
 }
 
 .nav-cta {
-    padding: 8px 12px;
+    padding: 10px 16px;
     color: var(--white);
     background: var(--blue);
-    border-radius: 6px;
+    border-radius: 999px;
 }
 
 .nav-links .nav-cta:hover {
@@ -178,7 +164,7 @@ textarea {
 
 .hero-shell {
     display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
     gap: 28px;
     align-items: start;
 }
@@ -269,48 +255,48 @@ h3 {
     padding: 28px;
     background: var(--white);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 14px;
     box-shadow: var(--shadow);
 }
 
 .hero-panel h2 {
-    margin-bottom: 10px;
+    margin-bottom: 18px;
     font-size: 1.35rem;
 }
 
-.search-form {
+.hero-steps {
     display: grid;
+    gap: 16px;
+}
+
+.hero-step {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr);
     gap: 14px;
+    align-items: start;
 }
 
-.search-form label {
-    display: grid;
-    gap: 8px;
-    color: var(--dark);
-    font-size: 0.88rem;
-    font-weight: 600;
-}
-
-.search-form input {
-    min-height: 46px;
-    padding: 0 12px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-}
-
-.search-form button {
-    min-height: 46px;
+.hero-step span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
     color: var(--white);
     background: var(--blue);
-    border: 1px solid var(--blue);
-    border-radius: 6px;
-    font-weight: 700;
-    cursor: pointer;
+    border-radius: 999px;
+    font-weight: 800;
 }
 
-.search-form button:hover {
-    background: var(--blue-dark);
-    border-color: var(--blue-dark);
+.hero-step h3 {
+    margin-bottom: 6px;
+    font-size: 1rem;
+}
+
+.hero-step p {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
 }
 
 .button,
@@ -318,10 +304,10 @@ h3 {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 44px;
-    padding: 0 18px;
+    min-height: 48px;
+    padding: 0 22px;
     border: 1px solid var(--blue);
-    border-radius: 6px;
+    border-radius: 999px;
     font-weight: 700;
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
@@ -516,10 +502,10 @@ h3 {
     display: grid;
     grid-template-columns: repeat(4, minmax(160px, 1fr));
     gap: 14px;
-    padding: 18px;
+    padding: 22px;
     background: var(--white);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 14px;
     box-shadow: var(--shadow);
 }
 
@@ -535,12 +521,12 @@ h3 {
 .filter-form select,
 .filter-form input,
 .filter-form textarea {
-    min-height: 44px;
-    padding: 0 12px;
+    min-height: 52px;
+    padding: 0 16px;
     color: var(--dark);
     background: var(--white);
     border: 1px solid var(--line);
-    border-radius: 6px;
+    border-radius: 999px;
 }
 
 .filter-form select:focus,
@@ -741,38 +727,6 @@ h3 {
     background: var(--success);
 }
 
-.steps-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 18px;
-}
-
-.step-card {
-    padding: 24px;
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-}
-
-.step-card span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    margin-bottom: 16px;
-    color: var(--white);
-    background: var(--blue);
-    border-radius: 999px;
-    font-weight: 800;
-}
-
-.step-card p {
-    color: var(--muted);
-    margin-bottom: 0;
-}
-
 .account-section {
     padding-top: 30px;
 }
@@ -927,11 +881,11 @@ h3 {
 
 .footer {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: 24px;
     margin-top: 70px;
-    padding: 30px 0;
+    padding: 38px 0;
     color: var(--white);
 }
 
@@ -955,15 +909,41 @@ body::after {
     color: rgba(255, 255, 255, 0.76);
 }
 
+.footer-brand {
+    max-width: 320px;
+}
+
+.footer-column {
+    display: grid;
+    gap: 12px;
+}
+
+.footer-title {
+    color: var(--white);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
 .footer a {
     color: var(--white);
     font-weight: 700;
 }
 
 .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
+    display: grid;
+    gap: 10px;
+}
+
+.footer-note {
+    max-width: 280px;
+    margin: 0;
+}
+
+.footer-copy {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.88rem;
 }
 
 @media (max-width: 760px) {
@@ -986,7 +966,6 @@ body::after {
 
     .hero-shell,
     .filter-form,
-    .steps-grid,
     .account-grid,
     .stats-grid,
     .detail-layout,
