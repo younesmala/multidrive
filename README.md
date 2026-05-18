@@ -1449,6 +1449,3 @@ Peut :
 
 ---
 
-## 28. Phrase simple pour l'oral
-
-> J'ai construit la base de donnees de MultiDrive progressivement avec Django, en partant des modeles Python. Les vehicules sont ranges par categories, chaque vehicule peut avoir plusieurs images, un utilisateur peut faire une reservation, cette reservation peut avoir un paiement d'acompte, et ce paiement peut generer une facture. Les messages de contact restent independants. J'ai ensuite configure l'admin Django pour consulter les donnees et cree une commande de seed pour generer une base de test realiste, avec des velos, trottinettes, scooters, motos legeres et petites voitures d'occasion a prix accessibles.
