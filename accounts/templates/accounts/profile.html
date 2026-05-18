@@ -1,0 +1,59 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Mon profil - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">Espace client</p>
+    <h1>Mon profil</h1>
+    <p>Retrouvez ici les informations principales de votre compte MultiDrive.</p>
+</section>
+
+<section class="section account-section">
+    <div class="account-grid">
+        <article class="account-card">
+            <h2>Informations du compte</h2>
+            <dl class="account-details">
+                <div>
+                    <dt>Nom d'utilisateur</dt>
+                    <dd>{{ request.user.username }}</dd>
+                </div>
+                <div>
+                    <dt>Adresse email</dt>
+                    <dd>{{ request.user.email|default:"Non renseignee" }}</dd>
+                </div>
+                <div>
+                    <dt>Date d'inscription</dt>
+                    <dd>{{ request.user.date_joined|date:"d/m/Y" }}</dd>
+                </div>
+                <div>
+                    <dt>Derniere connexion</dt>
+                    <dd>{{ request.user.last_login|date:"d/m/Y H:i"|default:"Aucune" }}</dd>
+                </div>
+            </dl>
+        </article>
+
+        <article class="account-card">
+            <h2>Suivi rapide</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span>{{ reservation_count }}</span>
+                    <p>Reservations</p>
+                </div>
+                <div class="stat-card">
+                    <span>{{ payment_count }}</span>
+                    <p>Paiements</p>
+                </div>
+                <div class="stat-card">
+                    <span>{{ paid_payment_count }}</span>
+                    <p>Paiements valides</p>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Voir mes reservations</a>
+                <a class="button primary" href="{% url 'accounts:payment_list' %}">Voir mes paiements</a>
+            </div>
+        </article>
+    </div>
+</section>
+{% endblock %}

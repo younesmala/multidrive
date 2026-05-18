@@ -1,0 +1,109 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}{{ vehicle.title }} - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="detail-layout">
+    <div class="gallery">
+        {% if images %}
+            {% for image in images %}
+                <div class="gallery-item">
+                    <span>{{ vehicle.category.name }}</span>
+                    <small>{{ image.image }}</small>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="gallery-item">
+                <span>{{ vehicle.category.name }}</span>
+                <small>Aucune image</small>
+            </div>
+        {% endif %}
+    </div>
+
+    <article class="detail-panel">
+        <p class="eyebrow">{{ vehicle.category.name }}</p>
+        <h1>{{ vehicle.title }}</h1>
+        <p class="price">{{ vehicle.price }} EUR</p>
+        <p class="status status-{{ vehicle.status }}">{{ vehicle.get_status_display }}</p>
+        <p class="description">{{ vehicle.description }}</p>
+        <div class="detail-actions">
+            <a class="button primary" href="{% url 'reservations:reserve_vehicle' vehicle.id %}">Reserver ce vehicule</a>
+            <a class="button secondary" href="{% url 'vehicles:vehicle_list' %}">Retour au catalogue</a>
+        </div>
+    </article>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <div>
+            <h2>Avis clients</h2>
+            <p>
+                {% if review_count %}
+                    {{ review_count }} avis, note moyenne :
+                    {{ average_rating|floatformat:1 }}/5
+                {% else %}
+                    Aucun avis pour ce vehicule pour le moment.
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    {% if request.user.is_authenticated %}
+        <div class="review-form-card">
+            <h3>{% if user_review %}Modifier mon avis{% else %}Laisser un avis{% endif %}</h3>
+            <form class="auth-form" method="post" action="{% url 'vehicles:add_review' vehicle.id %}">
+                {% csrf_token %}
+                {{ review_form.non_field_errors }}
+                <label for="{{ review_form.rating.id_for_label }}">
+                    {{ review_form.rating.label }}
+                    {{ review_form.rating }}
+                    {% for error in review_form.rating.errors %}
+                        <span class="field-error">{{ error }}</span>
+                    {% endfor %}
+                </label>
+                <label for="{{ review_form.comment.id_for_label }}">
+                    {{ review_form.comment.label }}
+                    {{ review_form.comment }}
+                    {% for error in review_form.comment.errors %}
+                        <span class="field-error">{{ error }}</span>
+                    {% endfor %}
+                </label>
+                <button type="submit">{% if user_review %}Mettre a jour mon avis{% else %}Publier mon avis{% endif %}</button>
+            </form>
+        </div>
+    {% else %}
+        <div class="review-form-card">
+            <p>Connectez-vous pour laisser un avis sur ce vehicule.</p>
+            <a class="button primary" href="{% url 'accounts:login' %}">Se connecter</a>
+        </div>
+    {% endif %}
+
+    <div class="review-list">
+        {% for review in reviews %}
+            <article class="review-card">
+                <div class="review-header">
+                    <strong>{{ review.user.username }}</strong>
+                    <span>{{ review.rating }}/5</span>
+                </div>
+                <p>{{ review.comment }}</p>
+                <small>Publie le {{ review.created_at|date:"d/m/Y H:i" }}</small>
+            </article>
+        {% empty %}
+            <p>Aucun avis disponible pour le moment.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <h2>Vehicules similaires</h2>
+    </div>
+    <div class="vehicle-grid">
+        {% for vehicle in related_vehicles %}
+            {% include "vehicles/partials/vehicle_card.html" %}
+        {% empty %}
+            <p>Aucune suggestion disponible.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

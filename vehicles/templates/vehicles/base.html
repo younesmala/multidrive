@@ -1,0 +1,53 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}MultiDrive{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'vehicles/styles.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="nav">
+            <a class="brand" href="{% url 'home' %}">MultiDrive</a>
+            <div class="nav-links">
+                <a href="{% url 'home' %}">Accueil</a>
+                <a href="{% url 'vehicles:vehicle_list' %}">Vehicules</a>
+                {% if request.user.is_authenticated %}
+                    <div class="user-menu">
+                        <button type="button" class="user-menu-button">Bonjour, {{ request.user.username }}</button>
+                        <div class="user-menu-panel">
+                            <a href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
+                            <a href="{% url 'accounts:profile' %}">Mon profil</a>
+                            <a href="{% url 'accounts:payment_list' %}">Paiements</a>
+                            <a href="{% url 'accounts:logout' %}">Deconnexion</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'accounts:login' %}">Connexion</a>
+                    <a class="nav-cta" href="{% url 'accounts:register' %}">Creer un compte</a>
+                {% endif %}
+                {% if request.user.is_staff %}
+                    <a href="/admin/">Admin</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div>
+            <strong>MultiDrive</strong>
+            <p>Plateforme de vente et reservation de vehicules d'occasion accessibles.</p>
+        </div>
+        <a href="{% url 'vehicles:vehicle_list' %}">Consulter les vehicules</a>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Mes reservations - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">Espace client</p>
+    <h1>Mes reservations</h1>
+    <p>Retrouvez les demandes de reservation liees a votre compte.</p>
+</section>
+
+<section class="section">
+    <div class="table-card">
+        {% if reservations %}
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Vehicule</th>
+                        <th>Prix</th>
+                        <th>Statut</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reservation in reservations %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">
+                                    {{ reservation.vehicle.title }}
+                                </a>
+                            </td>
+                            <td>{{ reservation.vehicle.price }} EUR</td>
+                            <td>
+                                <span class="status status-{{ reservation.status }}">
+                                    {{ reservation.get_status_display }}
+                                </span>
+                            </td>
+                            <td>{{ reservation.created_at|date:"d/m/Y H:i" }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Vous n'avez pas encore de reservation.</p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

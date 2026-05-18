@@ -1,0 +1,21 @@
+<article class="vehicle-card">
+    <a class="vehicle-media" href="{% url 'vehicles:vehicle_detail' vehicle.id %}">
+        {% if vehicle.main_image %}
+            <span>{{ vehicle.category.name }}</span>
+            <small>{{ vehicle.main_image.image }}</small>
+        {% else %}
+            <span>{{ vehicle.category.name }}</span>
+            <small>Image a venir</small>
+        {% endif %}
+    </a>
+    <div class="vehicle-body">
+        <div>
+            <p class="vehicle-category">{{ vehicle.category.name }}</p>
+            <h3><a href="{% url 'vehicles:vehicle_detail' vehicle.id %}">{{ vehicle.title }}</a></h3>
+        </div>
+        <div class="vehicle-meta">
+            <strong>{{ vehicle.price }} EUR</strong>
+            <span class="status status-{{ vehicle.status }}">{{ vehicle.get_status_display }}</span>
+        </div>
+    </div>
+</article>

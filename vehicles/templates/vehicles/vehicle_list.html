@@ -1,0 +1,52 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}MultiDrive - Vehicules{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">Catalogue</p>
+    <h1>Vehicules d'occasion</h1>
+    <p>Filtre les annonces par categorie ou par statut.</p>
+</section>
+
+<section class="filters">
+    <form method="get" class="filter-form">
+        <label>
+            Categorie
+            <select name="category">
+                <option value="">Toutes</option>
+                {% for category in categories %}
+                    <option value="{{ category.slug }}" {% if selected_category == category.slug %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+        <label>
+            Statut
+            <select name="status">
+                <option value="">Tous</option>
+                {% for value, label in status_choices %}
+                    <option value="{{ value }}" {% if selected_status == value %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </label>
+        <button type="submit">Filtrer</button>
+    </form>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <h2>{{ vehicles|length }} resultat(s)</h2>
+    </div>
+    <div class="vehicle-grid">
+        {% for vehicle in vehicles %}
+            {% include "vehicles/partials/vehicle_card.html" %}
+        {% empty %}
+            <p>Aucun vehicule ne correspond a ce filtre.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

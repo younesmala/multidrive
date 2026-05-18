@@ -1,0 +1,41 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Creer un compte - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+    <div class="auth-card">
+        <p class="eyebrow">Nouveau client</p>
+        <h1>Creer un compte</h1>
+        <p class="auth-intro">Un compte est necessaire pour reserver un vehicule ou payer un acompte.</p>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-alert">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            {% for field in form %}
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small>{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <span class="field-error">{{ error }}</span>
+                    {% endfor %}
+                </label>
+            {% endfor %}
+
+            <button type="submit">Creer mon compte</button>
+        </form>
+
+        <p class="auth-switch">
+            Deja inscrit ?
+            <a href="{% url 'accounts:login' %}">Se connecter</a>
+        </p>
+    </div>
+</section>
+{% endblock %}

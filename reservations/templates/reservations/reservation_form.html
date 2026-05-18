@@ -1,0 +1,36 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Reserver {{ vehicle.title }} - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="form-page">
+    <div class="form-card">
+        <p class="eyebrow">Reservation</p>
+        <h1>Reserver ce vehicule</h1>
+        <div class="reservation-summary">
+            <strong>{{ vehicle.title }}</strong>
+            <span>{{ vehicle.price }} EUR</span>
+        </div>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="form-alert">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            {% for field in form %}
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                    {{ field }}
+                    {% for error in field.errors %}
+                        <span class="field-error">{{ error }}</span>
+                    {% endfor %}
+                </label>
+            {% endfor %}
+
+            <button type="submit">Envoyer ma demande</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

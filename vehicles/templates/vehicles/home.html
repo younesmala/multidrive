@@ -1,0 +1,56 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}MultiDrive - Accueil{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <p class="eyebrow">Occasion accessible</p>
+        <h1>Velos, trottinettes, scooters, motos et petites voitures.</h1>
+        <p class="hero-text">
+            MultiDrive rassemble des vehicules d'occasion a prix raisonnable,
+            avec des annonces organisees par categorie et faciles a consulter.
+        </p>
+        <div class="hero-actions">
+            <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">Voir les vehicules</a>
+            {% if request.user.is_authenticated and request.user.is_staff %}
+                <a class="button secondary" href="/admin/">Gerer la base</a>
+            {% elif request.user.is_authenticated %}
+                <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
+            {% else %}
+                <a class="button secondary" href="{% url 'accounts:register' %}">Creer un compte</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <h2>Categories</h2>
+        <p>{{ categories|length }} categories disponibles dans la base.</p>
+    </div>
+    <div class="category-grid">
+        {% for category in categories %}
+            <a class="category-card" href="{% url 'vehicles:vehicle_list' %}?category={{ category.slug }}">
+                <span>{{ category.name }}</span>
+            </a>
+        {% empty %}
+            <p>Aucune categorie disponible.</p>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <h2>Derniers vehicules disponibles</h2>
+        <p>Un apercu des annonces actuellement en base.</p>
+    </div>
+    <div class="vehicle-grid">
+        {% for vehicle in latest_vehicles %}
+            {% include "vehicles/partials/vehicle_card.html" %}
+        {% empty %}
+            <p>Aucun vehicule disponible pour le moment.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

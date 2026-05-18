@@ -1,0 +1,39 @@
+from django.contrib import admin
+
+from .models import Review, Vehicle, VehicleCategory, VehicleImage
+
+
+class VehicleImageInline(admin.TabularInline):
+    model = VehicleImage
+    extra = 1
+
+
+@admin.register(VehicleCategory)
+class VehicleCategoryAdmin(admin.ModelAdmin):
+    list_display = ("name", "slug", "created_at")
+    search_fields = ("name", "slug")
+    prepopulated_fields = {"slug": ("name",)}
+    ordering = ("name",)
+
+
+@admin.register(Vehicle)
+class VehicleAdmin(admin.ModelAdmin):
+    list_display = ("title", "category", "price", "status", "created_at")
+    list_filter = ("status", "category")
+    search_fields = ("title", "description")
+    ordering = ("title",)
+    inlines = [VehicleImageInline]
+
+
+@admin.register(VehicleImage)
+class VehicleImageAdmin(admin.ModelAdmin):
+    list_display = ("vehicle", "image", "is_main", "created_at")
+    list_filter = ("is_main", "created_at")
+    search_fields = ("vehicle__title",)
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ("vehicle", "user", "rating", "created_at")
+    list_filter = ("rating", "created_at")
+    search_fields = ("vehicle__title", "user__username", "comment")
