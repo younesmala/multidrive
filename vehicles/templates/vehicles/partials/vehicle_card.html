@@ -12,10 +12,15 @@
         <div>
             <p class="vehicle-category">{{ vehicle.category.name }}</p>
             <h3><a href="{% url 'vehicles:vehicle_detail' vehicle.id %}">{{ vehicle.title }}</a></h3>
+            <div class="vehicle-highlights">
+                <span>Annee {{ vehicle.display_year }}</span>
+                <span>Acompte estime {{ vehicle.deposit_amount }} EUR</span>
+            </div>
         </div>
         <div class="vehicle-meta">
             <strong>{{ vehicle.price }} EUR</strong>
             <span class="status status-{{ vehicle.status }}">{{ vehicle.get_status_display }}</span>
         </div>
+        <a class="button card-button" href="{% url 'vehicles:vehicle_detail' vehicle.id %}">Voir la fiche</a>
     </div>
 </article>

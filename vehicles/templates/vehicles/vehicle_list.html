@@ -6,11 +6,15 @@
 <section class="page-title">
     <p class="eyebrow">Catalogue</p>
     <h1>Vehicules d'occasion</h1>
-    <p>Filtre les annonces par categorie ou par statut.</p>
+    <p>Consulte le catalogue principal et affine rapidement par recherche, categorie ou statut.</p>
 </section>
 
 <section class="filters">
     <form method="get" class="filter-form">
+        <label>
+            Recherche
+            <input type="text" name="q" value="{{ selected_query }}" placeholder="Rechercher un modele, une marque ou un type de vehicule">
+        </label>
         <label>
             Categorie
             <select name="category">
@@ -39,7 +43,11 @@
 
 <section class="section">
     <div class="section-heading">
-        <h2>{{ vehicles|length }} resultat(s)</h2>
+        <div>
+            <h2>{{ vehicles|length }} resultat(s)</h2>
+            <p>Des cartes lisibles pour comparer rapidement les vehicules disponibles.</p>
+        </div>
+        <a class="button secondary" href="{% url 'vehicles:vehicle_list' %}">Reinitialiser</a>
     </div>
     <div class="vehicle-grid">
         {% for vehicle in vehicles %}
