@@ -1361,6 +1361,30 @@ Quand une reponse administrateur est ajoutee :
 
 ---
 
+## 24quater. Dashboard administrateur
+
+Un dashboard administrateur simple est maintenant disponible pour les comptes staff.
+
+URL ajoutee :
+
+```text
+/accounts/admin-dashboard/
+```
+
+Fonctionnalites du dashboard :
+
+- vue globale sur le catalogue ;
+- nombre de reservations en attente ;
+- nombre de messages sans reponse ;
+- nombre de paiements a suivre ;
+- nombre de comptes desactives ;
+- listes recentes de reservations, messages et comptes desactives ;
+- raccourcis vers l'admin Django.
+
+Le dashboard ne remplace pas l'admin Django : il sert de page de pilotage rapide pour les actions du quotidien.
+
+---
+
 ## 25. Direction UI/UX
 
 La direction visuelle de MultiDrive est maintenant fixee.
