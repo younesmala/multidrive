@@ -617,6 +617,19 @@ h3 {
     resize: vertical;
 }
 
+.checkbox-field {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+}
+
+.checkbox-field input {
+    width: 18px;
+    height: 18px;
+    min-height: auto;
+    padding: 0;
+}
+
 .auth-form input:focus,
 .auth-form textarea:focus {
     outline: 2px solid rgba(30, 58, 138, 0.18);
@@ -744,6 +757,26 @@ h3 {
     border: 1px solid var(--line);
     border-radius: 8px;
     box-shadow: var(--shadow);
+}
+
+.danger-card {
+    border-color: #F3C7C7;
+}
+
+.danger-button {
+    min-height: 48px;
+    padding: 0 22px;
+    color: var(--white);
+    background: var(--danger);
+    border: 1px solid var(--danger);
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.danger-button:hover {
+    background: #991B1B;
+    border-color: #991B1B;
 }
 
 .account-card h2,

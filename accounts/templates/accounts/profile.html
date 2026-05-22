@@ -56,4 +56,35 @@
         </article>
     </div>
 </section>
+
+<section class="section account-section">
+    <article class="account-card danger-card">
+        <h2>Suppression du compte</h2>
+        {% if account_status.is_deleted %}
+            <p class="description">
+                Ce compte a deja ete desactive. L'etat est conserve en base avec le libelle :
+                <strong>{{ account_status.deletion_label }}</strong>.
+            </p>
+            <p class="description">
+                Motif :
+                {% if account_status.deletion_reason_type == "admin_block" %}
+                    desactivation administrative.
+                {% else %}
+                    demande utilisateur.
+                {% endif %}
+            </p>
+            <p class="description">
+                Date de desactivation : {{ account_status.deleted_at|date:"d/m/Y H:i" }}
+            </p>
+        {% else %}
+            <p class="description">
+                Vous pouvez demander la desactivation de votre compte. Le compte sera conserve en base en soft delete
+                pour l'historique et l'administration.
+            </p>
+            <div class="hero-actions">
+                <a class="button secondary" href="{% url 'accounts:delete_request' %}">Demander la suppression du compte</a>
+            </div>
+        {% endif %}
+    </article>
+</section>
 {% endblock %}

@@ -1,0 +1,46 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Compte desactive - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">Compte desactive</p>
+    <h1>Votre demande a ete prise en compte</h1>
+    <p>Le compte a ete desactive en soft delete. Il reste conserve en base pour l'historique et l'administration.</p>
+</section>
+
+<section class="section account-section">
+    <article class="account-card">
+        <h2>Confirmation</h2>
+        <p class="description">
+            Votre compte n'est plus utilisable pour la connexion. L'administrateur peut toujours voir qu'il a ete desactive.
+        </p>
+        {% if deletion_label %}
+            <dl class="account-details">
+                <div>
+                    <dt>Libelle de suppression</dt>
+                    <dd>{{ deletion_label }}</dd>
+                </div>
+                <div>
+                    <dt>Date de desactivation</dt>
+                    <dd>{{ deletion_date }}</dd>
+                </div>
+            </dl>
+        {% elif account_status and account_status.deletion_label %}
+            <dl class="account-details">
+                <div>
+                    <dt>Libelle de suppression</dt>
+                    <dd>{{ account_status.deletion_label }}</dd>
+                </div>
+                <div>
+                    <dt>Date de desactivation</dt>
+                    <dd>{{ account_status.deleted_at|date:"d/m/Y H:i" }}</dd>
+                </div>
+            </dl>
+        {% endif %}
+        <div class="hero-actions">
+            <a class="button primary" href="{% url 'home' %}">Retour a l'accueil</a>
+        </div>
+    </article>
+</section>
+{% endblock %}
