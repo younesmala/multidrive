@@ -1,0 +1,21 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Message envoye - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+    <article class="empty-state">
+        <h1>Message envoye</h1>
+        <p>
+            Votre demande a bien ete enregistree{% if subject %} pour le sujet <strong>{{ subject }}</strong>{% endif %}.
+        </p>
+        <p>Nous reviendrons vers vous des que possible.</p>
+        <div class="hero-actions">
+            {% if request.user.is_authenticated %}
+                <a class="button primary" href="{% url 'contact:my_messages' %}">Voir mes messages</a>
+            {% endif %}
+            <a class="button secondary" href="{% url 'home' %}">Retour a l'accueil</a>
+        </div>
+    </article>
+</section>
+{% endblock %}

@@ -136,6 +136,28 @@ textarea {
     color: var(--dark);
 }
 
+.menu-link-with-badge {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.notification-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 7px;
+    color: var(--white);
+    background: var(--danger);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
 .user-menu-panel a:hover {
     color: var(--blue);
     background: var(--light);
@@ -910,6 +932,65 @@ h3 {
 
 .review-card small {
     color: var(--muted);
+}
+
+.message-list {
+    display: grid;
+    gap: 18px;
+}
+
+.message-card {
+    padding: 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.message-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.message-card-header h2 {
+    margin-bottom: 6px;
+    font-size: 1.2rem;
+}
+
+.message-date {
+    color: var(--muted);
+}
+
+.message-block {
+    margin-top: 16px;
+    padding: 18px;
+    background: var(--light);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.message-block strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--dark);
+}
+
+.message-block p,
+.message-block small {
+    margin: 0;
+}
+
+.message-response {
+    border-color: rgba(47, 133, 90, 0.28);
+    background: rgba(47, 133, 90, 0.08);
+}
+
+.message-pending {
+    border-color: rgba(183, 121, 31, 0.24);
+    background: rgba(183, 121, 31, 0.08);
 }
 
 .footer {

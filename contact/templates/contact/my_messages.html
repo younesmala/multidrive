@@ -1,0 +1,56 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Mes messages - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">Espace client</p>
+    <h1>Mes messages</h1>
+    <p>Retrouvez ici vos messages envoyes a MultiDrive et les reponses eventuelles de l'administrateur.</p>
+</section>
+
+<section class="section">
+    {% if messages %}
+        <div class="message-list">
+            {% for contact_message in messages %}
+                <article class="message-card">
+                    <div class="message-card-header">
+                        <div>
+                            <h2>{{ contact_message.subject }}</h2>
+                            <p class="message-date">Envoye le {{ contact_message.created_at|date:"d/m/Y H:i" }}</p>
+                        </div>
+                        <span class="status {% if contact_message.admin_response %}status-available{% else %}status-reserved{% endif %}">
+                            {% if contact_message.admin_response %}Repondu{% else %}En attente{% endif %}
+                        </span>
+                    </div>
+
+                    <div class="message-block">
+                        <strong>Votre message</strong>
+                        <p>{{ contact_message.message|linebreaksbr }}</p>
+                    </div>
+
+                    {% if contact_message.admin_response %}
+                        <div class="message-block message-response">
+                            <strong>Reponse de l'administration</strong>
+                            <p>{{ contact_message.admin_response|linebreaksbr }}</p>
+                            {% if contact_message.responded_at %}
+                                <small>Reponse ajoutee le {{ contact_message.responded_at|date:"d/m/Y H:i" }}</small>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="message-block message-pending">
+                            <p>Aucune reponse n'a encore ete ajoutee pour le moment.</p>
+                        </div>
+                    {% endif %}
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <h2>Aucun message pour le moment</h2>
+            <p>Vous pourrez retrouver ici vos futurs echanges avec l'administration.</p>
+            <a class="button primary" href="{% url 'contact:contact_form' %}">Contacter MultiDrive</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

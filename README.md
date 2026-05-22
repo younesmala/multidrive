@@ -27,6 +27,7 @@ MultiDrive combine :
 - detail d'un vehicule ;
 - authentification membre ;
 - reservations ;
+- page de contact ;
 - espace membre ;
 - paiements (modele et interface prepares) ;
 - API REST versionnee ;
@@ -1316,6 +1317,47 @@ L'administrateur peut aussi desactiver un compte pour abus depuis l'admin Django
 - `is_active` passe a `False` ;
 - le motif devient `admin_block` ;
 - un message bloquant specifique est affiche a la connexion.
+
+---
+
+## 24ter. Page de contact et suivi des messages
+
+Une vraie page publique de contact est maintenant disponible.
+
+URLs ajoutees :
+
+```text
+/contact/
+/contact/success/
+/contact/mine/
+```
+
+Fonctionnement :
+
+- un visiteur peut envoyer un message sans compte ;
+- un membre connecte peut envoyer un message lie a son compte ;
+- l'administrateur peut repondre depuis l'admin Django ;
+- le membre connecte peut ensuite lire la reponse dans son espace.
+
+Le modele `ContactMessage` a ete enrichi avec :
+
+```text
+user
+admin_response
+responded_at
+```
+
+La page `Mes messages` permet au membre de suivre :
+
+- son message initial ;
+- l'etat de traitement ;
+- la reponse de l'administration si elle existe.
+
+Quand une reponse administrateur est ajoutee :
+
+- une notification non lue est creee pour le membre ;
+- une bulle rouge apparait sur `Mes messages` dans le menu utilisateur ;
+- la notification disparait quand le membre ouvre sa page de messages.
 
 ---
 
