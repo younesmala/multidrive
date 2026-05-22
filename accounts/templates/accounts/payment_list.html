@@ -6,51 +6,135 @@
 <section class="page-title">
     <p class="eyebrow">Espace client</p>
     <h1>Mes paiements</h1>
-    <p>Consultez ici les acomptes lies a vos reservations.</p>
+    <p>Consultez ici les acomptes lies a vos reservations et l'etat de leur traitement.</p>
+</section>
+
+<section class="section account-section">
+    <div class="member-summary-grid">
+        <article class="member-summary-card">
+            <span>{{ payment_counts.total|default:0 }}</span>
+            <p>Total paiements</p>
+        </article>
+        <article class="member-summary-card">
+            <span>{{ payment_counts.pending|default:0 }}</span>
+            <p>En attente</p>
+        </article>
+        <article class="member-summary-card">
+            <span>{{ payment_counts.paid|default:0 }}</span>
+            <p>Valides</p>
+        </article>
+        <article class="member-summary-card">
+            <span>{{ payment_summary.paid_amount|default:0 }} EUR</span>
+            <p>Montant paye</p>
+        </article>
+    </div>
 </section>
 
 <section class="section">
-    <div class="table-card">
-        {% if payments %}
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Vehicule</th>
-                        <th>Montant</th>
-                        <th>Statut</th>
-                        <th>Methode</th>
-                        <th>Reference</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for payment in payments %}
-                        <tr>
-                            <td>
+    {% if payments %}
+        <div class="member-card-list">
+            {% for payment in payments %}
+                <article class="member-detail-card">
+                    <div class="member-detail-head">
+                        <div>
+                            <p class="eyebrow">{{ payment.reservation.vehicle.category.name|default:"Vehicule" }}</p>
+                            <h2>
                                 <a href="{% url 'vehicles:vehicle_detail' payment.reservation.vehicle.id %}">
                                     {{ payment.reservation.vehicle.title }}
                                 </a>
-                            </td>
-                            <td>{{ payment.amount }} EUR</td>
-                            <td>
-                                <span class="status status-{{ payment.status }}">
-                                    {{ payment.get_status_display }}
-                                </span>
-                            </td>
-                            <td>{{ payment.payment_method|default:"Non renseignee" }}</td>
-                            <td>{{ payment.transaction_reference|default:"Aucune" }}</td>
-                            <td>{{ payment.created_at|date:"d/m/Y H:i" }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <div class="empty-state">
-                <h2>Aucun paiement pour le moment</h2>
-                <p>Vos futurs acomptes apparaitront ici une fois le paiement en ligne active.</p>
-                <a class="button primary" href="{% url 'reservations:my_reservations' %}">Voir mes reservations</a>
-            </div>
-        {% endif %}
-    </div>
+                            </h2>
+                        </div>
+                        <span class="status status-{{ payment.status }}">
+                            {{ payment.get_status_display }}
+                        </span>
+                    </div>
+
+                    <div class="member-detail-grid">
+                        <div class="member-detail-block">
+                            <strong>Montant de l'acompte</strong>
+                            <p>{{ payment.amount }} EUR</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Statut reservation</strong>
+                            <p>{{ payment.reservation.get_status_display }}</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Methode</strong>
+                            <p>{{ payment.payment_method|default:"Non renseignee" }}</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Reference</strong>
+                            <p>{{ payment.transaction_reference|default:"Aucune" }}</p>
+                        </div>
+                    </div>
+
+                    <div class="member-detail-grid">
+                        <div class="member-detail-block">
+                            <strong>Cree le</strong>
+                            <p>{{ payment.created_at|date:"d/m/Y H:i" }}</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Paye le</strong>
+                            <p>
+                                {% if payment.paid_at %}
+                                    {{ payment.paid_at|date:"d/m/Y H:i" }}
+                                {% else %}
+                                    Non encore paye
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Facture</strong>
+                            <p>
+                                {% if payment.invoice %}
+                                    {{ payment.invoice.invoice_number }}
+                                {% else %}
+                                    Aucune facture pour le moment
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Total facture</strong>
+                            <p>
+                                {% if payment.invoice %}
+                                    {{ payment.invoice.total_amount }} EUR
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+
+                    {% if payment.status == "pending" %}
+                        <div class="member-note member-note-warning">
+                            <strong>Paiement en attente</strong>
+                            <p>Le paiement n'est pas encore finalise. Le module Stripe sera relie dans la suite du projet.</p>
+                        </div>
+                    {% elif payment.status == "failed" %}
+                        <div class="member-note member-note-danger">
+                            <strong>Paiement echoue</strong>
+                            <p>Le paiement a rencontre un probleme. Une verification manuelle peut etre necessaire.</p>
+                        </div>
+                    {% elif payment.status == "refunded" %}
+                        <div class="member-note member-note-warning">
+                            <strong>Paiement rembourse</strong>
+                            <p>Ce paiement a ete rembourse. Consultez l'administration en cas de question.</p>
+                        </div>
+                    {% endif %}
+
+                    <div class="hero-actions">
+                        <a class="button primary" href="{% url 'vehicles:vehicle_detail' payment.reservation.vehicle.id %}">Voir le vehicule</a>
+                        <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Voir mes reservations</a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <h2>Aucun paiement pour le moment</h2>
+            <p>Vos futurs acomptes apparaitront ici avec leur statut, leur reference et la facture associee si elle existe.</p>
+            <a class="button primary" href="{% url 'reservations:my_reservations' %}">Voir mes reservations</a>
+        </div>
+    {% endif %}
 </section>
 {% endblock %}

@@ -9,3 +9,18 @@ class ReservationAdmin(admin.ModelAdmin):
     list_filter = ("status", "created_at", "appointment_date")
     search_fields = ("user__username", "user__email", "vehicle__title", "message")
     ordering = ("-created_at",)
+
+    def save_model(self, request, obj, form, change):
+        previous_status = None
+        previous_appointment = None
+        if change and obj.pk:
+            previous = Reservation.objects.get(pk=obj.pk)
+            previous_status = previous.status
+            previous_appointment = previous.appointment_date
+
+        if change and (
+            obj.status != previous_status or obj.appointment_date != previous_appointment
+        ):
+            obj.user_status_read = False
+
+        super().save_model(request, obj, form, change)
