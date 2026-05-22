@@ -19,17 +19,37 @@
                 <a href="{% url 'vehicles:vehicle_list' %}">Catalogue</a>
                 <a href="{% url 'contact:contact_form' %}">Contact</a>
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'reservations:my_reservations' %}">Reservations</a>
+                    <a href="{% url 'reservations:my_reservations' %}" class="menu-link-with-badge nav-main-link">
+                        <span>Reservations</span>
+                        {% if unread_reservations %}
+                            <span class="notification-badge">{{ unread_reservations }}</span>
+                        {% endif %}
+                    </a>
                 {% else %}
                     <a href="{% url 'accounts:login' %}">Reservations</a>
                 {% endif %}
                 {% if request.user.is_authenticated %}
                     <div class="user-menu">
-                        <button type="button" class="user-menu-button">Bonjour, {{ request.user.username }}</button>
+                        <button type="button" class="user-menu-button">
+                            Bonjour, {{ request.user.username }}
+                            {% if member_total_notifications %}
+                                <span class="notification-badge">{{ member_total_notifications }}</span>
+                            {% endif %}
+                        </button>
                         <div class="user-menu-panel">
-                            <a href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
+                            <a href="{% url 'reservations:my_reservations' %}" class="menu-link-with-badge">
+                                <span>Mes reservations</span>
+                                {% if unread_reservations %}
+                                    <span class="notification-badge">{{ unread_reservations }}</span>
+                                {% endif %}
+                            </a>
                             <a href="{% url 'accounts:profile' %}">Mon profil</a>
-                            <a href="{% url 'accounts:payment_list' %}">Paiements</a>
+                            <a href="{% url 'accounts:payment_list' %}" class="menu-link-with-badge">
+                                <span>Paiements</span>
+                                {% if unread_payments %}
+                                    <span class="notification-badge">{{ unread_payments }}</span>
+                                {% endif %}
+                            </a>
                             <a href="{% url 'contact:my_messages' %}" class="menu-link-with-badge">
                                 <span>Mes messages</span>
                                 {% if unread_contact_responses %}

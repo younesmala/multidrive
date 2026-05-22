@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.db import transaction
-from django.db.models import Q
+from django.db.models import Count, Q, Sum
 from django.shortcuts import redirect, render
 from django.utils import timezone
 
@@ -63,11 +63,37 @@ def profile(request):
 @login_required
 def payment_list(request):
     payments = (
-        Payment.objects.select_related("reservation", "reservation__vehicle")
+        Payment.objects.select_related(
+            "reservation",
+            "reservation__vehicle",
+            "reservation__vehicle__category",
+            "invoice",
+        )
         .filter(reservation__user=request.user)
         .order_by("-created_at")
     )
-    return render(request, "accounts/payment_list.html", {"payments": payments})
+    payments.filter(user_status_read=False).update(user_status_read=True)
+    payment_summary = payments.aggregate(
+        total_count=Count("id"),
+        total_amount=Sum("amount"),
+        paid_amount=Sum("amount", filter=Q(status=Payment.STATUS_PAID)),
+    )
+    payment_counts = {
+        "total": payments.count(),
+        "pending": payments.filter(status=Payment.STATUS_PENDING).count(),
+        "paid": payments.filter(status=Payment.STATUS_PAID).count(),
+        "failed": payments.filter(status=Payment.STATUS_FAILED).count(),
+        "refunded": payments.filter(status=Payment.STATUS_REFUNDED).count(),
+    }
+    return render(
+        request,
+        "accounts/payment_list.html",
+        {
+            "payments": payments,
+            "payment_summary": payment_summary,
+            "payment_counts": payment_counts,
+        },
+    )
 
 
 @login_required

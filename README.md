@@ -1392,6 +1392,34 @@ Elle additionne :
 
 ---
 
+## 24quinquies. Amelioration de l'espace membre
+
+Les pages `Mes reservations` et `Mes paiements` ont ete rendues plus lisibles et plus coherentes pour le membre connecte.
+
+Ameliorations apportees :
+
+- cartes de synthese en haut de page ;
+- meilleure lecture des statuts ;
+- lien clair entre reservation et acompte ;
+- details du rendez-vous, du message et des mises a jour ;
+- affichage de la facture si elle existe ;
+- messages d'etat plus clairs selon qu'un acompte est attendu, paye, echoue ou rembourse.
+
+Une logique de notification membre a aussi ete ajoutee :
+
+- une modification admin sur une reservation cree une notification non lue ;
+- une modification admin sur un paiement cree une notification non lue ;
+- les bulles rouges apparaissent dans la navigation et dans le menu utilisateur ;
+- les notifications disparaissent lorsque le membre ouvre la page concernee.
+
+Objectif :
+
+- rendre l'espace membre plus utile ;
+- preparer l'integration future du paiement Stripe ;
+- rendre le suivi des demandes plus rassurant pour l'utilisateur.
+
+---
+
 ## 25. Direction UI/UX
 
 La direction visuelle de MultiDrive est maintenant fixee.

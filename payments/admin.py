@@ -22,6 +22,31 @@ class PaymentAdmin(admin.ModelAdmin):
     )
     ordering = ("-created_at",)
 
+    def save_model(self, request, obj, form, change):
+        previous_values = None
+        if change and obj.pk:
+            previous = Payment.objects.get(pk=obj.pk)
+            previous_values = (
+                previous.status,
+                previous.payment_method,
+                previous.transaction_reference,
+                previous.paid_at,
+                previous.amount,
+            )
+
+        current_values = (
+            obj.status,
+            obj.payment_method,
+            obj.transaction_reference,
+            obj.paid_at,
+            obj.amount,
+        )
+
+        if change and previous_values != current_values:
+            obj.user_status_read = False
+
+        super().save_model(request, obj, form, change)
+
 
 @admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):

@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404, redirect, render
 
 from vehicles.models import Vehicle
@@ -50,12 +51,25 @@ def reservation_success(request, reservation_id):
 @login_required
 def my_reservations(request):
     reservations = (
-        Reservation.objects.select_related("vehicle", "vehicle__category")
+        Reservation.objects.select_related("vehicle", "vehicle__category", "payment")
         .filter(user=request.user)
         .order_by("-created_at")
     )
+    reservations.filter(user_status_read=False).update(user_status_read=True)
+
+    reservation_summary = reservations.aggregate(
+        total=Count("id"),
+        pending=Count("id", filter=Q(status=Reservation.STATUS_PENDING)),
+        accepted=Count("id", filter=Q(status=Reservation.STATUS_ACCEPTED)),
+        rejected=Count("id", filter=Q(status=Reservation.STATUS_REJECTED)),
+        deposit_paid=Count("id", filter=Q(status=Reservation.STATUS_DEPOSIT_PAID)),
+    )
+
     return render(
         request,
         "reservations/my_reservations.html",
-        {"reservations": reservations},
+        {
+            "reservations": reservations,
+            "reservation_summary": reservation_summary,
+        },
     )

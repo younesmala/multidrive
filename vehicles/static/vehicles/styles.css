@@ -102,6 +102,9 @@ textarea {
 }
 
 .user-menu-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     min-height: 42px;
     padding: 0 16px;
     color: var(--blue);
@@ -144,6 +147,10 @@ textarea {
 }
 
 .nav-admin-link {
+    align-items: center;
+}
+
+.nav-main-link {
     align-items: center;
 }
 
@@ -1109,6 +1116,135 @@ h3 {
     gap: 14px;
 }
 
+.member-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.member-summary-card,
+.member-detail-card {
+    padding: 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.member-summary-card span {
+    display: block;
+    color: var(--blue);
+    font-size: 1.9rem;
+    font-weight: 800;
+    line-height: 1.05;
+}
+
+.member-summary-card p {
+    margin: 10px 0 0;
+    color: var(--muted);
+}
+
+.member-card-list {
+    display: grid;
+    gap: 18px;
+}
+
+.member-detail-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.member-detail-head h2 {
+    margin-bottom: 0;
+    font-size: 1.35rem;
+}
+
+.member-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.member-detail-block {
+    padding: 16px;
+    background: var(--light);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+}
+
+.member-detail-block strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--dark);
+}
+
+.member-detail-block p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.member-note {
+    margin-bottom: 18px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--light);
+}
+
+.member-note strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--dark);
+}
+
+.member-note p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.member-note-warning {
+    border-color: rgba(183, 121, 31, 0.22);
+    background: rgba(183, 121, 31, 0.08);
+}
+
+.member-note-danger {
+    border-color: rgba(185, 28, 28, 0.22);
+    background: rgba(185, 28, 28, 0.08);
+}
+
+.member-payment-panel {
+    margin-bottom: 18px;
+    padding: 18px;
+    border: 1px solid rgba(30, 58, 138, 0.14);
+    border-radius: 8px;
+    background: rgba(30, 58, 138, 0.04);
+}
+
+.member-payment-panel strong {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.member-payment-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+.member-payment-meta p {
+    margin: 0;
+    color: var(--blue);
+    font-size: 1.15rem;
+    font-weight: 800;
+}
+
 .footer {
     display: flex;
     align-items: flex-start;
@@ -1198,6 +1334,7 @@ body::after {
     .filter-form,
     .account-grid,
     .dashboard-columns,
+    .member-detail-grid,
     .stats-grid,
     .detail-layout,
     .gallery {

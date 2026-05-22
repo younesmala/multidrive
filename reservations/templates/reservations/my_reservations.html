@@ -6,43 +6,126 @@
 <section class="page-title">
     <p class="eyebrow">Espace client</p>
     <h1>Mes reservations</h1>
-    <p>Retrouvez les demandes de reservation liees a votre compte.</p>
+    <p>Suivez ici vos demandes, leur statut actuel et l'etat de l'acompte lorsque la reservation avance.</p>
+</section>
+
+<section class="section account-section">
+    <div class="member-summary-grid">
+        <article class="member-summary-card">
+            <span>{{ reservation_summary.total|default:0 }}</span>
+            <p>Total reservations</p>
+        </article>
+        <article class="member-summary-card">
+            <span>{{ reservation_summary.pending|default:0 }}</span>
+            <p>En attente</p>
+        </article>
+        <article class="member-summary-card">
+            <span>{{ reservation_summary.accepted|default:0 }}</span>
+            <p>Acceptees</p>
+        </article>
+        <article class="member-summary-card">
+            <span>{{ reservation_summary.deposit_paid|default:0 }}</span>
+            <p>Acompte paye</p>
+        </article>
+    </div>
 </section>
 
 <section class="section">
-    <div class="table-card">
-        {% if reservations %}
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Vehicule</th>
-                        <th>Prix</th>
-                        <th>Statut</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for reservation in reservations %}
-                        <tr>
-                            <td>
+    {% if reservations %}
+        <div class="member-card-list">
+            {% for reservation in reservations %}
+                <article class="member-detail-card">
+                    <div class="member-detail-head">
+                        <div>
+                            <p class="eyebrow">{{ reservation.vehicle.category.name|default:"Vehicule" }}</p>
+                            <h2>
                                 <a href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">
                                     {{ reservation.vehicle.title }}
                                 </a>
-                            </td>
-                            <td>{{ reservation.vehicle.price }} EUR</td>
-                            <td>
-                                <span class="status status-{{ reservation.status }}">
-                                    {{ reservation.get_status_display }}
+                            </h2>
+                        </div>
+                        <span class="status status-{{ reservation.status }}">
+                            {{ reservation.get_status_display }}
+                        </span>
+                    </div>
+
+                    <div class="member-detail-grid">
+                        <div class="member-detail-block">
+                            <strong>Prix du vehicule</strong>
+                            <p>{{ reservation.vehicle.price }} EUR</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Reservation creee le</strong>
+                            <p>{{ reservation.created_at|date:"d/m/Y H:i" }}</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Derniere mise a jour</strong>
+                            <p>{{ reservation.updated_at|date:"d/m/Y H:i" }}</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Rendez-vous souhaite</strong>
+                            <p>
+                                {% if reservation.appointment_date %}
+                                    {{ reservation.appointment_date|date:"d/m/Y H:i" }}
+                                {% else %}
+                                    Non renseigne
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+
+                    {% if reservation.message %}
+                        <div class="member-note">
+                            <strong>Votre message</strong>
+                            <p>{{ reservation.message|linebreaksbr }}</p>
+                        </div>
+                    {% endif %}
+
+                    <div class="member-payment-panel">
+                        <strong>Suivi de l'acompte</strong>
+                        {% if reservation.payment %}
+                            <div class="member-payment-meta">
+                                <span class="status status-{{ reservation.payment.status }}">
+                                    {{ reservation.payment.get_status_display }}
                                 </span>
-                            </td>
-                            <td>{{ reservation.created_at|date:"d/m/Y H:i" }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <p>Vous n'avez pas encore de reservation.</p>
-        {% endif %}
-    </div>
+                                <p>{{ reservation.payment.amount }} EUR</p>
+                            </div>
+                            <p class="description">
+                                Methode : {{ reservation.payment.payment_method|default:"Non renseignee" }}<br>
+                                Reference : {{ reservation.payment.transaction_reference|default:"Aucune" }}
+                            </p>
+                        {% elif reservation.status == "accepted" %}
+                            <p class="description">
+                                Votre reservation a ete acceptee. L'etape suivante sera le paiement de l'acompte.
+                            </p>
+                        {% elif reservation.status == "deposit_paid" %}
+                            <p class="description">
+                                La reservation est marquee comme acompte paye, mais aucun paiement detaille n'est encore visible.
+                            </p>
+                        {% elif reservation.status == "rejected" %}
+                            <p class="description">
+                                Cette demande a ete refusee. Aucun acompte n'est attendu.
+                            </p>
+                        {% else %}
+                            <p class="description">
+                                La demande est encore en cours de traitement. Aucun acompte n'est demande pour le moment.
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="hero-actions">
+                        <a class="button primary" href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">Voir le vehicule</a>
+                        <a class="button secondary" href="{% url 'accounts:payment_list' %}">Voir mes paiements</a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <h2>Aucune reservation pour le moment</h2>
+            <p>Vos futures demandes de reservation apparaitront ici avec leur statut et le suivi de l'acompte.</p>
+            <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">Decouvrir le catalogue</a>
+        </div>
+    {% endif %}
 </section>
 {% endblock %}
