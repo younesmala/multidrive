@@ -1257,6 +1257,68 @@ Utilisateur connecte -> creation reservation OK
 
 ---
 
+## 24bis. Suppression logique du compte
+
+La gestion du profil membre inclut maintenant une demande de suppression de compte en **soft delete**.
+
+Principe retenu :
+
+- le compte n'est pas supprime physiquement de la base ;
+- une demande de suppression est enregistree ;
+- un statut de compte conserve la trace de la desactivation ;
+- l'utilisateur ne peut plus se connecter apres la demande ;
+- l'administrateur peut voir l'etat du compte dans l'admin Django.
+
+Modeles ajoutes :
+
+```text
+AccountStatus
+AccountDeletionRequest
+```
+
+Champs importants :
+
+```text
+is_deleted
+deleted_at
+deletion_label
+deletion_reason_type
+admin_note
+reason
+processed
+processed_at
+```
+
+Le marquage visible dans la base prend la forme :
+
+```text
+id_<id>_DELETE
+```
+
+Exemple :
+
+```text
+id_1_DELETE
+```
+
+URLs ajoutees :
+
+```text
+/accounts/delete-request/
+/accounts/delete-request/done/
+```
+
+Cette solution a ete retenue pour conserver l'historique des reservations et paiements sans casser les relations en base.
+
+L'administrateur peut aussi desactiver un compte pour abus depuis l'admin Django. Dans ce cas :
+
+- le compte passe en soft delete ;
+- `is_active` passe a `False` ;
+- le motif devient `admin_block` ;
+- un message bloquant specifique est affiche a la connexion.
+
+---
+
 ## 25. Direction UI/UX
 
 La direction visuelle de MultiDrive est maintenant fixee.

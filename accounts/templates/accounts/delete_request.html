@@ -1,0 +1,46 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Suppression du compte - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">Espace client</p>
+    <h1>Desactiver mon compte</h1>
+    <p>La suppression est geree en soft delete : votre compte reste visible pour l'administration, mais il ne pourra plus etre utilise pour se connecter.</p>
+</section>
+
+<section class="form-page">
+    <div class="form-card danger-card">
+        <h2>Confirmation</h2>
+        <p class="auth-intro">
+            Cette action desactive votre compte. Les reservations, paiements et traces utiles au projet sont conserves dans la base.
+        </p>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <label for="{{ form.reason.id_for_label }}">
+                {{ form.reason.label }}
+                {{ form.reason }}
+                {% for error in form.reason.errors %}
+                    <span class="field-error">{{ error }}</span>
+                {% endfor %}
+            </label>
+
+            <label class="checkbox-field" for="{{ form.confirm_deletion.id_for_label }}">
+                {{ form.confirm_deletion }}
+                <span>{{ form.confirm_deletion.label }}</span>
+            </label>
+            {% for error in form.confirm_deletion.errors %}
+                <span class="field-error">{{ error }}</span>
+            {% endfor %}
+
+            <div class="hero-actions">
+                <button type="submit" class="danger-button">Confirmer la desactivation</button>
+                <a class="button secondary" href="{% url 'accounts:profile' %}">Retour au profil</a>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
