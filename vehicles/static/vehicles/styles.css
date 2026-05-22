@@ -993,6 +993,118 @@ h3 {
     background: rgba(183, 121, 31, 0.08);
 }
 
+.admin-summary-grid,
+.admin-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.admin-summary-card,
+.admin-action-card,
+.dashboard-panel,
+.admin-kpi-card {
+    padding: 24px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.admin-summary-card span,
+.admin-kpi-card strong {
+    display: block;
+    color: var(--blue);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.05;
+}
+
+.admin-summary-card h2,
+.admin-action-card strong,
+.admin-kpi-card p {
+    margin-top: 10px;
+}
+
+.admin-summary-card h2 {
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.admin-summary-card p,
+.admin-action-card p,
+.admin-kpi-card p {
+    margin-bottom: 0;
+    color: var(--muted);
+}
+
+.admin-action-card {
+    display: block;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.admin-action-card strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--dark);
+    font-size: 1.02rem;
+}
+
+.admin-action-card:hover {
+    border-color: var(--blue);
+    transform: translateY(-2px);
+}
+
+.dashboard-columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.compact-heading {
+    margin-bottom: 18px;
+}
+
+.compact-heading h2 {
+    font-size: 1.35rem;
+}
+
+.dashboard-list {
+    display: grid;
+    gap: 14px;
+}
+
+.dashboard-list-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+}
+
+.dashboard-list-item:first-child {
+    padding-top: 0;
+    border-top: none;
+}
+
+.dashboard-list-item strong {
+    display: block;
+    color: var(--dark);
+    margin-bottom: 4px;
+}
+
+.dashboard-list-item p,
+.dashboard-list-item small {
+    margin: 0;
+    color: var(--muted);
+}
+
+.admin-kpi-card {
+    display: grid;
+    gap: 14px;
+}
+
 .footer {
     display: flex;
     align-items: flex-start;
@@ -1081,6 +1193,7 @@ body::after {
     .hero-shell,
     .filter-form,
     .account-grid,
+    .dashboard-columns,
     .stats-grid,
     .detail-layout,
     .gallery {

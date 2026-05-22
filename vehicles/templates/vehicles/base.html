@@ -44,7 +44,7 @@
                     <a class="nav-cta" href="{% url 'accounts:register' %}">Inscription</a>
                 {% endif %}
                 {% if request.user.is_staff %}
-                    <a href="/admin/">Admin</a>
+                    <a href="{% url 'accounts:admin_dashboard' %}">Dashboard admin</a>
                 {% endif %}
             </div>
         </nav>

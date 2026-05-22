@@ -1,12 +1,16 @@
-from django.contrib.auth import login, logout
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.db import transaction
+from django.db.models import Q
 from django.shortcuts import redirect, render
 from django.utils import timezone
 
+from contact.models import ContactMessage
 from payments.models import Payment
 from reservations.models import Reservation
+from vehicles.models import Vehicle
 
 from .forms import AccountDeletionRequestForm, AccountLoginForm, RegisterForm
 from .models import AccountDeletionRequest, AccountStatus
@@ -121,3 +125,35 @@ def delete_request_done(request):
             "deletion_date": deletion_date,
         },
     )
+
+
+@staff_member_required
+def admin_dashboard(request):
+    User = get_user_model()
+
+    reservations = Reservation.objects.select_related("user", "vehicle").order_by("-created_at")
+    contact_messages = ContactMessage.objects.select_related("user").order_by("-created_at")
+    disabled_accounts = (
+        AccountStatus.objects.select_related("user")
+        .filter(is_deleted=True)
+        .order_by("-deleted_at")
+    )
+
+    context = {
+        "vehicle_count": Vehicle.objects.count(),
+        "available_vehicle_count": Vehicle.objects.filter(status=Vehicle.STATUS_AVAILABLE).count(),
+        "pending_reservation_count": Reservation.objects.filter(
+            status=Reservation.STATUS_PENDING
+        ).count(),
+        "contact_pending_count": ContactMessage.objects.filter(
+            Q(admin_response="") | Q(admin_response__isnull=True)
+        ).count(),
+        "disabled_account_count": AccountStatus.objects.filter(is_deleted=True).count(),
+        "pending_payment_count": Payment.objects.filter(status=Payment.STATUS_PENDING).count(),
+        "user_count": User.objects.filter(is_active=True).count(),
+        "recent_reservations": reservations[:5],
+        "recent_messages": contact_messages[:5],
+        "recent_disabled_accounts": disabled_accounts[:5],
+        "pending_deletion_requests": AccountDeletionRequest.objects.filter(processed=False).count(),
+    }
+    return render(request, "accounts/admin_dashboard.html", context)
