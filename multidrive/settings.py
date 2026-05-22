@@ -99,10 +99,14 @@ WSGI_APPLICATION = 'multidrive.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
+DB_PATH = Path(
+    os.environ.get("DJANGO_DB_PATH", str(BASE_DIR / "db.sqlite3"))
+).expanduser()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': DB_PATH,
     }
 }
 
