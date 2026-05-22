@@ -1,0 +1,186 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Dashboard admin - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">Administration</p>
+    <h1>Dashboard admin</h1>
+    <p>Suivez rapidement les demandes en cours, l'etat du catalogue et les actions prioritaires.</p>
+</section>
+
+<section class="section">
+    <div class="admin-summary-grid">
+        <article class="admin-summary-card">
+            <span>{{ vehicle_count }}</span>
+            <h2>Vehicules</h2>
+            <p>{{ available_vehicle_count }} disponibles actuellement.</p>
+        </article>
+        <article class="admin-summary-card">
+            <span>{{ pending_reservation_count }}</span>
+            <h2>Reservations en attente</h2>
+            <p>Demandes a verifier ou a confirmer.</p>
+        </article>
+        <article class="admin-summary-card">
+            <span>{{ contact_pending_count }}</span>
+            <h2>Messages sans reponse</h2>
+            <p>Questions client ou demandes d'information.</p>
+        </article>
+        <article class="admin-summary-card">
+            <span>{{ pending_payment_count }}</span>
+            <h2>Paiements a suivre</h2>
+            <p>Acomptes encore en attente de validation.</p>
+        </article>
+        <article class="admin-summary-card">
+            <span>{{ disabled_account_count }}</span>
+            <h2>Comptes desactives</h2>
+            <p>Inclut les demandes utilisateur et les blocages admin.</p>
+        </article>
+        <article class="admin-summary-card">
+            <span>{{ user_count }}</span>
+            <h2>Membres actifs</h2>
+            <p>Comptes clients actuellement actifs.</p>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Raccourcis</p>
+            <h2>Actions rapides</h2>
+        </div>
+        <p>Acces direct aux principales zones de gestion.</p>
+    </div>
+
+    <div class="admin-actions-grid">
+        <a class="admin-action-card" href="{% url 'admin:vehicles_vehicle_add' %}">
+            <strong>Ajouter un vehicule</strong>
+            <p>Creer une nouvelle annonce dans le catalogue.</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:vehicles_vehicle_changelist' %}">
+            <strong>Gerer les vehicules</strong>
+            <p>Modifier, supprimer ou filtrer le stock.</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:reservations_reservation_changelist' %}">
+            <strong>Voir les reservations</strong>
+            <p>Traiter les demandes et les rendez-vous.</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:contact_contactmessage_changelist' %}">
+            <strong>Traiter les messages</strong>
+            <p>Repondre aux questions et suivre les demandes.</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:payments_payment_changelist' %}">
+            <strong>Suivre les paiements</strong>
+            <p>Verifier les acomptes et leur statut.</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:index' %}">
+            <strong>Ouvrir l'admin Django</strong>
+            <p>Acceder a la gestion complete du projet.</p>
+        </a>
+    </div>
+</section>
+
+<section class="section">
+    <div class="dashboard-columns">
+        <article class="dashboard-panel">
+            <div class="section-heading compact-heading">
+                <div>
+                    <p class="eyebrow">Reservations</p>
+                    <h2>Dernieres demandes</h2>
+                </div>
+            </div>
+            <div class="dashboard-list">
+                {% for reservation in recent_reservations %}
+                    <div class="dashboard-list-item">
+                        <div>
+                            <strong>{{ reservation.user.username }}</strong>
+                            <p>{{ reservation.vehicle.title }}</p>
+                            <small>{{ reservation.created_at|date:"d/m/Y H:i" }}</small>
+                        </div>
+                        <span class="status status-{{ reservation.status }}">{{ reservation.get_status_display }}</span>
+                    </div>
+                {% empty %}
+                    <p class="description">Aucune reservation recente.</p>
+                {% endfor %}
+            </div>
+        </article>
+
+        <article class="dashboard-panel">
+            <div class="section-heading compact-heading">
+                <div>
+                    <p class="eyebrow">Contact</p>
+                    <h2>Derniers messages</h2>
+                </div>
+            </div>
+            <div class="dashboard-list">
+                {% for contact_message in recent_messages %}
+                    <div class="dashboard-list-item">
+                        <div>
+                            <strong>{{ contact_message.full_name }}</strong>
+                            <p>{{ contact_message.subject }}</p>
+                            <small>{{ contact_message.created_at|date:"d/m/Y H:i" }}</small>
+                        </div>
+                        {% if contact_message.admin_response %}
+                            <span class="status status-available">Repondu</span>
+                        {% else %}
+                            <span class="status status-reserved">En attente</span>
+                        {% endif %}
+                    </div>
+                {% empty %}
+                    <p class="description">Aucun message recent.</p>
+                {% endfor %}
+            </div>
+        </article>
+    </div>
+</section>
+
+<section class="section">
+    <div class="dashboard-columns">
+        <article class="dashboard-panel">
+            <div class="section-heading compact-heading">
+                <div>
+                    <p class="eyebrow">Comptes</p>
+                    <h2>Derniers comptes desactives</h2>
+                </div>
+            </div>
+            <div class="dashboard-list">
+                {% for account_status in recent_disabled_accounts %}
+                    <div class="dashboard-list-item">
+                        <div>
+                            <strong>{{ account_status.user.username }}</strong>
+                            <p>{{ account_status.deletion_label }}</p>
+                            <small>{{ account_status.deleted_at|date:"d/m/Y H:i" }}</small>
+                        </div>
+                        <span class="status status-rejected">
+                            {% if account_status.deletion_reason_type == "admin_block" %}
+                                Blocage admin
+                            {% else %}
+                                Demande client
+                            {% endif %}
+                        </span>
+                    </div>
+                {% empty %}
+                    <p class="description">Aucun compte desactive pour le moment.</p>
+                {% endfor %}
+            </div>
+        </article>
+
+        <article class="dashboard-panel">
+            <div class="section-heading compact-heading">
+                <div>
+                    <p class="eyebrow">Suppression</p>
+                    <h2>Demandes en attente</h2>
+                </div>
+            </div>
+            <div class="admin-kpi-card">
+                <strong>{{ pending_deletion_requests }}</strong>
+                <p>demande(s) de suppression non traitee(s).</p>
+                <a class="button secondary" href="{% url 'admin:accounts_accountdeletionrequest_changelist' %}">
+                    Ouvrir les demandes
+                </a>
+            </div>
+        </article>
+    </div>
+</section>
+{% endblock %}
