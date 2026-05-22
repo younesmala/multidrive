@@ -1383,6 +1383,13 @@ Fonctionnalites du dashboard :
 
 Le dashboard ne remplace pas l'admin Django : il sert de page de pilotage rapide pour les actions du quotidien.
 
+Une notification admin est affichee dans la navigation sous forme de bulle rouge sur `Dashboard admin`.
+Elle additionne :
+
+- les reservations en attente ;
+- les messages de contact sans reponse ;
+- les demandes de suppression non traitees.
+
 ---
 
 ## 25. Direction UI/UX

@@ -44,7 +44,12 @@
                     <a class="nav-cta" href="{% url 'accounts:register' %}">Inscription</a>
                 {% endif %}
                 {% if request.user.is_staff %}
-                    <a href="{% url 'accounts:admin_dashboard' %}">Dashboard admin</a>
+                    <a href="{% url 'accounts:admin_dashboard' %}" class="menu-link-with-badge nav-admin-link">
+                        <span>Dashboard admin</span>
+                        {% if admin_pending_notifications %}
+                            <span class="notification-badge">{{ admin_pending_notifications }}</span>
+                        {% endif %}
+                    </a>
                 {% endif %}
             </div>
         </nav>

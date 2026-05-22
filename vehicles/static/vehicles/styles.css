@@ -143,6 +143,10 @@ textarea {
     gap: 10px;
 }
 
+.nav-admin-link {
+    align-items: center;
+}
+
 .notification-badge {
     display: inline-flex;
     align-items: center;
