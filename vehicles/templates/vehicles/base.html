@@ -17,6 +17,7 @@
             <div class="nav-links">
                 <a href="{% url 'home' %}">Accueil</a>
                 <a href="{% url 'vehicles:vehicle_list' %}">Catalogue</a>
+                <a href="{% url 'contact:contact_form' %}">Contact</a>
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'reservations:my_reservations' %}">Reservations</a>
                 {% else %}
@@ -29,6 +30,12 @@
                             <a href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
                             <a href="{% url 'accounts:profile' %}">Mon profil</a>
                             <a href="{% url 'accounts:payment_list' %}">Paiements</a>
+                            <a href="{% url 'contact:my_messages' %}" class="menu-link-with-badge">
+                                <span>Mes messages</span>
+                                {% if unread_contact_responses %}
+                                    <span class="notification-badge">{{ unread_contact_responses }}</span>
+                                {% endif %}
+                            </a>
                             <a href="{% url 'accounts:logout' %}">Deconnexion</a>
                         </div>
                     </div>
@@ -57,6 +64,7 @@
             <div class="footer-links">
                 <a href="{% url 'home' %}">Accueil</a>
                 <a href="{% url 'vehicles:vehicle_list' %}">Catalogue</a>
+                <a href="{% url 'contact:contact_form' %}">Contact</a>
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'reservations:my_reservations' %}">Reservations</a>
                 {% else %}

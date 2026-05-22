@@ -1,0 +1,43 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Contact - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">Contact</p>
+    <h1>Nous contacter</h1>
+    <p>Posez votre question, demandez une information ou laissez un message pour un rendez-vous.</p>
+</section>
+
+<section class="auth-page">
+    <article class="form-card">
+        <h2>Envoyer un message</h2>
+        <p class="auth-intro">
+            {% if request.user.is_authenticated %}
+                Votre message sera associe a votre compte et vous pourrez lire une reponse dans votre espace membre.
+            {% else %}
+                Vous pouvez nous contacter meme sans compte. Creez un compte si vous souhaitez suivre plus facilement vos echanges.
+            {% endif %}
+        </p>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="form-alert">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            {% for field in form %}
+                <label for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <span class="field-error">{{ field.errors|join:", " }}</span>
+                    {% endif %}
+                </label>
+            {% endfor %}
+
+            <button type="submit">Envoyer le message</button>
+        </form>
+    </article>
+</section>
+{% endblock %}
