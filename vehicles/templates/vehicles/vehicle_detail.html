@@ -3,13 +3,28 @@
 {% block title %}{{ vehicle.title }} - MultiDrive{% endblock %}
 
 {% block content %}
+{% if messages %}
+<section class="section flash-section">
+    <div class="flash-stack">
+        {% for message in messages %}
+            <div class="flash-message flash-{{ message.tags|default:'info' }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
 <section class="detail-layout">
     <div class="gallery">
         {% if images %}
             {% for image in images %}
                 <div class="gallery-item">
+                    <img src="{{ image.image.url }}" alt="{{ vehicle.title }}">
                     <span>{{ vehicle.category.name }}</span>
-                    <small>{{ image.image }}</small>
+                    {% if image.is_main %}
+                        <small>Photo principale</small>
+                    {% else %}
+                        <small>Vue supplementaire</small>
+                    {% endif %}
                 </div>
             {% endfor %}
         {% else %}
@@ -26,6 +41,30 @@
         <p class="price">{{ vehicle.price }} EUR</p>
         <p class="status status-{{ vehicle.status }}">{{ vehicle.get_status_display }}</p>
         <p class="description">{{ vehicle.description }}</p>
+        <div class="detail-summary-grid">
+            <div class="detail-summary-card">
+                <strong>{{ vehicle.display_year }}</strong>
+                <span>Annee estimee</span>
+            </div>
+            <div class="detail-summary-card">
+                <strong>{{ vehicle.deposit_amount }} EUR</strong>
+                <span>Acompte estime</span>
+            </div>
+            <div class="detail-summary-card">
+                <strong>{{ images|length }}</strong>
+                <span>Photos disponibles</span>
+            </div>
+            <div class="detail-summary-card">
+                <strong>
+                    {% if review_count %}
+                        {{ average_rating|floatformat:1 }}/5
+                    {% else %}
+                        --
+                    {% endif %}
+                </strong>
+                <span>Note moyenne</span>
+            </div>
+        </div>
         <div class="detail-actions">
             <a class="button primary" href="{% url 'reservations:reserve_vehicle' vehicle.id %}">Reserver ce vehicule</a>
             <a class="button secondary" href="{% url 'vehicles:vehicle_list' %}">Retour au catalogue</a>
@@ -48,7 +87,7 @@
         </div>
     </div>
 
-    {% if request.user.is_authenticated %}
+    {% if can_review %}
         <div class="review-form-card">
             <h3>{% if user_review %}Modifier mon avis{% else %}Laisser un avis{% endif %}</h3>
             <form class="auth-form" method="post" action="{% url 'vehicles:add_review' vehicle.id %}">
@@ -73,8 +112,12 @@
         </div>
     {% else %}
         <div class="review-form-card">
-            <p>Connectez-vous pour laisser un avis sur ce vehicule.</p>
-            <a class="button primary" href="{% url 'accounts:login' %}">Se connecter</a>
+            <p>{{ review_gate_message }}</p>
+            {% if request.user.is_authenticated %}
+                <a class="button secondary" href="{% url 'reservations:reserve_vehicle' vehicle.id %}">Faire une demande de reservation</a>
+            {% else %}
+                <a class="button primary" href="{% url 'accounts:login' %}">Se connecter</a>
+            {% endif %}
         </div>
     {% endif %}
 
@@ -82,14 +125,19 @@
         {% for review in reviews %}
             <article class="review-card">
                 <div class="review-header">
-                    <strong>{{ review.user.username }}</strong>
+                    <div>
+                        <strong>{{ review.user.username }}</strong>
+                        <small>Publie le {{ review.created_at|date:"d/m/Y H:i" }}</small>
+                    </div>
                     <span>{{ review.rating }}/5</span>
                 </div>
                 <p>{{ review.comment }}</p>
-                <small>Publie le {{ review.created_at|date:"d/m/Y H:i" }}</small>
             </article>
         {% empty %}
-            <p>Aucun avis disponible pour le moment.</p>
+            <div class="empty-state">
+                <h2>Aucun avis disponible</h2>
+                <p>Ce vehicule n'a pas encore recu d'avis membre.</p>
+            </div>
         {% endfor %}
     </div>
 </section>
