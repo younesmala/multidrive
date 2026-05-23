@@ -1,7 +1,14 @@
 from datetime import timedelta
 from decimal import Decimal
+import json
 import random
+import shutil
+import time
+import urllib.parse
+import urllib.request
+from pathlib import Path
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.db import transaction
@@ -11,6 +18,59 @@ from contact.models import ContactMessage
 from payments.models import Invoice, Payment
 from reservations.models import Reservation
 from vehicles.models import Vehicle, VehicleCategory, VehicleImage
+
+try:
+    from PIL import Image, ImageDraw, ImageFont
+    PILLOW_AVAILABLE = True
+except ImportError:
+    PILLOW_AVAILABLE = False
+
+
+VEHICLE_WIKIPEDIA_MAP = {
+    ("Decathlon", "Rockrider 340"): "Mountain_bike",
+    ("Btwin", "Original 500"): "Bicycle",
+    ("Trek", "FX 1"): "City_bicycle",
+    ("Giant", "Escape 3"): "Road_bicycle",
+    ("Nakamura", "Cliff Lite"): "Mountain_bike",
+    ("Xiaomi", "Mi Electric Scooter"): "Electric_kick_scooter",
+    ("Ninebot", "ES2"): "Electric_kick_scooter",
+    ("Wispeed", "T850"): "Electric_kick_scooter",
+    ("Oxelo", "Town 7"): "Kick_scooter",
+    ("Peugeot", "Kisbee 50"): "Motor_scooter",
+    ("Yamaha", "Aerox 50"): "Motor_scooter",
+    ("Piaggio", "Zip 50"): "Piaggio_Zip",
+    ("Kymco", "Agility 50"): "Motor_scooter",
+    ("Honda", "CBF 125"): "Honda_CBF125",
+    ("Yamaha", "YBR 125"): "Yamaha_YBR125",
+    ("Mash", "Seventy 125"): "Cafe_racer",
+    ("Peugeot", "206"): "Peugeot_206",
+    ("Renault", "Clio"): "Renault_Clio",
+    ("Citroen", "C3"): "Citroen_C3",
+    ("Fiat", "Panda"): "Supermini_car",
+    ("Toyota", "Yaris"): "Toyota_Yaris",
+    ("Opel", "Astra"): "Opel_Astra",
+    ("Ford", "Focus"): "Ford_Focus",
+    ("Volkswagen", "Golf"): "Volkswagen_Golf",
+    ("Peugeot", "307 SW"): "Peugeot_307",
+    ("Renault", "Megane Estate"): "Renault_Megane",
+    ("Citroen", "Berlingo"): "Citroen_Berlingo",
+    ("Renault", "Kangoo"): "Renault_Kangoo",
+    ("Renault", "Scenic"): "Renault_Scenic",
+    ("Dacia", "Duster"): "Dacia_Duster",
+}
+
+CATEGORY_COLORS = {
+    "velo": (34, 139, 34),
+    "trottinette": (0, 119, 190),
+    "scooter": (200, 100, 0),
+    "moto-legere": (128, 0, 128),
+    "citadine": (30, 58, 138),
+    "compacte": (25, 100, 160),
+    "break": (0, 100, 80),
+    "utilitaire-leger": (140, 70, 0),
+    "monospace": (70, 50, 160),
+    "suv-compact": (100, 50, 20),
+}
 
 
 class Command(BaseCommand):
@@ -23,8 +83,8 @@ class Command(BaseCommand):
             self.clear_existing_data()
             categories = self.create_categories()
             users = self.create_users()
-            vehicles = self.create_vehicles(categories)
-            self.create_vehicle_images(vehicles)
+            vehicles, vehicle_info = self.create_vehicles(categories)
+            self.create_vehicle_images(vehicles, vehicle_info)
             reservations = self.create_reservations(users, vehicles)
             payments = self.create_payments(reservations)
             self.create_invoices(payments)
@@ -140,6 +200,7 @@ class Command(BaseCommand):
         statuses = [Vehicle.STATUS_AVAILABLE, Vehicle.STATUS_RESERVED, Vehicle.STATUS_SOLD]
 
         vehicles = []
+        vehicle_info = {}
         for index in range(150):
             slug, brand, model, base_year, min_price, max_price, vehicle_type, base_mileage = catalog[index % len(catalog)]
             year = base_year + random.randint(0, 3)
@@ -164,20 +225,153 @@ class Command(BaseCommand):
                 },
             )
             vehicles.append(vehicle)
-        return vehicles
+            vehicle_info[vehicle.id] = {
+                "brand": brand,
+                "model": model,
+                "category_slug": slug,
+            }
+        return vehicles, vehicle_info
 
-    def create_vehicle_images(self, vehicles):
-        for vehicle in vehicles:
-            slug = vehicle.title.lower().replace(" ", "-")
-            for image_number in range(1, 3):
-                VehicleImage.objects.update_or_create(
-                    vehicle=vehicle,
-                    image=f"vehicles/demo/{slug}-{image_number}.jpg",
-                    defaults={"is_main": image_number == 1},
+    def _model_slug(self, brand, model):
+        raw = f"{brand}-{model}".lower()
+        for char, rep in {" ": "-", "é": "e", "è": "e", "ê": "e", "à": "a", "â": "a", "ô": "o", "û": "u", "ç": "c"}.items():
+            raw = raw.replace(char, rep)
+        return raw
+
+    def _download_wikipedia_image(self, wikipedia_title, dest_path):
+        import io
+
+        for attempt in range(3):
+            try:
+                if attempt > 0:
+                    time.sleep(1.0)
+
+                encoded = urllib.parse.quote(wikipedia_title, safe="")
+                api_url = f"https://en.wikipedia.org/api/rest_v1/page/summary/{encoded}"
+                req = urllib.request.Request(
+                    api_url,
+                    headers={"User-Agent": "MultiDrive-TFE/1.0 (student educational project)"},
                 )
+                with urllib.request.urlopen(req, timeout=15) as resp:
+                    data = json.loads(resp.read().decode("utf-8"))
+
+                thumbnail = data.get("thumbnail", {})
+                thumb_src = thumbnail.get("source", "")
+
+                if not thumb_src:
+                    return False
+
+                parsed_path = urllib.parse.urlparse(thumb_src).path.lower()
+                if not any(parsed_path.endswith(ext) for ext in [".jpg", ".jpeg", ".png", ".webp"]):
+                    return False
+
+                img_req = urllib.request.Request(
+                    thumb_src,
+                    headers={"User-Agent": "MultiDrive-TFE/1.0 (student educational project)"},
+                )
+                with urllib.request.urlopen(img_req, timeout=20) as img_resp:
+                    raw = img_resp.read()
+
+                if not PILLOW_AVAILABLE:
+                    dest_path.write_bytes(raw)
+                    return True
+
+                img = Image.open(io.BytesIO(raw)).convert("RGB")
+                img.save(str(dest_path), "JPEG", quality=88)
+                return True
+
+            except Exception:
+                continue
+
+        return False
+
+    def _generate_placeholder_image(self, dest_path, brand, model, category_slug):
+        if not PILLOW_AVAILABLE:
+            return False
+        try:
+            color = CATEGORY_COLORS.get(category_slug, (30, 58, 138))
+            dark = tuple(max(0, c - 60) for c in color)
+
+            img = Image.new("RGB", (800, 533), color=color)
+            draw = ImageDraw.Draw(img)
+            draw.rectangle([(0, 373), (800, 533)], fill=dark)
+
+            font_large = ImageFont.load_default()
+            font_small = ImageFont.load_default()
+            try:
+                font_large = ImageFont.truetype("arialbd.ttf", 52)
+                font_small = ImageFont.truetype("arial.ttf", 32)
+            except Exception:
+                try:
+                    font_large = ImageFont.truetype("DejaVuSans-Bold.ttf", 52)
+                    font_small = ImageFont.truetype("DejaVuSans.ttf", 32)
+                except Exception:
+                    pass
+
+            draw.text((40, 390), brand, fill=(255, 255, 255), font=font_large)
+            draw.text((40, 458), model, fill=(200, 220, 255), font=font_small)
+            img.save(str(dest_path), "JPEG", quality=88)
+            return True
+        except Exception:
+            return False
+
+    def _get_or_create_model_image(self, brand, model, category_slug):
+        models_dir = Path(settings.MEDIA_ROOT) / "vehicles" / "models"
+        models_dir.mkdir(parents=True, exist_ok=True)
+
+        slug = self._model_slug(brand, model)
+        path1 = models_dir / f"{slug}-1.jpg"
+        path2 = models_dir / f"{slug}-2.jpg"
+
+        if not path1.exists():
+            wikipedia_title = VEHICLE_WIKIPEDIA_MAP.get((brand, model))
+            downloaded = False
+
+            if wikipedia_title:
+                time.sleep(0.5)
+                downloaded = self._download_wikipedia_image(wikipedia_title, path1)
+                if downloaded:
+                    self.stdout.write(f"  [image] {brand} {model}")
+                else:
+                    self.stdout.write(self.style.WARNING(f"  [placeholder] {brand} {model}"))
+
+            if not downloaded:
+                self._generate_placeholder_image(path1, brand, model, category_slug)
+
+        if path1.exists() and not path2.exists():
+            shutil.copy2(str(path1), str(path2))
+
+        return f"vehicles/models/{slug}-1.jpg", f"vehicles/models/{slug}-2.jpg"
+
+    def create_vehicle_images(self, vehicles, vehicle_info):
+        self.stdout.write("Preparing vehicle images (first run downloads from Wikipedia)...")
+        image_cache = {}
+
+        for vehicle in vehicles:
+            info = vehicle_info.get(vehicle.id, {})
+            brand = info.get("brand", "Unknown")
+            model = info.get("model", "")
+            category_slug = info.get("category_slug", "")
+
+            cache_key = (brand, model)
+            if cache_key not in image_cache:
+                image_cache[cache_key] = self._get_or_create_model_image(brand, model, category_slug)
+
+            path1, path2 = image_cache[cache_key]
+
+            VehicleImage.objects.update_or_create(
+                vehicle=vehicle,
+                image=path1,
+                defaults={"is_main": True},
+            )
+            VehicleImage.objects.update_or_create(
+                vehicle=vehicle,
+                image=path2,
+                defaults={"is_main": False},
+            )
 
     def create_reservations(self, users, vehicles):
-        messages = [
+        messages_list = [
             "Je souhaite venir voir le vehicule cette semaine.",
             "Le prix est-il negociable ?",
             "Je suis interesse pour une visite rapide.",
@@ -201,7 +395,7 @@ class Command(BaseCommand):
                 vehicle=vehicle,
                 defaults={
                     "status": status,
-                    "message": random.choice(messages),
+                    "message": random.choice(messages_list),
                     "appointment_date": timezone.now() + timedelta(days=random.randint(1, 21)),
                 },
             )

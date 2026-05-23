@@ -1420,6 +1420,48 @@ Objectif :
 
 ---
 
+## 24sexies. Finition de la fiche vehicule et des avis
+
+La fiche vehicule a ete finalisee pour offrir une presentation plus claire et plus realiste.
+
+Ameliorations apportees :
+
+- affichage des vraies images dans la galerie vehicule ;
+- affichage des vraies images aussi dans les cartes vehicule ;
+- ajout d'un resume visuel dans la fiche :
+  - annee estimee ;
+  - acompte estime ;
+  - nombre de photos ;
+  - note moyenne ;
+- meilleure mise en page de la section `Avis clients` ;
+- affichage de messages de retour apres publication ou refus d'un avis.
+
+La logique des avis a ete rendue plus coherente :
+
+- l'utilisateur doit etre connecte ;
+- il doit avoir au moins une reservation `accepted` ou `deposit_paid` sur le vehicule ;
+- un seul avis par utilisateur et par vehicule est autorise ;
+- un avis deja cree peut etre modifie.
+
+Fichiers principalement modifies :
+
+```text
+vehicles/views.py
+vehicles/templates/vehicles/vehicle_detail.html
+vehicles/templates/vehicles/partials/vehicle_card.html
+vehicles/static/vehicles/styles.css
+```
+
+Verification :
+
+```text
+manage.py check -> OK
+fiche vehicule -> section Avis clients visible
+fiche vehicule -> vraies balises <img> rendues
+```
+
+---
+
 ## 25. Direction UI/UX
 
 La direction visuelle de MultiDrive est maintenant fixee.

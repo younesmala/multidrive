@@ -1,12 +1,12 @@
 <article class="vehicle-card">
     <a class="vehicle-media" href="{% url 'vehicles:vehicle_detail' vehicle.id %}">
         {% if vehicle.main_image %}
-            <span>{{ vehicle.category.name }}</span>
-            <small>{{ vehicle.main_image.image }}</small>
+            <img src="{{ vehicle.main_image.image.url }}" alt="{{ vehicle.title }}">
         {% else %}
-            <span>{{ vehicle.category.name }}</span>
-            <small>Image a venir</small>
+            <div class="vehicle-media-placeholder">Image a venir</div>
         {% endif %}
+        <span>{{ vehicle.category.name }}</span>
+        <small>{{ vehicle.title }}</small>
     </a>
     <div class="vehicle-body">
         <div>

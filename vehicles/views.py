@@ -1,9 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import ReviewForm
 from .models import Review, Vehicle, VehicleCategory
+from reservations.models import Reservation
 
 
 def attach_main_images(vehicles):
@@ -93,14 +95,70 @@ def vehicle_detail(request, vehicle_id):
         Vehicle.objects.select_related("category").prefetch_related("images", "reviews__user"),
         id=vehicle_id,
     )
+    return render(
+        request,
+        "vehicles/vehicle_detail.html",
+        build_vehicle_detail_context(request, vehicle),
+    )
+
+
+@login_required
+def add_review(request, vehicle_id):
+    vehicle = get_object_or_404(Vehicle, id=vehicle_id)
+    review = Review.objects.filter(vehicle=vehicle, user=request.user).first()
+    review_form = ReviewForm(request.POST or None, instance=review)
+    can_review = user_can_review_vehicle(request.user, vehicle, existing_review=review)
+
+    if not can_review:
+        messages.warning(
+            request,
+            "Vous devez avoir une reservation acceptee sur ce vehicule avant de laisser un avis.",
+        )
+        return redirect("vehicles:vehicle_detail", vehicle_id=vehicle.id)
+
+    if request.method == "POST":
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.vehicle = vehicle
+            review.user = request.user
+            review.save()
+            messages.success(request, "Votre avis a bien ete enregistre.")
+            return redirect("vehicles:vehicle_detail", vehicle_id=vehicle.id)
+
+        messages.error(request, "Merci de corriger le formulaire avant de publier votre avis.")
+
+    return render(
+        request,
+        "vehicles/vehicle_detail.html",
+        build_vehicle_detail_context(request, vehicle, review_form=review_form),
+    )
+
+
+def build_vehicle_detail_context(request, vehicle, review_form=None):
     reviews = vehicle.reviews.select_related("user").all()
     review_stats = reviews.aggregate(average_rating=Avg("rating"))
     user_review = None
-    review_form = None
+    can_review = False
+    review_gate_message = ""
+
+    images = list(vehicle.images.all().order_by("-is_main", "created_at"))
+    vehicle.main_image = next((image for image in images if image.is_main), images[0] if images else None)
+    vehicle.display_year = extract_vehicle_year(vehicle.title)
+    vehicle.deposit_amount = round(float(vehicle.price) * 0.2, 2)
 
     if request.user.is_authenticated:
         user_review = reviews.filter(user=request.user).first()
-        review_form = ReviewForm(instance=user_review)
+        can_review = user_can_review_vehicle(request.user, vehicle, existing_review=user_review)
+
+        if review_form is None and can_review:
+            review_form = ReviewForm(instance=user_review)
+
+        if not can_review:
+            review_gate_message = (
+                "Vous pourrez laisser un avis apres une reservation acceptee sur ce vehicule."
+            )
+    else:
+        review_gate_message = "Connectez-vous pour laisser un avis sur ce vehicule."
 
     related_vehicles = attach_main_images(
         Vehicle.objects.select_related("category")
@@ -110,33 +168,29 @@ def vehicle_detail(request, vehicle_id):
         .order_by("price")[:4]
     )
 
-    return render(
-        request,
-        "vehicles/vehicle_detail.html",
-        {
-            "vehicle": vehicle,
-            "images": vehicle.images.all(),
-            "reviews": reviews,
-            "review_form": review_form,
-            "user_review": user_review,
-            "review_count": reviews.count(),
-            "average_rating": review_stats["average_rating"],
-            "related_vehicles": related_vehicles,
-        },
-    )
+    return {
+        "vehicle": vehicle,
+        "images": images,
+        "reviews": reviews,
+        "review_form": review_form,
+        "user_review": user_review,
+        "can_review": can_review,
+        "review_gate_message": review_gate_message,
+        "review_count": reviews.count(),
+        "average_rating": review_stats["average_rating"],
+        "related_vehicles": related_vehicles,
+    }
 
 
-@login_required
-def add_review(request, vehicle_id):
-    vehicle = get_object_or_404(Vehicle, id=vehicle_id)
-    review = Review.objects.filter(vehicle=vehicle, user=request.user).first()
+def user_can_review_vehicle(user, vehicle, existing_review=None):
+    if existing_review:
+        return True
 
-    if request.method == "POST":
-        form = ReviewForm(request.POST, instance=review)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.vehicle = vehicle
-            review.user = request.user
-            review.save()
-
-    return redirect("vehicles:vehicle_detail", vehicle_id=vehicle.id)
+    return Reservation.objects.filter(
+        user=user,
+        vehicle=vehicle,
+        status__in=[
+            Reservation.STATUS_ACCEPTED,
+            Reservation.STATUS_DEPOSIT_PAID,
+        ],
+    ).exists()
