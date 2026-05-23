@@ -36,6 +36,7 @@ class Payment(models.Model):
     )
     paid_at = models.DateTimeField(blank=True, null=True)
     user_status_read = models.BooleanField(default=True)
+    admin_notif_read = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
