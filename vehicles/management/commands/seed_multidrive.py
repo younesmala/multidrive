@@ -26,6 +26,39 @@ except ImportError:
     PILLOW_AVAILABLE = False
 
 
+VEHICLE_WIKIPEDIA_MAP_2 = {
+    ("Decathlon", "Rockrider 340"): "Bicycle",
+    ("Btwin", "Original 500"): "Mountain_bike",
+    ("Trek", "FX 1"): "Road_bicycle",
+    ("Giant", "Escape 3"): "City_bicycle",
+    ("Nakamura", "Cliff Lite"): "Road_bicycle",
+    ("Xiaomi", "Mi Electric Scooter"): "Electric_kick_scooter",
+    ("Ninebot", "ES2"): "Electric_kick_scooter",
+    ("Wispeed", "T850"): "Electric_kick_scooter",
+    ("Oxelo", "Town 7"): "Electric_kick_scooter",
+    ("Peugeot", "Kisbee 50"): "Piaggio_Zip",
+    ("Yamaha", "Aerox 50"): "Motor_scooter",
+    ("Piaggio", "Zip 50"): "Motor_scooter",
+    ("Kymco", "Agility 50"): "Motor_scooter",
+    ("Honda", "CBF 125"): "Yamaha_YBR125",
+    ("Yamaha", "YBR 125"): "Honda_CBF125",
+    ("Mash", "Seventy 125"): "Cafe_racer",
+    ("Peugeot", "206"): "Renault_Clio",
+    ("Renault", "Clio"): "Peugeot_206",
+    ("Citroen", "C3"): "Toyota_Yaris",
+    ("Fiat", "Panda"): "Citroen_C3",
+    ("Toyota", "Yaris"): "Supermini_car",
+    ("Opel", "Astra"): "Volkswagen_Golf",
+    ("Ford", "Focus"): "Opel_Astra",
+    ("Volkswagen", "Golf"): "Ford_Focus",
+    ("Peugeot", "307 SW"): "Renault_Megane",
+    ("Renault", "Megane Estate"): "Peugeot_307",
+    ("Citroen", "Berlingo"): "Renault_Kangoo",
+    ("Renault", "Kangoo"): "Citroen_Berlingo",
+    ("Renault", "Scenic"): "Dacia_Duster",
+    ("Dacia", "Duster"): "Renault_Scenic",
+}
+
 VEHICLE_WIKIPEDIA_MAP = {
     ("Decathlon", "Rockrider 340"): "Mountain_bike",
     ("Btwin", "Original 500"): "Bicycle",
@@ -81,6 +114,7 @@ class Command(BaseCommand):
 
         with transaction.atomic():
             self.clear_existing_data()
+            self.clear_model_images()
             categories = self.create_categories()
             users = self.create_users()
             vehicles, vehicle_info = self.create_vehicles(categories)
@@ -232,6 +266,12 @@ class Command(BaseCommand):
             }
         return vehicles, vehicle_info
 
+    def clear_model_images(self):
+        models_dir = Path(settings.MEDIA_ROOT) / "vehicles" / "models"
+        if models_dir.exists():
+            shutil.rmtree(str(models_dir))
+        models_dir.mkdir(parents=True, exist_ok=True)
+
     def _model_slug(self, brand, model):
         raw = f"{brand}-{model}".lower()
         for char, rep in {" ": "-", "é": "e", "è": "e", "ê": "e", "à": "a", "â": "a", "ô": "o", "û": "u", "ç": "c"}.items():
@@ -245,7 +285,6 @@ class Command(BaseCommand):
             try:
                 if attempt > 0:
                     time.sleep(1.0)
-
                 encoded = urllib.parse.quote(wikipedia_title, safe="")
                 api_url = f"https://en.wikipedia.org/api/rest_v1/page/summary/{encoded}"
                 req = urllib.request.Request(
@@ -254,36 +293,36 @@ class Command(BaseCommand):
                 )
                 with urllib.request.urlopen(req, timeout=15) as resp:
                     data = json.loads(resp.read().decode("utf-8"))
-
-                thumbnail = data.get("thumbnail", {})
-                thumb_src = thumbnail.get("source", "")
-
+                thumb_src = data.get("thumbnail", {}).get("source", "")
                 if not thumb_src:
                     return False
-
                 parsed_path = urllib.parse.urlparse(thumb_src).path.lower()
-                if not any(parsed_path.endswith(ext) for ext in [".jpg", ".jpeg", ".png", ".webp"]):
+                if not any(parsed_path.endswith(ext) for ext in (".jpg", ".jpeg", ".png", ".webp")):
                     return False
-
                 img_req = urllib.request.Request(
                     thumb_src,
                     headers={"User-Agent": "MultiDrive-TFE/1.0 (student educational project)"},
                 )
                 with urllib.request.urlopen(img_req, timeout=20) as img_resp:
                     raw = img_resp.read()
-
                 if not PILLOW_AVAILABLE:
                     dest_path.write_bytes(raw)
                     return True
-
                 img = Image.open(io.BytesIO(raw)).convert("RGB")
                 img.save(str(dest_path), "JPEG", quality=88)
+                img.close()
                 return True
-
             except Exception:
                 continue
-
         return False
+
+    def _safe_copy(self, src, dest, retries=5):
+        for i in range(retries):
+            try:
+                shutil.copy2(str(src), str(dest))
+                return
+            except PermissionError:
+                time.sleep(0.3 * (i + 1))
 
     def _generate_placeholder_image(self, dest_path, brand, model, category_slug):
         if not PILLOW_AVAILABLE:
@@ -320,32 +359,43 @@ class Command(BaseCommand):
         models_dir.mkdir(parents=True, exist_ok=True)
 
         slug = self._model_slug(brand, model)
-        path1 = models_dir / f"{slug}-1.jpg"
-        path2 = models_dir / f"{slug}-2.jpg"
+        wikipedia_title = VEHICLE_WIKIPEDIA_MAP.get((brand, model))
+        downloaded_paths = []
 
-        if not path1.exists():
-            wikipedia_title = VEHICLE_WIKIPEDIA_MAP.get((brand, model))
-            downloaded = False
+        article1 = VEHICLE_WIKIPEDIA_MAP.get((brand, model))
+        article2 = VEHICLE_WIKIPEDIA_MAP_2.get((brand, model))
 
-            if wikipedia_title:
-                time.sleep(0.5)
-                downloaded = self._download_wikipedia_image(wikipedia_title, path1)
-                if downloaded:
-                    self.stdout.write(f"  [image] {brand} {model}")
-                else:
-                    self.stdout.write(self.style.WARNING(f"  [placeholder] {brand} {model}"))
+        if article1:
+            time.sleep(0.5)
+            dest1 = models_dir / f"{slug}-1.jpg"
+            if self._download_wikipedia_image(article1, dest1):
+                downloaded_paths.append(dest1)
 
-            if not downloaded:
-                self._generate_placeholder_image(path1, brand, model, category_slug)
+        if article2:
+            time.sleep(0.8)
+            dest2 = models_dir / f"{slug}-2.jpg"
+            if self._download_wikipedia_image(article2, dest2):
+                downloaded_paths.append(dest2)
 
-        if path1.exists() and not path2.exists():
-            shutil.copy2(str(path1), str(path2))
+        if downloaded_paths:
+            self.stdout.write(f"  [image x{len(downloaded_paths)}] {brand} {model}")
+        else:
+            self.stdout.write(self.style.WARNING(f"  [placeholder] {brand} {model}"))
+            dest = models_dir / f"{slug}-1.jpg"
+            self._generate_placeholder_image(dest, brand, model, category_slug)
+            downloaded_paths = [dest]
 
-        return f"vehicles/models/{slug}-1.jpg", f"vehicles/models/{slug}-2.jpg"
+        if len(downloaded_paths) == 1:
+            dest = models_dir / f"{slug}-2.jpg"
+            self._safe_copy(downloaded_paths[0], dest)
+            downloaded_paths.append(dest)
+
+        return [f"vehicles/models/{p.name}" for p in downloaded_paths[:2]]
 
     def create_vehicle_images(self, vehicles, vehicle_info):
-        self.stdout.write("Preparing vehicle images (first run downloads from Wikipedia)...")
+        self.stdout.write("Downloading vehicle images from Wikipedia...")
         image_cache = {}
+        model_counters = {}
 
         for vehicle in vehicles:
             info = vehicle_info.get(vehicle.id, {})
@@ -357,18 +407,18 @@ class Command(BaseCommand):
             if cache_key not in image_cache:
                 image_cache[cache_key] = self._get_or_create_model_image(brand, model, category_slug)
 
-            path1, path2 = image_cache[cache_key]
+            paths = image_cache[cache_key]
+            counter = model_counters.get(cache_key, 0)
+            model_counters[cache_key] = counter + 1
 
-            VehicleImage.objects.update_or_create(
-                vehicle=vehicle,
-                image=path1,
-                defaults={"is_main": True},
-            )
-            VehicleImage.objects.update_or_create(
-                vehicle=vehicle,
-                image=path2,
-                defaults={"is_main": False},
-            )
+            # Alternate main/secondary for each vehicle of the same model
+            if counter % 2 == 0:
+                path_main, path_sec = paths[0], paths[1]
+            else:
+                path_main, path_sec = paths[1], paths[0]
+
+            VehicleImage.objects.create(vehicle=vehicle, image=path_main, is_main=True)
+            VehicleImage.objects.create(vehicle=vehicle, image=path_sec, is_main=False)
 
     def create_reservations(self, users, vehicles):
         messages_list = [
