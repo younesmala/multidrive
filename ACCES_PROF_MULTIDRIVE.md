@@ -41,8 +41,8 @@ Fonctionnalites testables :
 ### B. Membre
 
 ```text
-username: Younes
-password: Multidrive1
+username: client_adam_001
+password: client1234
 ```
 
 Fonctionnalites testables :
@@ -52,6 +52,7 @@ Fonctionnalites testables :
 - consulter le detail d'un vehicule ;
 - reserver un vehicule ;
 - consulter ses reservations ;
+- acceder a l'espace membre (paiements, messages, profil) ;
 - consulter l'API documentee si besoin.
 
 ---
@@ -66,11 +67,13 @@ password: admin1234
 Fonctionnalites testables :
 
 - se connecter a l'interface d'administration ;
+- acceder au dashboard administrateur ;
 - ajouter / modifier / supprimer des vehicules ;
 - gerer les reservations ;
 - gerer les paiements ;
 - gerer les factures ;
-- gerer les messages de contact.
+- gerer les messages de contact et y repondre ;
+- gerer les comptes membres.
 
 ---
 
@@ -91,7 +94,7 @@ est une URL de test locale utilisee sur la machine de demonstration.
 ## 4. Resume rapide
 
 ```text
-Visiteur : consultation sans connexion
-Membre : Younes / Multidrive1
+Visiteur       : consultation sans connexion
+Membre         : client_adam_001 / client1234
 Administrateur : admin / admin1234
 ```
