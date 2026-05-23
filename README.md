@@ -6,39 +6,57 @@ Projet Django realise dans le cadre du TFE. MultiDrive est une plateforme de con
 
 MultiDrive combine :
 
-- un site web Django ;
+- un site web Django avec Bootstrap 5.3 ;
 - une API REST documentee ;
 - une base de donnees relationnelle ;
 - une interface d'administration ;
-- un parcours membre pour la reservation.
+- un parcours membre complet : consultation, reservation, paiement, suivi.
 
 ## Technologies utilisees
 
-- Django
+- Django 6.0.4
+- Bootstrap 5.3 (navigation responsive, composants UI)
 - Django REST Framework
 - Swagger / OpenAPI via drf-spectacular
-- SQLite
-- Pillow
-- Stripe Checkout (prevu pour l'integration du paiement)
+- SQLite (developpement)
+- Pillow (gestion des images)
+- Stripe Checkout (architecture preparee, flux de paiement simule)
 
 ## Fonctionnalites principales
 
-- catalogue de vehicules ;
-- detail d'un vehicule ;
-- authentification membre ;
-- reservations ;
-- page de contact ;
-- espace membre ;
-- paiements (modele et interface prepares) ;
-- API REST versionnee ;
-- documentation Swagger.
+**Catalogue et vehicules**
+- catalogue de vehicules avec filtres par categorie et statut ;
+- fiches vehicules avec vraies photos par modele (galerie images) ;
+- systeme d'avis : seuls les membres avec une reservation acceptee peuvent publier un avis ;
+- suggestions de vehicules similaires.
+
+**Authentification et espace membre**
+- inscription, connexion, deconnexion ;
+- profil membre, mes reservations, mes paiements, mes messages ;
+- notifications en temps reel (bulles rouges) pour les mises a jour admin ;
+- suppression de compte en soft delete.
+
+**Reservation et paiement**
+- parcours de reservation complet (demande, statuts, suivi) ;
+- page de paiement d'acompte (checkout) : choix du montant, saisie carte, enregistrement en base ;
+- notification automatique de l'administrateur a chaque nouveau paiement.
+
+**Administration**
+- admin Django configure pour tous les modeles ;
+- dashboard administrateur : indicateurs en temps reel, raccourcis metier ;
+- gestion des messages de contact avec reponse admin.
+
+**Technique**
+- API REST versionnee (/api/v1/) ;
+- documentation Swagger automatique ;
+- versioning Git + GitHub avec .env pour les secrets.
 
 ## Lancer le projet en local
 
 Depuis le dossier du projet :
 
 ```powershell
-cd C:\Users\elmal\OneDrive\Desktop\multidrive\TFE_MultiDrive\multidrive
+cd C:\Users\elmal\OneDrive\Desktop\TFE_MultiDrive\multidrive
 ..\venv\Scripts\python.exe manage.py runserver 127.0.0.1:8001
 ```
 
@@ -1054,21 +1072,25 @@ Objectif pour le TFE :
 
 ## 21. Etat actuel du projet
 
-Etat actuel :
-
 ```text
-Projet Django cree
-Apps creees
-Modeles principaux crees
-Migrations appliquees
-Admin configure
-Images configurees
-Pillow installe
-Donnees de test generees
-Base consultable via localhost
-Pages publiques de base creees
-Authentification client ajoutee
-Reservation connectee ajoutee
+Projet Django cree                          OK
+Apps creees (accounts, vehicles, reservations, payments, contact, api)  OK
+Modeles principaux crees et migres          OK
+Admin Django configure                      OK
+Bootstrap 5.3 integre (responsive)         OK
+Vraies photos de vehicules (par modele)    OK
+Donnees de test generees (150+ vehicules)  OK
+Authentification membre complete            OK
+Parcours reservation complet               OK
+Page paiement checkout (Stripe-compatible) OK
+Espace membre (reservations, paiements, messages, profil)  OK
+Suppression de compte soft delete          OK
+Page de contact + reponse admin            OK
+Dashboard administrateur                   OK
+Notifications membres et admin             OK
+Systeme d'avis clients                     OK
+API REST versionnee + Swagger              OK
+Versioning Git + GitHub                    OK
 ```
 
 URL admin :

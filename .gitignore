@@ -39,3 +39,6 @@ Thumbs.db
 *.temp
 *.bak
 *.sqlite3-journal
+
+# Documents locaux (preparation orale, notes personnelles)
+preparation_orale_TFE.md
