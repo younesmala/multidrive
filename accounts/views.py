@@ -157,6 +157,8 @@ def delete_request_done(request):
 def admin_dashboard(request):
     User = get_user_model()
 
+    Payment.objects.filter(admin_notif_read=False).update(admin_notif_read=True)
+
     reservations = Reservation.objects.select_related("user", "vehicle").order_by("-created_at")
     contact_messages = ContactMessage.objects.select_related("user").order_by("-created_at")
     disabled_accounts = (
