@@ -31,6 +31,9 @@ runserver.out.log
 .DS_Store
 Thumbs.db
 
+# Claude Code (outil de développement local, ne pas committer)
+.claude/
+
 # Temporary files
 *.tmp
 *.temp
