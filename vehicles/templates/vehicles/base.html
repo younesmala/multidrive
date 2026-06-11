@@ -38,15 +38,6 @@
                     </li>
 
                     {% if request.user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link menu-link-with-badge" href="{% url 'reservations:my_reservations' %}">
-                                <span>Reservations</span>
-                                {% if unread_reservations %}
-                                    <span class="notification-badge">{{ unread_reservations }}</span>
-                                {% endif %}
-                            </a>
-                        </li>
-
                         <li class="nav-item dropdown ms-lg-2">
                             <button class="user-menu-button dropdown-toggle"
                                     type="button"
@@ -107,9 +98,6 @@
                         {% endif %}
 
                     {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'accounts:login' %}">Reservations</a>
-                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'accounts:login' %}">Connexion</a>
                         </li>
