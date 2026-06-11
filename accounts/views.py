@@ -1,6 +1,7 @@
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth import get_user_model, login, logout
+from django.contrib.auth import get_user_model, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import LoginView
 from django.db import transaction
 from django.db.models import Count, Q, Sum
@@ -94,6 +95,22 @@ def payment_list(request):
             "payment_counts": payment_counts,
         },
     )
+
+
+@login_required
+def change_password(request):
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, "Votre mot de passe a bien ete modifie.")
+            return redirect("accounts:profile")
+        messages.error(request, "Merci de corriger les erreurs ci-dessous.")
+    else:
+        form = PasswordChangeForm(request.user)
+
+    return render(request, "accounts/change_password.html", {"form": form})
 
 
 @login_required
