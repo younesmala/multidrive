@@ -23,6 +23,9 @@
                 <label for="{{ field.id_for_label }}">
                     {{ field.label }}
                     {{ field }}
+                    {% if field.name == "appointment_date" %}
+                        <span id="horaire-hint" class="field-hint" style="display:none;"></span>
+                    {% endif %}
                     {% for error in field.errors %}
                         <span class="field-error">{{ error }}</span>
                     {% endfor %}
@@ -33,4 +36,24 @@
         </form>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const input = document.getElementById('id_appointment_date');
+    const hint = document.getElementById('horaire-hint');
+
+    function updateHint() {
+        if (!input.value) { hint.style.display = 'none'; return; }
+        const date = new Date(input.value);
+        const day = date.getDay(); // 0=dim, 6=sam
+        const isWeekend = (day === 0 || day === 6);
+        hint.textContent = isWeekend
+            ? 'Week-end : rendez-vous acceptes de 9h00 a 21h00.'
+            : 'Semaine : rendez-vous acceptes de 16h00 a 21h30.';
+        hint.style.display = 'block';
+    }
+
+    if (input) input.addEventListener('change', updateHint);
+</script>
 {% endblock %}

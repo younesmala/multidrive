@@ -9,6 +9,14 @@
     <p>Suivez rapidement les demandes en cours, l'etat du catalogue et les actions prioritaires.</p>
 </section>
 
+{% if messages %}
+<div class="container-xl" style="margin-top: 16px;">
+    {% for message in messages %}
+        <div class="form-feedback {{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
+
 <section class="section">
     <div class="admin-summary-grid">
         <article class="admin-summary-card">
@@ -98,7 +106,22 @@
                             <p>{{ reservation.vehicle.title }}</p>
                             <small>{{ reservation.created_at|date:"d/m/Y H:i" }}</small>
                         </div>
-                        <span class="status status-{{ reservation.status }}">{{ reservation.get_status_display }}</span>
+                        {% if reservation.status == "pending" %}
+                            <div class="dashboard-item-actions">
+                                <form method="post" action="{% url 'reservations:update_status' reservation.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="accept">
+                                    <button type="submit" class="btn-action btn-accept">Accepter</button>
+                                </form>
+                                <form method="post" action="{% url 'reservations:update_status' reservation.id %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="reject">
+                                    <button type="submit" class="btn-action btn-reject">Refuser</button>
+                                </form>
+                            </div>
+                        {% else %}
+                            <span class="status status-{{ reservation.status }}">{{ reservation.get_status_display }}</span>
+                        {% endif %}
                     </div>
                 {% empty %}
                     <p class="description">Aucune reservation recente.</p>

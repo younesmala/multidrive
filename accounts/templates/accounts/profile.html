@@ -59,6 +59,16 @@
 </section>
 
 <section class="section account-section">
+    <article class="account-card">
+        <h2>Securite du compte</h2>
+        <p class="description">Vous pouvez modifier votre mot de passe a tout moment depuis cette page.</p>
+        <div class="hero-actions">
+            <a class="button secondary" href="{% url 'accounts:change_password' %}">Changer mon mot de passe</a>
+        </div>
+    </article>
+</section>
+
+<section class="section account-section">
     <article class="account-card danger-card">
         <h2>Suppression du compte</h2>
         {% if account_status.is_deleted %}

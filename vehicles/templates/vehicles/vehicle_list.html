@@ -44,7 +44,7 @@
 <section class="section">
     <div class="section-heading">
         <div>
-            <h2>{{ vehicles|length }} resultat(s)</h2>
+            <h2>{{ page_obj.paginator.count }} resultat(s)</h2>
             <p>Des cartes lisibles pour comparer rapidement les vehicules disponibles.</p>
         </div>
         <a class="button secondary" href="{% url 'vehicles:vehicle_list' %}">Reinitialiser</a>
@@ -56,5 +56,23 @@
             <p>Aucun vehicule ne correspond a ce filtre.</p>
         {% endfor %}
     </div>
+
+    {% if page_obj.has_other_pages %}
+    <nav class="pagination" aria-label="Pagination">
+        {% if page_obj.has_previous %}
+            <a class="pagination-btn" href="?page={{ page_obj.previous_page_number }}{% if selected_query %}&q={{ selected_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if selected_status %}&status={{ selected_status }}{% endif %}">&laquo; Precedent</a>
+        {% else %}
+            <span class="pagination-btn disabled">&laquo; Precedent</span>
+        {% endif %}
+
+        <span class="pagination-info">Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a class="pagination-btn" href="?page={{ page_obj.next_page_number }}{% if selected_query %}&q={{ selected_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if selected_status %}&status={{ selected_status }}{% endif %}">Suivant &raquo;</a>
+        {% else %}
+            <span class="pagination-btn disabled">Suivant &raquo;</span>
+        {% endif %}
+    </nav>
+    {% endif %}
 </section>
 {% endblock %}
