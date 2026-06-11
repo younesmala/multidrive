@@ -1922,3 +1922,41 @@ body::after {
         grid-template-columns: 1fr;
     }
 }
+
+/* ── Pagination ─────────────────────────────────────────────────────────── */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+.pagination-btn {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 6px;
+    background: #1E3A8A;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.pagination-btn:hover {
+    background: #16306e;
+    color: #fff;
+}
+
+.pagination-btn.disabled {
+    background: #dde3f0;
+    color: #888;
+    cursor: default;
+    pointer-events: none;
+}
+
+.pagination-info {
+    font-size: 0.9rem;
+    color: #555;
+}

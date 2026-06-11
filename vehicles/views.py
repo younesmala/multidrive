@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.db.models import Avg
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -73,14 +74,19 @@ def vehicle_list(request):
     if selected_query:
         vehicles = vehicles.filter(title__icontains=selected_query)
 
-    vehicles = attach_main_images(vehicles)
+    paginator = Paginator(vehicles, 12)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    attach_main_images(page_obj.object_list)
+
     categories = VehicleCategory.objects.order_by("name")
 
     return render(
         request,
         "vehicles/vehicle_list.html",
         {
-            "vehicles": vehicles,
+            "vehicles": page_obj.object_list,
+            "page_obj": page_obj,
             "categories": categories,
             "selected_category": selected_category,
             "selected_status": selected_status,
