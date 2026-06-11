@@ -1,11 +1,34 @@
+from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
 
 from vehicles.models import Vehicle
 
 from .forms import ReservationForm
 from .models import Reservation
+
+
+@require_POST
+@staff_member_required
+def update_reservation_status(request, reservation_id):
+    reservation = get_object_or_404(Reservation, id=reservation_id)
+    action = request.POST.get("action")
+
+    if action == "accept" and reservation.status == Reservation.STATUS_PENDING:
+        reservation.status = Reservation.STATUS_ACCEPTED
+        reservation.user_status_read = False
+        reservation.save(update_fields=["status", "user_status_read", "updated_at"])
+        messages.success(request, f"Reservation de {reservation.user.username} acceptee.")
+    elif action == "reject" and reservation.status == Reservation.STATUS_PENDING:
+        reservation.status = Reservation.STATUS_REJECTED
+        reservation.user_status_read = False
+        reservation.save(update_fields=["status", "user_status_read", "updated_at"])
+        messages.success(request, f"Reservation de {reservation.user.username} refusee.")
+
+    return redirect("accounts:admin_dashboard")
 
 
 @login_required

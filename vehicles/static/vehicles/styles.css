@@ -1960,3 +1960,34 @@ body::after {
     font-size: 0.9rem;
     color: #555;
 }
+
+/* ── Boutons action dashboard admin ─────────────────────────────────────── */
+.dashboard-item-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn-action {
+    padding: 5px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn-action:hover {
+    opacity: 0.85;
+}
+
+.btn-accept {
+    background: #16a34a;
+    color: #fff;
+}
+
+.btn-reject {
+    background: #dc2626;
+    color: #fff;
+}
