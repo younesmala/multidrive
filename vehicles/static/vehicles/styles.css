@@ -381,6 +381,17 @@ h3 {
     background: var(--blue);
 }
 
+.button.danger {
+    color: #c0392b;
+    background: var(--white);
+    border: 1.5px solid #c0392b;
+}
+
+.button.danger:hover {
+    color: var(--white);
+    background: #c0392b;
+}
+
 .section,
 .page-title {
     padding: 52px 0 0;

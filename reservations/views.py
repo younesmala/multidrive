@@ -116,6 +116,21 @@ def my_reservations(request):
     )
 
 
+@require_POST
+@login_required
+def cancel_reservation(request, reservation_id):
+    reservation = get_object_or_404(
+        Reservation, id=reservation_id, user=request.user
+    )
+    if reservation.status == Reservation.STATUS_PENDING:
+        reservation.status = Reservation.STATUS_CANCELLED
+        reservation.save(update_fields=["status", "updated_at"])
+        messages.success(request, "Votre reservation a bien ete annulee.")
+    else:
+        messages.error(request, "Seules les reservations en attente peuvent etre annulees.")
+    return redirect("reservations:my_reservations")
+
+
 @login_required
 def my_purchases(request):
     purchases = (

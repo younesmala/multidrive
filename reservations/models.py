@@ -9,12 +9,14 @@ class Reservation(models.Model):
     STATUS_ACCEPTED = "accepted"
     STATUS_REJECTED = "rejected"
     STATUS_DEPOSIT_PAID = "deposit_paid"
+    STATUS_CANCELLED = "cancelled"
 
     STATUS_CHOICES = [
-        (STATUS_PENDING, "Pending"),
-        (STATUS_ACCEPTED, "Accepted"),
-        (STATUS_REJECTED, "Rejected"),
-        (STATUS_DEPOSIT_PAID, "Deposit paid"),
+        (STATUS_PENDING, "En attente"),
+        (STATUS_ACCEPTED, "Acceptee"),
+        (STATUS_REJECTED, "Refusee"),
+        (STATUS_DEPOSIT_PAID, "Acompte paye"),
+        (STATUS_CANCELLED, "Annulee"),
     ]
 
     user = models.ForeignKey(
