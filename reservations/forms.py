@@ -1,6 +1,7 @@
 from datetime import time as dt_time
 
 from django import forms
+from django.utils import timezone
 
 from .models import Reservation
 
@@ -33,6 +34,11 @@ class ReservationForm(forms.ModelForm):
         appointment_date = self.cleaned_data.get("appointment_date")
         if not appointment_date:
             return appointment_date
+
+        if appointment_date <= timezone.now():
+            raise forms.ValidationError(
+                "La date de rendez-vous doit etre dans le futur."
+            )
 
         weekday = appointment_date.weekday()
         slot = WEEKDAY_HOURS["weekend"] if weekday >= 5 else WEEKDAY_HOURS["week"]

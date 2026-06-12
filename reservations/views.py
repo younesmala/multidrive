@@ -21,6 +21,9 @@ def update_reservation_status(request, reservation_id):
         reservation.status = Reservation.STATUS_ACCEPTED
         reservation.user_status_read = False
         reservation.save(update_fields=["status", "user_status_read", "updated_at"])
+        vehicle = reservation.vehicle
+        vehicle.status = Vehicle.STATUS_RESERVED
+        vehicle.save(update_fields=["status"])
         messages.success(request, f"Reservation de {reservation.user.username} acceptee.")
     elif action == "reject" and reservation.status == Reservation.STATUS_PENDING:
         reservation.status = Reservation.STATUS_REJECTED
@@ -34,6 +37,19 @@ def update_reservation_status(request, reservation_id):
 @login_required
 def reserve_vehicle(request, vehicle_id):
     vehicle = get_object_or_404(Vehicle, id=vehicle_id)
+
+    if vehicle.status != Vehicle.STATUS_AVAILABLE:
+        messages.error(request, "Ce vehicule n'est plus disponible a la reservation.")
+        return redirect("vehicles:vehicle_detail", vehicle_id=vehicle.id)
+
+    existing = Reservation.objects.filter(
+        user=request.user,
+        vehicle=vehicle,
+        status__in=[Reservation.STATUS_PENDING, Reservation.STATUS_ACCEPTED],
+    ).first()
+    if existing:
+        messages.warning(request, "Vous avez deja une reservation en cours pour ce vehicule.")
+        return redirect("reservations:my_reservations")
 
     if request.method == "POST":
         form = ReservationForm(request.POST)

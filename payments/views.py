@@ -87,6 +87,10 @@ def checkout(request):
             },
         )
 
+        reservation.status = Reservation.STATUS_DEPOSIT_PAID
+        reservation.user_status_read = False
+        reservation.save(update_fields=["status", "user_status_read", "updated_at"])
+
         messages.success(
             request,
             f"Paiement de {chosen_amount} € enregistré. "
