@@ -24,7 +24,8 @@ def _deposit_for(vehicle):
 
 @login_required
 def checkout(request):
-    pending_reservations = list(
+    # Réservations acceptées sans paiement (premier paiement)
+    first_payment_qs = list(
         Reservation.objects.filter(
             user=request.user,
             status=Reservation.STATUS_ACCEPTED,
@@ -35,33 +36,66 @@ def checkout(request):
         .order_by("created_at")
     )
 
+    # Réservations deposit_paid avec solde restant (second paiement)
+    balance_qs = list(
+        Reservation.objects.filter(
+            user=request.user,
+            status=Reservation.STATUS_DEPOSIT_PAID,
+        )
+        .select_related("vehicle", "vehicle__category", "payment")
+        .prefetch_related("vehicle__images")
+        .order_by("created_at")
+    )
+    balance_qs = [r for r in balance_qs if r.vehicle.price - r.payment.amount > Decimal("0")]
+
     reservations_data = []
-    for r in pending_reservations:
+    for r in first_payment_qs:
         deposit = _deposit_for(r.vehicle)
         main_image = r.vehicle.images.filter(is_main=True).first()
         reservations_data.append({
             "reservation": r,
             "deposit_amount": deposit,
             "total_price": r.vehicle.price,
+            "already_paid": Decimal("0"),
+            "remaining": r.vehicle.price,
             "main_image": main_image,
+            "is_balance": False,
+        })
+
+    for r in balance_qs:
+        already_paid = r.payment.amount
+        remaining = r.vehicle.price - already_paid
+        main_image = r.vehicle.images.filter(is_main=True).first()
+        reservations_data.append({
+            "reservation": r,
+            "deposit_amount": remaining,
+            "total_price": r.vehicle.price,
+            "already_paid": already_paid,
+            "remaining": remaining,
+            "main_image": main_image,
+            "is_balance": True,
         })
 
     if request.method == "POST":
         reservation_id = request.POST.get("reservation_id")
-        reservation = next(
-            (rd["reservation"] for rd in reservations_data if str(rd["reservation"].id) == reservation_id),
+        rd = next(
+            (rd for rd in reservations_data if str(rd["reservation"].id) == reservation_id),
             None,
         )
 
-        if not reservation:
+        if not rd:
             messages.error(request, "Réservation introuvable. Veuillez réessayer.")
             return redirect("payments:checkout")
 
-        deposit_amount = _deposit_for(reservation.vehicle)
-        total_price = reservation.vehicle.price
+        reservation = rd["reservation"]
+        total_price = rd["total_price"]
+        already_paid = rd["already_paid"]
+        remaining = rd["remaining"]
         amount_type = request.POST.get("amount_type", "deposit")
 
-        if amount_type == "full":
+        if rd["is_balance"]:
+            chosen_amount = remaining
+        elif amount_type == "full":
             chosen_amount = total_price
         elif amount_type == "custom":
             raw = request.POST.get("custom_amount", "").replace(",", ".").strip()
@@ -73,12 +107,14 @@ def checkout(request):
                 messages.error(request, "Montant invalide. Veuillez saisir un montant supérieur à 0 €.")
                 return redirect("payments:checkout")
         else:
-            chosen_amount = deposit_amount
+            chosen_amount = rd["deposit_amount"]
+
+        new_total = already_paid + chosen_amount
 
         Payment.objects.update_or_create(
             reservation=reservation,
             defaults={
-                "amount": chosen_amount,
+                "amount": new_total,
                 "status": Payment.STATUS_PAID,
                 "payment_method": "card",
                 "transaction_reference": uuid4().hex,
@@ -99,16 +135,17 @@ def checkout(request):
         messages.success(
             request,
             f"Paiement de {chosen_amount} € enregistré. "
-            f"Véhicule : {reservation.vehicle.title}.",
+            f"Total versé : {new_total} € sur {total_price} €.",
         )
         return redirect("accounts:payment_list")
 
-    # Build JSON payload for JS (amounts per reservation id)
     js_data = {
         str(rd["reservation"].id): {
             "deposit": str(rd["deposit_amount"]),
-            "total": str(rd["total_price"]),
-            "label": rd['reservation'].vehicle.title,
+            "total": str(rd["remaining"]),
+            "label": rd["reservation"].vehicle.title,
+            "already_paid": str(rd["already_paid"]),
+            "is_balance": rd["is_balance"],
         }
         for rd in reservations_data
     }

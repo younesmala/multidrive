@@ -58,16 +58,22 @@
                             <p>{{ payment.reservation.vehicle.price }} EUR</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Acompte verse</strong>
+                            <strong>Deja verse</strong>
                             <p>{{ payment.amount }} EUR</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Solde restant</strong>
+                            <p>
+                                {% if payment.remaining > 0 %}
+                                    <span style="color:#e05a1e; font-weight:600;">{{ payment.remaining }} EUR</span>
+                                {% else %}
+                                    <span style="color:#2a7a3b; font-weight:600;">Solde apure</span>
+                                {% endif %}
+                            </p>
                         </div>
                         <div class="member-detail-block">
                             <strong>Date du paiement</strong>
                             <p>{{ payment.paid_at|date:"d/m/Y H:i"|default:"Non renseignee" }}</p>
-                        </div>
-                        <div class="member-detail-block">
-                            <strong>Methode</strong>
-                            <p>{{ payment.payment_method|default:"Non renseignee" }}</p>
                         </div>
                     </div>
 
@@ -111,6 +117,9 @@
 
                     <div class="hero-actions">
                         <a class="button primary" href="{% url 'vehicles:vehicle_detail' payment.reservation.vehicle.id %}">Voir le vehicule</a>
+                        {% if payment.remaining > 0 %}
+                            <a class="button primary" href="{% url 'payments:checkout' %}">Completer le paiement ({{ payment.remaining }} EUR)</a>
+                        {% endif %}
                         <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
                     </div>
                 </article>

@@ -85,6 +85,7 @@ def payment_list(request):
             p.reservation.vehicle.images.filter(is_main=True).first()
             or p.reservation.vehicle.images.first()
         )
+        p.remaining = p.reservation.vehicle.price - p.amount
 
     return render(
         request,
