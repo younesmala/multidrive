@@ -1,31 +1,27 @@
 {% extends "vehicles/base.html" %}
 
-{% block title %}Mes paiements - MultiDrive{% endblock %}
+{% block title %}Paiements et achats - MultiDrive{% endblock %}
 
 {% block content %}
 <section class="page-title">
     <p class="eyebrow">Espace client</p>
-    <h1>Mes paiements</h1>
-    <p>Consultez ici les acomptes lies a vos reservations et l'etat de leur traitement.</p>
+    <h1>Paiements et achats</h1>
+    <p>Retrouvez ici tous vos acomptes verses, les vehicules acquis et les details financiers associes.</p>
 </section>
 
 <section class="section account-section">
     <div class="member-summary-grid">
         <article class="member-summary-card">
-            <span>{{ payment_counts.total|default:0 }}</span>
+            <span>{{ total_count|default:0 }}</span>
             <p>Total paiements</p>
         </article>
         <article class="member-summary-card">
-            <span>{{ payment_counts.pending|default:0 }}</span>
-            <p>En attente</p>
+            <span>{{ paid_count|default:0 }}</span>
+            <p>Acomptes valides</p>
         </article>
         <article class="member-summary-card">
-            <span>{{ payment_counts.paid|default:0 }}</span>
-            <p>Valides</p>
-        </article>
-        <article class="member-summary-card">
-            <span>{{ payment_summary.paid_amount|default:0 }} EUR</span>
-            <p>Montant paye</p>
+            <span>{{ paid_amount|default:0 }} EUR</span>
+            <p>Montant total verse</p>
         </article>
     </div>
 </section>
@@ -36,13 +32,20 @@
             {% for payment in payments %}
                 <article class="member-detail-card">
                     <div class="member-detail-head">
-                        <div>
-                            <p class="eyebrow">{{ payment.reservation.vehicle.category.name|default:"Vehicule" }}</p>
-                            <h2>
-                                <a href="{% url 'vehicles:vehicle_detail' payment.reservation.vehicle.id %}">
-                                    {{ payment.reservation.vehicle.title }}
-                                </a>
-                            </h2>
+                        <div style="display:flex; align-items:center; gap:16px;">
+                            {% if payment.main_image %}
+                                <img src="{{ payment.main_image.image.url }}"
+                                     alt="{{ payment.reservation.vehicle.title }}"
+                                     style="width:72px; height:56px; object-fit:cover; border-radius:6px; flex-shrink:0;">
+                            {% endif %}
+                            <div>
+                                <p class="eyebrow">{{ payment.reservation.vehicle.category.name|default:"Vehicule" }}</p>
+                                <h2>
+                                    <a href="{% url 'vehicles:vehicle_detail' payment.reservation.vehicle.id %}">
+                                        {{ payment.reservation.vehicle.title }}
+                                    </a>
+                                </h2>
+                            </div>
                         </div>
                         <span class="status status-{{ payment.status }}">
                             {{ payment.get_status_display }}
@@ -51,35 +54,35 @@
 
                     <div class="member-detail-grid">
                         <div class="member-detail-block">
-                            <strong>Montant de l'acompte</strong>
+                            <strong>Prix du vehicule</strong>
+                            <p>{{ payment.reservation.vehicle.price }} EUR</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Acompte verse</strong>
                             <p>{{ payment.amount }} EUR</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Statut reservation</strong>
-                            <p>{{ payment.reservation.get_status_display }}</p>
+                            <strong>Date du paiement</strong>
+                            <p>{{ payment.paid_at|date:"d/m/Y H:i"|default:"Non renseignee" }}</p>
                         </div>
                         <div class="member-detail-block">
                             <strong>Methode</strong>
                             <p>{{ payment.payment_method|default:"Non renseignee" }}</p>
                         </div>
-                        <div class="member-detail-block">
-                            <strong>Reference</strong>
-                            <p>{{ payment.transaction_reference|default:"Aucune" }}</p>
-                        </div>
                     </div>
 
                     <div class="member-detail-grid">
                         <div class="member-detail-block">
-                            <strong>Cree le</strong>
-                            <p>{{ payment.created_at|date:"d/m/Y H:i" }}</p>
+                            <strong>Reference</strong>
+                            <p style="word-break:break-all; font-size:0.82rem;">{{ payment.transaction_reference|default:"Aucune" }}</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Paye le</strong>
+                            <strong>Rendez-vous</strong>
                             <p>
-                                {% if payment.paid_at %}
-                                    {{ payment.paid_at|date:"d/m/Y H:i" }}
+                                {% if payment.reservation.appointment_date %}
+                                    {{ payment.reservation.appointment_date|date:"d/m/Y \a H:i" }}
                                 {% else %}
-                                    Non encore paye
+                                    Non renseigne
                                 {% endif %}
                             </p>
                         </div>
@@ -89,33 +92,17 @@
                                 {% if payment.invoice %}
                                     {{ payment.invoice.invoice_number }}
                                 {% else %}
-                                    Aucune facture pour le moment
+                                    Aucune facture
                                 {% endif %}
                             </p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Total facture</strong>
-                            <p>
-                                {% if payment.invoice %}
-                                    {{ payment.invoice.total_amount }} EUR
-                                {% else %}
-                                    -
-                                {% endif %}
-                            </p>
+                            <strong>Statut reservation</strong>
+                            <p>{{ payment.reservation.get_status_display }}</p>
                         </div>
                     </div>
 
-                    {% if payment.status == "pending" %}
-                        <div class="member-note member-note-warning">
-                            <strong>Paiement en attente</strong>
-                            <p>Le paiement n'est pas encore finalise. Le module Stripe sera relie dans la suite du projet.</p>
-                        </div>
-                    {% elif payment.status == "failed" %}
-                        <div class="member-note member-note-danger">
-                            <strong>Paiement echoue</strong>
-                            <p>Le paiement a rencontre un probleme. Une verification manuelle peut etre necessaire.</p>
-                        </div>
-                    {% elif payment.status == "refunded" %}
+                    {% if payment.status == "refunded" %}
                         <div class="member-note member-note-warning">
                             <strong>Paiement rembourse</strong>
                             <p>Ce paiement a ete rembourse. Consultez l'administration en cas de question.</p>
@@ -124,16 +111,16 @@
 
                     <div class="hero-actions">
                         <a class="button primary" href="{% url 'vehicles:vehicle_detail' payment.reservation.vehicle.id %}">Voir le vehicule</a>
-                        <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Voir mes reservations</a>
+                        <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
                     </div>
                 </article>
             {% endfor %}
         </div>
     {% else %}
         <div class="empty-state">
-            <h2>Aucun paiement pour le moment</h2>
-            <p>Vos futurs acomptes apparaitront ici avec leur statut, leur reference et la facture associee si elle existe.</p>
-            <a class="button primary" href="{% url 'reservations:my_reservations' %}">Voir mes reservations</a>
+            <h2>Aucun achat pour le moment</h2>
+            <p>Les vehicules pour lesquels vous avez verse un acompte apparaitront ici avec tous les details financiers.</p>
+            <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">Decouvrir le catalogue</a>
         </div>
     {% endif %}
 </section>

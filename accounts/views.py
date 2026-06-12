@@ -70,29 +70,30 @@ def payment_list(request):
             "reservation__vehicle__category",
             "invoice",
         )
+        .prefetch_related("reservation__vehicle__images")
         .filter(reservation__user=request.user)
         .order_by("-created_at")
     )
     payments.filter(user_status_read=False).update(user_status_read=True)
-    payment_summary = payments.aggregate(
-        total_count=Count("id"),
-        total_amount=Sum("amount"),
-        paid_amount=Sum("amount", filter=Q(status=Payment.STATUS_PAID)),
-    )
-    payment_counts = {
-        "total": payments.count(),
-        "pending": payments.filter(status=Payment.STATUS_PENDING).count(),
-        "paid": payments.filter(status=Payment.STATUS_PAID).count(),
-        "failed": payments.filter(status=Payment.STATUS_FAILED).count(),
-        "refunded": payments.filter(status=Payment.STATUS_REFUNDED).count(),
-    }
+
+    paid_amount = payments.filter(status=Payment.STATUS_PAID).aggregate(
+        total=Sum("amount")
+    )["total"] or 0
+
+    for p in payments:
+        p.main_image = (
+            p.reservation.vehicle.images.filter(is_main=True).first()
+            or p.reservation.vehicle.images.first()
+        )
+
     return render(
         request,
         "accounts/payment_list.html",
         {
             "payments": payments,
-            "payment_summary": payment_summary,
-            "payment_counts": payment_counts,
+            "paid_amount": paid_amount,
+            "paid_count": payments.filter(status=Payment.STATUS_PAID).count(),
+            "total_count": payments.count(),
         },
     )
 

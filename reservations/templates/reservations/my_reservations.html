@@ -118,7 +118,7 @@
                         {% if reservation.status == 'accepted' and not reservation.payment %}
                             <a class="button primary" href="{% url 'payments:checkout' %}">Payer l'acompte</a>
                         {% endif %}
-                        <a class="button secondary" href="{% url 'reservations:my_purchases' %}">Mes achats</a>
+                        <a class="button secondary" href="{% url 'accounts:payment_list' %}">Paiements et achats</a>
                     </div>
                 </article>
             {% endfor %}
