@@ -49,8 +49,76 @@
             <h2>Membres actifs</h2>
             <p>Comptes clients actuellement actifs.</p>
         </article>
+        <article class="admin-summary-card {% if refund_request_count %}admin-summary-card--alert{% endif %}">
+            <span>{{ refund_request_count }}</span>
+            <h2>Remboursements a traiter</h2>
+            <p>Annulations avec acompte verse en attente de remboursement.</p>
+        </article>
     </div>
 </section>
+
+{% if refund_requests %}
+<section class="section">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Prioritaire</p>
+            <h2>Remboursements en attente</h2>
+        </div>
+        <p>Ces membres ont annule leur reservation apres avoir verse un acompte. Saisissez le montant rembourse et un commentaire pour le membre.</p>
+    </div>
+    <div class="refund-list">
+        {% for payment in refund_requests %}
+            <article class="refund-card">
+                <div class="refund-card-header">
+                    <div>
+                        <strong>{{ payment.reservation.user.username }}</strong>
+                        <span style="color:var(--muted); margin-left:8px;">{{ payment.reservation.user.email }}</span>
+                        <p style="margin:4px 0 0;">{{ payment.reservation.vehicle.title }}</p>
+                        <small style="color:var(--muted);">
+                            Acompte verse : <strong>{{ payment.amount }} EUR</strong> —
+                            Annulation le {{ payment.updated_at|date:"d/m/Y a H:i" }}
+                        </small>
+                    </div>
+                    <span class="status status-refund_requested">Remboursement demande</span>
+                </div>
+
+                <form method="post" action="{% url 'accounts:process_refund' payment.id %}" class="refund-form">
+                    {% csrf_token %}
+                    <div class="refund-form-row">
+                        <div class="refund-form-field">
+                            <label for="refund_amount_{{ payment.id }}">
+                                Montant a rembourser (EUR)
+                                <span style="color:var(--muted); font-weight:400;">
+                                    — Acompte verse : {{ payment.amount }} EUR
+                                    (frais 10 % = {{ payment.amount|floatformat:2 }} → min retenu ~{{ payment.amount }} × 0.10)
+                                </span>
+                            </label>
+                            <input type="number" id="refund_amount_{{ payment.id }}"
+                                   name="refund_amount" step="0.01" min="0"
+                                   max="{{ payment.amount }}"
+                                   placeholder="Ex : {{ payment.amount }}"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="refund-form-field">
+                        <label for="refund_note_{{ payment.id }}">Message pour le membre (optionnel)</label>
+                        <textarea id="refund_note_{{ payment.id }}" name="refund_note"
+                                  rows="3"
+                                  placeholder="Ex : Remboursement de 90 EUR apres retention de 10 % de frais administratifs conformement aux CGV."></textarea>
+                    </div>
+                    <div style="display:flex; gap:12px; align-items:center; margin-top:8px;">
+                        <button type="submit" class="btn-action btn-accept">Valider le remboursement</button>
+                        <a class="button secondary" style="font-size:0.82rem;"
+                           href="{% url 'admin:payments_payment_change' payment.id %}">
+                            Voir dans l'admin Django
+                        </a>
+                    </div>
+                </form>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
 
 <section class="section">
     <div class="section-heading">

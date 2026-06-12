@@ -118,6 +118,19 @@
                         {% if reservation.status == 'accepted' and not reservation.payment %}
                             <a class="button primary" href="{% url 'payments:checkout' %}">Payer l'acompte</a>
                         {% endif %}
+                        {% if reservation.status == 'pending' %}
+                            <form method="post" action="{% url 'reservations:cancel_reservation' reservation.id %}"
+                                  onsubmit="return confirm('Etes-vous sur de vouloir annuler cette reservation ?');">
+                                {% csrf_token %}
+                                <button type="submit" class="button danger">Annuler la reservation</button>
+                            </form>
+                        {% elif reservation.status == 'accepted' %}
+                            <form method="post" action="{% url 'reservations:cancel_reservation' reservation.id %}"
+                                  onsubmit="return confirm('Votre reservation a ete acceptee. Etes-vous certain de vouloir annuler ? Le vehicule sera remis en disponible.');">
+                                {% csrf_token %}
+                                <button type="submit" class="button danger">Annuler la reservation</button>
+                            </form>
+                        {% endif %}
                         <a class="button secondary" href="{% url 'accounts:payment_list' %}">Paiements et achats</a>
                     </div>
                 </article>

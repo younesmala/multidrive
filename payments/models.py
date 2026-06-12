@@ -8,12 +8,14 @@ class Payment(models.Model):
     STATUS_PAID = "paid"
     STATUS_FAILED = "failed"
     STATUS_REFUNDED = "refunded"
+    STATUS_REFUND_REQUESTED = "refund_requested"
 
     STATUS_CHOICES = [
-        (STATUS_PENDING, "Pending"),
-        (STATUS_PAID, "Paid"),
-        (STATUS_FAILED, "Failed"),
-        (STATUS_REFUNDED, "Refunded"),
+        (STATUS_PENDING, "En attente"),
+        (STATUS_PAID, "Paye"),
+        (STATUS_FAILED, "Echoue"),
+        (STATUS_REFUNDED, "Rembourse"),
+        (STATUS_REFUND_REQUESTED, "Remboursement demande"),
     ]
 
     reservation = models.OneToOneField(
@@ -35,6 +37,8 @@ class Payment(models.Model):
         null=True
     )
     paid_at = models.DateTimeField(blank=True, null=True)
+    refund_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    refund_note = models.TextField(blank=True, null=True)
     user_status_read = models.BooleanField(default=True)
     admin_notif_read = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

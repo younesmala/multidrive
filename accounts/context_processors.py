@@ -19,9 +19,13 @@ def admin_notifications(request):
         ).count()
         pending_deletions = AccountDeletionRequest.objects.filter(processed=False).count()
         unread_payments_admin = Payment.objects.filter(admin_notif_read=False).count()
+        pending_refunds = Payment.objects.filter(
+            status=Payment.STATUS_REFUND_REQUESTED
+        ).count()
 
         admin_pending_notifications = (
-            pending_reservations + pending_messages + pending_deletions + unread_payments_admin
+            pending_reservations + pending_messages + pending_deletions
+            + unread_payments_admin + pending_refunds
         )
 
     return {

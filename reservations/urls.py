@@ -11,4 +11,5 @@ urlpatterns = [
     path("mine/", views.my_reservations, name="my_reservations"),
     path("<int:reservation_id>/update-status/", views.update_reservation_status, name="update_status"),
     path("mes-achats/", views.my_purchases, name="my_purchases"),
+    path("<int:reservation_id>/cancel/", views.cancel_reservation, name="cancel_reservation"),
 ]

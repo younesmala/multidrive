@@ -108,17 +108,34 @@
                         </div>
                     </div>
 
-                    {% if payment.status == "refunded" %}
+                    {% if payment.status == "refund_requested" %}
                         <div class="member-note member-note-warning">
-                            <strong>Paiement rembourse</strong>
-                            <p>Ce paiement a ete rembourse. Consultez l'administration en cas de question.</p>
+                            <strong>Remboursement en cours de traitement</strong>
+                            <p>Votre demande de remboursement a ete enregistree. Notre equipe la traitera sous 14 jours. Des frais administratifs de 10 % minimum peuvent etre retenus.</p>
+                        </div>
+                    {% elif payment.status == "refunded" %}
+                        <div class="member-note" style="border-left-color:#2a7a3b;">
+                            <strong>Remboursement effectue</strong>
+                            {% if payment.refund_amount %}
+                                <p>Montant rembourse : <strong>{{ payment.refund_amount }} EUR</strong></p>
+                            {% endif %}
+                            {% if payment.refund_note %}
+                                <p style="margin-top:6px; color:var(--muted);">{{ payment.refund_note }}</p>
+                            {% endif %}
                         </div>
                     {% endif %}
 
                     <div class="hero-actions">
                         <a class="button primary" href="{% url 'vehicles:vehicle_detail' payment.reservation.vehicle.id %}">Voir le vehicule</a>
-                        {% if payment.remaining > 0 %}
+                        {% if payment.remaining > 0 and payment.reservation.status == 'deposit_paid' %}
                             <a class="button primary" href="{% url 'payments:checkout' %}">Completer le paiement ({{ payment.remaining }} EUR)</a>
+                        {% endif %}
+                        {% if payment.reservation.status == 'deposit_paid' and payment.status == 'paid' %}
+                            <form method="post" action="{% url 'reservations:cancel_reservation' payment.reservation.id %}"
+                                  onsubmit="return confirm('ATTENTION — Un acompte de {{ payment.amount }} EUR a ete verse.\nDes frais administratifs de 10 % minimum pourront etre retenus sur le remboursement.\nConfirmer l annulation ?');">
+                                {% csrf_token %}
+                                <button type="submit" class="button danger">Annuler et demander un remboursement</button>
+                            </form>
                         {% endif %}
                         <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
                     </div>

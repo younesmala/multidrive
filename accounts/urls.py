@@ -15,4 +15,5 @@ urlpatterns = [
     path("change-password/", views.change_password, name="change_password"),
     path("delete-request/", views.delete_request, name="delete_request"),
     path("delete-request/done/", views.delete_request_done, name="delete_request_done"),
+    path("refund/<int:payment_id>/process/", views.process_refund, name="process_refund"),
 ]

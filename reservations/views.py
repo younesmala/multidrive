@@ -5,6 +5,7 @@ from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
+from payments.models import Payment
 from vehicles.models import Vehicle
 
 from .forms import ReservationForm
@@ -93,7 +94,12 @@ def my_reservations(request):
         Reservation.objects.select_related("vehicle", "vehicle__category", "payment")
         .filter(
             user=request.user,
-            status__in=[Reservation.STATUS_PENDING, Reservation.STATUS_ACCEPTED, Reservation.STATUS_REJECTED],
+            status__in=[
+                Reservation.STATUS_PENDING,
+                Reservation.STATUS_ACCEPTED,
+                Reservation.STATUS_REJECTED,
+                Reservation.STATUS_CANCELLED,
+            ],
         )
         .order_by("-created_at")
     )
@@ -114,6 +120,53 @@ def my_reservations(request):
             "reservation_summary": reservation_summary,
         },
     )
+
+
+@require_POST
+@login_required
+def cancel_reservation(request, reservation_id):
+    reservation = get_object_or_404(
+        Reservation.objects.select_related("vehicle", "payment"),
+        id=reservation_id,
+        user=request.user,
+    )
+
+    if reservation.status == Reservation.STATUS_PENDING:
+        reservation.status = Reservation.STATUS_CANCELLED
+        reservation.save(update_fields=["status", "updated_at"])
+        messages.success(request, "Votre reservation a bien ete annulee.")
+
+    elif reservation.status == Reservation.STATUS_ACCEPTED:
+        reservation.status = Reservation.STATUS_CANCELLED
+        reservation.save(update_fields=["status", "updated_at"])
+        vehicle = reservation.vehicle
+        vehicle.status = Vehicle.STATUS_AVAILABLE
+        vehicle.save(update_fields=["status"])
+        messages.success(request, "Votre reservation a ete annulee. Le vehicule est de nouveau disponible.")
+
+    elif reservation.status == Reservation.STATUS_DEPOSIT_PAID:
+        reservation.status = Reservation.STATUS_CANCELLED
+        reservation.save(update_fields=["status", "updated_at"])
+        vehicle = reservation.vehicle
+        vehicle.status = Vehicle.STATUS_AVAILABLE
+        vehicle.save(update_fields=["status"])
+        payment = getattr(reservation, "payment", None)
+        if payment:
+            payment.status = Payment.STATUS_REFUND_REQUESTED
+            payment.admin_notif_read = False
+            payment.user_status_read = False
+            payment.save(update_fields=["status", "admin_notif_read", "user_status_read", "updated_at"])
+        messages.warning(
+            request,
+            "Votre annulation a ete enregistree. Un remboursement de votre acompte sera traite "
+            "par notre equipe sous 14 jours. Des frais administratifs de 10 % minimum "
+            "pourront etre retenus conformement aux conditions generales.",
+        )
+
+    else:
+        messages.error(request, "Cette reservation ne peut pas etre annulee.")
+
+    return redirect("reservations:my_reservations")
 
 
 @login_required
