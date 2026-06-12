@@ -37,6 +37,8 @@ class Payment(models.Model):
         null=True
     )
     paid_at = models.DateTimeField(blank=True, null=True)
+    refund_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    refund_note = models.TextField(blank=True, null=True)
     user_status_read = models.BooleanField(default=True)
     admin_notif_read = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -108,10 +108,20 @@
                         </div>
                     </div>
 
-                    {% if payment.status == "refunded" %}
+                    {% if payment.status == "refund_requested" %}
                         <div class="member-note member-note-warning">
-                            <strong>Paiement rembourse</strong>
-                            <p>Ce paiement a ete rembourse. Consultez l'administration en cas de question.</p>
+                            <strong>Remboursement en cours de traitement</strong>
+                            <p>Votre demande de remboursement a ete enregistree. Notre equipe la traitera sous 14 jours. Des frais administratifs de 10 % minimum peuvent etre retenus.</p>
+                        </div>
+                    {% elif payment.status == "refunded" %}
+                        <div class="member-note" style="border-left-color:#2a7a3b;">
+                            <strong>Remboursement effectue</strong>
+                            {% if payment.refund_amount %}
+                                <p>Montant rembourse : <strong>{{ payment.refund_amount }} EUR</strong></p>
+                            {% endif %}
+                            {% if payment.refund_note %}
+                                <p style="margin-top:6px; color:var(--muted);">{{ payment.refund_note }}</p>
+                            {% endif %}
                         </div>
                     {% endif %}
 

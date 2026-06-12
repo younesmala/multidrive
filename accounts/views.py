@@ -1,3 +1,6 @@
+from decimal import Decimal, InvalidOperation
+
+from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -5,8 +8,9 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import LoginView
 from django.db import transaction
 from django.db.models import Count, Q, Sum
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.views.decorators.http import require_POST
 
 from contact.models import ContactMessage
 from payments.models import Payment
@@ -170,6 +174,36 @@ def delete_request_done(request):
             "deletion_date": deletion_date,
         },
     )
+
+
+@require_POST
+@staff_member_required
+def process_refund(request, payment_id):
+    payment = get_object_or_404(Payment, id=payment_id, status=Payment.STATUS_REFUND_REQUESTED)
+
+    raw = request.POST.get("refund_amount", "").replace(",", ".").strip()
+    note = request.POST.get("refund_note", "").strip()
+
+    try:
+        refund_amount = Decimal(raw).quantize(Decimal("0.01"))
+        if refund_amount < Decimal("0"):
+            raise ValueError
+    except (InvalidOperation, ValueError):
+        messages.error(request, "Montant de remboursement invalide.")
+        return redirect("accounts:admin_dashboard")
+
+    payment.refund_amount = refund_amount
+    payment.refund_note = note if note else None
+    payment.status = Payment.STATUS_REFUNDED
+    payment.user_status_read = False
+    payment.admin_notif_read = True
+    payment.save(update_fields=["refund_amount", "refund_note", "status", "user_status_read", "admin_notif_read", "updated_at"])
+
+    messages.success(
+        request,
+        f"Remboursement de {refund_amount} EUR enregistre pour {payment.reservation.user.username}.",
+    )
+    return redirect("accounts:admin_dashboard")
 
 
 @staff_member_required

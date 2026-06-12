@@ -1262,6 +1262,68 @@ h3 {
     border: 1px solid #ffc107;
 }
 
+.refund-list {
+    display: grid;
+    gap: 20px;
+}
+
+.refund-card {
+    background: #fff8f0;
+    border: 1px solid #f5c18a;
+    border-left: 4px solid #e05a1e;
+    border-radius: 10px;
+    padding: 20px 24px;
+}
+
+.refund-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f5c18a;
+}
+
+.refund-form {
+    display: grid;
+    gap: 12px;
+}
+
+.refund-form-row {
+    display: grid;
+    gap: 12px;
+}
+
+.refund-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.refund-form-field label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.refund-form-field input,
+.refund-form-field textarea {
+    padding: 10px 14px;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: var(--white);
+    resize: vertical;
+}
+
+.refund-form-field input:focus,
+.refund-form-field textarea:focus {
+    outline: none;
+    border-color: var(--blue);
+}
+
 .admin-kpi-card {
     display: grid;
     gap: 14px;
