@@ -49,8 +49,43 @@
             <h2>Membres actifs</h2>
             <p>Comptes clients actuellement actifs.</p>
         </article>
+        <article class="admin-summary-card {% if refund_request_count %}admin-summary-card--alert{% endif %}">
+            <span>{{ refund_request_count }}</span>
+            <h2>Remboursements a traiter</h2>
+            <p>Annulations avec acompte verse en attente de remboursement.</p>
+        </article>
     </div>
 </section>
+
+{% if refund_requests %}
+<section class="section">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Prioritaire</p>
+            <h2>Remboursements en attente</h2>
+        </div>
+        <p>Ces membres ont annule leur reservation apres avoir verse un acompte.</p>
+    </div>
+    <div class="dashboard-list">
+        {% for payment in refund_requests %}
+            <div class="dashboard-list-item dashboard-list-item--alert">
+                <div>
+                    <strong>{{ payment.reservation.user.username }}</strong>
+                    <p>{{ payment.reservation.vehicle.title }}</p>
+                    <small>Acompte verse : {{ payment.amount }} EUR — Annulation le {{ payment.updated_at|date:"d/m/Y" }}</small>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+                    <span class="status status-refund_requested">Remboursement demande</span>
+                    <a class="button secondary" style="font-size:0.78rem; padding:4px 12px;"
+                       href="{% url 'admin:payments_payment_change' payment.id %}">
+                        Traiter dans l'admin
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
 
 <section class="section">
     <div class="section-heading">

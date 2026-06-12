@@ -8,12 +8,14 @@ class Payment(models.Model):
     STATUS_PAID = "paid"
     STATUS_FAILED = "failed"
     STATUS_REFUNDED = "refunded"
+    STATUS_REFUND_REQUESTED = "refund_requested"
 
     STATUS_CHOICES = [
-        (STATUS_PENDING, "Pending"),
-        (STATUS_PAID, "Paid"),
-        (STATUS_FAILED, "Failed"),
-        (STATUS_REFUNDED, "Refunded"),
+        (STATUS_PENDING, "En attente"),
+        (STATUS_PAID, "Paye"),
+        (STATUS_FAILED, "Echoue"),
+        (STATUS_REFUNDED, "Rembourse"),
+        (STATUS_REFUND_REQUESTED, "Remboursement demande"),
     ]
 
     reservation = models.OneToOneField(

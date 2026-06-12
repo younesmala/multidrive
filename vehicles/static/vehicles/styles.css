@@ -1242,6 +1242,26 @@ h3 {
     color: var(--muted);
 }
 
+.dashboard-list-item--alert {
+    background: #fff8f0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    border-top: none;
+    border-left: 3px solid #e05a1e;
+    margin-bottom: 8px;
+}
+
+.admin-summary-card--alert {
+    border-left: 4px solid #c0392b;
+    background: #fff5f5;
+}
+
+.status-refund_requested {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffc107;
+}
+
 .admin-kpi-card {
     display: grid;
     gap: 14px;

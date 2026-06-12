@@ -185,6 +185,11 @@ def admin_dashboard(request):
         .filter(is_deleted=True)
         .order_by("-deleted_at")
     )
+    refund_requests = (
+        Payment.objects.select_related("reservation", "reservation__user", "reservation__vehicle")
+        .filter(status=Payment.STATUS_REFUND_REQUESTED)
+        .order_by("-updated_at")
+    )
 
     context = {
         "vehicle_count": Vehicle.objects.count(),
@@ -202,5 +207,7 @@ def admin_dashboard(request):
         "recent_messages": contact_messages[:5],
         "recent_disabled_accounts": disabled_accounts[:5],
         "pending_deletion_requests": AccountDeletionRequest.objects.filter(processed=False).count(),
+        "refund_requests": refund_requests,
+        "refund_request_count": refund_requests.count(),
     }
     return render(request, "accounts/admin_dashboard.html", context)
