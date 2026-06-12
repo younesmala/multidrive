@@ -1961,6 +1961,17 @@ body::after {
     color: #555;
 }
 
+.vehicle-unavailable-msg {
+    display: inline-block;
+    padding: 10px 18px;
+    border-radius: 6px;
+    background: #f3f4f6;
+    color: #666;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid #dde3f0;
+}
+
 /* ── Boutons action dashboard admin ─────────────────────────────────────── */
 .dashboard-item-actions {
     display: flex;
