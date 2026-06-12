@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from contact.models import ContactMessage
 from payments.models import Invoice, Payment
 from reservations.models import Reservation
-from vehicles.models import Vehicle, VehicleCategory
+from vehicles.models import Review, Vehicle, VehicleCategory
 
 from .permissions import IsAdminOrCreateOnly, IsAdminOrReadOnly
 from .serializers import (
@@ -13,6 +13,7 @@ from .serializers import (
     InvoiceSerializer,
     PaymentSerializer,
     ReservationSerializer,
+    ReviewSerializer,
     VehicleCategorySerializer,
     VehicleSerializer,
 )
@@ -89,6 +90,25 @@ class InvoiceViewSet(viewsets.ModelViewSet):
         if self.request.user.is_staff:
             return queryset
         return queryset.filter(payment__reservation__user=self.request.user)
+
+
+@extend_schema_view(
+    list=extend_schema(description="Retourne les avis. Un membre voit uniquement ses propres avis."),
+    create=extend_schema(description="Permet a un membre connecte de laisser un avis sur un vehicule."),
+)
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.select_related("vehicle", "user").order_by("-created_at")
+    serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = Review.objects.select_related("vehicle", "user").order_by("-created_at")
+        if self.request.user.is_staff:
+            return queryset
+        return queryset.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
 @extend_schema_view(
