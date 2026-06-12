@@ -91,7 +91,10 @@ def reservation_success(request, reservation_id):
 def my_reservations(request):
     reservations = (
         Reservation.objects.select_related("vehicle", "vehicle__category", "payment")
-        .filter(user=request.user)
+        .filter(
+            user=request.user,
+            status__in=[Reservation.STATUS_PENDING, Reservation.STATUS_ACCEPTED, Reservation.STATUS_REJECTED],
+        )
         .order_by("-created_at")
     )
     reservations.filter(user_status_read=False).update(user_status_read=True)
@@ -101,7 +104,6 @@ def my_reservations(request):
         pending=Count("id", filter=Q(status=Reservation.STATUS_PENDING)),
         accepted=Count("id", filter=Q(status=Reservation.STATUS_ACCEPTED)),
         rejected=Count("id", filter=Q(status=Reservation.STATUS_REJECTED)),
-        deposit_paid=Count("id", filter=Q(status=Reservation.STATUS_DEPOSIT_PAID)),
     )
 
     return render(
@@ -112,3 +114,15 @@ def my_reservations(request):
             "reservation_summary": reservation_summary,
         },
     )
+
+
+@login_required
+def my_purchases(request):
+    purchases = (
+        Reservation.objects.select_related("vehicle", "vehicle__category", "payment")
+        .filter(user=request.user, status=Reservation.STATUS_DEPOSIT_PAID)
+        .order_by("-updated_at")
+    )
+    purchases.filter(user_status_read=False).update(user_status_read=True)
+
+    return render(request, "reservations/my_purchases.html", {"purchases": purchases})

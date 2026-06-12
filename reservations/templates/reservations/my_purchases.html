@@ -1,0 +1,70 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Mes achats - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">Espace client</p>
+    <h1>Mes achats</h1>
+    <p>Retrouvez ici tous les vehicules pour lesquels vous avez verse un acompte.</p>
+</section>
+
+<section class="section">
+    {% if purchases %}
+        <div class="member-card-list">
+            {% for reservation in purchases %}
+                <article class="member-detail-card">
+                    <div class="member-detail-head">
+                        <div>
+                            <p class="eyebrow">{{ reservation.vehicle.category.name|default:"Vehicule" }}</p>
+                            <h2>
+                                <a href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">
+                                    {{ reservation.vehicle.title }}
+                                </a>
+                            </h2>
+                        </div>
+                        <span class="status status-deposit_paid">Acompte verse</span>
+                    </div>
+
+                    <div class="member-detail-grid">
+                        <div class="member-detail-block">
+                            <strong>Prix du vehicule</strong>
+                            <p>{{ reservation.vehicle.price }} EUR</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Acompte verse</strong>
+                            <p>{{ reservation.payment.amount }} EUR</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Date du paiement</strong>
+                            <p>{{ reservation.payment.paid_at|date:"d/m/Y H:i"|default:"Non renseignee" }}</p>
+                        </div>
+                        <div class="member-detail-block">
+                            <strong>Reference</strong>
+                            <p class="text-truncate">{{ reservation.payment.transaction_reference|default:"Aucune" }}</p>
+                        </div>
+                    </div>
+
+                    {% if reservation.appointment_date %}
+                        <div class="member-note">
+                            <strong>Rendez-vous confirme</strong>
+                            <p>{{ reservation.appointment_date|date:"d/m/Y \a H:i" }}</p>
+                        </div>
+                    {% endif %}
+
+                    <div class="hero-actions">
+                        <a class="button primary" href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">Voir le vehicule</a>
+                        <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <h2>Aucun achat pour le moment</h2>
+            <p>Les vehicules pour lesquels vous avez verse un acompte apparaitront ici.</p>
+            <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">Decouvrir le catalogue</a>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

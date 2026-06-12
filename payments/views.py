@@ -9,6 +9,7 @@ from django.utils import timezone
 
 from payments.models import Payment
 from reservations.models import Reservation
+from vehicles.models import Vehicle
 
 
 def _deposit_for(vehicle):
@@ -90,6 +91,10 @@ def checkout(request):
         reservation.status = Reservation.STATUS_DEPOSIT_PAID
         reservation.user_status_read = False
         reservation.save(update_fields=["status", "user_status_read", "updated_at"])
+
+        vehicle = reservation.vehicle
+        vehicle.status = Vehicle.STATUS_SOLD
+        vehicle.save(update_fields=["status"])
 
         messages.success(
             request,
