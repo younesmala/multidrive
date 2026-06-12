@@ -43,6 +43,11 @@ def member_notifications(request):
         unread_reservations = Reservation.objects.filter(
             user=request.user,
             user_status_read=False,
+            status__in=[
+                Reservation.STATUS_PENDING,
+                Reservation.STATUS_ACCEPTED,
+                Reservation.STATUS_REJECTED,
+            ],
         ).count()
         unread_payments = Payment.objects.filter(
             reservation__user=request.user,
