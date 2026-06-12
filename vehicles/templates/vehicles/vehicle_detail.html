@@ -66,7 +66,13 @@
             </div>
         </div>
         <div class="detail-actions">
-            <a class="button primary" href="{% url 'reservations:reserve_vehicle' vehicle.id %}">Reserver ce vehicule</a>
+            {% if vehicle.status == 'available' %}
+                <a class="button primary" href="{% url 'reservations:reserve_vehicle' vehicle.id %}">Reserver ce vehicule</a>
+            {% elif vehicle.status == 'reserved' %}
+                <span class="vehicle-unavailable-msg">Ce vehicule est deja reserve.</span>
+            {% else %}
+                <span class="vehicle-unavailable-msg">Ce vehicule n'est plus disponible.</span>
+            {% endif %}
             <a class="button secondary" href="{% url 'vehicles:vehicle_list' %}">Retour au catalogue</a>
         </div>
     </article>

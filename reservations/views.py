@@ -21,6 +21,9 @@ def update_reservation_status(request, reservation_id):
         reservation.status = Reservation.STATUS_ACCEPTED
         reservation.user_status_read = False
         reservation.save(update_fields=["status", "user_status_read", "updated_at"])
+        vehicle = reservation.vehicle
+        vehicle.status = Vehicle.STATUS_RESERVED
+        vehicle.save(update_fields=["status"])
         messages.success(request, f"Reservation de {reservation.user.username} acceptee.")
     elif action == "reject" and reservation.status == Reservation.STATUS_PENDING:
         reservation.status = Reservation.STATUS_REJECTED
@@ -34,6 +37,19 @@ def update_reservation_status(request, reservation_id):
 @login_required
 def reserve_vehicle(request, vehicle_id):
     vehicle = get_object_or_404(Vehicle, id=vehicle_id)
+
+    if vehicle.status != Vehicle.STATUS_AVAILABLE:
+        messages.error(request, "Ce vehicule n'est plus disponible a la reservation.")
+        return redirect("vehicles:vehicle_detail", vehicle_id=vehicle.id)
+
+    existing = Reservation.objects.filter(
+        user=request.user,
+        vehicle=vehicle,
+        status__in=[Reservation.STATUS_PENDING, Reservation.STATUS_ACCEPTED],
+    ).first()
+    if existing:
+        messages.warning(request, "Vous avez deja une reservation en cours pour ce vehicule.")
+        return redirect("reservations:my_reservations")
 
     if request.method == "POST":
         form = ReservationForm(request.POST)
@@ -75,7 +91,10 @@ def reservation_success(request, reservation_id):
 def my_reservations(request):
     reservations = (
         Reservation.objects.select_related("vehicle", "vehicle__category", "payment")
-        .filter(user=request.user)
+        .filter(
+            user=request.user,
+            status__in=[Reservation.STATUS_PENDING, Reservation.STATUS_ACCEPTED, Reservation.STATUS_REJECTED],
+        )
         .order_by("-created_at")
     )
     reservations.filter(user_status_read=False).update(user_status_read=True)
@@ -85,7 +104,6 @@ def my_reservations(request):
         pending=Count("id", filter=Q(status=Reservation.STATUS_PENDING)),
         accepted=Count("id", filter=Q(status=Reservation.STATUS_ACCEPTED)),
         rejected=Count("id", filter=Q(status=Reservation.STATUS_REJECTED)),
-        deposit_paid=Count("id", filter=Q(status=Reservation.STATUS_DEPOSIT_PAID)),
     )
 
     return render(
@@ -96,3 +114,15 @@ def my_reservations(request):
             "reservation_summary": reservation_summary,
         },
     )
+
+
+@login_required
+def my_purchases(request):
+    purchases = (
+        Reservation.objects.select_related("vehicle", "vehicle__category", "payment")
+        .filter(user=request.user, status=Reservation.STATUS_DEPOSIT_PAID)
+        .order_by("-updated_at")
+    )
+    purchases.filter(user_status_read=False).update(user_status_read=True)
+
+    return render(request, "reservations/my_purchases.html", {"purchases": purchases})

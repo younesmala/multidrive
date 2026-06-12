@@ -62,7 +62,7 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item menu-link-with-badge" href="{% url 'accounts:payment_list' %}">
-                                        <span>Paiements</span>
+                                        <span>Paiements et achats</span>
                                         {% if unread_payments %}
                                             <span class="notification-badge">{{ unread_payments }}</span>
                                         {% endif %}
@@ -75,9 +75,6 @@
                                             <span class="notification-badge">{{ unread_contact_responses }}</span>
                                         {% endif %}
                                     </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'payments:checkout' %}">Payer un acompte</a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>

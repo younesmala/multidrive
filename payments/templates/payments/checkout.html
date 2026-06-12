@@ -69,7 +69,11 @@
                     <span>Prix du véhicule</span>
                     <span id="summary-total-price">{{ reservations_data.0.total_price }} €</span>
                 </div>
-                <div class="checkout-line">
+                <div class="checkout-line" id="summary-already-paid-row" style="{% if not reservations_data.0.is_balance %}display:none{% endif %}">
+                    <span>Déjà versé</span>
+                    <span id="summary-already-paid">{{ reservations_data.0.already_paid }} €</span>
+                </div>
+                <div class="checkout-line" id="summary-deposit-row" style="{% if reservations_data.0.is_balance %}display:none{% endif %}">
                     <span>Acompte (20 %)</span>
                     <span id="summary-deposit">{{ reservations_data.0.deposit_amount }} €</span>
                 </div>
@@ -89,8 +93,8 @@
                 <input type="hidden" name="reservation_id" id="reservation-id-input"
                        value="{{ reservations_data.0.reservation.id }}">
 
-                <!-- Sélecteur de montant -->
-                <div class="checkout-amount-choices">
+                <!-- Sélecteur de montant (premier paiement) -->
+                <div class="checkout-amount-choices" id="amount-choices-block" style="{% if reservations_data.0.is_balance %}display:none{% endif %}">
                     <p class="checkout-amount-label">Montant à régler</p>
 
                     <label class="checkout-amount-option checkout-amount-option--selected" id="opt-deposit">
@@ -129,6 +133,23 @@
                         <input type="number" id="custom_amount" name="custom_amount"
                                min="1" step="0.01" placeholder="Ex : 150.00">
                     </div>
+                </div>
+
+                <!-- Solde restant (second paiement) -->
+                <div id="balance-block" style="{% if not reservations_data.0.is_balance %}display:none{% endif %}">
+                    <p class="checkout-amount-label">Solde restant à régler</p>
+                    <div class="checkout-amount-option checkout-amount-option--selected" style="pointer-events:none;">
+                        <span class="checkout-amount-option-body">
+                            <span class="checkout-amount-option-title">Solde restant</span>
+                            <span class="checkout-amount-option-sub" id="balance-sub-text">
+                                Prix total moins acompte déjà versé
+                            </span>
+                        </span>
+                        <strong class="checkout-amount-option-price" id="balance-price">
+                            {{ reservations_data.0.remaining }} €
+                        </strong>
+                    </div>
+                    <input type="hidden" name="amount_type" id="balance-amount-type" value="deposit">
                 </div>
 
                 <!-- Champs carte -->
@@ -210,23 +231,29 @@
     var DATA = {{ js_data|safe }};
 
     var currentId   = document.getElementById('reservation-id-input').value;
-    var radios      = document.querySelectorAll('input[name="amount_type"]');
+    var radios      = document.querySelectorAll('#amount-choices-block input[name="amount_type"]');
     var cartRadios  = document.querySelectorAll('input[name="cart_select"]');
     var optLabels   = {
         deposit: document.getElementById('opt-deposit'),
         full:    document.getElementById('opt-full'),
         custom:  document.getElementById('opt-custom')
     };
-    var customWrap    = document.getElementById('custom-input-wrap');
-    var customInput   = document.getElementById('custom_amount');
-    var submitBtn     = document.getElementById('submit-btn');
-    var summaryAmt    = document.getElementById('summary-amount');
-    var summaryDep    = document.getElementById('summary-deposit');
-    var summaryTotal  = document.getElementById('summary-total-price');
-    var optDepPrice   = document.getElementById('opt-deposit-price');
-    var optFullPrice  = document.getElementById('opt-full-price');
-    var customPrice   = document.getElementById('custom-price-display');
-    var reservInput   = document.getElementById('reservation-id-input');
+    var customWrap         = document.getElementById('custom-input-wrap');
+    var customInput        = document.getElementById('custom_amount');
+    var submitBtn          = document.getElementById('submit-btn');
+    var summaryAmt         = document.getElementById('summary-amount');
+    var summaryDep         = document.getElementById('summary-deposit');
+    var summaryTotal       = document.getElementById('summary-total-price');
+    var summaryAlreadyPaid = document.getElementById('summary-already-paid');
+    var summaryDepRow      = document.getElementById('summary-deposit-row');
+    var summaryAlreadyRow  = document.getElementById('summary-already-paid-row');
+    var optDepPrice        = document.getElementById('opt-deposit-price');
+    var optFullPrice       = document.getElementById('opt-full-price');
+    var customPrice        = document.getElementById('custom-price-display');
+    var reservInput        = document.getElementById('reservation-id-input');
+    var amountChoicesBlock = document.getElementById('amount-choices-block');
+    var balanceBlock       = document.getElementById('balance-block');
+    var balancePrice       = document.getElementById('balance-price');
 
     function fmt(n) {
         return parseFloat(n).toLocaleString('fr-BE', {
@@ -237,22 +264,40 @@
     function updateAmounts() {
         var d = DATA[currentId];
         if (!d) return;
-        summaryDep.textContent    = fmt(d.deposit);
-        summaryTotal.textContent  = fmt(d.total);
-        optDepPrice.textContent   = fmt(d.deposit);
-        optFullPrice.textContent  = fmt(d.total);
-        recalcSelected();
+
+        summaryTotal.textContent = fmt(d.total);
+
+        if (d.is_balance) {
+            amountChoicesBlock.style.display = 'none';
+            balanceBlock.style.display = 'block';
+            summaryDepRow.style.display = 'none';
+            summaryAlreadyRow.style.display = 'flex';
+            summaryAlreadyPaid.textContent = fmt(d.already_paid);
+            balancePrice.textContent = fmt(d.total);
+            summaryAmt.textContent = fmt(d.total);
+            submitBtn.textContent = 'Payer ' + fmt(d.total);
+        } else {
+            amountChoicesBlock.style.display = 'block';
+            balanceBlock.style.display = 'none';
+            summaryDepRow.style.display = 'flex';
+            summaryAlreadyRow.style.display = 'none';
+            summaryDep.textContent = fmt(d.deposit);
+            optDepPrice.textContent = fmt(d.deposit);
+            optFullPrice.textContent = fmt(d.total);
+            recalcSelected();
+        }
     }
 
     function recalcSelected() {
         var d = DATA[currentId];
-        if (!d) return;
-        var selected = document.querySelector('input[name="amount_type"]:checked').value;
+        if (!d || d.is_balance) return;
+        var checked = document.querySelector('#amount-choices-block input[name="amount_type"]:checked');
+        var selected = checked ? checked.value : 'deposit';
 
         Object.keys(optLabels).forEach(function (k) {
             optLabels[k].classList.remove('checkout-amount-option--selected');
         });
-        optLabels[selected].classList.add('checkout-amount-option--selected');
+        if (optLabels[selected]) optLabels[selected].classList.add('checkout-amount-option--selected');
 
         var amount;
         if (selected === 'deposit') {
@@ -295,11 +340,13 @@
     radios.forEach(function (r) { r.addEventListener('change', recalcSelected); });
 
     // Montant personnalisé
-    customInput.addEventListener('input', function () {
-        var raw = parseFloat(this.value.replace(',', '.'));
-        customPrice.textContent = (!isNaN(raw) && raw > 0) ? fmt(raw) : '— €';
-        recalcSelected();
-    });
+    if (customInput) {
+        customInput.addEventListener('input', function () {
+            var raw = parseFloat(this.value.replace(',', '.'));
+            customPrice.textContent = (!isNaN(raw) && raw > 0) ? fmt(raw) : '— €';
+            recalcSelected();
+        });
+    }
 
     // Formatage carte
     document.getElementById('card_number').addEventListener('input', function () {

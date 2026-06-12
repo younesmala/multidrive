@@ -13,7 +13,7 @@
     <div class="member-summary-grid">
         <article class="member-summary-card">
             <span>{{ reservation_summary.total|default:0 }}</span>
-            <p>Total reservations</p>
+            <p>Total demandes</p>
         </article>
         <article class="member-summary-card">
             <span>{{ reservation_summary.pending|default:0 }}</span>
@@ -24,8 +24,8 @@
             <p>Acceptees</p>
         </article>
         <article class="member-summary-card">
-            <span>{{ reservation_summary.deposit_paid|default:0 }}</span>
-            <p>Acompte paye</p>
+            <span>{{ reservation_summary.rejected|default:0 }}</span>
+            <p>Refusees</p>
         </article>
     </div>
 </section>
@@ -115,7 +115,10 @@
 
                     <div class="hero-actions">
                         <a class="button primary" href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">Voir le vehicule</a>
-                        <a class="button secondary" href="{% url 'accounts:payment_list' %}">Voir mes paiements</a>
+                        {% if reservation.status == 'accepted' and not reservation.payment %}
+                            <a class="button primary" href="{% url 'payments:checkout' %}">Payer l'acompte</a>
+                        {% endif %}
+                        <a class="button secondary" href="{% url 'accounts:payment_list' %}">Paiements et achats</a>
                     </div>
                 </article>
             {% endfor %}
