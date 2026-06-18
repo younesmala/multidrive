@@ -13,12 +13,12 @@
 
     <article class="member-detail-card">
         <h2>1. Presentation de la plateforme</h2>
-        <p>MultiDrive est une plateforme web de consultation et de reservation de vehicules d'occasion. Elle est exploitee dans le cadre d'un projet academique (Travail de Fin d'Etudes).</p>
+        <p>MultiDrive est une plateforme web de consultation et de reservation de vehicules d'occasion. Elle est exploitee dans le cadre d'un projet academique (Travail de Fin d'Etudes). Les vehicules presentes sont des donnees de demonstration et ne constituent pas des offres commerciales reelles.</p>
     </article>
 
     <article class="member-detail-card">
         <h2>2. Acces au service</h2>
-        <p>L'acces au catalogue est libre et gratuit. La reservation d'un vehicule necessite la creation d'un compte membre. MultiDrive se reserve le droit de suspendre ou de supprimer un compte en cas d'utilisation abusive.</p>
+        <p>L'acces au catalogue est libre et gratuit. La reservation d'un vehicule necessite la creation d'un compte membre. MultiDrive se reserve le droit de suspendre ou de supprimer un compte en cas d'utilisation abusive ou de non-respect des presentes conditions.</p>
     </article>
 
     <article class="member-detail-card">
@@ -28,12 +28,14 @@
             <li>Du lundi au vendredi : 16h00 a 21h30</li>
             <li>Le samedi et dimanche : 9h00 a 21h00</li>
         </ul>
+        <p style="margin-top: 12px;">Les prix et conditions de reservation sont affiches clairement avant toute validation de paiement.</p>
     </article>
 
     <article class="member-detail-card">
-        <h2>4. Paiement et acompte</h2>
+        <h2>4. Paiement et securite des transactions</h2>
         <p>Un acompte peut etre demande apres acceptation de la reservation. Cet acompte correspond a 20 % du prix du vehicule, avec un minimum de 20 EUR et un maximum de 250 EUR.</p>
-        <p style="margin-top: 12px;">Le paiement est traite de maniere securisee via Stripe Checkout. MultiDrive ne stocke aucune donnee bancaire.</p>
+        <p style="margin-top: 12px;">Le paiement est traite de maniere securisee via <strong>Stripe Checkout</strong>, solution conforme aux standards internationaux de securite des paiements (PCI-DSS). Les transactions sont chiffrees via HTTPS.</p>
+        <p style="margin-top: 12px;"><strong>Aucune donnee bancaire n'est stockee sur les serveurs de MultiDrive.</strong> Les informations de carte sont traitees exclusivement par Stripe et ne transitent jamais par notre application.</p>
     </article>
 
     <article class="member-detail-card">
@@ -48,18 +50,42 @@
     </article>
 
     <article class="member-detail-card">
-        <h2>6. Donnees personnelles</h2>
-        <p>Les donnees collectees (nom, email, historique de reservations) sont utilisees uniquement dans le cadre du service MultiDrive. Elles ne sont pas transmises a des tiers. Conformement au RGPD, tout membre peut demander la suppression de son compte depuis son espace personnel.</p>
+        <h2>6. Donnees personnelles et RGPD</h2>
+        <p>MultiDrive respecte les principes du Reglement General sur la Protection des Donnees (RGPD). Les donnees collectees sont limitees au strict necessaire pour le fonctionnement du service :</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li>Nom et prenom</li>
+            <li>Adresse e-mail</li>
+            <li>Historique de reservations et de paiements</li>
+        </ul>
+        <p style="margin-top: 12px;">Ces donnees sont traitees de maniere licite, loyale et transparente. Elles ne sont jamais transmises a des tiers ni revendues.</p>
+        <p style="margin-top: 12px;">Conformement au RGPD, tout membre dispose d'un droit d'acces, de modification et de suppression de ses donnees. La suppression du compte est accessible directement depuis l'espace personnel.</p>
     </article>
 
     <article class="member-detail-card">
-        <h2>7. Responsabilite</h2>
-        <p>MultiDrive est un projet academique. La plateforme est fournie a titre demonstratif. Les vehicules presentes sont des donnees de test et ne constituent pas des offres commerciales reelles.</p>
+        <h2>7. Cookies</h2>
+        <p>MultiDrive utilise uniquement des cookies techniques strictement necessaires au bon fonctionnement de la plateforme :</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li>Maintien de la session utilisateur (authentification)</li>
+            <li>Protection contre les attaques CSRF</li>
+            <li>Memorisation de la preference de langue</li>
+        </ul>
+        <p style="margin-top: 12px;">Ces cookies ne servent pas au suivi publicitaire ou analytique et ne necessitent pas de consentement prealable selon la reglementation europeenne. Aucun cookie tiers n'est utilise.</p>
     </article>
 
     <article class="member-detail-card">
-        <h2>8. Contact</h2>
-        <p>Pour toute question relative aux conditions d'utilisation, vous pouvez nous contacter via la <a href="{% url 'contact:contact_form' %}">page de contact</a>.</p>
+        <h2>8. Propriete intellectuelle</h2>
+        <p>Les contenus presentes sur MultiDrive (design, code source, textes, elements graphiques) sont proteges par le droit d'auteur. Toute reproduction ou diffusion sans autorisation prealable est interdite.</p>
+        <p style="margin-top: 12px;">Ce projet est realise a titre academique dans le cadre d'un Travail de Fin d'Etudes. Les images utilisees pour illustrer les vehicules sont issues de ressources libres de droits ou appartiennent au projet.</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>9. Responsabilite</h2>
+        <p>MultiDrive est un projet academique fourni a titre demonstratif. L'administrateur du site est responsable de la gestion des contenus publies et de la securisation generale de la plateforme. MultiDrive ne saurait etre tenu responsable des dommages indirects lies a l'utilisation du service.</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>10. Contact</h2>
+        <p>Pour toute question relative aux conditions d'utilisation, a la protection des donnees ou a un remboursement, vous pouvez nous contacter via la <a href="{% url 'contact:contact_form' %}">page de contact</a> ou par email a <strong>multidrive25@gmail.com</strong>.</p>
     </article>
 
 </section>

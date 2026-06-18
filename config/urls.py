@@ -24,6 +24,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from vehicles import views as vehicle_views
 
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
     path('', vehicle_views.home, name='home'),
     path('accounts/', include('accounts.urls')),
     path('admin/', admin.site.urls),
