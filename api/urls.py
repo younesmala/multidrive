@@ -1,7 +1,10 @@
 from rest_framework.routers import DefaultRouter
 
+from django.urls import path
+
 from .views import (
     ContactMessageViewSet,
+    CurrentUserView,
     InvoiceViewSet,
     PaymentViewSet,
     ReservationViewSet,
@@ -20,4 +23,6 @@ router.register("invoices", InvoiceViewSet, basename="api-invoice")
 router.register("reviews", ReviewViewSet, basename="api-review")
 router.register("contact-messages", ContactMessageViewSet, basename="api-contact-message")
 
-urlpatterns = router.urls
+urlpatterns = router.urls + [
+    path("me/", CurrentUserView.as_view(), name="api-me"),
+]

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmation de reservation — MultiDrive</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
+        .container { max-width: 580px; margin: 30px auto; background: #ffffff; border-radius: 8px; overflow: hidden; }
+        .header { background: #1a1a2e; padding: 32px 40px; text-align: center; }
+        .header h1 { color: #ffffff; margin: 0; font-size: 22px; letter-spacing: 1px; }
+        .header p { color: #a0a0b0; margin: 6px 0 0; font-size: 13px; }
+        .body { padding: 32px 40px; }
+        .body p { color: #333333; line-height: 1.7; font-size: 15px; margin: 0 0 14px; }
+        .info-block { background: #f8f8f8; border-left: 4px solid #6c63ff; border-radius: 4px; padding: 16px 20px; margin: 20px 0; }
+        .info-block p { margin: 4px 0; font-size: 14px; color: #444; }
+        .info-block strong { color: #1a1a2e; }
+        .footer { background: #f0f0f0; padding: 20px 40px; text-align: center; }
+        .footer p { color: #888; font-size: 12px; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MultiDrive</h1>
+            <p>Confirmation de votre demande de reservation</p>
+        </div>
+        <div class="body">
+            <p>Bonjour <strong>{{ reservation.user.first_name|default:reservation.user.username }}</strong>,</p>
+            <p>Nous avons bien recu votre demande de reservation pour le vehicule suivant :</p>
+
+            <div class="info-block">
+                <p><strong>Vehicule :</strong> {{ reservation.vehicle.title }}</p>
+                <p><strong>Prix :</strong> {{ reservation.vehicle.price }} EUR</p>
+                {% if reservation.preferred_date %}
+                <p><strong>Date souhaitee :</strong> {{ reservation.preferred_date }}</p>
+                {% endif %}
+                {% if reservation.preferred_time %}
+                <p><strong>Creneau :</strong> {{ reservation.preferred_time }}</p>
+                {% endif %}
+                <p><strong>Statut :</strong> En attente de validation</p>
+            </div>
+
+            <p>Notre equipe examinera votre demande et vous contactera par email pour vous confirmer l'acceptation ou vous proposer un autre creneau.</p>
+            <p>Vous pouvez suivre l'avancement de votre reservation depuis votre espace membre.</p>
+            <p>Merci pour votre confiance.</p>
+            <p>L'equipe MultiDrive</p>
+        </div>
+        <div class="footer">
+            <p>Cet email est envoye automatiquement. Merci de ne pas y repondre directement.</p>
+            <p style="margin-top: 6px;">MultiDrive — Projet academique</p>
+        </div>
+    </div>
+</body>
+</html>

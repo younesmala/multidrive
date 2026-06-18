@@ -93,12 +93,17 @@
                             </p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Facture</strong>
+                            <strong>Documents</strong>
                             <p>
-                                {% if payment.invoice %}
-                                    {{ payment.invoice.invoice_number }}
+                                {% if payment.status == 'paid' %}
+                                    <a href="{% url 'payments:download_facture' payment.id %}" style="display:block; margin-bottom:4px;">
+                                        <i class="fa-solid fa-file-invoice"></i> Facture PDF
+                                    </a>
+                                    <a href="{% url 'payments:download_cession' payment.id %}">
+                                        <i class="fa-solid fa-file-signature"></i> Acte de cession PDF
+                                    </a>
                                 {% else %}
-                                    Aucune facture
+                                    <span style="color:var(--muted);">Disponible apres paiement</span>
                                 {% endif %}
                             </p>
                         </div>

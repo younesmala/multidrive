@@ -1,6 +1,8 @@
 from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from contact.models import ContactMessage
 from payments.models import Invoice, Payment
@@ -37,6 +39,9 @@ class VehicleViewSet(viewsets.ModelViewSet):
     queryset = Vehicle.objects.select_related("category").prefetch_related("images").order_by("price", "title")
     serializer_class = VehicleSerializer
     permission_classes = [IsAdminOrReadOnly]
+    filterset_fields = ["status", "category"]
+    search_fields = ["title", "description"]
+    ordering_fields = ["price", "created_at"]
 
 
 @extend_schema_view(
@@ -53,6 +58,9 @@ class ReservationViewSet(viewsets.ModelViewSet):
         if self.request.user.is_staff:
             return queryset
         return queryset.filter(user=self.request.user)
+
+    filterset_fields = ["status"]
+    ordering_fields = ["created_at", "updated_at"]
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user, status=Reservation.STATUS_PENDING)
@@ -119,3 +127,18 @@ class ContactMessageViewSet(viewsets.ModelViewSet):
     queryset = ContactMessage.objects.all().order_by("-created_at")
     serializer_class = ContactMessageSerializer
     permission_classes = [IsAdminOrCreateOnly]
+
+
+@extend_schema(description="Retourne les informations du compte connecte.")
+class CurrentUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        return Response({
+            "id": user.id,
+            "username": user.username,
+            "email": user.email,
+            "is_staff": user.is_staff,
+            "date_joined": user.date_joined,
+        })

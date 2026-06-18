@@ -1,59 +1,73 @@
 # MultiDrive
 
-Projet Django realise dans le cadre du TFE. MultiDrive est une plateforme de consultation et de reservation de vehicules d'occasion accessibles : velos, trottinettes, scooters, motos legeres et petites voitures.
+Plateforme web de consultation et de reservation de vehicules d'occasion, realisee dans le cadre d'un Travail de Fin d'Etudes (TFE). MultiDrive couvre un large spectre de vehicules accessibles : velos, trottinettes, scooters, motos legeres, citadines et petits utilitaires.
 
-## Presentation rapide
+## Stack technique
 
-MultiDrive combine :
+| Categorie | Technologie |
+|---|---|
+| Backend | Django 6.0.4 (Python 3.14) |
+| Frontend | Bootstrap 5.3 + CSS sur mesure (Poppins, #1E3A8A) |
+| Icones | Font Awesome 6.5 via CDN |
+| Base de donnees | SQLite (dev) |
+| Paiement | Stripe Checkout (PCI-DSS, hosted page) |
+| PDF | xhtml2pdf |
+| Email | Django SMTP (Gmail) |
+| API | Django REST Framework + JWT (simplejwt) + Swagger (drf-spectacular) |
+| Filtres API | django-filter |
 
-- un site web Django avec Bootstrap 5.3 ;
-- une API REST documentee ;
-- une base de donnees relationnelle ;
-- une interface d'administration ;
-- un parcours membre complet : consultation, reservation, paiement, suivi.
+## Fonctionnalites implementees
 
-## Technologies utilisees
+**Catalogue**
+- Catalogue avec filtres (categorie, statut, recherche texte) et pagination
+- Fiches vehicules avec galerie photos, note moyenne, vehicules similaires
+- Avis membres : uniquement apres une reservation acceptee
 
-- Django 6.0.4
-- Bootstrap 5.3 (navigation responsive, composants UI)
-- Django REST Framework
-- Swagger / OpenAPI via drf-spectacular
-- SQLite (developpement)
-- Pillow (gestion des images)
-- Stripe Checkout (architecture preparee, flux de paiement simule)
+**Parcours membre complet**
+- Inscription / connexion / deconnexion / changement de mot de passe
+- Profil, suppression de compte (soft delete)
+- Notifications en temps reel (bulles rouges) pour reservations et paiements
+- Mes reservations, Paiements et achats, Mes messages
 
-## Fonctionnalites principales
+**Reservation**
+- Demande de reservation avec creneau horaire
+- Workflow : pending -> accepted / rejected -> deposit_paid -> cancelled
+- Annulation a 3 niveaux (libre, libre, ou avec demande de remboursement)
+- Email de confirmation automatique a chaque reservation (Gmail SMTP)
 
-**Catalogue et vehicules**
-- catalogue de vehicules avec filtres par categorie et statut ;
-- fiches vehicules avec vraies photos par modele (galerie images) ;
-- systeme d'avis : seuls les membres avec une reservation acceptee peuvent publier un avis ;
-- suggestions de vehicules similaires.
+**Paiement Stripe**
+- Acompte : 20 % du prix (min 20 EUR, max 250 EUR)
+- Paiement du solde restant depuis l'espace membre
+- Redirection vers Stripe Checkout (hosted page, PCI-DSS)
+- Confirmation et mise a jour automatique apres paiement
+- Protection anti-doublon via session_id Stripe
 
-**Authentification et espace membre**
-- inscription, connexion, deconnexion ;
-- profil membre, mes reservations, mes paiements, mes messages ;
-- notifications en temps reel (bulles rouges) pour les mises a jour admin ;
-- suppression de compte en soft delete.
-
-**Reservation et paiement**
-- parcours de reservation complet (demande, statuts, suivi) ;
-- page de paiement d'acompte (checkout) : choix du montant, saisie carte, enregistrement en base ;
-- notification automatique de l'administrateur a chaque nouveau paiement.
+**Documents PDF**
+- Facture PDF telechargeable (numero, montant, reference Stripe)
+- Acte de cession PDF (parties, vehicule, conditions, mention papier rose)
 
 **Administration**
-- admin Django configure pour tous les modeles ;
-- dashboard administrateur : indicateurs en temps reel, raccourcis metier ;
-- gestion des messages de contact avec reponse admin.
+- Dashboard admin : reservations en attente, paiements, remboursements, messages
+- Formulaire de remboursement (montant + commentaire) depuis le dashboard
+- Gestion des messages de contact avec reponse admin
 
-**Technique**
-- API REST versionnee (/api/v1/) ;
-- documentation Swagger automatique ;
-- versioning Git + GitHub avec .env pour les secrets.
+**API REST**
+- Endpoints : /api/v1/categories/, /api/v1/vehicles/, /api/v1/reservations/, /api/v1/payments/, /api/v1/invoices/, /api/v1/reviews/, /api/v1/contact-messages/
+- Authentification JWT (simplejwt) + session
+- Filtres, recherche, tri, pagination (20/page)
+- Endpoint profil : GET /api/v1/me/
+- Documentation Swagger : /api/docs/
+
+**Juridique et conformite**
+- Page Conditions Generales (10 sections : CGV, RGPD, cookies, propriete intellectuelle, Stripe)
+- Bandeau cookies (cookies techniques uniquement, sans tracking)
+- Pages d'erreur 404 et 500 personnalisees
+
+**Multilingue**
+- Switcher FR / NL / EN dans la navbar
+- Banniere informative pour NL et EN (version complete en cours de preparation)
 
 ## Lancer le projet en local
-
-Depuis le dossier du projet :
 
 ```powershell
 cd C:\Users\elmal\OneDrive\Desktop\TFE_MultiDrive\multidrive
@@ -63,25 +77,34 @@ cd C:\Users\elmal\OneDrive\Desktop\TFE_MultiDrive\multidrive
 URLs utiles :
 
 ```text
-http://127.0.0.1:8001/
-http://127.0.0.1:8001/admin/
-http://127.0.0.1:8001/api/docs/
+http://127.0.0.1:8001/          Site principal
+http://127.0.0.1:8001/admin/    Administration Django
+http://127.0.0.1:8001/api/docs/ Documentation Swagger
 ```
 
 ## Comptes de test
 
-Membre :
+| Role | Username | Password |
+|---|---|---|
+| Membre | Younes | Multidrive1 |
+| Administrateur | admin | admin1234 |
+
+## Variables d'environnement (.env)
 
 ```text
-username: Younes
-password: Multidrive1
-```
-
-Administrateur :
-
-```text
-username: admin
-password: admin1234
+DJANGO_SECRET_KEY=...
+DJANGO_DEBUG=True
+DJANGO_ALLOWED_HOSTS=127.0.0.1,localhost
+DJANGO_DB_PATH=...
+STRIPE_PUBLIC_KEY=pk_test_...
+STRIPE_SECRET_KEY=sk_test_...
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=multidrive25@gmail.com
+EMAIL_HOST_PASSWORD=...
+DEFAULT_FROM_EMAIL=MultiDrive <multidrive25@gmail.com>
 ```
 
 ---

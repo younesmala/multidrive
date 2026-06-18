@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page { size: A4; margin: 2cm; }
+        body { font-family: Helvetica, Arial, sans-serif; font-size: 11pt; color: #1a1a2e; }
+        .header { display: table; width: 100%; margin-bottom: 30px; }
+        .header-left { display: table-cell; vertical-align: top; width: 60%; }
+        .header-right { display: table-cell; vertical-align: top; text-align: right; }
+        .brand { font-size: 22pt; font-weight: bold; color: #1a1a2e; }
+        .brand-sub { font-size: 9pt; color: #666; margin-top: 2px; }
+        .doc-title { font-size: 18pt; font-weight: bold; margin: 0 0 4px 0; }
+        .doc-meta { font-size: 9pt; color: #555; }
+        hr { border: none; border-top: 2px solid #1a1a2e; margin: 20px 0; }
+        .section-title { font-size: 10pt; font-weight: bold; text-transform: uppercase;
+                         color: #555; letter-spacing: 0.5px; margin: 18px 0 8px; }
+        table { width: 100%; border-collapse: collapse; }
+        .info-table td { padding: 4px 8px; font-size: 10pt; }
+        .info-table td:first-child { font-weight: bold; width: 40%; }
+        .line-table th { background: #1a1a2e; color: #fff; padding: 8px 10px;
+                         font-size: 10pt; text-align: left; }
+        .line-table td { padding: 10px; border-bottom: 1px solid #e0e0e0; font-size: 10pt; }
+        .line-table td.right { text-align: right; }
+        .total-row td { font-weight: bold; padding: 10px; font-size: 11pt; }
+        .total-row td.right { text-align: right; color: #1a1a2e; }
+        .badge { display: inline-block; background: #2a7a3b; color: #fff;
+                 padding: 3px 10px; border-radius: 4px; font-size: 9pt; }
+        .footer { margin-top: 40px; font-size: 8pt; color: #888; text-align: center;
+                  border-top: 1px solid #ddd; padding-top: 12px; }
+        .note-box { background: #f5f5f5; border-left: 4px solid #6c63ff;
+                    padding: 10px 14px; margin: 16px 0; font-size: 9.5pt; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-left">
+        <div class="brand">MultiDrive</div>
+        <div class="brand-sub">Plateforme de vehicules d'occasion<br>multidrive25@gmail.com</div>
+    </div>
+    <div class="header-right">
+        <div class="doc-title">FACTURE</div>
+        <div class="doc-meta">
+            N° {{ invoice_number }}<br>
+            Date : {{ issued_date }}<br>
+            <span class="badge">Paye</span>
+        </div>
+    </div>
+</div>
+
+<hr>
+
+<p class="section-title">Acheteur</p>
+<table class="info-table">
+    <tr>
+        <td>Nom</td>
+        <td>{{ buyer_name }}</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>{{ buyer_email }}</td>
+    </tr>
+    <tr>
+        <td>Identifiant membre</td>
+        <td>#{{ buyer_id }}</td>
+    </tr>
+</table>
+
+<p class="section-title">Detail du paiement</p>
+<table class="line-table">
+    <tr>
+        <th>Description</th>
+        <th>Categorie</th>
+        <th class="right">Prix total vehicule</th>
+        <th class="right">Montant verse</th>
+    </tr>
+    <tr>
+        <td>{{ vehicle_title }}</td>
+        <td>{{ vehicle_category }}</td>
+        <td class="right">{{ vehicle_price }} EUR</td>
+        <td class="right">{{ amount_paid }} EUR</td>
+    </tr>
+    <tr class="total-row">
+        <td colspan="3">Solde restant</td>
+        <td class="right">
+            {% if remaining == "0.00" %}
+                Solde apure
+            {% else %}
+                {{ remaining }} EUR
+            {% endif %}
+        </td>
+    </tr>
+</table>
+
+<p class="section-title">Reference de transaction</p>
+<table class="info-table">
+    <tr>
+        <td>Reference Stripe</td>
+        <td style="font-size:8.5pt; word-break:break-all;">{{ transaction_ref }}</td>
+    </tr>
+    <tr>
+        <td>Date du paiement</td>
+        <td>{{ paid_at }}</td>
+    </tr>
+    <tr>
+        <td>Moyen de paiement</td>
+        <td>Carte bancaire (Stripe Checkout)</td>
+    </tr>
+</table>
+
+<div class="note-box">
+    Ce document constitue la preuve de votre paiement aupres de MultiDrive.
+    Conservez-le pour vos dossiers.
+    {% if remaining != "0.00" %}
+    Le solde restant de {{ remaining }} EUR sera a regler avant la remise des cles du vehicule.
+    {% endif %}
+</div>
+
+<div class="footer">
+    MultiDrive — Projet academique TFE &bull; multidrive25@gmail.com<br>
+    Document genere automatiquement le {{ issued_date }}
+</div>
+
+</body>
+</html>
