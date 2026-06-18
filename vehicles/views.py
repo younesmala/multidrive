@@ -27,6 +27,10 @@ def extract_vehicle_year(title):
     return "N/A"
 
 
+def cgv(request):
+    return render(request, "vehicles/cgv.html")
+
+
 def home(request):
     latest_vehicles = attach_main_images(
         Vehicle.objects.select_related("category")

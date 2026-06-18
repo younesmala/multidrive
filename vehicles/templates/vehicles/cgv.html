@@ -1,0 +1,66 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Conditions generales — MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">Informations legales</p>
+    <h1>Conditions generales d'utilisation</h1>
+    <p>Derniere mise a jour : juin 2026</p>
+</section>
+
+<section class="section" style="max-width: 820px; margin: 0 auto;">
+
+    <article class="member-detail-card">
+        <h2>1. Presentation de la plateforme</h2>
+        <p>MultiDrive est une plateforme web de consultation et de reservation de vehicules d'occasion. Elle est exploitee dans le cadre d'un projet academique (Travail de Fin d'Etudes).</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>2. Acces au service</h2>
+        <p>L'acces au catalogue est libre et gratuit. La reservation d'un vehicule necessite la creation d'un compte membre. MultiDrive se reserve le droit de suspendre ou de supprimer un compte en cas d'utilisation abusive.</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>3. Reservations et rendez-vous</h2>
+        <p>Toute reservation est soumise a validation par l'administration. Un rendez-vous peut etre propose lors de la demande, dans les plages horaires definies :</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li>Du lundi au vendredi : 16h00 a 21h30</li>
+            <li>Le samedi et dimanche : 9h00 a 21h00</li>
+        </ul>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>4. Paiement et acompte</h2>
+        <p>Un acompte peut etre demande apres acceptation de la reservation. Cet acompte correspond a 20 % du prix du vehicule, avec un minimum de 20 EUR et un maximum de 250 EUR.</p>
+        <p style="margin-top: 12px;">Le paiement est traite de maniere securisee via Stripe Checkout. MultiDrive ne stocke aucune donnee bancaire.</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>5. Annulation et remboursement</h2>
+        <p>Une reservation peut etre annulee par le membre selon les conditions suivantes :</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li>Reservation en attente : annulation libre, sans frais.</li>
+            <li>Reservation acceptee : annulation possible, sans frais.</li>
+            <li>Acompte verse : annulation possible. Des frais administratifs de 10 % minimum du montant verse pourront etre retenus.</li>
+        </ul>
+        <p style="margin-top: 12px;">Le remboursement est traite sous 14 jours ouvrables.</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>6. Donnees personnelles</h2>
+        <p>Les donnees collectees (nom, email, historique de reservations) sont utilisees uniquement dans le cadre du service MultiDrive. Elles ne sont pas transmises a des tiers. Conformement au RGPD, tout membre peut demander la suppression de son compte depuis son espace personnel.</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>7. Responsabilite</h2>
+        <p>MultiDrive est un projet academique. La plateforme est fournie a titre demonstratif. Les vehicules presentes sont des donnees de test et ne constituent pas des offres commerciales reelles.</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>8. Contact</h2>
+        <p>Pour toute question relative aux conditions d'utilisation, vous pouvez nous contacter via la <a href="{% url 'contact:contact_form' %}">page de contact</a>.</p>
+    </article>
+
+</section>
+{% endblock %}
