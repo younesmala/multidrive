@@ -1,0 +1,28 @@
+{% extends "vehicles/base.html" %}
+
+{% block title %}Mes favoris — MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">Espace membre</p>
+    <h1>Mes favoris</h1>
+    <p>Les vehicules que vous avez mis en favori.</p>
+</section>
+
+<section class="section">
+    {% if vehicles %}
+    <div class="vehicle-grid">
+        {% for vehicle in vehicles %}
+            {% include "vehicles/partials/vehicle_card.html" %}
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <i class="fa-regular fa-star" style="font-size:2.5rem; color:var(--muted); margin-bottom:16px;"></i>
+        <h2>Aucun favori pour l'instant</h2>
+        <p>Cliquez sur l'etoile d'un vehicule pour l'ajouter ici.</p>
+        <a href="{% url 'vehicles:vehicle_list' %}" class="button primary">Voir le catalogue</a>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}

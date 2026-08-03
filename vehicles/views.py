@@ -2,10 +2,12 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Avg
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
 
 from .forms import ReviewForm
-from .models import Review, Vehicle, VehicleCategory
+from .models import Favorite, Review, Vehicle, VehicleCategory
 from reservations.models import Reservation
 
 
@@ -31,19 +33,30 @@ def cgv(request):
     return render(request, "vehicles/cgv.html")
 
 
+def _attach_favorites(vehicles, user):
+    if user.is_authenticated:
+        ids = set(Favorite.objects.filter(user=user).values_list("vehicle_id", flat=True))
+    else:
+        ids = set()
+    for v in vehicles:
+        v.is_favorite = v.id in ids
+
+
 def home(request):
-    latest_vehicles = attach_main_images(
+    latest_vehicles = list(attach_main_images(
         Vehicle.objects.select_related("category")
         .prefetch_related("images")
         .filter(status=Vehicle.STATUS_AVAILABLE)
         .order_by("-created_at")[:8]
-    )
-    popular_vehicles = attach_main_images(
+    ))
+    popular_vehicles = list(attach_main_images(
         Vehicle.objects.select_related("category")
         .prefetch_related("images")
         .filter(status=Vehicle.STATUS_AVAILABLE)
         .order_by("price", "-created_at")[:4]
-    )
+    ))
+    _attach_favorites(latest_vehicles, request.user)
+    _attach_favorites(popular_vehicles, request.user)
     categories = VehicleCategory.objects.order_by("name")
 
     return render(
@@ -82,6 +95,7 @@ def vehicle_list(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     attach_main_images(page_obj.object_list)
+    _attach_favorites(page_obj.object_list, request.user)
 
     categories = VehicleCategory.objects.order_by("name")
 
@@ -159,6 +173,7 @@ def build_vehicle_detail_context(request, vehicle, review_form=None):
     if request.user.is_authenticated:
         user_review = reviews.filter(user=request.user).first()
         can_review = user_can_review_vehicle(request.user, vehicle, existing_review=user_review)
+        vehicle.is_favorite = Favorite.objects.filter(user=request.user, vehicle=vehicle).exists()
 
         if review_form is None and can_review:
             review_form = ReviewForm(instance=user_review)
@@ -168,6 +183,7 @@ def build_vehicle_detail_context(request, vehicle, review_form=None):
                 "Vous pourrez laisser un avis apres une reservation acceptee sur ce vehicule."
             )
     else:
+        vehicle.is_favorite = False
         review_gate_message = "Connectez-vous pour laisser un avis sur ce vehicule."
 
     related_vehicles = attach_main_images(
@@ -190,6 +206,34 @@ def build_vehicle_detail_context(request, vehicle, review_form=None):
         "average_rating": review_stats["average_rating"],
         "related_vehicles": related_vehicles,
     }
+
+
+@login_required
+@require_POST
+def toggle_favorite(request, vehicle_id):
+    vehicle = get_object_or_404(Vehicle, id=vehicle_id)
+    fav, created = Favorite.objects.get_or_create(user=request.user, vehicle=vehicle)
+    if not created:
+        fav.delete()
+        is_favorite = False
+    else:
+        is_favorite = True
+    return JsonResponse({"is_favorite": is_favorite})
+
+
+@login_required
+def my_favorites(request):
+    favs = (
+        Favorite.objects.filter(user=request.user)
+        .select_related("vehicle", "vehicle__category")
+        .prefetch_related("vehicle__images")
+    )
+    vehicles = []
+    for fav in favs:
+        fav.vehicle.is_favorite = True
+        vehicles.append(fav.vehicle)
+    attach_main_images(vehicles)
+    return render(request, "vehicles/my_favorites.html", {"vehicles": vehicles})
 
 
 def user_can_review_vehicle(user, vehicle, existing_review=None):

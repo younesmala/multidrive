@@ -8,6 +8,13 @@
         <span>{{ vehicle.category.name }}</span>
         <small>{{ vehicle.title }}</small>
     </a>
+    {% if request.user.is_authenticated %}
+    <button class="fav-btn fav-btn--overlay{% if vehicle.is_favorite %} fav-active{% endif %}"
+            data-url="{% url 'vehicles:toggle_favorite' vehicle.id %}"
+            title="{% if vehicle.is_favorite %}Retirer des favoris{% else %}Ajouter aux favoris{% endif %}">
+        <i class="fa-{% if vehicle.is_favorite %}solid{% else %}regular{% endif %} fa-star"></i>
+    </button>
+    {% endif %}
     <div class="vehicle-body">
         <div>
             <p class="vehicle-category">{{ vehicle.category.name }}</p>
