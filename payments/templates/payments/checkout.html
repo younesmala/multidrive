@@ -12,10 +12,6 @@
 
 {% if has_reservations %}
 <div class="checkout-page">
-    <div class="checkout-notice">
-        <strong>Mode démonstration</strong> — Le module Stripe n'est pas encore intégré. Aucune transaction ne sera effectuée.
-    </div>
-
     <div class="checkout-layout">
 
         <!-- Colonne gauche : récapitulatif + sélection réservation -->
@@ -152,48 +148,6 @@
                     <input type="hidden" name="amount_type" id="balance-amount-type" value="deposit">
                 </div>
 
-                <!-- Champs carte -->
-                <div class="checkout-field">
-                    <label for="cardholder">Nom du titulaire</label>
-                    <input id="cardholder" type="text" name="cardholder"
-                           placeholder="Jean Dupont" autocomplete="cc-name">
-                </div>
-
-                <div class="checkout-field">
-                    <label for="card_number">Numéro de carte</label>
-                    <div class="checkout-card-input-wrap">
-                        <input id="card_number" type="text" name="card_number"
-                               placeholder="1234 5678 9012 3456"
-                               maxlength="19" inputmode="numeric" autocomplete="cc-number">
-                        <span class="checkout-card-icon" aria-hidden="true">
-                            <svg width="38" height="24" viewBox="0 0 38 24" fill="none">
-                                <rect width="38" height="24" rx="4" fill="#1A1F71"/>
-                                <circle cx="15" cy="12" r="7" fill="#EB001B"/>
-                                <circle cx="23" cy="12" r="7" fill="#F79E1B"/>
-                                <path d="M19 6.5a7 7 0 0 1 0 11A7 7 0 0 1 19 6.5Z" fill="#FF5F00"/>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="checkout-field-row">
-                    <div class="checkout-field">
-                        <label for="expiry">Expiration</label>
-                        <input id="expiry" type="text" name="expiry"
-                               placeholder="MM / AA" maxlength="7"
-                               inputmode="numeric" autocomplete="cc-exp">
-                    </div>
-                    <div class="checkout-field">
-                        <label for="cvv">
-                            CVV
-                            <span class="checkout-cvv-hint" title="3 chiffres au dos de votre carte">?</span>
-                        </label>
-                        <input id="cvv" type="text" name="cvv"
-                               placeholder="123" maxlength="4"
-                               inputmode="numeric" autocomplete="cc-csc">
-                    </div>
-                </div>
-
                 <button type="submit" class="checkout-submit-btn" id="submit-btn">
                     Payer {{ reservations_data.0.deposit_amount }} €
                 </button>
@@ -205,7 +159,7 @@
                         <path d="M5 7l1.5 1.5L9.5 6" stroke="currentColor" stroke-width="1.3"
                               stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Paiement sécurisé — aucune donnée n'est transmise.
+                    Paiement sécurisé via Stripe — vos coordonnées bancaires ne transitent jamais par nos serveurs.
                 </p>
             </form>
         </div>
@@ -347,19 +301,6 @@
             recalcSelected();
         });
     }
-
-    // Formatage carte
-    document.getElementById('card_number').addEventListener('input', function () {
-        var d = this.value.replace(/\D/g, '').substring(0, 16);
-        this.value = d.replace(/(.{4})(?=.)/g, '$1 ');
-    });
-    document.getElementById('expiry').addEventListener('input', function () {
-        var d = this.value.replace(/\D/g, '').substring(0, 4);
-        this.value = d.length >= 3 ? d.substring(0, 2) + ' / ' + d.substring(2) : d;
-    });
-    document.getElementById('cvv').addEventListener('input', function () {
-        this.value = this.value.replace(/\D/g, '').substring(0, 4);
-    });
 
     updateAmounts();
 }());
