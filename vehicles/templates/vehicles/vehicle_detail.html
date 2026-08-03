@@ -37,7 +37,16 @@
 
     <article class="detail-panel">
         <p class="eyebrow">{{ vehicle.category.name }}</p>
-        <h1>{{ vehicle.title }}</h1>
+        <div class="detail-title-row">
+            <h1>{{ vehicle.title }}</h1>
+            {% if request.user.is_authenticated %}
+            <button class="fav-btn fav-btn--large{% if vehicle.is_favorite %} fav-active{% endif %}"
+                    data-url="{% url 'vehicles:toggle_favorite' vehicle.id %}"
+                    title="{% if vehicle.is_favorite %}Retirer des favoris{% else %}Ajouter aux favoris{% endif %}">
+                <i class="fa-{% if vehicle.is_favorite %}solid{% else %}regular{% endif %} fa-star"></i>
+            </button>
+            {% endif %}
+        </div>
         <p class="price">{{ vehicle.price }} EUR</p>
         <p class="status status-{{ vehicle.status }}">{{ vehicle.get_status_display }}</p>
         <p class="description">{{ vehicle.description }}</p>
