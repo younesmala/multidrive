@@ -96,12 +96,26 @@
                             <strong>Documents</strong>
                             <p>
                                 {% if payment.status == 'paid' %}
-                                    <a href="{% url 'payments:download_facture' payment.id %}" style="display:block; margin-bottom:4px;">
-                                        <i class="fa-solid fa-file-invoice"></i> Facture PDF
-                                    </a>
-                                    <a href="{% url 'payments:download_cession' payment.id %}">
-                                        <i class="fa-solid fa-file-signature"></i> Acte de cession PDF
-                                    </a>
+                                    {% if payment.remaining <= 0 %}
+                                        <strong style="display:block; font-size:0.8rem; color:var(--muted); margin-bottom:5px; text-transform:uppercase;">Dossier de vente</strong>
+                                        <a href="{% url 'payments:download_facture' payment.id %}" style="display:block; margin-bottom:4px;">
+                                            <i class="fa-solid fa-file-invoice"></i> Facture finale
+                                        </a>
+                                        <a href="{% url 'payments:download_cession' payment.id %}" style="display:block; margin-bottom:4px;">
+                                            <i class="fa-solid fa-file-signature"></i> Acte de cession
+                                        </a>
+                                        <a href="{% url 'payments:download_specimen' payment.id %}" style="display:block;">
+                                            <i class="fa-solid fa-id-card"></i> Specimen immatriculation
+                                        </a>
+                                    {% else %}
+                                        <strong style="display:block; font-size:0.8rem; color:var(--muted); margin-bottom:5px; text-transform:uppercase;">Acompte</strong>
+                                        <a href="{% url 'payments:download_recu_acompte' payment.id %}" style="display:block;">
+                                            <i class="fa-solid fa-receipt"></i> Recu d'acompte
+                                        </a>
+                                        <span style="display:block; margin-top:5px; font-size:0.82rem; color:var(--muted);">
+                                            Dossier complet disponible apres paiement integral
+                                        </span>
+                                    {% endif %}
                                 {% else %}
                                     <span style="color:var(--muted);">Disponible apres paiement</span>
                                 {% endif %}

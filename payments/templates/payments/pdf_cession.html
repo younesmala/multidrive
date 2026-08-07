@@ -111,10 +111,12 @@
 </div>
 
 <div class="alert-box">
-    <strong>Certificat de controle technique (papier rose)</strong><br>
-    Le certificat de controle technique en cours de validite vous sera transmis par email
-    ({{ buyer_email }}) dans les meilleurs delais suivant la signature du present acte.
-    Toute demande peut etre adressee a multidrive25@gmail.com.
+    <strong>Document d'immatriculation (specimen pedagogique joint)</strong><br>
+    Dans le cadre de ce projet academique, un specimen non officiel de demande d'immatriculation
+    est joint a ce dossier de vente a titre pedagogique. Ce document porte la mention
+    <strong>SPECIMEN &ndash; NON VALABLE</strong> et ne constitue pas un document administratif reel.
+    Il illustre les informations qui seraient normalement transmises a la DIV lors d'une
+    transaction reelle. Toute question peut etre adressee a multidrive25@gmail.com.
 </div>
 
 <p class="section-title">Conditions de la cession</p>
@@ -137,6 +139,9 @@
     <tr>
         <td>
             <strong>Le vendeur</strong>
+            {% if signature_url %}
+            <div style="margin: 6px 0 0;"><img src="{{ signature_url }}" style="height:48px; width:auto;"></div>
+            {% endif %}
             <div class="sign-line">Signature MultiDrive</div>
         </td>
         <td>
