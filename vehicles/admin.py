@@ -18,11 +18,20 @@ class VehicleCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Vehicle)
 class VehicleAdmin(admin.ModelAdmin):
-    list_display = ("title", "category", "price", "status", "created_at")
-    list_filter = ("status", "category")
+    list_display = ("title", "category", "price", "status", "carrosserie", "moteur", "created_at")
+    list_filter = ("status", "category", "carrosserie", "moteur")
     search_fields = ("title", "description")
     ordering = ("title",)
     inlines = [VehicleImageInline]
+    fieldsets = (
+        (None, {
+            "fields": ("category", "title", "description", "price", "status")
+        }),
+        ("Etat du vehicule", {
+            "fields": ("carrosserie", "moteur", "condition_notes"),
+            "description": "Renseignez l'etat de la carrosserie, du moteur, et ajoutez un commentaire si necessaire.",
+        }),
+    )
 
 
 @admin.register(VehicleImage)

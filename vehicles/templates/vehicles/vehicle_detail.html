@@ -17,22 +17,20 @@
     <div class="gallery">
         {% if images %}
             {% for image in images %}
-                <div class="gallery-item">
+                <div class="gallery-item gallery-item--clickable" data-src="{{ image.image.url }}" data-alt="{{ vehicle.title }}">
                     <img src="{{ image.image.url }}" alt="{{ vehicle.title }}">
-                    <span>{{ vehicle.category.name }}</span>
-                    {% if image.is_main %}
-                        <small>Photo principale</small>
-                    {% else %}
-                        <small>Vue supplementaire</small>
-                    {% endif %}
                 </div>
             {% endfor %}
         {% else %}
             <div class="gallery-item">
                 <span>{{ vehicle.category.name }}</span>
-                <small>Aucune image</small>
             </div>
         {% endif %}
+    </div>
+
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">&times;</button>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="">
     </div>
 
     <article class="detail-panel">
@@ -47,31 +45,52 @@
             </button>
             {% endif %}
         </div>
-        <p class="price">{{ vehicle.price }} EUR</p>
         <p class="status status-{{ vehicle.status }}">{{ vehicle.get_status_display }}</p>
         <p class="description">{{ vehicle.description }}</p>
-        <div class="detail-summary-grid">
-            <div class="detail-summary-card">
-                <strong>{{ vehicle.display_year }}</strong>
-                <span>Annee estimee</span>
+
+        <div class="fiche-technique">
+            <h3 class="fiche-titre">Fiche technique</h3>
+            <div class="fiche-grid">
+                <div class="fiche-item">
+                    <span class="fiche-label">Marque</span>
+                    <strong class="fiche-value">{{ vehicle.display_brand }}</strong>
+                </div>
+                <div class="fiche-item">
+                    <span class="fiche-label">Modele</span>
+                    <strong class="fiche-value">{{ vehicle.display_model }}</strong>
+                </div>
+                <div class="fiche-item">
+                    <span class="fiche-label">Annee</span>
+                    <strong class="fiche-value">{{ vehicle.display_year }}</strong>
+                </div>
+                <div class="fiche-item">
+                    <span class="fiche-label">Categorie</span>
+                    <strong class="fiche-value">{{ vehicle.category.name }}</strong>
+                </div>
+                <div class="fiche-item">
+                    <span class="fiche-label">Carrosserie</span>
+                    <strong class="fiche-value fiche-etat">{{ vehicle.get_carrosserie_display|default:"—" }}</strong>
+                </div>
+                <div class="fiche-item">
+                    <span class="fiche-label">Moteur</span>
+                    <strong class="fiche-value fiche-etat">{{ vehicle.get_moteur_display|default:"—" }}</strong>
+                </div>
             </div>
-            <div class="detail-summary-card">
-                <strong>{{ vehicle.deposit_amount }} EUR</strong>
-                <span>Acompte estime</span>
+            {% if vehicle.condition_notes %}
+            <div class="fiche-notes">
+                <span class="fiche-label">Commentaire</span>
+                <p class="fiche-notes-text">{{ vehicle.condition_notes }}</p>
             </div>
-            <div class="detail-summary-card">
-                <strong>{{ images|length }}</strong>
-                <span>Photos disponibles</span>
-            </div>
-            <div class="detail-summary-card">
-                <strong>
-                    {% if review_count %}
-                        {{ average_rating|floatformat:1 }}/5
-                    {% else %}
-                        --
-                    {% endif %}
-                </strong>
-                <span>Note moyenne</span>
+            {% endif %}
+            <div class="fiche-prix-row">
+                <div class="fiche-prix-block">
+                    <span class="fiche-label">Prix de vente</span>
+                    <strong class="fiche-prix">{{ vehicle.price }} EUR</strong>
+                </div>
+                <div class="fiche-prix-block">
+                    <span class="fiche-label">Acompte (20%)</span>
+                    <strong class="fiche-acompte">{{ vehicle.deposit_amount }} EUR</strong>
+                </div>
             </div>
         </div>
         <div class="detail-actions">
@@ -169,4 +188,72 @@
         {% endfor %}
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<style>
+.gallery-item--clickable { cursor: zoom-in; }
+
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.88);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+.lightbox.active { display: flex; }
+
+.lightbox-img {
+    max-width: 92vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 8px 40px rgba(0,0,0,.6);
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 8px;
+    opacity: .8;
+}
+.lightbox-close:hover { opacity: 1; }
+</style>
+<script>
+(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        var lb    = document.getElementById('lightbox');
+        var lbImg = document.getElementById('lightbox-img');
+        var lbClose = document.getElementById('lightbox-close');
+
+        document.querySelectorAll('.gallery-item--clickable').forEach(function (item) {
+            item.addEventListener('click', function () {
+                lbImg.src = item.dataset.src;
+                lbImg.alt = item.dataset.alt;
+                lb.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function close() {
+            lb.classList.remove('active');
+            lbImg.src = '';
+            document.body.style.overflow = '';
+        }
+
+        lbClose.addEventListener('click', close);
+        lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    });
+})();
+</script>
 {% endblock %}

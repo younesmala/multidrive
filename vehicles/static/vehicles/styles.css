@@ -954,6 +954,12 @@ h3 {
     gap: 14px;
 }
 
+.gallery .gallery-item:only-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
+    min-height: 280px;
+}
+
 .detail-panel {
     align-self: start;
     padding: 30px;
@@ -998,31 +1004,103 @@ h3 {
     border-left-color: var(--danger);
 }
 
-.detail-summary-grid {
+.fiche-technique {
+    margin: 28px 0 0;
+    border: 2px solid var(--blue);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: #fff;
+}
+
+.fiche-titre {
+    background: var(--blue);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 10px 18px;
+    margin: 0;
+}
+
+.fiche-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-    margin: 26px 0 0;
-}
-
-.detail-summary-card {
-    padding: 16px 18px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
     background: var(--light);
-    border: 1px solid var(--line);
-    border-radius: 8px;
 }
 
-.detail-summary-card strong {
+.fiche-item {
+    padding: 14px 18px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.fiche-item:nth-child(3n) {
+    border-right: none;
+}
+
+.fiche-label {
     display: block;
-    color: var(--blue);
-    font-size: 1.2rem;
-    font-weight: 800;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: 4px;
 }
 
-.detail-summary-card span {
+.fiche-value {
+    display: block;
+    color: var(--dark);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.fiche-etat {
+    color: var(--blue);
+}
+
+.fiche-prix-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--line);
+}
+
+.fiche-prix-block {
+    padding: 16px 18px;
+    background: #fff;
+}
+
+.fiche-prix-block:first-child {
+    border-right: 1px solid var(--line);
+}
+
+.fiche-prix {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--blue);
+}
+
+.fiche-acompte {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
     color: var(--muted);
-    font-size: 0.88rem;
-    font-weight: 600;
+}
+
+.fiche-notes {
+    padding: 14px 18px;
+    border-top: 1px solid var(--line);
+    background: #fff;
+}
+
+.fiche-notes-text {
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+    color: var(--dark);
 }
 
 .review-form-card,

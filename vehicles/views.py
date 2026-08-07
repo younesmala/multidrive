@@ -29,6 +29,35 @@ def extract_vehicle_year(title):
     return "N/A"
 
 
+def extract_vehicle_info(title):
+    """Extrait brand, model, year depuis 'Renault Clio 2004 #001'."""
+    tokens = [t for t in title.split() if not t.startswith("#")]
+    year = None
+    for i, token in enumerate(reversed(tokens)):
+        if token.isdigit() and len(token) == 4:
+            year = token
+            tokens = tokens[:len(tokens) - i - 1]
+            break
+    brand = tokens[0] if tokens else ""
+    model = " ".join(tokens[1:]) if len(tokens) > 1 else ""
+    return brand, model, year
+
+
+def vehicle_condition(year_str):
+    try:
+        y = int(year_str)
+    except (TypeError, ValueError):
+        return "Bon"
+    if y >= 2018:
+        return "Tres bon"
+    elif y >= 2013:
+        return "Bon"
+    elif y >= 2008:
+        return "Correct"
+    else:
+        return "D'usage"
+
+
 def cgv(request):
     return render(request, "vehicles/cgv.html")
 
@@ -169,6 +198,10 @@ def build_vehicle_detail_context(request, vehicle, review_form=None):
     vehicle.main_image = next((image for image in images if image.is_main), images[0] if images else None)
     vehicle.display_year = extract_vehicle_year(vehicle.title)
     vehicle.deposit_amount = round(float(vehicle.price) * 0.2, 2)
+    brand, model, year = extract_vehicle_info(vehicle.title)
+    vehicle.display_brand     = brand
+    vehicle.display_model     = model
+    vehicle.display_condition = vehicle_condition(year)
 
     if request.user.is_authenticated:
         user_review = reviews.filter(user=request.user).first()
