@@ -16,4 +16,9 @@ urlpatterns = [
     path("delete-request/", views.delete_request, name="delete_request"),
     path("delete-request/done/", views.delete_request_done, name="delete_request_done"),
     path("refund/<int:payment_id>/process/", views.process_refund, name="process_refund"),
+    path("review/<int:review_id>/delete/", views.delete_review, name="delete_review"),
+    path("export/stats.csv", views.export_stats_csv, name="export_stats_csv"),
+    path("admins/create/", views.create_admin, name="create_admin"),
+    path("admins/<int:user_id>/demote/", views.demote_admin, name="demote_admin"),
+    path("admins/<int:user_id>/deactivate/", views.deactivate_admin, name="deactivate_admin"),
 ]
