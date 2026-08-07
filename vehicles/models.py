@@ -23,9 +23,27 @@ class Vehicle(models.Model):
     STATUS_SOLD = "sold"
 
     STATUS_CHOICES = [
-        (STATUS_AVAILABLE, "Available"),
-        (STATUS_RESERVED, "Reserved"),
-        (STATUS_SOLD, "Sold"),
+        (STATUS_AVAILABLE, "Disponible"),
+        (STATUS_RESERVED, "Reserve"),
+        (STATUS_SOLD, "Vendu"),
+    ]
+
+    CARROSSERIE_TRES_BON = "tres_bon"
+    CARROSSERIE_BON = "bon"
+    CARROSSERIE_ACCIDENTE = "accidente"
+    CARROSSERIE_CHOICES = [
+        (CARROSSERIE_TRES_BON, "Tres bon"),
+        (CARROSSERIE_BON, "Bon"),
+        (CARROSSERIE_ACCIDENTE, "Legerement accidente"),
+    ]
+
+    MOTEUR_TRES_BON = "tres_bon"
+    MOTEUR_BON = "bon"
+    MOTEUR_REPARATION = "reparation"
+    MOTEUR_CHOICES = [
+        (MOTEUR_TRES_BON, "Tres bon"),
+        (MOTEUR_BON, "Bon"),
+        (MOTEUR_REPARATION, "Roule, reparation mineure a prevoir"),
     ]
 
     category = models.ForeignKey(
@@ -43,6 +61,19 @@ class Vehicle(models.Model):
         choices=STATUS_CHOICES,
         default=STATUS_AVAILABLE
     )
+    carrosserie = models.CharField(
+        max_length=20,
+        choices=CARROSSERIE_CHOICES,
+        blank=True,
+        default=""
+    )
+    moteur = models.CharField(
+        max_length=20,
+        choices=MOTEUR_CHOICES,
+        blank=True,
+        default=""
+    )
+    condition_notes = models.TextField(blank=True, default="")
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
