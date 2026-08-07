@@ -117,6 +117,22 @@
     {% endif %}
 </div>
 
+<table style="width:100%; margin-top:28px;">
+    <tr>
+        <td style="width:50%; vertical-align:top; padding:8px 12px;">
+            <strong>MultiDrive</strong>
+            {% if signature_url %}
+            <div style="margin:6px 0 0;"><img src="{{ signature_url }}" style="height:44px; width:auto;"></div>
+            {% endif %}
+            <div style="border-top:1px solid #888; margin-top:34px; font-size:8pt; color:#666; padding-top:4px;">Signature MultiDrive</div>
+        </td>
+        <td style="width:50%; vertical-align:top; padding:8px 12px;">
+            <strong>L'acheteur</strong>
+            <div style="border-top:1px solid #888; margin-top:78px; font-size:8pt; color:#666; padding-top:4px;">{{ buyer_name }}</div>
+        </td>
+    </tr>
+</table>
+
 <div class="footer">
     MultiDrive — Projet academique TFE &bull; multidrive25@gmail.com<br>
     Document genere automatiquement le {{ issued_date }}
