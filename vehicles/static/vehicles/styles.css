@@ -1335,6 +1335,108 @@ h3 {
     background: #fff5f5;
 }
 
+/* Stats ventes */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.stats-card {
+    padding: 20px 22px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+.stats-card--primary {
+    background: var(--blue);
+    border-color: var(--blue-dark);
+    color: #fff;
+}
+
+.stats-card--primary .stats-label,
+.stats-card--primary .stats-sub { color: rgba(255,255,255,.75); }
+
+.stats-card--primary .stats-value { color: #fff; }
+
+.stats-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--muted);
+    margin: 0 0 6px;
+}
+
+.stats-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--blue);
+    margin: 0 0 4px;
+    line-height: 1.1;
+}
+
+.stats-value span {
+    font-size: 0.95rem;
+    font-weight: 600;
+    opacity: .7;
+}
+
+.stats-sub {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin: 0;
+}
+
+.stats-categories {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px 22px;
+    box-shadow: var(--shadow);
+}
+
+.stats-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.stats-bar-label {
+    width: 120px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--dark);
+    flex-shrink: 0;
+}
+
+.stats-bar-track {
+    flex: 1;
+    height: 10px;
+    background: var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.stats-bar-fill {
+    height: 100%;
+    background: var(--blue);
+    border-radius: 6px;
+    min-width: 4px;
+}
+
+.stats-bar-count {
+    width: 28px;
+    text-align: right;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--muted);
+}
+
 .status-refund_requested {
     background: #fff3cd;
     color: #1a1a1a;

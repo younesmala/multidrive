@@ -6,7 +6,6 @@
 <section class="page-title">
     <p class="eyebrow">Administration</p>
     <h1>Dashboard admin</h1>
-    <p>Suivez rapidement les demandes en cours, l'etat du catalogue et les actions prioritaires.</p>
 </section>
 
 {% if messages %}
@@ -17,7 +16,8 @@
 </div>
 {% endif %}
 
-<section class="section">
+{# ── 1. KPI ── #}
+<section class="section" style="padding-bottom:0;">
     <div class="admin-summary-grid">
         <article class="admin-summary-card">
             <span>{{ vehicle_count }}</span>
@@ -40,25 +40,151 @@
             <p>Acomptes encore en attente de validation.</p>
         </article>
         <article class="admin-summary-card">
-            <span>{{ disabled_account_count }}</span>
-            <h2>Comptes desactives</h2>
-            <p>Inclut les demandes utilisateur et les blocages admin.</p>
-        </article>
-        <article class="admin-summary-card">
             <span>{{ user_count }}</span>
             <h2>Membres actifs</h2>
             <p>Comptes clients actuellement actifs.</p>
         </article>
+        <article class="admin-summary-card">
+            <span>{{ sold_count }}</span>
+            <h2>Vehicules vendus</h2>
+            <p>Ventes finalisees dans le catalogue.</p>
+        </article>
         <article class="admin-summary-card {% if refund_request_count %}admin-summary-card--alert{% endif %}">
             <span>{{ refund_request_count }}</span>
             <h2>Remboursements a traiter</h2>
-            <p>Annulations avec acompte verse en attente de remboursement.</p>
+            <p>Annulations avec acompte verse en attente.</p>
         </article>
     </div>
 </section>
 
+{# ── 2. Gestion des admins (superadmin uniquement) ── #}
+{% if request.user.is_superuser %}
+<section class="section" style="padding-bottom:0;">
+    <div style="background:#fff; border:2px solid #1E3A8A22; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06);">
+        <div style="padding:16px 20px; border-bottom:1px solid #f0f0f0; display:flex; align-items:center; justify-content:space-between; background:#f8faff;">
+            <div style="display:flex; align-items:center; gap:10px;">
+                <i class="fa-solid fa-shield-halved" style="color:#1E3A8A; font-size:.9rem;"></i>
+                <p style="margin:0; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#1E3A8A;">Gestion des administrateurs</p>
+                <span style="background:#1E3A8A; color:#fff; border-radius:20px; padding:1px 8px; font-size:.72rem; font-weight:700;">{{ admin_users|length }} admin(s)</span>
+            </div>
+            <a href="{% url 'accounts:create_admin' %}" class="button primary" style="font-size:.8rem; padding:8px 16px; display:inline-flex; align-items:center; gap:6px;">
+                <i class="fa-solid fa-user-plus"></i> Ajouter un admin
+            </a>
+        </div>
+
+        {% if admin_users %}
+            {% for admin in admin_users %}
+            <div style="display:flex; align-items:center; gap:14px; padding:12px 20px; border-bottom:1px solid #f7f7f7; {% if forloop.last %}border-bottom:none;{% endif %}">
+                <div style="width:36px; height:36px; border-radius:50%; background:#1E3A8A18; display:flex; align-items:center; justify-content:center; font-weight:700; color:#1E3A8A; flex-shrink:0;">
+                    {{ admin.username|first|upper }}
+                </div>
+                <div style="flex:1; min-width:0;">
+                    <p style="margin:0; font-size:.88rem; font-weight:600; color:#222;">{{ admin.username }}</p>
+                    <p style="margin:0; font-size:.75rem; color:#aaa;">{{ admin.email }}{% if not admin.is_active %} — <span style="color:#B91C1C;">Compte desactive</span>{% endif %}</p>
+                </div>
+                <div style="display:flex; gap:8px; flex-shrink:0;">
+                    <form method="post" action="{% url 'accounts:demote_admin' admin.id %}">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Retirer les droits admin a {{ admin.username }} ? Il repassera en compte client.')"
+                                style="background:#FEF3C7; color:#B7791F; border:1px solid #FDE68A; border-radius:6px; padding:5px 12px; font-size:.76rem; font-weight:600; cursor:pointer; white-space:nowrap;">
+                            Retirer les droits
+                        </button>
+                    </form>
+                    <form method="post" action="{% url 'accounts:deactivate_admin' admin.id %}">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Desactiver definitivement le compte de {{ admin.username }} ?')"
+                                style="background:#FEF2F2; color:#B91C1C; border:1px solid #FECACA; border-radius:6px; padding:5px 12px; font-size:.76rem; font-weight:600; cursor:pointer; white-space:nowrap;">
+                            Desactiver
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div style="padding:20px 24px; color:#aaa; font-size:.88rem;">
+                Aucun administrateur cree pour le moment. Cliquez sur « Ajouter un admin » pour commencer.
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+{# ── 3. Fil d'activite recente ── #}
+{% if activity_feed %}
+<section class="section" style="padding-bottom:0;">
+    <div style="background:#fff; border:1px solid #e2e2e2; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06);">
+        <div style="padding:16px 20px; border-bottom:1px solid #f0f0f0; display:flex; align-items:center; justify-content:space-between;">
+            <p style="margin:0; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">Derniers mouvements</p>
+            <span style="font-size:.78rem; color:#999;">10 derniers evenements</span>
+        </div>
+        {% for event in activity_feed %}
+        <a href="{{ event.url }}" style="display:flex; align-items:center; gap:14px; padding:12px 20px; border-bottom:1px solid #f7f7f7; text-decoration:none; transition:background .15s; {% if forloop.last %}border-bottom:none;{% endif %}" onmouseover="this.style.background='#f8f9ff'" onmouseout="this.style.background='transparent'">
+            <div style="width:34px; height:34px; border-radius:50%; background:{{ event.color }}18; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                <i class="fa-solid {{ event.icon }}" style="font-size:.8rem; color:{{ event.color }};"></i>
+            </div>
+            <div style="flex:1; min-width:0;">
+                <p style="margin:0; font-size:.88rem; font-weight:600; color:#333;">{{ event.label }}</p>
+                <p style="margin:0; font-size:.78rem; color:#888;">{{ event.detail }}</p>
+            </div>
+            <span style="font-size:.75rem; color:#aaa; white-space:nowrap; flex-shrink:0;">
+                {{ event.date|date:"d/m/Y H:i" }}
+                <i class="fa-solid fa-arrow-right" style="font-size:.65rem; margin-left:4px; opacity:.4;"></i>
+            </span>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# ── 3. Actions rapides ── #}
+<section class="section" style="padding-bottom:0;">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Raccourcis</p>
+            <h2>Actions rapides</h2>
+        </div>
+        <p>Acces direct aux principales zones de gestion.</p>
+    </div>
+
+    <div class="admin-actions-grid">
+        <a class="admin-action-card" href="{% url 'admin:vehicles_vehicle_add' %}">
+            <strong>Ajouter un vehicule</strong>
+            <p>Creer une nouvelle annonce dans le catalogue.</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:vehicles_vehicle_changelist' %}">
+            <strong>Gerer les vehicules</strong>
+            <p>Modifier, supprimer ou filtrer le stock.</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:reservations_reservation_changelist' %}">
+            <strong>Voir les reservations</strong>
+            <p>Traiter les demandes.{% if pending_reservation_count %} <strong style="color:#1E3A8A;">{{ pending_reservation_count }} en attente.</strong>{% endif %}</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:contact_contactmessage_changelist' %}">
+            <strong>Traiter les messages</strong>
+            <p>Repondre aux questions.{% if contact_pending_count %} <strong style="color:#B7791F;">{{ contact_pending_count }} sans reponse.</strong>{% endif %}</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:payments_payment_changelist' %}">
+            <strong>Suivre les paiements</strong>
+            <p>Verifier les acomptes et leur statut.</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:accounts_accountstatus_changelist' %}">
+            <strong>Comptes desactives</strong>
+            <p>{{ disabled_account_count }} compte(s) desactive(s) au total.</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:accounts_accountdeletionrequest_changelist' %}">
+            <strong>Demandes de suppression</strong>
+            <p>{% if pending_deletion_requests %}<strong style="color:#B91C1C;">{{ pending_deletion_requests }} non traitee(s).</strong>{% else %}Aucune demande en attente.{% endif %}</p>
+        </a>
+        <a class="admin-action-card" href="{% url 'admin:index' %}">
+            <strong>Ouvrir l'admin Django</strong>
+            <p>Acceder a la gestion complete du projet.</p>
+        </a>
+    </div>
+</section>
+
+{# ── 4. A traiter : Remboursements ── #}
 {% if refund_requests %}
-<section class="section">
+<section class="section" style="padding-bottom:0;">
     <div class="section-heading">
         <div>
             <p class="eyebrow">Prioritaire</p>
@@ -90,7 +216,6 @@
                                 Montant a rembourser (EUR)
                                 <span style="color:var(--muted); font-weight:400;">
                                     — Acompte verse : {{ payment.amount }} EUR
-                                    (frais 10 % = {{ payment.amount|floatformat:2 }} → min retenu ~{{ payment.amount }} × 0.10)
                                 </span>
                             </label>
                             <input type="number" id="refund_amount_{{ payment.id }}"
@@ -120,158 +245,135 @@
 </section>
 {% endif %}
 
+{# ── 5. A traiter : Moderation des avis ── #}
+{% if recent_reviews %}
+<section class="section" style="padding-bottom:0;">
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Moderation</p>
+            <h2>Derniers avis clients</h2>
+        </div>
+        <p>Consultez et supprimez les avis inappropries. Les avis sont visibles publiquement sur les fiches vehicules.</p>
+    </div>
+
+    <div style="background:#fff; border:1px solid #e2e2e2; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06);">
+        {% for review in recent_reviews %}
+        <div style="display:flex; align-items:flex-start; gap:16px; padding:16px 20px; border-bottom:1px solid #f7f7f7; {% if forloop.last %}border-bottom:none;{% endif %}">
+
+            {# Avatar initiale #}
+            <div style="width:38px; height:38px; border-radius:50%; background:#1E3A8A18; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-weight:700; color:#1E3A8A; font-size:.95rem;">
+                {{ review.user.username|first|upper }}
+            </div>
+
+            <div style="flex:1; min-width:0;">
+                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                    <strong style="font-size:.9rem; color:#222;">{{ review.user.username }}</strong>
+                    <span style="font-size:.78rem; color:#aaa;">sur</span>
+                    <a href="{% url 'vehicles:vehicle_detail' review.vehicle.pk %}" style="font-size:.82rem; color:#1E3A8A; text-decoration:none; font-weight:500;">{{ review.vehicle.title }}</a>
+                    <span style="margin-left:auto; font-size:.75rem; color:#bbb;">{{ review.created_at|date:"d/m/Y H:i" }}</span>
+                </div>
+
+                {# Etoiles #}
+                <div style="margin:4px 0 6px;">
+                    {% for i in "12345" %}
+                        {% if forloop.counter <= review.rating %}
+                            <i class="fa-solid fa-star" style="font-size:.8rem; color:#F59E0B;"></i>
+                        {% else %}
+                            <i class="fa-regular fa-star" style="font-size:.8rem; color:#ddd;"></i>
+                        {% endif %}
+                    {% endfor %}
+                    <span style="font-size:.78rem; color:#888; margin-left:4px;">{{ review.rating }}/5</span>
+                </div>
+
+                <p style="margin:0; font-size:.87rem; color:#444; line-height:1.45;">{{ review.comment|truncatechars:180 }}</p>
+            </div>
+
+            <form method="post" action="{% url 'accounts:delete_review' review.id %}" style="flex-shrink:0;" onsubmit="return confirm('Supprimer cet avis ?');">
+                {% csrf_token %}
+                <button type="submit" style="background:#FEF2F2; color:#B91C1C; border:1px solid #FECACA; border-radius:6px; padding:6px 12px; font-size:.78rem; font-weight:600; cursor:pointer; white-space:nowrap;">
+                    <i class="fa-solid fa-trash" style="margin-right:4px;"></i>Supprimer
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{# ── 6. Statistiques (en bas) ── #}
 <section class="section">
     <div class="section-heading">
         <div>
-            <p class="eyebrow">Raccourcis</p>
-            <h2>Actions rapides</h2>
+            <p class="eyebrow">Statistiques</p>
+            <h2>Ventes &amp; revenus</h2>
         </div>
-        <p>Acces direct aux principales zones de gestion.</p>
+        <a href="{% url 'accounts:export_stats_csv' %}" class="button secondary" style="display:inline-flex; align-items:center; gap:8px; white-space:nowrap;">
+            <i class="fa-solid fa-file-csv"></i>
+            Exporter en CSV
+        </a>
     </div>
 
-    <div class="admin-actions-grid">
-        <a class="admin-action-card" href="{% url 'admin:vehicles_vehicle_add' %}">
-            <strong>Ajouter un vehicule</strong>
-            <p>Creer une nouvelle annonce dans le catalogue.</p>
-        </a>
-        <a class="admin-action-card" href="{% url 'admin:vehicles_vehicle_changelist' %}">
-            <strong>Gerer les vehicules</strong>
-            <p>Modifier, supprimer ou filtrer le stock.</p>
-        </a>
-        <a class="admin-action-card" href="{% url 'admin:reservations_reservation_changelist' %}">
-            <strong>Voir les reservations</strong>
-            <p>Traiter les demandes et les rendez-vous.</p>
-        </a>
-        <a class="admin-action-card" href="{% url 'admin:contact_contactmessage_changelist' %}">
-            <strong>Traiter les messages</strong>
-            <p>Repondre aux questions et suivre les demandes.</p>
-        </a>
-        <a class="admin-action-card" href="{% url 'admin:payments_payment_changelist' %}">
-            <strong>Suivre les paiements</strong>
-            <p>Verifier les acomptes et leur statut.</p>
-        </a>
-        <a class="admin-action-card" href="{% url 'admin:index' %}">
-            <strong>Ouvrir l'admin Django</strong>
-            <p>Acceder a la gestion complete du projet.</p>
-        </a>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:24px;">
+
+        <div style="background:#1E3A8A; color:#fff; border-radius:10px; padding:22px 20px; box-shadow:0 4px 14px rgba(30,58,138,.18);">
+            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; opacity:.75;">Revenus totaux</p>
+            <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; line-height:1.1;">{{ total_revenue|floatformat:2 }}&nbsp;<span style="font-size:.9rem; font-weight:600; opacity:.8;">EUR</span></p>
+            <p style="margin:0; font-size:.78rem; opacity:.7;">Tous paiements confondus</p>
+        </div>
+
+        <div style="background:#fff; border:1px solid #e2e2e2; border-left:4px solid #2F855A; border-radius:10px; padding:22px 20px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
+            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">{{ current_month }}</p>
+            <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; color:#2F855A; line-height:1.1;">{{ monthly_revenue|floatformat:2 }}&nbsp;<span style="font-size:.9rem; font-weight:600; color:#2F855A; opacity:.8;">EUR</span></p>
+            <p style="margin:0; font-size:.78rem; color:#666;">Revenus ce mois-ci</p>
+        </div>
+
+        <div style="background:#fff; border:1px solid #e2e2e2; border-left:4px solid #1E3A8A; border-radius:10px; padding:22px 20px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
+            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">Ventes finalisees</p>
+            <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; color:#1E3A8A; line-height:1.1;">{{ full_payment_count }}&nbsp;<span style="font-size:.9rem; font-weight:600; opacity:.7;">ventes</span></p>
+            <p style="margin:0; font-size:.78rem; color:#666;">{{ full_payment_revenue|floatformat:2 }} EUR encaisses</p>
+        </div>
+
+        <div style="background:#fff; border:1px solid #e2e2e2; border-left:4px solid #6c63ff; border-radius:10px; padding:22px 20px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
+            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">Vehicules vendus</p>
+            <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; color:#6c63ff; line-height:1.1;">{{ sold_count }}&nbsp;<span style="font-size:.9rem; font-weight:600; opacity:.7;">vehicules</span></p>
+            <p style="margin:0; font-size:.78rem; color:#666;">Statut Vendu dans le catalogue</p>
+        </div>
+
+        <div style="background:#fff; border:1px solid #e2e2e2; border-left:4px solid #B7791F; border-radius:10px; padding:22px 20px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
+            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">Acomptes en cours</p>
+            <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; color:#B7791F; line-height:1.1;">{{ deposit_only_count }}&nbsp;<span style="font-size:.9rem; font-weight:600; opacity:.7;">dossiers</span></p>
+            <p style="margin:0; font-size:.78rem; color:#666;">Solde restant a encaisser</p>
+        </div>
+
     </div>
+
+    {% if top_categories %}
+    <div style="background:#fff; border:1px solid #e2e2e2; border-radius:10px; padding:24px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
+        <p style="margin:0 0 16px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">Ventes par categorie</p>
+        <table style="width:100%; border-collapse:collapse;">
+            <thead>
+                <tr style="border-bottom:2px solid #e2e2e2;">
+                    <th style="text-align:left; padding:8px 10px; font-size:.82rem; color:#666; font-weight:600;">Categorie</th>
+                    <th style="padding:8px 10px; font-size:.82rem; color:#666; font-weight:600;">Progression</th>
+                    <th style="text-align:right; padding:8px 10px; font-size:.82rem; color:#666; font-weight:600;">Ventes</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in top_categories %}
+                <tr style="border-bottom:1px solid #f0f0f0;">
+                    <td style="padding:10px 10px; font-size:.9rem; font-weight:600; color:#333;">{{ cat.name }}</td>
+                    <td style="padding:10px 10px; width:55%;">
+                        <div style="background:#f0f0f0; border-radius:6px; height:10px; overflow:hidden;">
+                            <div style="background:#1E3A8A; height:100%; border-radius:6px; width:{% widthratio cat.sold max_sold 100 %}%;"></div>
+                        </div>
+                    </td>
+                    <td style="text-align:right; padding:10px 10px; font-size:.95rem; font-weight:800; color:#1E3A8A;">{{ cat.sold }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
 </section>
 
-<section class="section">
-    <div class="dashboard-columns">
-        <article class="dashboard-panel">
-            <div class="section-heading compact-heading">
-                <div>
-                    <p class="eyebrow">Reservations</p>
-                    <h2>Dernieres demandes</h2>
-                </div>
-            </div>
-            <div class="dashboard-list">
-                {% for reservation in recent_reservations %}
-                    <div class="dashboard-list-item">
-                        <div>
-                            <strong>{{ reservation.user.username }}</strong>
-                            <p>{{ reservation.vehicle.title }}</p>
-                            <small>{{ reservation.created_at|date:"d/m/Y H:i" }}</small>
-                        </div>
-                        {% if reservation.status == "pending" %}
-                            <div class="dashboard-item-actions">
-                                <form method="post" action="{% url 'reservations:update_status' reservation.id %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="action" value="accept">
-                                    <button type="submit" class="btn-action btn-accept">Accepter</button>
-                                </form>
-                                <form method="post" action="{% url 'reservations:update_status' reservation.id %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="action" value="reject">
-                                    <button type="submit" class="btn-action btn-reject">Refuser</button>
-                                </form>
-                            </div>
-                        {% else %}
-                            <span class="status status-{{ reservation.status }}">{{ reservation.get_status_display }}</span>
-                        {% endif %}
-                    </div>
-                {% empty %}
-                    <p class="description">Aucune reservation recente.</p>
-                {% endfor %}
-            </div>
-        </article>
-
-        <article class="dashboard-panel">
-            <div class="section-heading compact-heading">
-                <div>
-                    <p class="eyebrow">Contact</p>
-                    <h2>Derniers messages</h2>
-                </div>
-            </div>
-            <div class="dashboard-list">
-                {% for contact_message in recent_messages %}
-                    <div class="dashboard-list-item">
-                        <div>
-                            <strong>{{ contact_message.full_name }}</strong>
-                            <p>{{ contact_message.subject }}</p>
-                            <small>{{ contact_message.created_at|date:"d/m/Y H:i" }}</small>
-                        </div>
-                        {% if contact_message.admin_response %}
-                            <span class="status status-available">Repondu</span>
-                        {% else %}
-                            <span class="status status-reserved">En attente</span>
-                        {% endif %}
-                    </div>
-                {% empty %}
-                    <p class="description">Aucun message recent.</p>
-                {% endfor %}
-            </div>
-        </article>
-    </div>
-</section>
-
-<section class="section">
-    <div class="dashboard-columns">
-        <article class="dashboard-panel">
-            <div class="section-heading compact-heading">
-                <div>
-                    <p class="eyebrow">Comptes</p>
-                    <h2>Derniers comptes desactives</h2>
-                </div>
-            </div>
-            <div class="dashboard-list">
-                {% for account_status in recent_disabled_accounts %}
-                    <div class="dashboard-list-item">
-                        <div>
-                            <strong>{{ account_status.user.username }}</strong>
-                            <p>{{ account_status.deletion_label }}</p>
-                            <small>{{ account_status.deleted_at|date:"d/m/Y H:i" }}</small>
-                        </div>
-                        <span class="status status-rejected">
-                            {% if account_status.deletion_reason_type == "admin_block" %}
-                                Blocage admin
-                            {% else %}
-                                Demande client
-                            {% endif %}
-                        </span>
-                    </div>
-                {% empty %}
-                    <p class="description">Aucun compte desactive pour le moment.</p>
-                {% endfor %}
-            </div>
-        </article>
-
-        <article class="dashboard-panel">
-            <div class="section-heading compact-heading">
-                <div>
-                    <p class="eyebrow">Suppression</p>
-                    <h2>Demandes en attente</h2>
-                </div>
-            </div>
-            <div class="admin-kpi-card">
-                <strong>{{ pending_deletion_requests }}</strong>
-                <p>demande(s) de suppression non traitee(s).</p>
-                <a class="button secondary" href="{% url 'admin:accounts_accountdeletionrequest_changelist' %}">
-                    Ouvrir les demandes
-                </a>
-            </div>
-        </article>
-    </div>
-</section>
 {% endblock %}
