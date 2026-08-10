@@ -1,35 +1,36 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}MultiDrive - Vehicules{% endblock %}
+{% block title %}MultiDrive - {% trans "Vehicules" %}{% endblock %}
 
 {% block content %}
 <section class="page-title">
-    <p class="eyebrow">Catalogue</p>
-    <h1>Vehicules d'occasion</h1>
-    <p>Consulte le catalogue principal et affine rapidement par recherche, categorie ou statut.</p>
+    <p class="eyebrow">{% trans "Catalogue" %}</p>
+    <h1>{% trans "Vehicules d'occasion" %}</h1>
+    <p>{% trans "Consulte le catalogue principal et affine rapidement par recherche, categorie ou statut." %}</p>
 </section>
 
 <section class="filters">
     <form method="get" class="filter-form">
         <label>
-            Recherche
-            <input type="text" name="q" value="{{ selected_query }}" placeholder="Rechercher un modele, une marque ou un type de vehicule">
+            {% trans "Recherche" %}
+            <input type="text" name="q" value="{{ selected_query }}" placeholder="{% trans 'Rechercher un modele, une marque ou un type de vehicule' %}">
         </label>
         <label>
-            Categorie
+            {% trans "Categorie" %}
             <select name="category">
-                <option value="">Toutes</option>
+                <option value="">{% trans "Toutes" %}</option>
                 {% for category in categories %}
                     <option value="{{ category.slug }}" {% if selected_category == category.slug %}selected{% endif %}>
-                        {{ category.name }}
+                        {% trans category.name %}
                     </option>
                 {% endfor %}
             </select>
         </label>
         <label>
-            Statut
+            {% trans "Statut" %}
             <select name="status">
-                <option value="">Tous</option>
+                <option value="">{% trans "Tous" %}</option>
                 {% for value, label in status_choices %}
                     <option value="{{ value }}" {% if selected_status == value %}selected{% endif %}>
                         {{ label }}
@@ -37,40 +38,40 @@
                 {% endfor %}
             </select>
         </label>
-        <button type="submit">Filtrer</button>
+        <button type="submit">{% trans "Filtrer" %}</button>
     </form>
 </section>
 
 <section class="section">
     <div class="section-heading">
         <div>
-            <h2>{{ page_obj.paginator.count }} resultat(s)</h2>
-            <p>Des cartes lisibles pour comparer rapidement les vehicules disponibles.</p>
+            <h2>{% blocktrans with count=page_obj.paginator.count %}{{ count }} resultat(s){% endblocktrans %}</h2>
+            <p>{% trans "Des cartes lisibles pour comparer rapidement les vehicules disponibles." %}</p>
         </div>
-        <a class="button secondary" href="{% url 'vehicles:vehicle_list' %}">Reinitialiser</a>
+        <a class="button secondary" href="{% url 'vehicles:vehicle_list' %}">{% trans "Reinitialiser" %}</a>
     </div>
     <div class="vehicle-grid">
         {% for vehicle in vehicles %}
             {% include "vehicles/partials/vehicle_card.html" %}
         {% empty %}
-            <p>Aucun vehicule ne correspond a ce filtre.</p>
+            <p>{% trans "Aucun vehicule ne correspond a ce filtre." %}</p>
         {% endfor %}
     </div>
 
     {% if page_obj.has_other_pages %}
-    <nav class="pagination" aria-label="Pagination">
+    <nav class="pagination" aria-label="{% trans 'Pagination' %}">
         {% if page_obj.has_previous %}
-            <a class="pagination-btn" href="?page={{ page_obj.previous_page_number }}{% if selected_query %}&q={{ selected_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if selected_status %}&status={{ selected_status }}{% endif %}">&laquo; Precedent</a>
+            <a class="pagination-btn" href="?page={{ page_obj.previous_page_number }}{% if selected_query %}&q={{ selected_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if selected_status %}&status={{ selected_status }}{% endif %}">&laquo; {% trans "Precedent" %}</a>
         {% else %}
-            <span class="pagination-btn disabled">&laquo; Precedent</span>
+            <span class="pagination-btn disabled">&laquo; {% trans "Precedent" %}</span>
         {% endif %}
 
-        <span class="pagination-info">Page {{ page_obj.number }} sur {{ page_obj.paginator.num_pages }}</span>
+        <span class="pagination-info">{% blocktrans with num=page_obj.number total=page_obj.paginator.num_pages %}Page {{ num }} sur {{ total }}{% endblocktrans %}</span>
 
         {% if page_obj.has_next %}
-            <a class="pagination-btn" href="?page={{ page_obj.next_page_number }}{% if selected_query %}&q={{ selected_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if selected_status %}&status={{ selected_status }}{% endif %}">Suivant &raquo;</a>
+            <a class="pagination-btn" href="?page={{ page_obj.next_page_number }}{% if selected_query %}&q={{ selected_query }}{% endif %}{% if selected_category %}&category={{ selected_category }}{% endif %}{% if selected_status %}&status={{ selected_status }}{% endif %}">{% trans "Suivant" %} &raquo;</a>
         {% else %}
-            <span class="pagination-btn disabled">Suivant &raquo;</span>
+            <span class="pagination-btn disabled">{% trans "Suivant" %} &raquo;</span>
         {% endif %}
     </nav>
     {% endif %}

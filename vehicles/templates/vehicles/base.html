@@ -23,7 +23,7 @@
             <button class="navbar-toggler" type="button"
                     data-bs-toggle="collapse" data-bs-target="#mainNav"
                     aria-controls="mainNav" aria-expanded="false"
-                    aria-label="Ouvrir le menu">
+                    aria-label="{% trans 'Ouvrir le menu' %}">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -31,13 +31,13 @@
                 <ul class="navbar-nav ms-auto align-items-lg-center">
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}">Accueil</a>
+                        <a class="nav-link" href="{% url 'home' %}">{% trans "Accueil" %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'vehicles:vehicle_list' %}">Catalogue</a>
+                        <a class="nav-link" href="{% url 'vehicles:vehicle_list' %}">{% trans "Catalogue" %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'contact:contact_form' %}">Contact</a>
+                        <a class="nav-link" href="{% url 'contact:contact_form' %}">{% trans "Contact" %}</a>
                     </li>
 
                     {% if request.user.is_authenticated %}
@@ -46,7 +46,7 @@
                                     type="button"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false">
-                                Bonjour, {{ request.user.username }}
+                                {% blocktrans with username=request.user.username %}Bonjour, {{ username }}{% endblocktrans %}
                                 {% if member_total_notifications %}
                                     <span class="notification-badge">{{ member_total_notifications }}</span>
                                 {% endif %}
@@ -54,21 +54,21 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
                                     <a class="dropdown-item menu-link-with-badge" href="{% url 'reservations:my_reservations' %}">
-                                        <span>Mes reservations</span>
+                                        <span>{% trans "Mes reservations" %}</span>
                                         {% if unread_reservations %}
                                             <span class="notification-badge">{{ unread_reservations }}</span>
                                         {% endif %}
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{% url 'accounts:profile' %}">Mon profil</a>
+                                    <a class="dropdown-item" href="{% url 'accounts:profile' %}">{% trans "Mon profil" %}</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{% url 'vehicles:my_favorites' %}">Mes favoris</a>
+                                    <a class="dropdown-item" href="{% url 'vehicles:my_favorites' %}">{% trans "Mes favoris" %}</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item menu-link-with-badge" href="{% url 'accounts:payment_list' %}">
-                                        <span>Paiements et achats</span>
+                                        <span>{% trans "Paiements et achats" %}</span>
                                         {% if unread_payments %}
                                             <span class="notification-badge">{{ unread_payments }}</span>
                                         {% endif %}
@@ -76,7 +76,7 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item menu-link-with-badge" href="{% url 'contact:my_messages' %}">
-                                        <span>Mes messages</span>
+                                        <span>{% trans "Mes messages" %}</span>
                                         {% if unread_contact_responses %}
                                             <span class="notification-badge">{{ unread_contact_responses }}</span>
                                         {% endif %}
@@ -84,7 +84,7 @@
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <a class="dropdown-item text-danger" href="{% url 'accounts:logout' %}">Deconnexion</a>
+                                    <a class="dropdown-item text-danger" href="{% url 'accounts:logout' %}">{% trans "Deconnexion" %}</a>
                                 </li>
                             </ul>
                         </li>
@@ -92,7 +92,7 @@
                         {% if request.user.is_staff %}
                             <li class="nav-item ms-lg-1">
                                 <a class="nav-link nav-admin-link menu-link-with-badge" href="{% url 'accounts:admin_dashboard' %}">
-                                    <span>Dashboard admin</span>
+                                    <span>{% trans "Dashboard admin" %}</span>
                                     {% if admin_pending_notifications %}
                                         <span class="notification-badge">{{ admin_pending_notifications }}</span>
                                     {% endif %}
@@ -102,10 +102,10 @@
 
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'accounts:login' %}">Connexion</a>
+                            <a class="nav-link" href="{% url 'accounts:login' %}">{% trans "Connexion" %}</a>
                         </li>
                         <li class="nav-item ms-lg-1">
-                            <a class="nav-cta" href="{% url 'accounts:register' %}">Inscription</a>
+                            <a class="nav-cta" href="{% url 'accounts:register' %}">{% trans "Inscription" %}</a>
                         </li>
                     {% endif %}
 
@@ -152,30 +152,6 @@
         </div>
     </nav>
 
-    {% if CURRENT_LANG == 'nl' or CURRENT_LANG == 'en' %}
-    <div class="lang-banner">
-        <div class="lang-banner-inner">
-            <i class="fa-solid fa-language lang-banner-icon"></i>
-            <div class="lang-banner-text">
-                {% if CURRENT_LANG == 'nl' %}
-                    <strong>Nederlandstalige versie in voorbereiding.</strong>
-                    Deze website is momenteel beschikbaar in het Frans. Een volledige vertaling is in uitvoering.
-                {% else %}
-                    <strong>English version coming soon.</strong>
-                    This website is currently available in French only. A full English translation is in progress.
-                {% endif %}
-            </div>
-            <form method="post" action="{% url 'set_language' %}" class="lang-banner-form">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.path }}">
-                <button name="language" value="fr" type="submit" class="lang-banner-btn">
-                    {% if CURRENT_LANG == 'nl' %}Doorgaan in het Frans{% else %}Continue in French{% endif %}
-                </button>
-            </form>
-        </div>
-    </div>
-    {% endif %}
-
     <main>
         {% block content %}{% endblock %}
     </main>
@@ -183,43 +159,43 @@
     <footer class="footer">
         <div class="footer-brand">
             <strong>MultiDrive</strong>
-            <p>Une plateforme simple pour consulter, reserver et suivre des vehicules d'occasion accessibles.</p>
+            <p>{% trans "Une plateforme simple pour consulter, reserver et suivre des vehicules d'occasion accessibles." %}</p>
         </div>
         <div class="footer-column">
-            <span class="footer-title">Navigation</span>
+            <span class="footer-title">{% trans "Navigation" %}</span>
             <div class="footer-links">
-                <a href="{% url 'home' %}">Accueil</a>
-                <a href="{% url 'vehicles:vehicle_list' %}">Catalogue</a>
-                <a href="{% url 'contact:contact_form' %}">Contact</a>
+                <a href="{% url 'home' %}">{% trans "Accueil" %}</a>
+                <a href="{% url 'vehicles:vehicle_list' %}">{% trans "Catalogue" %}</a>
+                <a href="{% url 'contact:contact_form' %}">{% trans "Contact" %}</a>
                 {% if request.user.is_authenticated %}
-                    <a href="{% url 'reservations:my_reservations' %}">Reservations</a>
+                    <a href="{% url 'reservations:my_reservations' %}">{% trans "Reservations" %}</a>
                 {% else %}
-                    <a href="{% url 'accounts:login' %}">Connexion</a>
+                    <a href="{% url 'accounts:login' %}">{% trans "Connexion" %}</a>
                 {% endif %}
             </div>
         </div>
         <div class="footer-column">
             <span class="footer-title">MultiDrive</span>
-            <p class="footer-note">Projet academique MultiDrive cree dans le cadre d'un travail de fin d'etudes.</p>
+            <p class="footer-note">{% trans "Projet academique MultiDrive cree dans le cadre d'un travail de fin d'etudes." %}</p>
             <div class="footer-links" style="margin-bottom: 10px;">
-                <a href="{% url 'vehicles:cgv' %}">Conditions generales</a>
+                <a href="{% url 'vehicles:cgv' %}">{% trans "Conditions generales" %}</a>
             </div>
             <p class="footer-copy">&copy; Younes El-Mallahi</p>
         </div>
     </footer>
 
     <!-- Bandeau cookies -->
-    <div id="cookie-banner" class="cookie-banner" style="display:none;" role="dialog" aria-label="Politique de cookies">
+    <div id="cookie-banner" class="cookie-banner" style="display:none;" role="dialog" aria-label="{% trans 'Politique de cookies' %}">
         <div class="cookie-banner-inner">
             <div class="cookie-banner-text">
                 <i class="fa-solid fa-cookie-bite"></i>
                 <span>
-                    MultiDrive utilise uniquement des cookies techniques necessaires a son fonctionnement (session, securite, langue).
-                    Aucun cookie publicitaire. <a href="{% url 'vehicles:cgv' %}#cookies" class="cookie-link">En savoir plus</a>
+                    {% blocktrans %}MultiDrive utilise uniquement des cookies techniques necessaires a son fonctionnement (session, securite, langue). Aucun cookie publicitaire.{% endblocktrans %}
+                    <a href="{% url 'vehicles:cgv' %}#cookies" class="cookie-link">{% trans "En savoir plus" %}</a>
                 </span>
             </div>
-            <button id="cookie-accept" class="cookie-btn cookie-btn-accept">Accepter</button>
-            <button id="cookie-refuse" class="cookie-btn cookie-btn-refuse">Refuser</button>
+            <button id="cookie-accept" class="cookie-btn cookie-btn-accept">{% trans "Accepter" %}</button>
+            <button id="cookie-refuse" class="cookie-btn cookie-btn-refuse">{% trans "Refuser" %}</button>
         </div>
     </div>
 
@@ -257,11 +233,9 @@
                 if (data.is_favorite) {
                     btn.classList.add('fav-active');
                     icon.className = 'fa-solid fa-star';
-                    btn.title = 'Retirer des favoris';
                 } else {
                     btn.classList.remove('fav-active');
                     icon.className = 'fa-regular fa-star';
-                    btn.title = 'Ajouter aux favoris';
                 }
             });
         });

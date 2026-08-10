@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class AccountStatus(models.Model):
@@ -7,8 +8,8 @@ class AccountStatus(models.Model):
     REASON_ADMIN_BLOCK = "admin_block"
 
     REASON_CHOICES = [
-        (REASON_USER_REQUEST, "Demande utilisateur"),
-        (REASON_ADMIN_BLOCK, "Blocage administrateur"),
+        (REASON_USER_REQUEST, _("Demande utilisateur")),
+        (REASON_ADMIN_BLOCK, _("Blocage administrateur")),
     ]
 
     user = models.OneToOneField(

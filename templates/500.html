@@ -1,17 +1,18 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Erreur serveur — MultiDrive{% endblock %}
+{% block title %}{% trans "Erreur serveur" %} — MultiDrive{% endblock %}
 
 {% block content %}
 <section class="page-title" style="text-align:center; padding: 80px 20px;">
-    <p class="eyebrow">Erreur 500</p>
-    <h1>Une erreur est survenue</h1>
+    <p class="eyebrow">{% trans "Erreur 500" %}</p>
+    <h1>{% trans "Une erreur est survenue" %}</h1>
     <p style="max-width:480px; margin:0 auto 32px;">
-        Une erreur interne s'est produite. Notre equipe en est informee. Veuillez reessayer dans quelques instants.
+        {% trans "Une erreur interne s'est produite. Notre equipe en est informee. Veuillez reessayer dans quelques instants." %}
     </p>
     <div class="hero-actions" style="justify-content:center;">
-        <a class="button primary" href="{% url 'home' %}">Retour a l'accueil</a>
-        <a class="button secondary" href="{% url 'contact:contact_form' %}">Contacter le support</a>
+        <a class="button primary" href="{% url 'home' %}">{% trans "Retour a l'accueil" %}</a>
+        <a class="button secondary" href="{% url 'contact:contact_form' %}">{% trans "Contacter le support" %}</a>
     </div>
 </section>
 {% endblock %}

@@ -1,19 +1,20 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Suppression du compte - MultiDrive{% endblock %}
+{% block title %}{% trans "Suppression du compte" %} - MultiDrive{% endblock %}
 
 {% block content %}
 <section class="page-title">
-    <p class="eyebrow">Espace client</p>
-    <h1>Desactiver mon compte</h1>
-    <p>La suppression est geree en soft delete : votre compte reste visible pour l'administration, mais il ne pourra plus etre utilise pour se connecter.</p>
+    <p class="eyebrow">{% trans "Espace client" %}</p>
+    <h1>{% trans "Desactiver mon compte" %}</h1>
+    <p>{% trans "La suppression est geree en soft delete : votre compte reste visible pour l'administration, mais il ne pourra plus etre utilise pour se connecter." %}</p>
 </section>
 
 <section class="form-page">
     <div class="form-card danger-card">
-        <h2>Confirmation</h2>
+        <h2>{% trans "Confirmation" %}</h2>
         <p class="auth-intro">
-            Cette action desactive votre compte. Les reservations, paiements et traces utiles au projet sont conserves dans la base.
+            {% trans "Cette action desactive votre compte. Les reservations, paiements et traces utiles au projet sont conserves dans la base." %}
         </p>
 
         <form method="post" class="auth-form">
@@ -37,8 +38,8 @@
             {% endfor %}
 
             <div class="hero-actions">
-                <button type="submit" class="danger-button">Confirmer la desactivation</button>
-                <a class="button secondary" href="{% url 'accounts:profile' %}">Retour au profil</a>
+                <button type="submit" class="danger-button">{% trans "Confirmer la desactivation" %}</button>
+                <a class="button secondary" href="{% url 'accounts:profile' %}">{% trans "Retour au profil" %}</a>
             </div>
         </form>
     </div>

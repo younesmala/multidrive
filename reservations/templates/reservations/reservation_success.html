@@ -1,19 +1,19 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Reservation envoyee - MultiDrive{% endblock %}
+{% block title %}{% trans "Reservation envoyee" %} - MultiDrive{% endblock %}
 
 {% block content %}
 <section class="form-page">
     <div class="form-card">
-        <p class="eyebrow">Demande envoyee</p>
-        <h1>Reservation en attente</h1>
+        <p class="eyebrow">{% trans "Demande envoyee" %}</p>
+        <h1>{% trans "Reservation en attente" %}</h1>
         <p class="auth-intro">
-            Votre demande pour <strong>{{ reservation.vehicle.title }}</strong> a bien ete enregistree.
-            Son statut actuel est <strong>{{ reservation.get_status_display }}</strong>.
+            {% blocktrans with title=reservation.vehicle.title status=reservation.get_status_display %}Votre demande pour <strong>{{ title }}</strong> a bien ete enregistree. Son statut actuel est <strong>{{ status }}</strong>.{% endblocktrans %}
         </p>
         <div class="hero-actions">
-            <a class="button primary" href="{% url 'reservations:my_reservations' %}">Voir mes reservations</a>
-            <a class="button secondary" href="{% url 'vehicles:vehicle_list' %}">Retour au catalogue</a>
+            <a class="button primary" href="{% url 'reservations:my_reservations' %}">{% trans "Voir mes reservations" %}</a>
+            <a class="button secondary" href="{% url 'vehicles:vehicle_list' %}">{% trans "Retour au catalogue" %}</a>
         </div>
     </div>
 </section>

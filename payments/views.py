@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.timezone import localtime
+from django.utils.translation import gettext_lazy as _
 from xhtml2pdf import pisa
 
 from payments.models import Payment
@@ -90,7 +91,7 @@ def checkout(request):
         )
 
         if not rd:
-            messages.error(request, "Réservation introuvable. Veuillez réessayer.")
+            messages.error(request, _("Reservation introuvable. Veuillez reessayer."))
             return redirect("payments:checkout")
 
         reservation = rd["reservation"]
@@ -110,7 +111,7 @@ def checkout(request):
                 if chosen_amount <= Decimal("0"):
                     raise ValueError
             except (InvalidOperation, ValueError):
-                messages.error(request, "Montant invalide. Veuillez saisir un montant supérieur à 0 €.")
+                messages.error(request, _("Montant invalide. Veuillez saisir un montant superieur a 0 EUR."))
                 return redirect("payments:checkout")
         else:
             chosen_amount = rd["deposit_amount"]
@@ -118,15 +119,18 @@ def checkout(request):
         new_total = already_paid + chosen_amount
 
         stripe.api_key = settings.STRIPE_SECRET_KEY
+        from django.utils.translation import get_language
+        stripe_locale = {"fr": "fr", "nl": "nl", "en": "en"}.get(get_language(), "auto")
         try:
             session = stripe.checkout.Session.create(
                 payment_method_types=["card"],
+                locale=stripe_locale,
                 line_items=[{
                     "price_data": {
                         "currency": "eur",
                         "product_data": {
                             "name": reservation.vehicle.title,
-                            "description": f"Réservation MultiDrive #{reservation.id}",
+                            "description": str(_("Reservation MultiDrive")) + f" #{reservation.id}",
                         },
                         "unit_amount": int(chosen_amount * 100),
                     },
@@ -147,7 +151,7 @@ def checkout(request):
                 },
             )
         except stripe.StripeError as e:
-            messages.error(request, f"Erreur Stripe : {e.user_message or str(e)}")
+            messages.error(request, str(_("Erreur Stripe :")) + f" {e.user_message or str(e)}")
             return redirect("payments:checkout")
 
         return redirect(session.url)
@@ -183,18 +187,18 @@ def stripe_success(request):
 
     # Anti-doublon : si ce session_id est déjà en base, on ne retraite pas
     if Payment.objects.filter(transaction_reference=session_id).exists():
-        messages.info(request, "Ce paiement a déjà été enregistré.")
+        messages.info(request, _("Ce paiement a deja ete enregistre."))
         return redirect("accounts:payment_list")
 
     stripe.api_key = settings.STRIPE_SECRET_KEY
     try:
         session = stripe.checkout.Session.retrieve(session_id)
     except stripe.StripeError:
-        messages.error(request, "Impossible de vérifier le paiement. Contactez le support.")
+        messages.error(request, _("Impossible de verifier le paiement. Contactez le support."))
         return redirect("payments:checkout")
 
     if session.payment_status != "paid":
-        messages.warning(request, "Le paiement n'a pas été complété.")
+        messages.warning(request, _("Le paiement n'a pas ete complete."))
         return redirect("payments:checkout")
 
     reservation_id = session.metadata["reservation_id"]
@@ -226,14 +230,14 @@ def stripe_success(request):
 
     messages.success(
         request,
-        f"Paiement de {chosen_amount} € confirmé. Total versé : {new_total} € sur {reservation.vehicle.price} €.",
+        str(_("Paiement de")) + f" {chosen_amount} EUR " + str(_("confirme. Total verse :")) + f" {new_total} EUR " + str(_("sur")) + f" {reservation.vehicle.price} EUR.",
     )
     return redirect("accounts:payment_list")
 
 
 @login_required
 def stripe_cancel(request):
-    messages.warning(request, "Paiement annulé. Vous pouvez réessayer quand vous voulez.")
+    messages.warning(request, _("Paiement annule. Vous pouvez reessayer quand vous voulez."))
     return redirect("payments:checkout")
 
 
@@ -315,7 +319,7 @@ def download_facture(request, payment_id):
     payment = _get_paid_payment(payment_id, request.user)
     context = _payment_pdf_context(payment)
     if not context["is_full_payment"]:
-        return HttpResponse("Document disponible apres paiement integral.", status=403)
+        return HttpResponse(_("Document disponible apres paiement integral."), status=403)
     pdf = _render_pdf("payments/pdf_facture.html", context)
     filename = f"facture_{context['invoice_number']}.pdf"
     response = HttpResponse(pdf, content_type="application/pdf")
@@ -328,7 +332,7 @@ def download_cession(request, payment_id):
     payment = _get_paid_payment(payment_id, request.user)
     context = _payment_pdf_context(payment)
     if not context["is_full_payment"]:
-        return HttpResponse("Document disponible apres paiement integral.", status=403)
+        return HttpResponse(_("Document disponible apres paiement integral."), status=403)
     pdf = _render_pdf("payments/pdf_cession.html", context)
     filename = f"acte_cession_{context['cession_ref']}.pdf"
     response = HttpResponse(pdf, content_type="application/pdf")
@@ -341,7 +345,7 @@ def download_specimen(request, payment_id):
     payment = _get_paid_payment(payment_id, request.user)
     context = _payment_pdf_context(payment)
     if not context["is_full_payment"]:
-        return HttpResponse("Document disponible apres paiement integral.", status=403)
+        return HttpResponse(_("Document disponible apres paiement integral."), status=403)
     pdf = _render_pdf("payments/pdf_specimen_immatriculation.html", context)
     filename = f"specimen_immatriculation_{context['specimen_ref']}.pdf"
     response = HttpResponse(pdf, content_type="application/pdf")

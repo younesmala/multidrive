@@ -1,31 +1,32 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Mes reservations - MultiDrive{% endblock %}
+{% block title %}{% trans "Mes reservations" %} - MultiDrive{% endblock %}
 
 {% block content %}
 <section class="page-title">
-    <p class="eyebrow">Espace client</p>
-    <h1>Mes reservations</h1>
-    <p>Suivez ici vos demandes, leur statut actuel et l'etat de l'acompte lorsque la reservation avance.</p>
+    <p class="eyebrow">{% trans "Espace client" %}</p>
+    <h1>{% trans "Mes reservations" %}</h1>
+    <p>{% trans "Suivez ici vos demandes, leur statut actuel et l'etat de l'acompte lorsque la reservation avance." %}</p>
 </section>
 
 <section class="section account-section">
     <div class="member-summary-grid">
         <article class="member-summary-card">
             <span>{{ reservation_summary.total|default:0 }}</span>
-            <p>Total demandes</p>
+            <p>{% trans "Total demandes" %}</p>
         </article>
         <article class="member-summary-card">
             <span>{{ reservation_summary.pending|default:0 }}</span>
-            <p>En attente</p>
+            <p>{% trans "En attente" %}</p>
         </article>
         <article class="member-summary-card">
             <span>{{ reservation_summary.accepted|default:0 }}</span>
-            <p>Acceptees</p>
+            <p>{% trans "Acceptees" %}</p>
         </article>
         <article class="member-summary-card">
             <span>{{ reservation_summary.rejected|default:0 }}</span>
-            <p>Refusees</p>
+            <p>{% trans "Refusees" %}</p>
         </article>
     </div>
 </section>
@@ -37,7 +38,7 @@
                 <article class="member-detail-card">
                     <div class="member-detail-head">
                         <div>
-                            <p class="eyebrow">{{ reservation.vehicle.category.name|default:"Vehicule" }}</p>
+                            <p class="eyebrow">{% trans reservation.vehicle.category.name|default:"Vehicule" %}</p>
                             <h2>
                                 <a href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">
                                     {{ reservation.vehicle.title }}
@@ -51,24 +52,24 @@
 
                     <div class="member-detail-grid">
                         <div class="member-detail-block">
-                            <strong>Prix du vehicule</strong>
+                            <strong>{% trans "Prix du vehicule" %}</strong>
                             <p>{{ reservation.vehicle.price }} EUR</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Reservation creee le</strong>
+                            <strong>{% trans "Reservation creee le" %}</strong>
                             <p>{{ reservation.created_at|date:"d/m/Y H:i" }}</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Derniere mise a jour</strong>
+                            <strong>{% trans "Derniere mise a jour" %}</strong>
                             <p>{{ reservation.updated_at|date:"d/m/Y H:i" }}</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Rendez-vous souhaite</strong>
+                            <strong>{% trans "Rendez-vous souhaite" %}</strong>
                             <p>
                                 {% if reservation.appointment_date %}
                                     {{ reservation.appointment_date|date:"d/m/Y H:i" }}
                                 {% else %}
-                                    Non renseigne
+                                    —
                                 {% endif %}
                             </p>
                         </div>
@@ -76,13 +77,13 @@
 
                     {% if reservation.message %}
                         <div class="member-note">
-                            <strong>Votre message</strong>
+                            <strong>{% trans "Votre message" %}</strong>
                             <p>{{ reservation.message|linebreaksbr }}</p>
                         </div>
                     {% endif %}
 
                     <div class="member-payment-panel">
-                        <strong>Suivi de l'acompte</strong>
+                        <strong>{% trans "Suivi de l'acompte" %}</strong>
                         {% if reservation.payment %}
                             <div class="member-payment-meta">
                                 <span class="status status-{{ reservation.payment.status }}">
@@ -91,56 +92,48 @@
                                 <p>{{ reservation.payment.amount }} EUR</p>
                             </div>
                             <p class="description">
-                                Methode : {{ reservation.payment.payment_method|default:"Non renseignee" }}<br>
-                                Reference : {{ reservation.payment.transaction_reference|default:"Aucune" }}
+                                {% trans "Methode :" %} {{ reservation.payment.payment_method|default:"—" }}<br>
+                                {% trans "Reference :" %} {{ reservation.payment.transaction_reference|default:"—" }}
                             </p>
                         {% elif reservation.status == "accepted" %}
-                            <p class="description">
-                                Votre reservation a ete acceptee. L'etape suivante sera le paiement de l'acompte.
-                            </p>
+                            <p class="description">{% trans "Votre reservation a ete acceptee. L'etape suivante sera le paiement de l'acompte." %}</p>
                         {% elif reservation.status == "deposit_paid" %}
-                            <p class="description">
-                                La reservation est marquee comme acompte paye, mais aucun paiement detaille n'est encore visible.
-                            </p>
+                            <p class="description">{% trans "La reservation est marquee comme acompte paye." %}</p>
                         {% elif reservation.status == "rejected" %}
-                            <p class="description">
-                                Cette demande a ete refusee. Aucun acompte n'est attendu.
-                            </p>
+                            <p class="description">{% trans "Cette demande a ete refusee. Aucun acompte n'est attendu." %}</p>
                         {% else %}
-                            <p class="description">
-                                La demande est encore en cours de traitement. Aucun acompte n'est demande pour le moment.
-                            </p>
+                            <p class="description">{% trans "La demande est encore en cours de traitement. Aucun acompte n'est demande pour le moment." %}</p>
                         {% endif %}
                     </div>
 
                     <div class="hero-actions">
-                        <a class="button primary" href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">Voir le vehicule</a>
+                        <a class="button primary" href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">{% trans "Voir le vehicule" %}</a>
                         {% if reservation.status == 'accepted' and not reservation.payment %}
-                            <a class="button primary" href="{% url 'payments:checkout' %}">Payer l'acompte</a>
+                            <a class="button primary" href="{% url 'payments:checkout' %}">{% trans "Payer l'acompte" %}</a>
                         {% endif %}
                         {% if reservation.status == 'pending' %}
                             <form method="post" action="{% url 'reservations:cancel_reservation' reservation.id %}"
-                                  onsubmit="return confirm('Etes-vous sur de vouloir annuler cette reservation ?');">
+                                  onsubmit="return confirm('{% trans "Etes-vous sur de vouloir annuler cette reservation ?" %}');">
                                 {% csrf_token %}
-                                <button type="submit" class="button danger">Annuler la reservation</button>
+                                <button type="submit" class="button danger">{% trans "Annuler la reservation" %}</button>
                             </form>
                         {% elif reservation.status == 'accepted' %}
                             <form method="post" action="{% url 'reservations:cancel_reservation' reservation.id %}"
-                                  onsubmit="return confirm('Votre reservation a ete acceptee. Etes-vous certain de vouloir annuler ? Le vehicule sera remis en disponible.');">
+                                  onsubmit="return confirm('{% trans "Votre reservation a ete acceptee. Etes-vous certain de vouloir annuler ?" %}');">
                                 {% csrf_token %}
-                                <button type="submit" class="button danger">Annuler la reservation</button>
+                                <button type="submit" class="button danger">{% trans "Annuler la reservation" %}</button>
                             </form>
                         {% endif %}
-                        <a class="button secondary" href="{% url 'accounts:payment_list' %}">Paiements et achats</a>
+                        <a class="button secondary" href="{% url 'accounts:payment_list' %}">{% trans "Paiements et achats" %}</a>
                     </div>
                 </article>
             {% endfor %}
         </div>
     {% else %}
         <div class="empty-state">
-            <h2>Aucune reservation pour le moment</h2>
-            <p>Vos futures demandes de reservation apparaitront ici avec leur statut et le suivi de l'acompte.</p>
-            <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">Decouvrir le catalogue</a>
+            <h2>{% trans "Aucune reservation pour le moment" %}</h2>
+            <p>{% trans "Vos futures demandes de reservation apparaitront ici avec leur statut et le suivi de l'acompte." %}</p>
+            <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">{% trans "Decouvrir le catalogue" %}</a>
         </div>
     {% endif %}
 </section>

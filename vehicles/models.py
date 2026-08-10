@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class VehicleCategory(models.Model):
@@ -23,27 +24,27 @@ class Vehicle(models.Model):
     STATUS_SOLD = "sold"
 
     STATUS_CHOICES = [
-        (STATUS_AVAILABLE, "Disponible"),
-        (STATUS_RESERVED, "Reserve"),
-        (STATUS_SOLD, "Vendu"),
+        (STATUS_AVAILABLE, _("Disponible")),
+        (STATUS_RESERVED, _("Reserve")),
+        (STATUS_SOLD, _("Vendu")),
     ]
 
     CARROSSERIE_TRES_BON = "tres_bon"
     CARROSSERIE_BON = "bon"
     CARROSSERIE_ACCIDENTE = "accidente"
     CARROSSERIE_CHOICES = [
-        (CARROSSERIE_TRES_BON, "Tres bon"),
-        (CARROSSERIE_BON, "Bon"),
-        (CARROSSERIE_ACCIDENTE, "Legerement accidente"),
+        (CARROSSERIE_TRES_BON, _("Tres bon")),
+        (CARROSSERIE_BON, _("Bon")),
+        (CARROSSERIE_ACCIDENTE, _("Legerement accidente")),
     ]
 
     MOTEUR_TRES_BON = "tres_bon"
     MOTEUR_BON = "bon"
     MOTEUR_REPARATION = "reparation"
     MOTEUR_CHOICES = [
-        (MOTEUR_TRES_BON, "Tres bon"),
-        (MOTEUR_BON, "Bon"),
-        (MOTEUR_REPARATION, "Roule, reparation mineure a prevoir"),
+        (MOTEUR_TRES_BON, _("Tres bon")),
+        (MOTEUR_BON, _("Bon")),
+        (MOTEUR_REPARATION, _("Roule, reparation mineure a prevoir")),
     ]
 
     category = models.ForeignKey(
@@ -55,6 +56,8 @@ class Vehicle(models.Model):
     )
     title = models.CharField(max_length=120)
     description = models.TextField(blank=True, null=True)
+    description_en = models.TextField(blank=True, null=True)
+    description_nl = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.CharField(
         max_length=20,

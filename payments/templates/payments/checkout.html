@@ -1,12 +1,13 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Paiement — MultiDrive{% endblock %}
+{% block title %}{% trans "Paiement" %} — MultiDrive{% endblock %}
 
 {% block content %}
 <div class="page-title">
-    <h1>Paiement</h1>
+    <h1>{% trans "Paiement" %}</h1>
     {% if has_reservations %}
-    <p>Sélectionnez la réservation à régler et choisissez le montant.</p>
+    <p>{% trans "Selectionnez la reservation a regler et choisissez le montant." %}</p>
     {% endif %}
 </div>
 
@@ -14,9 +15,8 @@
 <div class="checkout-page">
     <div class="checkout-layout">
 
-        <!-- Colonne gauche : récapitulatif + sélection réservation -->
         <div class="checkout-summary-card">
-            <p class="checkout-section-title">Votre panier</p>
+            <p class="checkout-section-title">{% trans "Votre panier" %}</p>
 
             {% if reservations_data|length > 1 %}
             <div class="checkout-cart-list">
@@ -27,12 +27,7 @@
                            value="{{ rd.reservation.id }}"
                            {% if forloop.first %}checked{% endif %}>
                     <div class="checkout-cart-item-body">
-                        <span class="checkout-cart-item-name">
-                            {{ rd.reservation.vehicle.title }}
-                        </span>
-                        <span class="checkout-cart-item-dates">
-                            {{ rd.reservation.start_date|date:"d/m/Y" }} → {{ rd.reservation.end_date|date:"d/m/Y" }}
-                        </span>
+                        <span class="checkout-cart-item-name">{{ rd.reservation.vehicle.title }}</span>
                     </div>
                     <span class="checkout-cart-item-price">{{ rd.total_price }} €</span>
                 </label>
@@ -62,42 +57,40 @@
 
             <div class="checkout-line-items">
                 <div class="checkout-line">
-                    <span>Prix du véhicule</span>
+                    <span>{% trans "Prix du vehicule" %}</span>
                     <span id="summary-total-price">{{ reservations_data.0.total_price }} €</span>
                 </div>
                 <div class="checkout-line" id="summary-already-paid-row" style="{% if not reservations_data.0.is_balance %}display:none{% endif %}">
-                    <span>Déjà versé</span>
+                    <span>{% trans "Deja verse" %}</span>
                     <span id="summary-already-paid">{{ reservations_data.0.already_paid }} €</span>
                 </div>
                 <div class="checkout-line" id="summary-deposit-row" style="{% if reservations_data.0.is_balance %}display:none{% endif %}">
-                    <span>Acompte (20 %)</span>
+                    <span>{% trans "Acompte (20 %)" %}</span>
                     <span id="summary-deposit">{{ reservations_data.0.deposit_amount }} €</span>
                 </div>
                 <div class="checkout-line checkout-line-total">
-                    <span>Montant sélectionné</span>
+                    <span>{% trans "Montant selectionne" %}</span>
                     <span class="checkout-total-amount" id="summary-amount">{{ reservations_data.0.deposit_amount }} €</span>
                 </div>
             </div>
         </div>
 
-        <!-- Colonne droite : formulaire de paiement -->
         <div class="checkout-form-card">
-            <p class="checkout-section-title">Informations de paiement</p>
+            <p class="checkout-section-title">{% trans "Informations de paiement" %}</p>
 
             <form method="post" novalidate autocomplete="off" id="checkout-form">
                 {% csrf_token %}
                 <input type="hidden" name="reservation_id" id="reservation-id-input"
                        value="{{ reservations_data.0.reservation.id }}">
 
-                <!-- Sélecteur de montant (premier paiement) -->
                 <div class="checkout-amount-choices" id="amount-choices-block" style="{% if reservations_data.0.is_balance %}display:none{% endif %}">
-                    <p class="checkout-amount-label">Montant à régler</p>
+                    <p class="checkout-amount-label">{% trans "Montant a regler" %}</p>
 
                     <label class="checkout-amount-option checkout-amount-option--selected" id="opt-deposit">
                         <input type="radio" name="amount_type" value="deposit" checked>
                         <span class="checkout-amount-option-body">
-                            <span class="checkout-amount-option-title">Acompte</span>
-                            <span class="checkout-amount-option-sub">20 % du prix, min. 20 € / max. 250 €</span>
+                            <span class="checkout-amount-option-title">{% trans "Acompte" %}</span>
+                            <span class="checkout-amount-option-sub">{% trans "20 % du prix, min. 20 EUR / max. 250 EUR" %}</span>
                         </span>
                         <strong class="checkout-amount-option-price" id="opt-deposit-price">
                             {{ reservations_data.0.deposit_amount }} €
@@ -107,8 +100,8 @@
                     <label class="checkout-amount-option" id="opt-full">
                         <input type="radio" name="amount_type" value="full">
                         <span class="checkout-amount-option-body">
-                            <span class="checkout-amount-option-title">Totalité</span>
-                            <span class="checkout-amount-option-sub">Solde complet du véhicule</span>
+                            <span class="checkout-amount-option-title">{% trans "Totalite" %}</span>
+                            <span class="checkout-amount-option-sub">{% trans "Solde complet du vehicule" %}</span>
                         </span>
                         <strong class="checkout-amount-option-price" id="opt-full-price">
                             {{ reservations_data.0.total_price }} €
@@ -118,27 +111,26 @@
                     <label class="checkout-amount-option" id="opt-custom">
                         <input type="radio" name="amount_type" value="custom">
                         <span class="checkout-amount-option-body">
-                            <span class="checkout-amount-option-title">Montant personnalisé</span>
-                            <span class="checkout-amount-option-sub">Saisissez le montant de votre choix</span>
+                            <span class="checkout-amount-option-title">{% trans "Montant personnalise" %}</span>
+                            <span class="checkout-amount-option-sub">{% trans "Saisissez le montant de votre choix" %}</span>
                         </span>
                         <strong class="checkout-amount-option-price checkout-custom-price" id="custom-price-display">— €</strong>
                     </label>
 
                     <div class="checkout-custom-input-wrap" id="custom-input-wrap" style="display:none;">
-                        <label for="custom_amount" class="checkout-custom-input-label">Montant (€)</label>
+                        <label for="custom_amount" class="checkout-custom-input-label">{% trans "Montant (EUR)" %}</label>
                         <input type="number" id="custom_amount" name="custom_amount"
                                min="1" step="0.01" placeholder="Ex : 150.00">
                     </div>
                 </div>
 
-                <!-- Solde restant (second paiement) -->
                 <div id="balance-block" style="{% if not reservations_data.0.is_balance %}display:none{% endif %}">
-                    <p class="checkout-amount-label">Solde restant à régler</p>
+                    <p class="checkout-amount-label">{% trans "Solde restant a regler" %}</p>
                     <div class="checkout-amount-option checkout-amount-option--selected" style="pointer-events:none;">
                         <span class="checkout-amount-option-body">
-                            <span class="checkout-amount-option-title">Solde restant</span>
+                            <span class="checkout-amount-option-title">{% trans "Solde restant" %}</span>
                             <span class="checkout-amount-option-sub" id="balance-sub-text">
-                                Prix total moins acompte déjà versé
+                                {% trans "Prix total moins acompte deja verse" %}
                             </span>
                         </span>
                         <strong class="checkout-amount-option-price" id="balance-price">
@@ -149,17 +141,15 @@
                 </div>
 
                 <button type="submit" class="checkout-submit-btn" id="submit-btn">
-                    Payer {{ reservations_data.0.deposit_amount }} €
+                    {% trans "Payer" %} {{ reservations_data.0.deposit_amount }} €
                 </button>
 
                 <p class="checkout-secure-note">
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                        <path d="M7 1L2 3v4c0 2.76 2.14 5.34 5 6 2.86-.66 5-3.24 5-6V3L7 1z"
-                              stroke="currentColor" stroke-width="1.3" fill="none"/>
-                        <path d="M5 7l1.5 1.5L9.5 6" stroke="currentColor" stroke-width="1.3"
-                              stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 1L2 3v4c0 2.76 2.14 5.34 5 6 2.86-.66 5-3.24 5-6V3L7 1z" stroke="currentColor" stroke-width="1.3" fill="none"/>
+                        <path d="M5 7l1.5 1.5L9.5 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    Paiement sécurisé via Stripe — vos coordonnées bancaires ne transitent jamais par nos serveurs.
+                    {% trans "Paiement securise via Stripe — vos coordonnees bancaires ne transitent jamais par nos serveurs." %}
                 </p>
             </form>
         </div>
@@ -170,9 +160,9 @@
 {% else %}
 <div class="page-title" style="padding-bottom: 70px;">
     <div class="empty-state">
-        <h2>Aucun paiement en attente</h2>
-        <p>Vous n'avez pas de réservation acceptée à régler pour le moment.</p>
-        <a href="{% url 'reservations:my_reservations' %}" class="button primary">Voir mes réservations</a>
+        <h2>{% trans "Aucun paiement en attente" %}</h2>
+        <p>{% trans "Vous n'avez pas de reservation acceptee a regler pour le moment." %}</p>
+        <a href="{% url 'reservations:my_reservations' %}" class="button primary">{% trans "Voir mes reservations" %}</a>
     </div>
 </div>
 {% endif %}
@@ -183,125 +173,65 @@
 <script>
 (function () {
     var DATA = {{ js_data|safe }};
-
     var currentId   = document.getElementById('reservation-id-input').value;
     var radios      = document.querySelectorAll('#amount-choices-block input[name="amount_type"]');
     var cartRadios  = document.querySelectorAll('input[name="cart_select"]');
-    var optLabels   = {
-        deposit: document.getElementById('opt-deposit'),
-        full:    document.getElementById('opt-full'),
-        custom:  document.getElementById('opt-custom')
-    };
-    var customWrap         = document.getElementById('custom-input-wrap');
-    var customInput        = document.getElementById('custom_amount');
-    var submitBtn          = document.getElementById('submit-btn');
-    var summaryAmt         = document.getElementById('summary-amount');
-    var summaryDep         = document.getElementById('summary-deposit');
-    var summaryTotal       = document.getElementById('summary-total-price');
+    var optLabels   = { deposit: document.getElementById('opt-deposit'), full: document.getElementById('opt-full'), custom: document.getElementById('opt-custom') };
+    var customWrap  = document.getElementById('custom-input-wrap');
+    var customInput = document.getElementById('custom_amount');
+    var submitBtn   = document.getElementById('submit-btn');
+    var summaryAmt  = document.getElementById('summary-amount');
+    var summaryDep  = document.getElementById('summary-deposit');
+    var summaryTotal = document.getElementById('summary-total-price');
     var summaryAlreadyPaid = document.getElementById('summary-already-paid');
-    var summaryDepRow      = document.getElementById('summary-deposit-row');
-    var summaryAlreadyRow  = document.getElementById('summary-already-paid-row');
-    var optDepPrice        = document.getElementById('opt-deposit-price');
-    var optFullPrice       = document.getElementById('opt-full-price');
-    var customPrice        = document.getElementById('custom-price-display');
-    var reservInput        = document.getElementById('reservation-id-input');
+    var summaryDepRow     = document.getElementById('summary-deposit-row');
+    var summaryAlreadyRow = document.getElementById('summary-already-paid-row');
+    var optDepPrice = document.getElementById('opt-deposit-price');
+    var optFullPrice = document.getElementById('opt-full-price');
+    var customPrice = document.getElementById('custom-price-display');
+    var reservInput = document.getElementById('reservation-id-input');
     var amountChoicesBlock = document.getElementById('amount-choices-block');
-    var balanceBlock       = document.getElementById('balance-block');
-    var balancePrice       = document.getElementById('balance-price');
+    var balanceBlock = document.getElementById('balance-block');
+    var balancePrice = document.getElementById('balance-price');
+    var payLabel = "{% trans 'Payer' %}";
 
-    function fmt(n) {
-        return parseFloat(n).toLocaleString('fr-BE', {
-            minimumFractionDigits: 2, maximumFractionDigits: 2
-        }) + ' €';
-    }
+    function fmt(n) { return parseFloat(n).toLocaleString('fr-BE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'; }
 
     function updateAmounts() {
         var d = DATA[currentId];
         if (!d) return;
-
         summaryTotal.textContent = fmt(d.total);
-
         if (d.is_balance) {
-            amountChoicesBlock.style.display = 'none';
-            balanceBlock.style.display = 'block';
-            summaryDepRow.style.display = 'none';
-            summaryAlreadyRow.style.display = 'flex';
+            amountChoicesBlock.style.display = 'none'; balanceBlock.style.display = 'block';
+            summaryDepRow.style.display = 'none'; summaryAlreadyRow.style.display = 'flex';
             summaryAlreadyPaid.textContent = fmt(d.already_paid);
-            balancePrice.textContent = fmt(d.total);
-            summaryAmt.textContent = fmt(d.total);
-            submitBtn.textContent = 'Payer ' + fmt(d.total);
+            balancePrice.textContent = fmt(d.total); summaryAmt.textContent = fmt(d.total);
+            submitBtn.textContent = payLabel + ' ' + fmt(d.total);
         } else {
-            amountChoicesBlock.style.display = 'block';
-            balanceBlock.style.display = 'none';
-            summaryDepRow.style.display = 'flex';
-            summaryAlreadyRow.style.display = 'none';
-            summaryDep.textContent = fmt(d.deposit);
-            optDepPrice.textContent = fmt(d.deposit);
-            optFullPrice.textContent = fmt(d.total);
-            recalcSelected();
+            amountChoicesBlock.style.display = 'block'; balanceBlock.style.display = 'none';
+            summaryDepRow.style.display = 'flex'; summaryAlreadyRow.style.display = 'none';
+            summaryDep.textContent = fmt(d.deposit); optDepPrice.textContent = fmt(d.deposit);
+            optFullPrice.textContent = fmt(d.total); recalcSelected();
         }
     }
 
     function recalcSelected() {
-        var d = DATA[currentId];
-        if (!d || d.is_balance) return;
+        var d = DATA[currentId]; if (!d || d.is_balance) return;
         var checked = document.querySelector('#amount-choices-block input[name="amount_type"]:checked');
         var selected = checked ? checked.value : 'deposit';
-
-        Object.keys(optLabels).forEach(function (k) {
-            optLabels[k].classList.remove('checkout-amount-option--selected');
-        });
+        Object.keys(optLabels).forEach(function (k) { optLabels[k].classList.remove('checkout-amount-option--selected'); });
         if (optLabels[selected]) optLabels[selected].classList.add('checkout-amount-option--selected');
-
         var amount;
-        if (selected === 'deposit') {
-            amount = parseFloat(d.deposit);
-            customWrap.style.display = 'none';
-        } else if (selected === 'full') {
-            amount = parseFloat(d.total);
-            customWrap.style.display = 'none';
-        } else {
-            customWrap.style.display = 'block';
-            var raw = parseFloat(customInput.value.replace(',', '.'));
-            amount = (!isNaN(raw) && raw > 0) ? raw : null;
-        }
-
-        if (amount !== null && amount !== undefined) {
-            summaryAmt.textContent = fmt(amount);
-            submitBtn.textContent  = 'Payer ' + fmt(amount);
-        } else {
-            summaryAmt.textContent = '— €';
-            submitBtn.textContent  = 'Payer';
-        }
+        if (selected === 'deposit') { amount = parseFloat(d.deposit); customWrap.style.display = 'none'; }
+        else if (selected === 'full') { amount = parseFloat(d.total); customWrap.style.display = 'none'; }
+        else { customWrap.style.display = 'block'; var raw = parseFloat(customInput.value.replace(',', '.')); amount = (!isNaN(raw) && raw > 0) ? raw : null; }
+        if (amount !== null && amount !== undefined) { summaryAmt.textContent = fmt(amount); submitBtn.textContent = payLabel + ' ' + fmt(amount); }
+        else { summaryAmt.textContent = '— €'; submitBtn.textContent = payLabel; }
     }
 
-    // Changement de réservation dans le panier
-    cartRadios.forEach(function (r) {
-        r.addEventListener('change', function () {
-            currentId = this.value;
-            reservInput.value = currentId;
-
-            document.querySelectorAll('.checkout-cart-item').forEach(function (el) {
-                el.classList.remove('checkout-cart-item--selected');
-            });
-            document.getElementById('cart-item-' + currentId).classList.add('checkout-cart-item--selected');
-
-            updateAmounts();
-        });
-    });
-
-    // Changement de type de montant
+    cartRadios.forEach(function (r) { r.addEventListener('change', function () { currentId = this.value; reservInput.value = currentId; document.querySelectorAll('.checkout-cart-item').forEach(function (el) { el.classList.remove('checkout-cart-item--selected'); }); document.getElementById('cart-item-' + currentId).classList.add('checkout-cart-item--selected'); updateAmounts(); }); });
     radios.forEach(function (r) { r.addEventListener('change', recalcSelected); });
-
-    // Montant personnalisé
-    if (customInput) {
-        customInput.addEventListener('input', function () {
-            var raw = parseFloat(this.value.replace(',', '.'));
-            customPrice.textContent = (!isNaN(raw) && raw > 0) ? fmt(raw) : '— €';
-            recalcSelected();
-        });
-    }
-
+    if (customInput) { customInput.addEventListener('input', function () { var raw = parseFloat(this.value.replace(',', '.')); customPrice.textContent = (!isNaN(raw) && raw > 0) ? fmt(raw) : '— €'; recalcSelected(); }); }
     updateAmounts();
 }());
 </script>

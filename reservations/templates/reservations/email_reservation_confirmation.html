@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+{% load i18n %}<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Confirmation de reservation — MultiDrive</title>
+    <title>{% trans "Confirmation de reservation — MultiDrive" %}</title>
     <style>
         body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
         .container { max-width: 580px; margin: 30px auto; background: #ffffff; border-radius: 8px; overflow: hidden; }
@@ -22,32 +22,32 @@
     <div class="container">
         <div class="header">
             <h1>MultiDrive</h1>
-            <p>Confirmation de votre demande de reservation</p>
+            <p>{% trans "Confirmation de votre demande de reservation" %}</p>
         </div>
         <div class="body">
-            <p>Bonjour <strong>{{ reservation.user.first_name|default:reservation.user.username }}</strong>,</p>
-            <p>Nous avons bien recu votre demande de reservation pour le vehicule suivant :</p>
+            <p>{% blocktrans with name=reservation.user.first_name|default:reservation.user.username %}Bonjour <strong>{{ name }}</strong>,{% endblocktrans %}</p>
+            <p>{% trans "Nous avons bien recu votre demande de reservation pour le vehicule suivant :" %}</p>
 
             <div class="info-block">
-                <p><strong>Vehicule :</strong> {{ reservation.vehicle.title }}</p>
-                <p><strong>Prix :</strong> {{ reservation.vehicle.price }} EUR</p>
+                <p><strong>{% trans "Vehicule :" %}</strong> {{ reservation.vehicle.title }}</p>
+                <p><strong>{% trans "Prix :" %}</strong> {{ reservation.vehicle.price }} EUR</p>
                 {% if reservation.preferred_date %}
-                <p><strong>Date souhaitee :</strong> {{ reservation.preferred_date }}</p>
+                <p><strong>{% trans "Date souhaitee :" %}</strong> {{ reservation.preferred_date }}</p>
                 {% endif %}
                 {% if reservation.preferred_time %}
-                <p><strong>Creneau :</strong> {{ reservation.preferred_time }}</p>
+                <p><strong>{% trans "Creneau :" %}</strong> {{ reservation.preferred_time }}</p>
                 {% endif %}
-                <p><strong>Statut :</strong> En attente de validation</p>
+                <p><strong>{% trans "Statut :" %}</strong> {% trans "En attente de validation" %}</p>
             </div>
 
-            <p>Notre equipe examinera votre demande et vous contactera par email pour vous confirmer l'acceptation ou vous proposer un autre creneau.</p>
-            <p>Vous pouvez suivre l'avancement de votre reservation depuis votre espace membre.</p>
-            <p>Merci pour votre confiance.</p>
-            <p>L'equipe MultiDrive</p>
+            <p>{% trans "Notre equipe examinera votre demande et vous contactera par email pour vous confirmer l'acceptation ou vous proposer un autre creneau." %}</p>
+            <p>{% trans "Vous pouvez suivre l'avancement de votre reservation depuis votre espace membre." %}</p>
+            <p>{% trans "Merci pour votre confiance." %}</p>
+            <p>{% trans "L'equipe MultiDrive" %}</p>
         </div>
         <div class="footer">
-            <p>Cet email est envoye automatiquement. Merci de ne pas y repondre directement.</p>
-            <p style="margin-top: 6px;">MultiDrive — Projet academique</p>
+            <p>{% trans "Cet email est envoye automatiquement. Merci de ne pas y repondre directement." %}</p>
+            <p style="margin-top: 6px;">{% trans "MultiDrive — Projet academique" %}</p>
         </div>
     </div>
 </body>

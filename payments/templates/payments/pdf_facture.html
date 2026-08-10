@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load i18n %}<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -13,23 +13,18 @@
         .doc-title { font-size: 18pt; font-weight: bold; margin: 0 0 4px 0; }
         .doc-meta { font-size: 9pt; color: #555; }
         hr { border: none; border-top: 2px solid #1a1a2e; margin: 20px 0; }
-        .section-title { font-size: 10pt; font-weight: bold; text-transform: uppercase;
-                         color: #555; letter-spacing: 0.5px; margin: 18px 0 8px; }
+        .section-title { font-size: 10pt; font-weight: bold; text-transform: uppercase; color: #555; letter-spacing: 0.5px; margin: 18px 0 8px; }
         table { width: 100%; border-collapse: collapse; }
         .info-table td { padding: 4px 8px; font-size: 10pt; }
         .info-table td:first-child { font-weight: bold; width: 40%; }
-        .line-table th { background: #1a1a2e; color: #fff; padding: 8px 10px;
-                         font-size: 10pt; text-align: left; }
+        .line-table th { background: #1a1a2e; color: #fff; padding: 8px 10px; font-size: 10pt; text-align: left; }
         .line-table td { padding: 10px; border-bottom: 1px solid #e0e0e0; font-size: 10pt; }
         .line-table td.right { text-align: right; }
         .total-row td { font-weight: bold; padding: 10px; font-size: 11pt; }
         .total-row td.right { text-align: right; color: #1a1a2e; }
-        .badge { display: inline-block; background: #2a7a3b; color: #fff;
-                 padding: 3px 10px; border-radius: 4px; font-size: 9pt; }
-        .footer { margin-top: 40px; font-size: 8pt; color: #888; text-align: center;
-                  border-top: 1px solid #ddd; padding-top: 12px; }
-        .note-box { background: #f5f5f5; border-left: 4px solid #6c63ff;
-                    padding: 10px 14px; margin: 16px 0; font-size: 9.5pt; }
+        .badge { display: inline-block; background: #2a7a3b; color: #fff; padding: 3px 10px; border-radius: 4px; font-size: 9pt; }
+        .footer { margin-top: 40px; font-size: 8pt; color: #888; text-align: center; border-top: 1px solid #ddd; padding-top: 12px; }
+        .note-box { background: #f5f5f5; border-left: 4px solid #6c63ff; padding: 10px 14px; margin: 16px 0; font-size: 9.5pt; }
     </style>
 </head>
 <body>
@@ -37,43 +32,34 @@
 <div class="header">
     <div class="header-left">
         <div class="brand">MultiDrive</div>
-        <div class="brand-sub">Plateforme de vehicules d'occasion<br>multidrive25@gmail.com</div>
+        <div class="brand-sub">{% trans "Plateforme de vehicules d'occasion" %}<br>multidrive25@gmail.com</div>
     </div>
     <div class="header-right">
-        <div class="doc-title">FACTURE</div>
+        <div class="doc-title">{% trans "FACTURE" %}</div>
         <div class="doc-meta">
             N° {{ invoice_number }}<br>
-            Date : {{ issued_date }}<br>
-            <span class="badge">Paye</span>
+            {% trans "Date :" %} {{ issued_date }}<br>
+            <span class="badge">{% trans "Paye" %}</span>
         </div>
     </div>
 </div>
 
 <hr>
 
-<p class="section-title">Acheteur</p>
+<p class="section-title">{% trans "Acheteur" %}</p>
 <table class="info-table">
-    <tr>
-        <td>Nom</td>
-        <td>{{ buyer_name }}</td>
-    </tr>
-    <tr>
-        <td>Email</td>
-        <td>{{ buyer_email }}</td>
-    </tr>
-    <tr>
-        <td>Identifiant membre</td>
-        <td>#{{ buyer_id }}</td>
-    </tr>
+    <tr><td>{% trans "Nom" %}</td><td>{{ buyer_name }}</td></tr>
+    <tr><td>{% trans "Email" %}</td><td>{{ buyer_email }}</td></tr>
+    <tr><td>{% trans "Identifiant membre" %}</td><td>#{{ buyer_id }}</td></tr>
 </table>
 
-<p class="section-title">Detail du paiement</p>
+<p class="section-title">{% trans "Detail du paiement" %}</p>
 <table class="line-table">
     <tr>
-        <th>Description</th>
-        <th>Categorie</th>
-        <th class="right">Prix total vehicule</th>
-        <th class="right">Montant verse</th>
+        <th>{% trans "Description" %}</th>
+        <th>{% trans "Categorie" %}</th>
+        <th class="right">{% trans "Prix total vehicule" %}</th>
+        <th class="right">{% trans "Montant verse" %}</th>
     </tr>
     <tr>
         <td>{{ vehicle_title }}</td>
@@ -82,38 +68,24 @@
         <td class="right">{{ amount_paid }} EUR</td>
     </tr>
     <tr class="total-row">
-        <td colspan="3">Solde restant</td>
+        <td colspan="3">{% trans "Solde restant" %}</td>
         <td class="right">
-            {% if remaining == "0.00" %}
-                Solde apure
-            {% else %}
-                {{ remaining }} EUR
-            {% endif %}
+            {% if remaining == "0.00" %}{% trans "Solde apure" %}{% else %}{{ remaining }} EUR{% endif %}
         </td>
     </tr>
 </table>
 
-<p class="section-title">Reference de transaction</p>
+<p class="section-title">{% trans "Reference de transaction" %}</p>
 <table class="info-table">
-    <tr>
-        <td>Reference Stripe</td>
-        <td style="font-size:8.5pt; word-break:break-all;">{{ transaction_ref }}</td>
-    </tr>
-    <tr>
-        <td>Date du paiement</td>
-        <td>{{ paid_at }}</td>
-    </tr>
-    <tr>
-        <td>Moyen de paiement</td>
-        <td>Carte bancaire (Stripe Checkout)</td>
-    </tr>
+    <tr><td>{% trans "Reference Stripe" %}</td><td style="font-size:8.5pt; word-break:break-all;">{{ transaction_ref }}</td></tr>
+    <tr><td>{% trans "Date du paiement" %}</td><td>{{ paid_at }}</td></tr>
+    <tr><td>{% trans "Moyen de paiement" %}</td><td>{% trans "Carte bancaire (Stripe Checkout)" %}</td></tr>
 </table>
 
 <div class="note-box">
-    Ce document constitue la preuve de votre paiement aupres de MultiDrive.
-    Conservez-le pour vos dossiers.
+    {% trans "Ce document constitue la preuve de votre paiement aupres de MultiDrive. Conservez-le pour vos dossiers." %}
     {% if remaining != "0.00" %}
-    Le solde restant de {{ remaining }} EUR sera a regler avant la remise des cles du vehicule.
+    {% blocktrans with remaining=remaining %}Le solde restant de {{ remaining }} EUR sera a regler avant la remise des cles du vehicule.{% endblocktrans %}
     {% endif %}
 </div>
 
@@ -121,21 +93,19 @@
     <tr>
         <td style="width:50%; vertical-align:top; padding:8px 12px;">
             <strong>MultiDrive</strong>
-            {% if signature_url %}
-            <div style="margin:6px 0 0;"><img src="{{ signature_url }}" style="height:44px; width:auto;"></div>
-            {% endif %}
-            <div style="border-top:1px solid #888; margin-top:34px; font-size:8pt; color:#666; padding-top:4px;">Signature MultiDrive</div>
+            {% if signature_url %}<div style="margin:6px 0 0;"><img src="{{ signature_url }}" style="height:44px; width:auto;"></div>{% endif %}
+            <div style="border-top:1px solid #888; margin-top:34px; font-size:8pt; color:#666; padding-top:4px;">{% trans "Signature MultiDrive" %}</div>
         </td>
         <td style="width:50%; vertical-align:top; padding:8px 12px;">
-            <strong>L'acheteur</strong>
+            <strong>{% trans "L'acheteur" %}</strong>
             <div style="border-top:1px solid #888; margin-top:78px; font-size:8pt; color:#666; padding-top:4px;">{{ buyer_name }}</div>
         </td>
     </tr>
 </table>
 
 <div class="footer">
-    MultiDrive — Projet academique TFE &bull; multidrive25@gmail.com<br>
-    Document genere automatiquement le {{ issued_date }}
+    MultiDrive — {% trans "Projet academique TFE" %} &bull; multidrive25@gmail.com<br>
+    {% blocktrans with date=issued_date %}Document genere automatiquement le {{ date }}{% endblocktrans %}
 </div>
 
 </body>

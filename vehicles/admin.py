@@ -25,7 +25,16 @@ class VehicleAdmin(admin.ModelAdmin):
     inlines = [VehicleImageInline]
     fieldsets = (
         (None, {
-            "fields": ("category", "title", "description", "price", "status")
+            "fields": ("category", "title", "price", "status")
+        }),
+        ("Description (FR)", {
+            "fields": ("description",),
+        }),
+        ("Description (EN)", {
+            "fields": ("description_en",),
+        }),
+        ("Description (NL)", {
+            "fields": ("description_nl",),
         }),
         ("Etat du vehicule", {
             "fields": ("carrosserie", "moteur", "condition_notes"),

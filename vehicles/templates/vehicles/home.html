@@ -1,63 +1,63 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}MultiDrive - Accueil{% endblock %}
+{% block title %}MultiDrive - {% trans "Accueil" %}{% endblock %}
 
 {% block content %}
 <section class="hero">
     <div class="hero-content">
         <div class="hero-shell">
             <div class="hero-copy">
-                <p class="eyebrow">Occasion accessible</p>
+                <p class="eyebrow">{% trans "Occasion accessible" %}</p>
                 <h1>All vehicles, one platform.</h1>
                 <p class="hero-text">
-                    MultiDrive rassemble des vehicules d'occasion a prix raisonnable,
-                    avec une navigation claire pour consulter, reserver et preparer un acompte.
+                    {% blocktrans %}MultiDrive rassemble des vehicules d'occasion a prix raisonnable, avec une navigation claire pour consulter, reserver et preparer un acompte.{% endblocktrans %}
                 </p>
                 <div class="hero-actions">
-                    <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">Voir les vehicules</a>
+                    <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">{% trans "Voir les vehicules" %}</a>
                     {% if request.user.is_authenticated and request.user.is_staff %}
-                        <a class="button secondary" href="/admin/">Gerer la base</a>
+                        <a class="button secondary" href="/admin/">{% trans "Gerer la base" %}</a>
                     {% elif request.user.is_authenticated %}
-                        <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
+                        <a class="button secondary" href="{% url 'reservations:my_reservations' %}">{% trans "Mes reservations" %}</a>
                     {% else %}
-                        <a class="button secondary" href="{% url 'accounts:register' %}">Inscription</a>
+                        <a class="button secondary" href="{% url 'accounts:register' %}">{% trans "Inscription" %}</a>
                     {% endif %}
                 </div>
                 <div class="hero-stats">
                     <div class="hero-stat">
                         <strong>{{ available_count }}</strong>
-                        <span>vehicules disponibles</span>
+                        <span>{% trans "vehicules disponibles" %}</span>
                     </div>
                     <div class="hero-stat">
                         <strong>{{ categories|length }}</strong>
-                        <span>categories</span>
+                        <span>{% trans "categories" %}</span>
                     </div>
                 </div>
             </div>
 
             <div class="hero-panel">
-                <p class="eyebrow">Comment utiliser MultiDrive</p>
-                <h2>Un parcours simple pour trouver, reserver et suivre ton vehicule.</h2>
+                <p class="eyebrow">{% trans "Comment utiliser MultiDrive" %}</p>
+                <h2>{% trans "Un parcours simple pour trouver, reserver et suivre ton vehicule." %}</h2>
                 <div class="hero-steps">
                     <article class="hero-step">
                         <span>1</span>
                         <div>
-                            <h3>Choisir un vehicule</h3>
-                            <p>Explore le catalogue et compare les prix, categories et disponibilites.</p>
+                            <h3>{% trans "Choisir un vehicule" %}</h3>
+                            <p>{% trans "Explore le catalogue et compare les prix, categories et disponibilites." %}</p>
                         </div>
                     </article>
                     <article class="hero-step">
                         <span>2</span>
                         <div>
-                            <h3>Reserver</h3>
-                            <p>Connecte-toi et envoie une demande de reservation en quelques clics.</p>
+                            <h3>{% trans "Reserver" %}</h3>
+                            <p>{% trans "Connecte-toi et envoie une demande de reservation en quelques clics." %}</p>
                         </div>
                     </article>
                     <article class="hero-step">
                         <span>3</span>
                         <div>
-                            <h3>Suivre ton dossier</h3>
-                            <p>Consulte ensuite tes reservations et paiements dans ton espace membre.</p>
+                            <h3>{% trans "Suivre ton dossier" %}</h3>
+                            <p>{% trans "Consulte ensuite tes reservations et paiements dans ton espace membre." %}</p>
                         </div>
                     </article>
                 </div>
@@ -68,44 +68,44 @@
 
 <section class="section">
     <div class="section-heading">
-        <h2>Categories</h2>
-        <p>{{ categories|length }} categories disponibles dans la base.</p>
+        <h2>{% trans "Categories" %}</h2>
+        <p>{% blocktrans with count=categories|length %}{{ count }} categories disponibles dans la base.{% endblocktrans %}</p>
     </div>
     <div class="category-grid">
         {% for category in categories %}
             <a class="category-card" href="{% url 'vehicles:vehicle_list' %}?category={{ category.slug }}">
-                <span>{{ category.name }}</span>
+                <span>{% trans category.name %}</span>
             </a>
         {% empty %}
-            <p>Aucune categorie disponible.</p>
+            <p>{% trans "Aucune categorie disponible." %}</p>
         {% endfor %}
     </div>
 </section>
 
 <section class="section">
     <div class="section-heading">
-        <h2>Vehicules populaires</h2>
-        <p>Une selection de vehicules accessibles pour demarrer rapidement.</p>
+        <h2>{% trans "Vehicules populaires" %}</h2>
+        <p>{% trans "Une selection de vehicules accessibles pour demarrer rapidement." %}</p>
     </div>
     <div class="vehicle-grid">
         {% for vehicle in popular_vehicles %}
             {% include "vehicles/partials/vehicle_card.html" %}
         {% empty %}
-            <p>Aucun vehicule populaire disponible pour le moment.</p>
+            <p>{% trans "Aucun vehicule populaire disponible pour le moment." %}</p>
         {% endfor %}
     </div>
 </section>
 
 <section class="section">
     <div class="section-heading">
-        <h2>Derniers vehicules disponibles</h2>
-        <p>Un apercu des nouvelles annonces actuellement publiees.</p>
+        <h2>{% trans "Derniers vehicules disponibles" %}</h2>
+        <p>{% trans "Un apercu des nouvelles annonces actuellement publiees." %}</p>
     </div>
     <div class="vehicle-grid">
         {% for vehicle in latest_vehicles %}
             {% include "vehicles/partials/vehicle_card.html" %}
         {% empty %}
-            <p>Aucun vehicule disponible pour le moment.</p>
+            <p>{% trans "Aucun vehicule disponible pour le moment." %}</p>
         {% endfor %}
     </div>
 </section>
