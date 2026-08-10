@@ -1,58 +1,59 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Mon profil - MultiDrive{% endblock %}
+{% block title %}{% trans "Mon profil" %} - MultiDrive{% endblock %}
 
 {% block content %}
 <section class="page-title">
-    <p class="eyebrow">Espace client</p>
-    <h1>Mon profil</h1>
-    <p>Retrouvez ici les informations principales de votre compte MultiDrive.</p>
+    <p class="eyebrow">{% trans "Espace client" %}</p>
+    <h1>{% trans "Mon profil" %}</h1>
+    <p>{% trans "Retrouvez ici les informations principales de votre compte MultiDrive." %}</p>
 </section>
 
 <section class="section account-section">
     <div class="account-grid">
         <article class="account-card">
-            <h2>Informations du compte</h2>
+            <h2>{% trans "Informations du compte" %}</h2>
             <dl class="account-details">
                 <div>
-                    <dt>Nom d'utilisateur</dt>
+                    <dt>{% trans "Nom d'utilisateur" %}</dt>
                     <dd>{{ request.user.username }}</dd>
                 </div>
                 <div>
-                    <dt>Adresse email</dt>
-                    <dd>{{ request.user.email|default:"Non renseignee" }}</dd>
+                    <dt>{% trans "Adresse email" %}</dt>
+                    <dd>{{ request.user.email|default:"—" }}</dd>
                 </div>
                 <div>
-                    <dt>Date d'inscription</dt>
+                    <dt>{% trans "Date d'inscription" %}</dt>
                     <dd>{{ request.user.date_joined|date:"d/m/Y" }}</dd>
                 </div>
                 <div>
-                    <dt>Derniere connexion</dt>
-                    <dd>{{ request.user.last_login|date:"d/m/Y H:i"|default:"Aucune" }}</dd>
+                    <dt>{% trans "Derniere connexion" %}</dt>
+                    <dd>{{ request.user.last_login|date:"d/m/Y H:i"|default:"—" }}</dd>
                 </div>
             </dl>
         </article>
 
         <article class="account-card">
-            <h2>Suivi rapide</h2>
+            <h2>{% trans "Suivi rapide" %}</h2>
             <div class="stats-grid">
                 <div class="stat-card">
                     <span>{{ reservation_count }}</span>
-                    <p>Reservations</p>
+                    <p>{% trans "Reservations" %}</p>
                 </div>
                 <div class="stat-card">
                     <span>{{ payment_count }}</span>
-                    <p>Paiements</p>
+                    <p>{% trans "Paiements" %}</p>
                 </div>
                 <div class="stat-card">
                     <span>{{ paid_payment_count }}</span>
-                    <p>Paiements valides</p>
+                    <p>{% trans "Paiements valides" %}</p>
                 </div>
             </div>
             <div class="hero-actions">
-                <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Voir mes reservations</a>
-                <a class="button primary" href="{% url 'accounts:payment_list' %}">Voir mes paiements</a>
-                <a class="button secondary" href="{% url 'contact:my_messages' %}">Voir mes messages</a>
+                <a class="button secondary" href="{% url 'reservations:my_reservations' %}">{% trans "Voir mes reservations" %}</a>
+                <a class="button primary" href="{% url 'accounts:payment_list' %}">{% trans "Voir mes paiements" %}</a>
+                <a class="button secondary" href="{% url 'contact:my_messages' %}">{% trans "Voir mes messages" %}</a>
             </div>
         </article>
     </div>
@@ -60,40 +61,38 @@
 
 <section class="section account-section">
     <article class="account-card">
-        <h2>Securite du compte</h2>
-        <p class="description">Vous pouvez modifier votre mot de passe a tout moment depuis cette page.</p>
+        <h2>{% trans "Securite du compte" %}</h2>
+        <p class="description">{% trans "Vous pouvez modifier votre mot de passe a tout moment depuis cette page." %}</p>
         <div class="hero-actions">
-            <a class="button secondary" href="{% url 'accounts:change_password' %}">Changer mon mot de passe</a>
+            <a class="button secondary" href="{% url 'accounts:change_password' %}">{% trans "Changer mon mot de passe" %}</a>
         </div>
     </article>
 </section>
 
 <section class="section account-section">
     <article class="account-card danger-card">
-        <h2>Suppression du compte</h2>
+        <h2>{% trans "Suppression du compte" %}</h2>
         {% if account_status.is_deleted %}
             <p class="description">
-                Ce compte a deja ete desactive. L'etat est conserve en base avec le libelle :
-                <strong>{{ account_status.deletion_label }}</strong>.
+                {% blocktrans with label=account_status.deletion_label %}Ce compte a deja ete desactive. Libelle : {{ label }}.{% endblocktrans %}
             </p>
             <p class="description">
-                Motif :
+                {% trans "Motif :" %}
                 {% if account_status.deletion_reason_type == "admin_block" %}
-                    desactivation administrative.
+                    {% trans "desactivation administrative." %}
                 {% else %}
-                    demande utilisateur.
+                    {% trans "demande utilisateur." %}
                 {% endif %}
             </p>
             <p class="description">
-                Date de desactivation : {{ account_status.deleted_at|date:"d/m/Y H:i" }}
+                {% blocktrans with date=account_status.deleted_at|date:"d/m/Y H:i" %}Date de desactivation : {{ date }}{% endblocktrans %}
             </p>
         {% else %}
             <p class="description">
-                Vous pouvez demander la desactivation de votre compte. Le compte sera conserve en base en soft delete
-                pour l'historique et l'administration.
+                {% trans "Vous pouvez demander la desactivation de votre compte. Le compte sera conserve en base en soft delete pour l'historique et l'administration." %}
             </p>
             <div class="hero-actions">
-                <a class="button secondary" href="{% url 'accounts:delete_request' %}">Demander la suppression du compte</a>
+                <a class="button secondary" href="{% url 'accounts:delete_request' %}">{% trans "Demander la suppression du compte" %}</a>
             </div>
         {% endif %}
     </article>

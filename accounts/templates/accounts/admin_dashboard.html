@@ -1,11 +1,12 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Dashboard admin - MultiDrive{% endblock %}
+{% block title %}{% trans "Dashboard admin" %} - MultiDrive{% endblock %}
 
 {% block content %}
 <section class="page-title">
-    <p class="eyebrow">Administration</p>
-    <h1>Dashboard admin</h1>
+    <p class="eyebrow">{% trans "Administration" %}</p>
+    <h1>{% trans "Dashboard admin" %}</h1>
 </section>
 
 {% if messages %}
@@ -21,38 +22,38 @@
     <div class="admin-summary-grid">
         <article class="admin-summary-card">
             <span>{{ vehicle_count }}</span>
-            <h2>Vehicules</h2>
-            <p>{{ available_vehicle_count }} disponibles actuellement.</p>
+            <h2>{% trans "Vehicules" %}</h2>
+            <p>{% blocktrans with n=available_vehicle_count %}{{ n }} disponibles actuellement.{% endblocktrans %}</p>
         </article>
         <article class="admin-summary-card">
             <span>{{ pending_reservation_count }}</span>
-            <h2>Reservations en attente</h2>
-            <p>Demandes a verifier ou a confirmer.</p>
+            <h2>{% trans "Reservations en attente" %}</h2>
+            <p>{% trans "Demandes a verifier ou a confirmer." %}</p>
         </article>
         <article class="admin-summary-card">
             <span>{{ contact_pending_count }}</span>
-            <h2>Messages sans reponse</h2>
-            <p>Questions client ou demandes d'information.</p>
+            <h2>{% trans "Messages sans reponse" %}</h2>
+            <p>{% trans "Questions client ou demandes d'information." %}</p>
         </article>
         <article class="admin-summary-card">
             <span>{{ pending_payment_count }}</span>
-            <h2>Paiements a suivre</h2>
-            <p>Acomptes encore en attente de validation.</p>
+            <h2>{% trans "Paiements a suivre" %}</h2>
+            <p>{% trans "Acomptes encore en attente de validation." %}</p>
         </article>
         <article class="admin-summary-card">
             <span>{{ user_count }}</span>
-            <h2>Membres actifs</h2>
-            <p>Comptes clients actuellement actifs.</p>
+            <h2>{% trans "Membres actifs" %}</h2>
+            <p>{% trans "Comptes clients actuellement actifs." %}</p>
         </article>
         <article class="admin-summary-card">
             <span>{{ sold_count }}</span>
-            <h2>Vehicules vendus</h2>
-            <p>Ventes finalisees dans le catalogue.</p>
+            <h2>{% trans "Vehicules vendus" %}</h2>
+            <p>{% trans "Ventes finalisees dans le catalogue." %}</p>
         </article>
         <article class="admin-summary-card {% if refund_request_count %}admin-summary-card--alert{% endif %}">
             <span>{{ refund_request_count }}</span>
-            <h2>Remboursements a traiter</h2>
-            <p>Annulations avec acompte verse en attente.</p>
+            <h2>{% trans "Remboursements a traiter" %}</h2>
+            <p>{% trans "Annulations avec acompte verse en attente." %}</p>
         </article>
     </div>
 </section>
@@ -64,11 +65,11 @@
         <div style="padding:16px 20px; border-bottom:1px solid #f0f0f0; display:flex; align-items:center; justify-content:space-between; background:#f8faff;">
             <div style="display:flex; align-items:center; gap:10px;">
                 <i class="fa-solid fa-shield-halved" style="color:#1E3A8A; font-size:.9rem;"></i>
-                <p style="margin:0; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#1E3A8A;">Gestion des administrateurs</p>
+                <p style="margin:0; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#1E3A8A;">{% trans "Gestion des administrateurs" %}</p>
                 <span style="background:#1E3A8A; color:#fff; border-radius:20px; padding:1px 8px; font-size:.72rem; font-weight:700;">{{ admin_users|length }} admin(s)</span>
             </div>
             <a href="{% url 'accounts:create_admin' %}" class="button primary" style="font-size:.8rem; padding:8px 16px; display:inline-flex; align-items:center; gap:6px;">
-                <i class="fa-solid fa-user-plus"></i> Ajouter un admin
+                <i class="fa-solid fa-user-plus"></i> {% trans "Ajouter un admin" %}
             </a>
         </div>
 
@@ -80,21 +81,21 @@
                 </div>
                 <div style="flex:1; min-width:0;">
                     <p style="margin:0; font-size:.88rem; font-weight:600; color:#222;">{{ admin.username }}</p>
-                    <p style="margin:0; font-size:.75rem; color:#aaa;">{{ admin.email }}{% if not admin.is_active %} — <span style="color:#B91C1C;">Compte desactive</span>{% endif %}</p>
+                    <p style="margin:0; font-size:.75rem; color:#aaa;">{{ admin.email }}{% if not admin.is_active %} — <span style="color:#B91C1C;">{% trans "Compte desactive" %}</span>{% endif %}</p>
                 </div>
                 <div style="display:flex; gap:8px; flex-shrink:0;">
                     <form method="post" action="{% url 'accounts:demote_admin' admin.id %}">
                         {% csrf_token %}
-                        <button type="submit" onclick="return confirm('Retirer les droits admin a {{ admin.username }} ? Il repassera en compte client.')"
+                        <button type="submit" onclick="return confirm('{% blocktrans with u=admin.username %}Retirer les droits admin a {{ u }} ? Il repassera en compte client.{% endblocktrans %}')"
                                 style="background:#FEF3C7; color:#B7791F; border:1px solid #FDE68A; border-radius:6px; padding:5px 12px; font-size:.76rem; font-weight:600; cursor:pointer; white-space:nowrap;">
-                            Retirer les droits
+                            {% trans "Retirer les droits" %}
                         </button>
                     </form>
                     <form method="post" action="{% url 'accounts:deactivate_admin' admin.id %}">
                         {% csrf_token %}
-                        <button type="submit" onclick="return confirm('Desactiver definitivement le compte de {{ admin.username }} ?')"
+                        <button type="submit" onclick="return confirm('{% blocktrans with u=admin.username %}Desactiver definitivement le compte de {{ u }} ?{% endblocktrans %}')"
                                 style="background:#FEF2F2; color:#B91C1C; border:1px solid #FECACA; border-radius:6px; padding:5px 12px; font-size:.76rem; font-weight:600; cursor:pointer; white-space:nowrap;">
-                            Desactiver
+                            {% trans "Desactiver" %}
                         </button>
                     </form>
                 </div>
@@ -102,7 +103,7 @@
             {% endfor %}
         {% else %}
             <div style="padding:20px 24px; color:#aaa; font-size:.88rem;">
-                Aucun administrateur cree pour le moment. Cliquez sur « Ajouter un admin » pour commencer.
+                {% trans "Aucun administrateur cree pour le moment. Cliquez sur « Ajouter un admin » pour commencer." %}
             </div>
         {% endif %}
     </div>
@@ -114,8 +115,8 @@
 <section class="section" style="padding-bottom:0;">
     <div style="background:#fff; border:1px solid #e2e2e2; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06);">
         <div style="padding:16px 20px; border-bottom:1px solid #f0f0f0; display:flex; align-items:center; justify-content:space-between;">
-            <p style="margin:0; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">Derniers mouvements</p>
-            <span style="font-size:.78rem; color:#999;">10 derniers evenements</span>
+            <p style="margin:0; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">{% trans "Derniers mouvements" %}</p>
+            <span style="font-size:.78rem; color:#999;">{% trans "10 derniers evenements" %}</span>
         </div>
         {% for event in activity_feed %}
         <a href="{{ event.url }}" style="display:flex; align-items:center; gap:14px; padding:12px 20px; border-bottom:1px solid #f7f7f7; text-decoration:none; transition:background .15s; {% if forloop.last %}border-bottom:none;{% endif %}" onmouseover="this.style.background='#f8f9ff'" onmouseout="this.style.background='transparent'">
@@ -140,44 +141,44 @@
 <section class="section" style="padding-bottom:0;">
     <div class="section-heading">
         <div>
-            <p class="eyebrow">Raccourcis</p>
-            <h2>Actions rapides</h2>
+            <p class="eyebrow">{% trans "Raccourcis" %}</p>
+            <h2>{% trans "Actions rapides" %}</h2>
         </div>
-        <p>Acces direct aux principales zones de gestion.</p>
+        <p>{% trans "Acces direct aux principales zones de gestion." %}</p>
     </div>
 
     <div class="admin-actions-grid">
         <a class="admin-action-card" href="{% url 'admin:vehicles_vehicle_add' %}">
-            <strong>Ajouter un vehicule</strong>
-            <p>Creer une nouvelle annonce dans le catalogue.</p>
+            <strong>{% trans "Ajouter un vehicule" %}</strong>
+            <p>{% trans "Creer une nouvelle annonce dans le catalogue." %}</p>
         </a>
         <a class="admin-action-card" href="{% url 'admin:vehicles_vehicle_changelist' %}">
-            <strong>Gerer les vehicules</strong>
-            <p>Modifier, supprimer ou filtrer le stock.</p>
+            <strong>{% trans "Gerer les vehicules" %}</strong>
+            <p>{% trans "Modifier, supprimer ou filtrer le stock." %}</p>
         </a>
         <a class="admin-action-card" href="{% url 'admin:reservations_reservation_changelist' %}">
-            <strong>Voir les reservations</strong>
-            <p>Traiter les demandes.{% if pending_reservation_count %} <strong style="color:#1E3A8A;">{{ pending_reservation_count }} en attente.</strong>{% endif %}</p>
+            <strong>{% trans "Voir les reservations" %}</strong>
+            <p>{% trans "Traiter les demandes." %}{% if pending_reservation_count %} <strong style="color:#1E3A8A;">{{ pending_reservation_count }} {% trans "en attente." %}</strong>{% endif %}</p>
         </a>
         <a class="admin-action-card" href="{% url 'admin:contact_contactmessage_changelist' %}">
-            <strong>Traiter les messages</strong>
-            <p>Repondre aux questions.{% if contact_pending_count %} <strong style="color:#B7791F;">{{ contact_pending_count }} sans reponse.</strong>{% endif %}</p>
+            <strong>{% trans "Traiter les messages" %}</strong>
+            <p>{% trans "Repondre aux questions." %}{% if contact_pending_count %} <strong style="color:#B7791F;">{{ contact_pending_count }} {% trans "sans reponse." %}</strong>{% endif %}</p>
         </a>
         <a class="admin-action-card" href="{% url 'admin:payments_payment_changelist' %}">
-            <strong>Suivre les paiements</strong>
-            <p>Verifier les acomptes et leur statut.</p>
+            <strong>{% trans "Suivre les paiements" %}</strong>
+            <p>{% trans "Verifier les acomptes et leur statut." %}</p>
         </a>
         <a class="admin-action-card" href="{% url 'admin:accounts_accountstatus_changelist' %}">
-            <strong>Comptes desactives</strong>
-            <p>{{ disabled_account_count }} compte(s) desactive(s) au total.</p>
+            <strong>{% trans "Comptes desactives" %}</strong>
+            <p>{% blocktrans with n=disabled_account_count %}{{ n }} compte(s) desactive(s) au total.{% endblocktrans %}</p>
         </a>
         <a class="admin-action-card" href="{% url 'admin:accounts_accountdeletionrequest_changelist' %}">
-            <strong>Demandes de suppression</strong>
-            <p>{% if pending_deletion_requests %}<strong style="color:#B91C1C;">{{ pending_deletion_requests }} non traitee(s).</strong>{% else %}Aucune demande en attente.{% endif %}</p>
+            <strong>{% trans "Demandes de suppression" %}</strong>
+            <p>{% if pending_deletion_requests %}<strong style="color:#B91C1C;">{{ pending_deletion_requests }} {% trans "non traitee(s)." %}</strong>{% else %}{% trans "Aucune demande en attente." %}{% endif %}</p>
         </a>
         <a class="admin-action-card" href="{% url 'admin:index' %}">
-            <strong>Ouvrir l'admin Django</strong>
-            <p>Acceder a la gestion complete du projet.</p>
+            <strong>{% trans "Ouvrir l'admin Django" %}</strong>
+            <p>{% trans "Acceder a la gestion complete du projet." %}</p>
         </a>
     </div>
 </section>
@@ -187,10 +188,10 @@
 <section class="section" style="padding-bottom:0;">
     <div class="section-heading">
         <div>
-            <p class="eyebrow">Prioritaire</p>
-            <h2>Remboursements en attente</h2>
+            <p class="eyebrow">{% trans "Prioritaire" %}</p>
+            <h2>{% trans "Remboursements en attente" %}</h2>
         </div>
-        <p>Ces membres ont annule leur reservation apres avoir verse un acompte. Saisissez le montant rembourse et un commentaire pour le membre.</p>
+        <p>{% trans "Ces membres ont annule leur reservation apres avoir verse un acompte. Saisissez le montant rembourse et un commentaire pour le membre." %}</p>
     </div>
     <div class="refund-list">
         {% for payment in refund_requests %}
@@ -201,11 +202,11 @@
                         <span style="color:var(--muted); margin-left:8px;">{{ payment.reservation.user.email }}</span>
                         <p style="margin:4px 0 0;">{{ payment.reservation.vehicle.title }}</p>
                         <small style="color:var(--muted);">
-                            Acompte verse : <strong>{{ payment.amount }} EUR</strong> —
-                            Annulation le {{ payment.updated_at|date:"d/m/Y a H:i" }}
+                            {% trans "Acompte verse :" %} <strong>{{ payment.amount }} EUR</strong> —
+                            {% trans "Annulation le" %} {{ payment.updated_at|date:"d/m/Y a H:i" }}
                         </small>
                     </div>
-                    <span class="status status-refund_requested">Remboursement demande</span>
+                    <span class="status status-refund_requested">{% trans "Remboursement demande" %}</span>
                 </div>
 
                 <form method="post" action="{% url 'accounts:process_refund' payment.id %}" class="refund-form">
@@ -213,9 +214,9 @@
                     <div class="refund-form-row">
                         <div class="refund-form-field">
                             <label for="refund_amount_{{ payment.id }}">
-                                Montant a rembourser (EUR)
+                                {% trans "Montant a rembourser (EUR)" %}
                                 <span style="color:var(--muted); font-weight:400;">
-                                    — Acompte verse : {{ payment.amount }} EUR
+                                    — {% trans "Acompte verse :" %} {{ payment.amount }} EUR
                                 </span>
                             </label>
                             <input type="number" id="refund_amount_{{ payment.id }}"
@@ -226,16 +227,16 @@
                         </div>
                     </div>
                     <div class="refund-form-field">
-                        <label for="refund_note_{{ payment.id }}">Message pour le membre (optionnel)</label>
+                        <label for="refund_note_{{ payment.id }}">{% trans "Message pour le membre (optionnel)" %}</label>
                         <textarea id="refund_note_{{ payment.id }}" name="refund_note"
                                   rows="3"
-                                  placeholder="Ex : Remboursement de 90 EUR apres retention de 10 % de frais administratifs conformement aux CGV."></textarea>
+                                  placeholder="{% trans 'Ex : Remboursement de 90 EUR apres retention de 10 % de frais administratifs conformement aux CGV.' %}"></textarea>
                     </div>
                     <div style="display:flex; gap:12px; align-items:center; margin-top:8px;">
-                        <button type="submit" class="btn-action btn-accept">Valider le remboursement</button>
+                        <button type="submit" class="btn-action btn-accept">{% trans "Valider le remboursement" %}</button>
                         <a class="button secondary" style="font-size:0.82rem;"
                            href="{% url 'admin:payments_payment_change' payment.id %}">
-                            Voir dans l'admin Django
+                            {% trans "Voir dans l'admin Django" %}
                         </a>
                     </div>
                 </form>
@@ -250,17 +251,16 @@
 <section class="section" style="padding-bottom:0;">
     <div class="section-heading">
         <div>
-            <p class="eyebrow">Moderation</p>
-            <h2>Derniers avis clients</h2>
+            <p class="eyebrow">{% trans "Moderation" %}</p>
+            <h2>{% trans "Derniers avis clients" %}</h2>
         </div>
-        <p>Consultez et supprimez les avis inappropries. Les avis sont visibles publiquement sur les fiches vehicules.</p>
+        <p>{% trans "Consultez et supprimez les avis inappropries. Les avis sont visibles publiquement sur les fiches vehicules." %}</p>
     </div>
 
     <div style="background:#fff; border:1px solid #e2e2e2; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06);">
         {% for review in recent_reviews %}
         <div style="display:flex; align-items:flex-start; gap:16px; padding:16px 20px; border-bottom:1px solid #f7f7f7; {% if forloop.last %}border-bottom:none;{% endif %}">
 
-            {# Avatar initiale #}
             <div style="width:38px; height:38px; border-radius:50%; background:#1E3A8A18; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-weight:700; color:#1E3A8A; font-size:.95rem;">
                 {{ review.user.username|first|upper }}
             </div>
@@ -268,12 +268,11 @@
             <div style="flex:1; min-width:0;">
                 <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                     <strong style="font-size:.9rem; color:#222;">{{ review.user.username }}</strong>
-                    <span style="font-size:.78rem; color:#aaa;">sur</span>
+                    <span style="font-size:.78rem; color:#aaa;">{% trans "sur" %}</span>
                     <a href="{% url 'vehicles:vehicle_detail' review.vehicle.pk %}" style="font-size:.82rem; color:#1E3A8A; text-decoration:none; font-weight:500;">{{ review.vehicle.title }}</a>
                     <span style="margin-left:auto; font-size:.75rem; color:#bbb;">{{ review.created_at|date:"d/m/Y H:i" }}</span>
                 </div>
 
-                {# Etoiles #}
                 <div style="margin:4px 0 6px;">
                     {% for i in "12345" %}
                         {% if forloop.counter <= review.rating %}
@@ -288,10 +287,10 @@
                 <p style="margin:0; font-size:.87rem; color:#444; line-height:1.45;">{{ review.comment|truncatechars:180 }}</p>
             </div>
 
-            <form method="post" action="{% url 'accounts:delete_review' review.id %}" style="flex-shrink:0;" onsubmit="return confirm('Supprimer cet avis ?');">
+            <form method="post" action="{% url 'accounts:delete_review' review.id %}" style="flex-shrink:0;" onsubmit="return confirm('{% trans "Supprimer cet avis ?" %}');">
                 {% csrf_token %}
                 <button type="submit" style="background:#FEF2F2; color:#B91C1C; border:1px solid #FECACA; border-radius:6px; padding:6px 12px; font-size:.78rem; font-weight:600; cursor:pointer; white-space:nowrap;">
-                    <i class="fa-solid fa-trash" style="margin-right:4px;"></i>Supprimer
+                    <i class="fa-solid fa-trash" style="margin-right:4px;"></i>{% trans "Supprimer" %}
                 </button>
             </form>
         </div>
@@ -304,58 +303,58 @@
 <section class="section">
     <div class="section-heading">
         <div>
-            <p class="eyebrow">Statistiques</p>
-            <h2>Ventes &amp; revenus</h2>
+            <p class="eyebrow">{% trans "Statistiques" %}</p>
+            <h2>{% trans "Ventes & revenus" %}</h2>
         </div>
         <a href="{% url 'accounts:export_stats_csv' %}" class="button secondary" style="display:inline-flex; align-items:center; gap:8px; white-space:nowrap;">
             <i class="fa-solid fa-file-csv"></i>
-            Exporter en CSV
+            {% trans "Exporter en CSV" %}
         </a>
     </div>
 
     <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-bottom:24px;">
 
         <div style="background:#1E3A8A; color:#fff; border-radius:10px; padding:22px 20px; box-shadow:0 4px 14px rgba(30,58,138,.18);">
-            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; opacity:.75;">Revenus totaux</p>
+            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; opacity:.75;">{% trans "Revenus totaux" %}</p>
             <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; line-height:1.1;">{{ total_revenue|floatformat:2 }}&nbsp;<span style="font-size:.9rem; font-weight:600; opacity:.8;">EUR</span></p>
-            <p style="margin:0; font-size:.78rem; opacity:.7;">Tous paiements confondus</p>
+            <p style="margin:0; font-size:.78rem; opacity:.7;">{% trans "Tous paiements confondus" %}</p>
         </div>
 
         <div style="background:#fff; border:1px solid #e2e2e2; border-left:4px solid #2F855A; border-radius:10px; padding:22px 20px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
             <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">{{ current_month }}</p>
             <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; color:#2F855A; line-height:1.1;">{{ monthly_revenue|floatformat:2 }}&nbsp;<span style="font-size:.9rem; font-weight:600; color:#2F855A; opacity:.8;">EUR</span></p>
-            <p style="margin:0; font-size:.78rem; color:#666;">Revenus ce mois-ci</p>
+            <p style="margin:0; font-size:.78rem; color:#666;">{% trans "Revenus ce mois-ci" %}</p>
         </div>
 
         <div style="background:#fff; border:1px solid #e2e2e2; border-left:4px solid #1E3A8A; border-radius:10px; padding:22px 20px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
-            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">Ventes finalisees</p>
-            <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; color:#1E3A8A; line-height:1.1;">{{ full_payment_count }}&nbsp;<span style="font-size:.9rem; font-weight:600; opacity:.7;">ventes</span></p>
-            <p style="margin:0; font-size:.78rem; color:#666;">{{ full_payment_revenue|floatformat:2 }} EUR encaisses</p>
+            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">{% trans "Ventes finalisees" %}</p>
+            <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; color:#1E3A8A; line-height:1.1;">{{ full_payment_count }}&nbsp;<span style="font-size:.9rem; font-weight:600; opacity:.7;">{% trans "ventes" %}</span></p>
+            <p style="margin:0; font-size:.78rem; color:#666;">{% blocktrans with amt=full_payment_revenue|floatformat:2 %}{{ amt }} EUR encaisses{% endblocktrans %}</p>
         </div>
 
         <div style="background:#fff; border:1px solid #e2e2e2; border-left:4px solid #6c63ff; border-radius:10px; padding:22px 20px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
-            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">Vehicules vendus</p>
-            <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; color:#6c63ff; line-height:1.1;">{{ sold_count }}&nbsp;<span style="font-size:.9rem; font-weight:600; opacity:.7;">vehicules</span></p>
-            <p style="margin:0; font-size:.78rem; color:#666;">Statut Vendu dans le catalogue</p>
+            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">{% trans "Vehicules vendus" %}</p>
+            <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; color:#6c63ff; line-height:1.1;">{{ sold_count }}&nbsp;<span style="font-size:.9rem; font-weight:600; opacity:.7;">{% trans "vehicules" %}</span></p>
+            <p style="margin:0; font-size:.78rem; color:#666;">{% trans "Statut Vendu dans le catalogue" %}</p>
         </div>
 
         <div style="background:#fff; border:1px solid #e2e2e2; border-left:4px solid #B7791F; border-radius:10px; padding:22px 20px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
-            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">Acomptes en cours</p>
-            <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; color:#B7791F; line-height:1.1;">{{ deposit_only_count }}&nbsp;<span style="font-size:.9rem; font-weight:600; opacity:.7;">dossiers</span></p>
-            <p style="margin:0; font-size:.78rem; color:#666;">Solde restant a encaisser</p>
+            <p style="margin:0 0 6px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">{% trans "Acomptes en cours" %}</p>
+            <p style="margin:0 0 4px; font-size:1.9rem; font-weight:800; color:#B7791F; line-height:1.1;">{{ deposit_only_count }}&nbsp;<span style="font-size:.9rem; font-weight:600; opacity:.7;">{% trans "dossiers" %}</span></p>
+            <p style="margin:0; font-size:.78rem; color:#666;">{% trans "Solde restant a encaisser" %}</p>
         </div>
 
     </div>
 
     {% if top_categories %}
     <div style="background:#fff; border:1px solid #e2e2e2; border-radius:10px; padding:24px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
-        <p style="margin:0 0 16px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">Ventes par categorie</p>
+        <p style="margin:0 0 16px; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">{% trans "Ventes par categorie" %}</p>
         <table style="width:100%; border-collapse:collapse;">
             <thead>
                 <tr style="border-bottom:2px solid #e2e2e2;">
-                    <th style="text-align:left; padding:8px 10px; font-size:.82rem; color:#666; font-weight:600;">Categorie</th>
-                    <th style="padding:8px 10px; font-size:.82rem; color:#666; font-weight:600;">Progression</th>
-                    <th style="text-align:right; padding:8px 10px; font-size:.82rem; color:#666; font-weight:600;">Ventes</th>
+                    <th style="text-align:left; padding:8px 10px; font-size:.82rem; color:#666; font-weight:600;">{% trans "Categorie" %}</th>
+                    <th style="padding:8px 10px; font-size:.82rem; color:#666; font-weight:600;">{% trans "Progression" %}</th>
+                    <th style="text-align:right; padding:8px 10px; font-size:.82rem; color:#666; font-weight:600;">{% trans "Ventes" %}</th>
                 </tr>
             </thead>
             <tbody>

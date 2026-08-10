@@ -1,18 +1,19 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Creer un administrateur - MultiDrive{% endblock %}
+{% block title %}{% trans "Creer un administrateur" %} - MultiDrive{% endblock %}
 
 {% block content %}
 <section class="page-title">
     <p class="eyebrow">Superadmin</p>
-    <h1>Creer un administrateur</h1>
+    <h1>{% trans "Creer un administrateur" %}</h1>
 </section>
 
 <section class="section">
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start;">
 
         <div style="background:#fff; border:1px solid #e2e2e2; border-radius:12px; padding:32px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
-            <p style="font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666; margin:0 0 20px;">Nouveau compte admin</p>
+            <p style="font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666; margin:0 0 20px;">{% trans "Nouveau compte admin" %}</p>
 
             {% if messages %}
                 {% for message in messages %}
@@ -34,16 +35,16 @@
                 </div>
                 {% endfor %}
                 <div style="margin-top:8px;">
-                    <button type="submit" class="button primary" style="width:100%;">Creer l'administrateur</button>
+                    <button type="submit" class="button primary" style="width:100%;">{% trans "Creer l'administrateur" %}</button>
                 </div>
             </form>
             <p style="margin-top:16px; font-size:.78rem; color:#888; line-height:1.5;">
-                L'admin recevra ses identifiants et pourra changer son mot de passe depuis son espace personnel.
+                {% trans "L'admin recevra ses identifiants et pourra changer son mot de passe depuis son espace personnel." %}
             </p>
         </div>
 
         <div style="background:#fff; border:1px solid #e2e2e2; border-radius:12px; padding:32px; box-shadow:0 2px 10px rgba(0,0,0,.06);">
-            <p style="font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666; margin:0 0 20px;">Admins actifs ({{ admin_users|length }})</p>
+            <p style="font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666; margin:0 0 20px;">{% blocktrans with n=admin_users|length %}Admins actifs ({{ n }}){% endblocktrans %}</p>
             {% if admin_users %}
                 {% for admin in admin_users %}
                 <div style="display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #f5f5f5; {% if forloop.last %}border-bottom:none;{% endif %}">
@@ -56,29 +57,29 @@
                     </div>
                     <form method="post" action="{% url 'accounts:demote_admin' admin.id %}" style="display:inline;">
                         {% csrf_token %}
-                        <button type="submit" onclick="return confirm('Retirer les droits admin a {{ admin.username }} ?')"
+                        <button type="submit" onclick="return confirm('{% blocktrans with u=admin.username %}Retirer les droits admin a {{ u }} ?{% endblocktrans %}')"
                                 style="background:#FEF3C7; color:#B7791F; border:1px solid #FDE68A; border-radius:5px; padding:4px 10px; font-size:.75rem; font-weight:600; cursor:pointer;">
-                            Retirer
+                            {% trans "Retirer" %}
                         </button>
                     </form>
                     <form method="post" action="{% url 'accounts:deactivate_admin' admin.id %}" style="display:inline;">
                         {% csrf_token %}
-                        <button type="submit" onclick="return confirm('Desactiver le compte de {{ admin.username }} ?')"
+                        <button type="submit" onclick="return confirm('{% blocktrans with u=admin.username %}Desactiver le compte de {{ u }} ?{% endblocktrans %}')"
                                 style="background:#FEF2F2; color:#B91C1C; border:1px solid #FECACA; border-radius:5px; padding:4px 10px; font-size:.75rem; font-weight:600; cursor:pointer; margin-left:4px;">
-                            Desactiver
+                            {% trans "Desactiver" %}
                         </button>
                     </form>
                 </div>
                 {% endfor %}
             {% else %}
-                <p style="color:#aaa; font-size:.88rem;">Aucun administrateur pour le moment.</p>
+                <p style="color:#aaa; font-size:.88rem;">{% trans "Aucun administrateur pour le moment." %}</p>
             {% endif %}
         </div>
     </div>
 
     <div style="margin-top:20px;">
         <a href="{% url 'accounts:admin_dashboard' %}" class="button secondary">
-            <i class="fa-solid fa-arrow-left" style="margin-right:6px;"></i>Retour au dashboard
+            <i class="fa-solid fa-arrow-left" style="margin-right:6px;"></i>{% trans "Retour au dashboard" %}
         </a>
     </div>
 </section>

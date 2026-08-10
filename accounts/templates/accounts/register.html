@@ -1,13 +1,14 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Creer un compte - MultiDrive{% endblock %}
+{% block title %}{% trans "Creer un compte" %} - MultiDrive{% endblock %}
 
 {% block content %}
 <section class="auth-page">
     <div class="auth-card">
-        <p class="eyebrow">Nouveau client</p>
-        <h1>Creer un compte</h1>
-        <p class="auth-intro">Un compte est necessaire pour reserver un vehicule ou payer un acompte.</p>
+        <p class="eyebrow">{% trans "Nouveau client" %}</p>
+        <h1>{% trans "Creer un compte" %}</h1>
+        <p class="auth-intro">{% trans "Un compte est necessaire pour reserver un vehicule ou payer un acompte." %}</p>
 
         <form method="post" class="auth-form">
             {% csrf_token %}
@@ -29,12 +30,12 @@
                 </label>
             {% endfor %}
 
-            <button type="submit">Creer mon compte</button>
+            <button type="submit">{% trans "Creer mon compte" %}</button>
         </form>
 
         <p class="auth-switch">
-            Deja inscrit ?
-            <a href="{% url 'accounts:login' %}">Se connecter</a>
+            {% trans "Deja inscrit ?" %}
+            <a href="{% url 'accounts:login' %}">{% trans "Se connecter" %}</a>
         </p>
     </div>
 </section>

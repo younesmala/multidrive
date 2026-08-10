@@ -1,27 +1,28 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Paiements et achats - MultiDrive{% endblock %}
+{% block title %}{% trans "Paiements et achats" %} - MultiDrive{% endblock %}
 
 {% block content %}
 <section class="page-title">
-    <p class="eyebrow">Espace client</p>
-    <h1>Paiements et achats</h1>
-    <p>Retrouvez ici tous vos acomptes verses, les vehicules acquis et les details financiers associes.</p>
+    <p class="eyebrow">{% trans "Espace client" %}</p>
+    <h1>{% trans "Paiements et achats" %}</h1>
+    <p>{% trans "Retrouvez ici tous vos acomptes verses, les vehicules acquis et les details financiers associes." %}</p>
 </section>
 
 <section class="section account-section">
     <div class="member-summary-grid">
         <article class="member-summary-card">
             <span>{{ total_count|default:0 }}</span>
-            <p>Total paiements</p>
+            <p>{% trans "Total paiements" %}</p>
         </article>
         <article class="member-summary-card">
             <span>{{ paid_count|default:0 }}</span>
-            <p>Acomptes valides</p>
+            <p>{% trans "Acomptes valides" %}</p>
         </article>
         <article class="member-summary-card">
             <span>{{ paid_amount|default:0 }} EUR</span>
-            <p>Montant total verse</p>
+            <p>{% trans "Montant total verse" %}</p>
         </article>
     </div>
 </section>
@@ -39,7 +40,7 @@
                                      style="width:72px; height:56px; object-fit:cover; border-radius:6px; flex-shrink:0;">
                             {% endif %}
                             <div>
-                                <p class="eyebrow">{{ payment.reservation.vehicle.category.name|default:"Vehicule" }}</p>
+                                <p class="eyebrow">{% trans payment.reservation.vehicle.category.name|default:"Vehicule" %}</p>
                                 <h2>
                                     <a href="{% url 'vehicles:vehicle_detail' payment.reservation.vehicle.id %}">
                                         {{ payment.reservation.vehicle.title }}
@@ -54,89 +55,89 @@
 
                     <div class="member-detail-grid">
                         <div class="member-detail-block">
-                            <strong>Prix du vehicule</strong>
+                            <strong>{% trans "Prix du vehicule" %}</strong>
                             <p>{{ payment.reservation.vehicle.price }} EUR</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Deja verse</strong>
+                            <strong>{% trans "Deja verse" %}</strong>
                             <p>{{ payment.amount }} EUR</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Solde restant</strong>
+                            <strong>{% trans "Solde restant" %}</strong>
                             <p>
                                 {% if payment.remaining > 0 %}
                                     <span style="color:#e05a1e; font-weight:600;">{{ payment.remaining }} EUR</span>
                                 {% else %}
-                                    <span style="color:#2a7a3b; font-weight:600;">Solde apure</span>
+                                    <span style="color:#2a7a3b; font-weight:600;">{% trans "Solde apure" %}</span>
                                 {% endif %}
                             </p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Date du paiement</strong>
-                            <p>{{ payment.paid_at|date:"d/m/Y H:i"|default:"Non renseignee" }}</p>
+                            <strong>{% trans "Date du paiement" %}</strong>
+                            <p>{{ payment.paid_at|date:"d/m/Y H:i"|default:"—" }}</p>
                         </div>
                     </div>
 
                     <div class="member-detail-grid">
                         <div class="member-detail-block">
-                            <strong>Reference</strong>
-                            <p style="word-break:break-all; font-size:0.82rem;">{{ payment.transaction_reference|default:"Aucune" }}</p>
+                            <strong>{% trans "Reference" %}</strong>
+                            <p style="word-break:break-all; font-size:0.82rem;">{{ payment.transaction_reference|default:"—" }}</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Rendez-vous</strong>
+                            <strong>{% trans "Rendez-vous" %}</strong>
                             <p>
                                 {% if payment.reservation.appointment_date %}
-                                    {{ payment.reservation.appointment_date|date:"d/m/Y \a H:i" }}
+                                    {% blocktrans with date=payment.reservation.appointment_date|date:"d/m/Y" time=payment.reservation.appointment_date|date:"H:i" %}{{ date }} a {{ time }}{% endblocktrans %}
                                 {% else %}
-                                    Non renseigne
+                                    —
                                 {% endif %}
                             </p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Documents</strong>
+                            <strong>{% trans "Documents" %}</strong>
                             <p>
                                 {% if payment.status == 'paid' %}
                                     {% if payment.remaining <= 0 %}
-                                        <strong style="display:block; font-size:0.8rem; color:var(--muted); margin-bottom:5px; text-transform:uppercase;">Dossier de vente</strong>
+                                        <strong style="display:block; font-size:0.8rem; color:var(--muted); margin-bottom:5px; text-transform:uppercase;">{% trans "Dossier de vente" %}</strong>
                                         <a href="{% url 'payments:download_facture' payment.id %}" style="display:block; margin-bottom:4px;">
-                                            <i class="fa-solid fa-file-invoice"></i> Facture finale
+                                            <i class="fa-solid fa-file-invoice"></i> {% trans "Facture finale" %}
                                         </a>
                                         <a href="{% url 'payments:download_cession' payment.id %}" style="display:block; margin-bottom:4px;">
-                                            <i class="fa-solid fa-file-signature"></i> Acte de cession
+                                            <i class="fa-solid fa-file-signature"></i> {% trans "Acte de cession" %}
                                         </a>
                                         <a href="{% url 'payments:download_specimen' payment.id %}" style="display:block;">
-                                            <i class="fa-solid fa-id-card"></i> Specimen immatriculation
+                                            <i class="fa-solid fa-id-card"></i> {% trans "Specimen immatriculation" %}
                                         </a>
                                     {% else %}
-                                        <strong style="display:block; font-size:0.8rem; color:var(--muted); margin-bottom:5px; text-transform:uppercase;">Acompte</strong>
+                                        <strong style="display:block; font-size:0.8rem; color:var(--muted); margin-bottom:5px; text-transform:uppercase;">{% trans "Acompte" %}</strong>
                                         <a href="{% url 'payments:download_recu_acompte' payment.id %}" style="display:block;">
-                                            <i class="fa-solid fa-receipt"></i> Recu d'acompte
+                                            <i class="fa-solid fa-receipt"></i> {% trans "Recu d'acompte" %}
                                         </a>
                                         <span style="display:block; margin-top:5px; font-size:0.82rem; color:var(--muted);">
-                                            Dossier complet disponible apres paiement integral
+                                            {% trans "Dossier complet disponible apres paiement integral" %}
                                         </span>
                                     {% endif %}
                                 {% else %}
-                                    <span style="color:var(--muted);">Disponible apres paiement</span>
+                                    <span style="color:var(--muted);">{% trans "Disponible apres paiement" %}</span>
                                 {% endif %}
                             </p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Statut reservation</strong>
+                            <strong>{% trans "Statut reservation" %}</strong>
                             <p>{{ payment.reservation.get_status_display }}</p>
                         </div>
                     </div>
 
                     {% if payment.status == "refund_requested" %}
                         <div class="member-note member-note-warning">
-                            <strong>Remboursement en cours de traitement</strong>
-                            <p>Votre demande de remboursement a ete enregistree. Notre equipe la traitera sous 14 jours. Des frais administratifs de 10 % minimum peuvent etre retenus.</p>
+                            <strong>{% trans "Remboursement en cours de traitement" %}</strong>
+                            <p>{% trans "Votre demande de remboursement a ete enregistree. Notre equipe la traitera sous 14 jours. Des frais administratifs de 10 % minimum peuvent etre retenus." %}</p>
                         </div>
                     {% elif payment.status == "refunded" %}
                         <div class="member-note" style="border-left-color:#2a7a3b;">
-                            <strong>Remboursement effectue</strong>
+                            <strong>{% trans "Remboursement effectue" %}</strong>
                             {% if payment.refund_amount %}
-                                <p>Montant rembourse : <strong>{{ payment.refund_amount }} EUR</strong></p>
+                                <p>{% blocktrans with amount=payment.refund_amount %}Montant rembourse : {{ amount }} EUR{% endblocktrans %}</p>
                             {% endif %}
                             {% if payment.refund_note %}
                                 <p style="margin-top:6px; color:var(--muted);">{{ payment.refund_note }}</p>
@@ -145,27 +146,27 @@
                     {% endif %}
 
                     <div class="hero-actions">
-                        <a class="button primary" href="{% url 'vehicles:vehicle_detail' payment.reservation.vehicle.id %}">Voir le vehicule</a>
+                        <a class="button primary" href="{% url 'vehicles:vehicle_detail' payment.reservation.vehicle.id %}">{% trans "Voir le vehicule" %}</a>
                         {% if payment.remaining > 0 and payment.reservation.status == 'deposit_paid' %}
-                            <a class="button primary" href="{% url 'payments:checkout' %}">Completer le paiement ({{ payment.remaining }} EUR)</a>
+                            <a class="button primary" href="{% url 'payments:checkout' %}">{% blocktrans with remaining=payment.remaining %}Completer le paiement ({{ remaining }} EUR){% endblocktrans %}</a>
                         {% endif %}
                         {% if payment.reservation.status == 'deposit_paid' and payment.status == 'paid' %}
                             <form method="post" action="{% url 'reservations:cancel_reservation' payment.reservation.id %}"
-                                  onsubmit="return confirm('ATTENTION — Un acompte de {{ payment.amount }} EUR a ete verse.\nDes frais administratifs de 10 % minimum pourront etre retenus sur le remboursement.\nConfirmer l annulation ?');">
+                                  onsubmit="return confirm('{% trans "Confirmer l annulation et la demande de remboursement ?" %}');">
                                 {% csrf_token %}
-                                <button type="submit" class="button danger">Annuler et demander un remboursement</button>
+                                <button type="submit" class="button danger">{% trans "Annuler et demander un remboursement" %}</button>
                             </form>
                         {% endif %}
-                        <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
+                        <a class="button secondary" href="{% url 'reservations:my_reservations' %}">{% trans "Mes reservations" %}</a>
                     </div>
                 </article>
             {% endfor %}
         </div>
     {% else %}
         <div class="empty-state">
-            <h2>Aucun achat pour le moment</h2>
-            <p>Les vehicules pour lesquels vous avez verse un acompte apparaitront ici avec tous les details financiers.</p>
-            <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">Decouvrir le catalogue</a>
+            <h2>{% trans "Aucun achat pour le moment" %}</h2>
+            <p>{% trans "Les vehicules pour lesquels vous avez verse un acompte apparaitront ici avec tous les details financiers." %}</p>
+            <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">{% trans "Decouvrir le catalogue" %}</a>
         </div>
     {% endif %}
 </section>

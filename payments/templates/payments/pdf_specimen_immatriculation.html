@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load i18n %}<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,6 @@
         body { font-family: Helvetica, Arial, sans-serif; font-size: 10.5pt;
                color: #1a1a2e; background-color: #fce8ee; }
 
-        /* Bandeau specimen */
         .specimen-banner {
             background: #c0002a;
             color: #fff;
@@ -19,7 +18,6 @@
             margin-bottom: 16px;
         }
 
-        /* Header */
         .header { display: table; width: 100%; margin-bottom: 18px; }
         .header-left  { display: table-cell; vertical-align: top; width: 58%; }
         .header-right { display: table-cell; vertical-align: top; text-align: right; }
@@ -31,20 +29,17 @@
         hr { border: none; border-top: 2px solid #1a1a2e; margin: 12px 0; }
         hr.pink { border-top: 1px solid #d48090; margin: 8px 0; }
 
-        /* Sections */
         .section-title {
             font-size: 9.5pt; font-weight: bold; text-transform: uppercase;
             color: #c0002a; letter-spacing: 0.5px; margin: 14px 0 5px;
             border-left: 3px solid #c0002a; padding-left: 7px;
         }
 
-        /* Tables info */
         table { width: 100%; border-collapse: collapse; }
         .info-table td { padding: 4px 8px; font-size: 9.5pt; vertical-align: top; }
         .info-table td:first-child { font-weight: bold; width: 44%; color: #333; }
         .info-table tr:nth-child(even) td { background: #f9e8ec; }
 
-        /* Parties */
         .parties { display: table; width: 100%; margin: 8px 0; }
         .party   { display: table-cell; width: 50%; vertical-align: top;
                    padding: 10px 12px; background: #fff; border: 1px solid #d48090; }
@@ -53,31 +48,26 @@
                        color: #c0002a; margin-bottom: 5px; }
         .party p { font-size: 9.5pt; margin: 2px 0; }
 
-        /* Highlight box */
         .highlight-box { background: #1a1a2e; color: #fff; padding: 10px 14px;
                           margin: 12px 0; }
         .highlight-box p { margin: 3px 0; font-size: 10pt; }
 
-        /* Zone assurance */
         .info-box { background: #fff; border: 1px solid #d48090;
                      padding: 10px 14px; margin: 10px 0; font-size: 9pt; }
         .info-box .info-label { font-weight: bold; color: #c0002a;
                                  font-size: 8.5pt; text-transform: uppercase; }
 
-        /* Signatures */
         .sign-table { width: 100%; margin-top: 22px; }
         .sign-table td { width: 50%; vertical-align: top; padding: 8px 12px; }
         .sign-line { border-top: 1px solid #888; margin-top: 36px;
                      font-size: 8pt; color: #666; padding-top: 4px; }
 
-        /* Disclaimer */
         .disclaimer {
             background: #fff0f3; border: 1px solid #d48090;
             padding: 9px 13px; margin-top: 16px; font-size: 8pt; color: #555;
             font-style: italic;
         }
 
-        /* Footer */
         .footer { margin-top: 14px; font-size: 7.5pt; color: #888;
                   text-align: center; border-top: 1px solid #d48090; padding-top: 8px; }
     </style>
@@ -85,114 +75,108 @@
 <body>
 
 <div class="specimen-banner">
-    SPECIMEN &ndash; DOCUMENT DE DEMONSTRATION &ndash; NON VALABLE
+    {% trans "SPECIMEN — DOCUMENT DE DEMONSTRATION — NON VALABLE" %}
 </div>
 
 <div class="header">
     <div class="header-left">
         <div class="brand">MultiDrive</div>
-        <div class="brand-sub">Plateforme de vehicules d'occasion<br>multidrive25@gmail.com</div>
+        <div class="brand-sub">{% trans "Plateforme de vehicules d'occasion" %}<br>multidrive25@gmail.com</div>
     </div>
     <div class="header-right">
-        <div class="doc-title">SPECIMEN D'IMMATRICULATION</div>
+        <div class="doc-title">{% trans "SPECIMEN D'IMMATRICULATION" %}</div>
         <div class="doc-ref">
-            Ref. : {{ specimen_ref }}<br>
-            Date : {{ issued_date }}
+            {% trans "Ref. :" %} {{ specimen_ref }}<br>
+            {% trans "Date :" %} {{ issued_date }}
         </div>
     </div>
 </div>
 
 <hr>
 
-<p class="section-title">Identification du titulaire (acheteur)</p>
+<p class="section-title">{% trans "Identification du titulaire (acheteur)" %}</p>
 
 <div class="parties">
     <div class="party">
-        <div class="party-title">Coordonnees</div>
+        <div class="party-title">{% trans "Coordonnees" %}</div>
         <p><strong>{{ buyer_name }}</strong></p>
         <p>{{ buyer_email }}</p>
-        <p>Adresse : Non renseignee</p>
+        <p>{% trans "Adresse : Non renseignee" %}</p>
     </div>
     <div class="party party-right">
-        <div class="party-title">Identification</div>
-        <p>Membre MultiDrive #{{ buyer_id }}</p>
-        <p>N° reservation : #{{ reservation_id }}</p>
-        <p>Date de transaction : {{ paid_at }}</p>
+        <div class="party-title">{% trans "Identification" %}</div>
+        <p>{% trans "Membre MultiDrive" %} #{{ buyer_id }}</p>
+        <p>{% trans "N° reservation :" %} #{{ reservation_id }}</p>
+        <p>{% trans "Date de transaction :" %} {{ paid_at }}</p>
     </div>
 </div>
 
-<p class="section-title">Identification du vehicule</p>
+<p class="section-title">{% trans "Identification du vehicule" %}</p>
 
 <table class="info-table">
-    <tr><td>Marque</td><td>{{ vehicle_brand }}</td></tr>
-    <tr><td>Modele</td><td>{{ vehicle_model }}</td></tr>
-    <tr><td>Annee</td><td>{{ vehicle_year }}</td></tr>
-    <tr><td>Categorie</td><td>{{ vehicle_category }}</td></tr>
-    <tr><td>Vehicule neuf / usage</td><td>Usage (vehicule d'occasion)</td></tr>
-    <tr><td>Designation complete</td><td>{{ vehicle_title }}</td></tr>
-    <tr><td>Numero de chassis (VIN)</td><td>Non disponible</td></tr>
+    <tr><td>{% trans "Marque" %}</td><td>{{ vehicle_brand }}</td></tr>
+    <tr><td>{% trans "Modele" %}</td><td>{{ vehicle_model }}</td></tr>
+    <tr><td>{% trans "Annee" %}</td><td>{{ vehicle_year }}</td></tr>
+    <tr><td>{% trans "Categorie" %}</td><td>{{ vehicle_category }}</td></tr>
+    <tr><td>{% trans "Vehicule neuf / usage" %}</td><td>{% trans "Usage (vehicule d'occasion)" %}</td></tr>
+    <tr><td>{% trans "Designation complete" %}</td><td>{{ vehicle_title }}</td></tr>
+    <tr><td>{% trans "Numero de chassis (VIN)" %}</td><td>{% trans "Non disponible" %}</td></tr>
 </table>
 
-<p class="section-title">Donnees financieres</p>
+<p class="section-title">{% trans "Donnees financieres" %}</p>
 
 <div class="highlight-box">
-    <p>Prix de cession : <strong>{{ vehicle_price }} EUR</strong></p>
-    <p>Acompte verse    : <strong>{{ amount_paid }} EUR</strong></p>
+    <p>{% trans "Prix de cession :" %} <strong>{{ vehicle_price }} EUR</strong></p>
+    <p>{% trans "Acompte verse :" %} <strong>{{ amount_paid }} EUR</strong></p>
     <p>
-        Solde restant :
+        {% trans "Solde restant :" %}
         {% if remaining == "0.00" %}
-            <strong>Neant &mdash; paiement integral</strong>
+            <strong>{% trans "Neant — paiement integral" %}</strong>
         {% else %}
             <strong>{{ remaining }} EUR</strong>
         {% endif %}
     </p>
 </div>
 
-<p class="section-title">Immatriculation &amp; assurance (indicatif)</p>
+<p class="section-title">{% trans "Immatriculation & assurance (indicatif)" %}</p>
 
 <div class="info-box">
-    <div class="info-label">Plaque d'immatriculation</div>
+    <div class="info-label">{% trans "Plaque d'immatriculation" %}</div>
     <table class="info-table" style="margin-top:6px;">
-        <tr><td>Plaque existante</td><td>Non renseignee</td></tr>
-        <tr><td>Type de plaque</td><td>Ordinaire / Transit (a determiner)</td></tr>
-        <tr><td>Zone assurance (indicatif)</td><td>Zone nationale &mdash; Belgique (BE)</td></tr>
-        <tr><td>Compagnie d'assurance</td><td>A choisir par l'acheteur</td></tr>
+        <tr><td>{% trans "Plaque existante" %}</td><td>{% trans "Non renseignee" %}</td></tr>
+        <tr><td>{% trans "Type de plaque" %}</td><td>{% trans "Ordinaire / Transit (a determiner)" %}</td></tr>
+        <tr><td>{% trans "Zone assurance (indicatif)" %}</td><td>{% trans "Zone nationale — Belgique (BE)" %}</td></tr>
+        <tr><td>{% trans "Compagnie d'assurance" %}</td><td>{% trans "A choisir par l'acheteur" %}</td></tr>
     </table>
 </div>
 
-<p class="section-title">Signatures</p>
+<p class="section-title">{% trans "Signatures" %}</p>
 
 <table class="sign-table">
     <tr>
         <td>
-            <strong>Le vendeur (cedant)</strong><br>
+            <strong>{% trans "Le vendeur (cedant)" %}</strong><br>
             <small>MultiDrive &mdash; {{ issued_date }}</small>
             {% if signature_url %}
             <div style="margin: 6px 0 0;"><img src="{{ signature_url }}" style="height:48px; width:auto;"></div>
             {% endif %}
-            <div class="sign-line">Signature MultiDrive</div>
+            <div class="sign-line">{% trans "Signature MultiDrive" %}</div>
         </td>
         <td>
-            <strong>L'acheteur (cessionnaire)</strong><br>
+            <strong>{% trans "L'acheteur (cessionnaire)" %}</strong><br>
             <small>{{ buyer_name }}</small>
-            <div class="sign-line">Signature de l'acheteur</div>
+            <div class="sign-line">{% trans "Signature de l'acheteur" %}</div>
         </td>
     </tr>
 </table>
 
 <div class="disclaimer">
-    Ce document est un <strong>specimen non officiel</strong> genere dans le cadre du projet academique MultiDrive,
-    joint au dossier de vente en remplacement pedagogique du formulaire officiel d'immatriculation.
-    Il ne constitue pas une demande officielle d'immatriculation et ne peut en aucun cas etre transmis
-    a la DIV ou a un assureur. Aucun logo officiel DIV, vignette d'assurance reelle ou
-    numero administratif officiel n'est utilise.
-    Dans une transaction reelle, ce document serait remplace par les formulaires officiels
-    delivres par les autorites competentes.
+    {% trans "Ce document est un specimen non officiel genere dans le cadre du projet academique MultiDrive, joint au dossier de vente en remplacement pedagogique du formulaire officiel d'immatriculation. Il ne constitue pas une demande officielle d'immatriculation et ne peut en aucun cas etre transmis a la DIV ou a un assureur. Aucun logo officiel DIV, vignette d'assurance reelle ou numero administratif officiel n'est utilise. Dans une transaction reelle, ce document serait remplace par les formulaires officiels delivres par les autorites competentes." %}
 </div>
 
 <div class="footer">
-    MultiDrive &mdash; Projet academique TFE &bull; multidrive25@gmail.com<br>
-    Specimen ref. {{ specimen_ref }} &mdash; genere le {{ issued_date }}
+    MultiDrive &mdash; {% trans "Projet academique TFE" %} &bull; multidrive25@gmail.com<br>
+    {% blocktrans with ref=specimen_ref date=issued_date %}Specimen ref. {{ ref }} &mdash; genere le {{ date }}{% endblocktrans %}
 </div>
 
 </body>

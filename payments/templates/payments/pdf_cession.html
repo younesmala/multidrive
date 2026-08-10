@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load i18n %}<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -13,31 +13,23 @@
         .doc-title { font-size: 16pt; font-weight: bold; margin: 0 0 4px 0; }
         .doc-ref { font-size: 9pt; color: #555; }
         hr { border: none; border-top: 2px solid #1a1a2e; margin: 16px 0; }
-        .section-title { font-size: 10pt; font-weight: bold; text-transform: uppercase;
-                         color: #555; letter-spacing: 0.5px; margin: 16px 0 6px; }
+        .section-title { font-size: 10pt; font-weight: bold; text-transform: uppercase; color: #555; letter-spacing: 0.5px; margin: 16px 0 6px; }
         table { width: 100%; border-collapse: collapse; }
         .info-table td { padding: 5px 8px; font-size: 10pt; vertical-align: top; }
         .info-table td:first-child { font-weight: bold; width: 42%; }
         .parties { display: table; width: 100%; margin: 10px 0; }
-        .party { display: table-cell; width: 50%; vertical-align: top; padding: 12px 14px;
-                 background: #f8f8f8; border: 1px solid #e0e0e0; }
-        .party-title { font-size: 9.5pt; font-weight: bold; text-transform: uppercase;
-                       color: #555; margin-bottom: 6px; }
+        .party { display: table-cell; width: 50%; vertical-align: top; padding: 12px 14px; background: #f8f8f8; border: 1px solid #e0e0e0; }
+        .party-title { font-size: 9.5pt; font-weight: bold; text-transform: uppercase; color: #555; margin-bottom: 6px; }
         .party p { font-size: 10pt; margin: 2px 0; }
         .party-right { margin-left: 12px; }
-        .highlight-box { background: #1a1a2e; color: #fff; padding: 12px 16px;
-                         margin: 16px 0; border-radius: 4px; }
+        .highlight-box { background: #1a1a2e; color: #fff; padding: 12px 16px; margin: 16px 0; border-radius: 4px; }
         .highlight-box p { margin: 3px 0; font-size: 10.5pt; }
-        .alert-box { background: #fff8e1; border-left: 4px solid #f5a623;
-                     padding: 10px 14px; margin: 14px 0; font-size: 9.5pt; }
+        .alert-box { background: #fff8e1; border-left: 4px solid #f5a623; padding: 10px 14px; margin: 14px 0; font-size: 9.5pt; }
         .sign-table { width: 100%; margin-top: 30px; }
         .sign-table td { width: 50%; vertical-align: top; padding: 10px 14px; }
-        .sign-line { border-top: 1px solid #888; margin-top: 40px;
-                     font-size: 8.5pt; color: #666; padding-top: 4px; }
-        .footer { margin-top: 30px; font-size: 8pt; color: #888; text-align: center;
-                  border-top: 1px solid #ddd; padding-top: 10px; }
-        .mention-legal { font-size: 8.5pt; color: #555; margin-top: 14px;
-                         border: 1px solid #ddd; padding: 10px 14px; }
+        .sign-line { border-top: 1px solid #888; margin-top: 40px; font-size: 8.5pt; color: #666; padding-top: 4px; }
+        .footer { margin-top: 30px; font-size: 8pt; color: #888; text-align: center; border-top: 1px solid #ddd; padding-top: 10px; }
+        .mention-legal { font-size: 8.5pt; color: #555; margin-top: 14px; border: 1px solid #ddd; padding: 10px 14px; }
     </style>
 </head>
 <body>
@@ -45,13 +37,13 @@
 <div class="header">
     <div class="header-left">
         <div class="brand">MultiDrive</div>
-        <div class="brand-sub">Plateforme de vehicules d'occasion<br>multidrive25@gmail.com</div>
+        <div class="brand-sub">{% trans "Plateforme de vehicules d'occasion" %}<br>multidrive25@gmail.com</div>
     </div>
     <div class="header-right">
-        <div class="doc-title">ACTE DE CESSION</div>
+        <div class="doc-title">{% trans "ACTE DE CESSION" %}</div>
         <div class="doc-ref">
-            Ref. : {{ cession_ref }}<br>
-            Date : {{ cession_date }}
+            {% trans "Ref. :" %} {{ cession_ref }}<br>
+            {% trans "Date :" %} {{ cession_date }}
         </div>
     </div>
 </div>
@@ -59,107 +51,78 @@
 <hr>
 
 <p style="font-size:10pt; margin:0 0 14px;">
-    Le present acte atteste de la cession du vehicule decrit ci-dessous entre les parties suivantes :
+    {% trans "Le present acte atteste de la cession du vehicule decrit ci-dessous entre les parties suivantes :" %}
 </p>
 
 <div class="parties">
     <div class="party">
-        <div class="party-title">Vendeur (cedant)</div>
+        <div class="party-title">{% trans "Vendeur (cedant)" %}</div>
         <p><strong>MultiDrive</strong></p>
-        <p>Plateforme de vente de vehicules d'occasion</p>
+        <p>{% trans "Plateforme de vente de vehicules d'occasion" %}</p>
         <p>multidrive25@gmail.com</p>
     </div>
     <div class="party party-right">
-        <div class="party-title">Acheteur (cessionnaire)</div>
+        <div class="party-title">{% trans "Acheteur (cessionnaire)" %}</div>
         <p><strong>{{ buyer_name }}</strong></p>
         <p>{{ buyer_email }}</p>
-        <p>Membre #{{ buyer_id }}</p>
+        <p>{% trans "Membre" %} #{{ buyer_id }}</p>
     </div>
 </div>
 
-<p class="section-title">Vehicule cede</p>
+<p class="section-title">{% trans "Vehicule cede" %}</p>
 <table class="info-table">
-    <tr>
-        <td>Designation</td>
-        <td>{{ vehicle_title }}</td>
-    </tr>
-    <tr>
-        <td>Categorie</td>
-        <td>{{ vehicle_category }}</td>
-    </tr>
-    <tr>
-        <td>Annee estimee</td>
-        <td>{{ vehicle_year }}</td>
-    </tr>
-    <tr>
-        <td>Numero de reservation</td>
-        <td>#{{ reservation_id }}</td>
-    </tr>
+    <tr><td>{% trans "Designation" %}</td><td>{{ vehicle_title }}</td></tr>
+    <tr><td>{% trans "Categorie" %}</td><td>{{ vehicle_category }}</td></tr>
+    <tr><td>{% trans "Annee estimee" %}</td><td>{{ vehicle_year }}</td></tr>
+    <tr><td>{% trans "Numero de reservation" %}</td><td>#{{ reservation_id }}</td></tr>
 </table>
 
 <div class="highlight-box">
-    <p>Prix de cession convenu : <strong>{{ vehicle_price }} EUR</strong></p>
-    <p>Acompte verse a ce jour : <strong>{{ amount_paid }} EUR</strong></p>
+    <p>{% trans "Prix de cession convenu :" %} <strong>{{ vehicle_price }} EUR</strong></p>
+    <p>{% trans "Acompte verse a ce jour :" %} <strong>{{ amount_paid }} EUR</strong></p>
     <p>
-        Solde restant :
+        {% trans "Solde restant :" %}
         {% if remaining == "0.00" %}
-            <strong>Neant — paiement integral</strong>
+            <strong>{% trans "Neant — paiement integral" %}</strong>
         {% else %}
-            <strong>{{ remaining }} EUR</strong> a regler avant remise des cles
+            <strong>{{ remaining }} EUR</strong> {% trans "a regler avant remise des cles" %}
         {% endif %}
     </p>
 </div>
 
 <div class="alert-box">
-    <strong>Document d'immatriculation (specimen pedagogique joint)</strong><br>
-    Dans le cadre de ce projet academique, un specimen non officiel de demande d'immatriculation
-    est joint a ce dossier de vente a titre pedagogique. Ce document porte la mention
-    <strong>SPECIMEN &ndash; NON VALABLE</strong> et ne constitue pas un document administratif reel.
-    Il illustre les informations qui seraient normalement transmises a la DIV lors d'une
-    transaction reelle. Toute question peut etre adressee a multidrive25@gmail.com.
+    <strong>{% trans "Document d'immatriculation (specimen pedagogique joint)" %}</strong><br>
+    {% trans "Dans le cadre de ce projet academique, un specimen non officiel de demande d'immatriculation est joint a ce dossier de vente a titre pedagogique. Ce document porte la mention SPECIMEN — NON VALABLE et ne constitue pas un document administratif reel." %}
 </div>
 
-<p class="section-title">Conditions de la cession</p>
+<p class="section-title">{% trans "Conditions de la cession" %}</p>
 <table class="info-table">
-    <tr>
-        <td>Le vehicule est vendu en l'etat, tel que vu et accepte par l'acheteur lors de la reservation.</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Le transfert de propriete est effectif a la reception du paiement integral.</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>L'acheteur reconnait avoir pris connaissance des conditions generales disponibles sur le site.</td>
-        <td></td>
-    </tr>
+    <tr><td>{% trans "Le vehicule est vendu en l'etat, tel que vu et accepte par l'acheteur lors de la reservation." %}</td><td></td></tr>
+    <tr><td>{% trans "Le transfert de propriete est effectif a la reception du paiement integral." %}</td><td></td></tr>
+    <tr><td>{% trans "L'acheteur reconnait avoir pris connaissance des conditions generales disponibles sur le site." %}</td><td></td></tr>
 </table>
 
 <table class="sign-table">
     <tr>
         <td>
-            <strong>Le vendeur</strong>
-            {% if signature_url %}
-            <div style="margin: 6px 0 0;"><img src="{{ signature_url }}" style="height:48px; width:auto;"></div>
-            {% endif %}
-            <div class="sign-line">Signature MultiDrive</div>
+            <strong>{% trans "Le vendeur" %}</strong>
+            {% if signature_url %}<div style="margin: 6px 0 0;"><img src="{{ signature_url }}" style="height:48px; width:auto;"></div>{% endif %}
+            <div class="sign-line">{% trans "Signature MultiDrive" %}</div>
         </td>
         <td>
-            <strong>L'acheteur</strong>
+            <strong>{% trans "L'acheteur" %}</strong>
             <div class="sign-line">{{ buyer_name }}</div>
         </td>
     </tr>
 </table>
 
 <div class="mention-legal">
-    Ce document est genere electroniquement par la plateforme MultiDrive a titre de preuve de transaction.
-    Il ne se substitue pas aux documents officiels d'immatriculation qui restent de la responsabilite
-    des autorites competentes. Document genere le {{ cession_date }}.
+    {% blocktrans with date=cession_date %}Ce document est genere electroniquement par la plateforme MultiDrive a titre de preuve de transaction. Il ne se substitue pas aux documents officiels d'immatriculation. Document genere le {{ date }}.{% endblocktrans %}
 </div>
 
 <div class="footer">
-    MultiDrive — Projet academique TFE &bull; multidrive25@gmail.com<br>
-    Acte de cession N° {{ cession_ref }}
+    MultiDrive — {% trans "Projet academique TFE" %} &bull; multidrive25@gmail.com<br>
+    {% trans "Acte de cession N°" %} {{ cession_ref }}
 </div>
 
 </body>

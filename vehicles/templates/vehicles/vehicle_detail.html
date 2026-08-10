@@ -1,4 +1,5 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
 {% block title %}{{ vehicle.title }} - MultiDrive{% endblock %}
 
@@ -23,85 +24,90 @@
             {% endfor %}
         {% else %}
             <div class="gallery-item">
-                <span>{{ vehicle.category.name }}</span>
+                <span>{% trans vehicle.category.name %}</span>
             </div>
         {% endif %}
     </div>
 
     <div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
-        <button class="lightbox-close" id="lightbox-close" aria-label="Fermer">&times;</button>
+        <button class="lightbox-close" id="lightbox-close" aria-label="{% trans 'Fermer' %}">&times;</button>
         <img class="lightbox-img" id="lightbox-img" src="" alt="">
     </div>
 
     <article class="detail-panel">
-        <p class="eyebrow">{{ vehicle.category.name }}</p>
+        <p class="eyebrow">{% trans vehicle.category.name %}</p>
         <div class="detail-title-row">
             <h1>{{ vehicle.title }}</h1>
             {% if request.user.is_authenticated %}
             <button class="fav-btn fav-btn--large{% if vehicle.is_favorite %} fav-active{% endif %}"
                     data-url="{% url 'vehicles:toggle_favorite' vehicle.id %}"
-                    title="{% if vehicle.is_favorite %}Retirer des favoris{% else %}Ajouter aux favoris{% endif %}">
+                    title="{% if vehicle.is_favorite %}{% trans 'Retirer des favoris' %}{% else %}{% trans 'Ajouter aux favoris' %}{% endif %}">
                 <i class="fa-{% if vehicle.is_favorite %}solid{% else %}regular{% endif %} fa-star"></i>
             </button>
             {% endif %}
         </div>
         <p class="status status-{{ vehicle.status }}">{{ vehicle.get_status_display }}</p>
-        <p class="description">{{ vehicle.description }}</p>
+        <p class="description">
+            {% get_current_language as LANG %}
+            {% if LANG == "en" and vehicle.description_en %}{{ vehicle.description_en }}
+            {% elif LANG == "nl" and vehicle.description_nl %}{{ vehicle.description_nl }}
+            {% else %}{{ vehicle.description }}{% endif %}
+        </p>
 
         <div class="fiche-technique">
-            <h3 class="fiche-titre">Fiche technique</h3>
+            <h3 class="fiche-titre">{% trans "Fiche technique" %}</h3>
             <div class="fiche-grid">
                 <div class="fiche-item">
-                    <span class="fiche-label">Marque</span>
+                    <span class="fiche-label">{% trans "Marque" %}</span>
                     <strong class="fiche-value">{{ vehicle.display_brand }}</strong>
                 </div>
                 <div class="fiche-item">
-                    <span class="fiche-label">Modele</span>
+                    <span class="fiche-label">{% trans "Modele" %}</span>
                     <strong class="fiche-value">{{ vehicle.display_model }}</strong>
                 </div>
                 <div class="fiche-item">
-                    <span class="fiche-label">Annee</span>
+                    <span class="fiche-label">{% trans "Annee" %}</span>
                     <strong class="fiche-value">{{ vehicle.display_year }}</strong>
                 </div>
                 <div class="fiche-item">
-                    <span class="fiche-label">Categorie</span>
-                    <strong class="fiche-value">{{ vehicle.category.name }}</strong>
+                    <span class="fiche-label">{% trans "Categorie" %}</span>
+                    <strong class="fiche-value">{% trans vehicle.category.name %}</strong>
                 </div>
                 <div class="fiche-item">
-                    <span class="fiche-label">Carrosserie</span>
+                    <span class="fiche-label">{% trans "Carrosserie" %}</span>
                     <strong class="fiche-value fiche-etat">{{ vehicle.get_carrosserie_display|default:"—" }}</strong>
                 </div>
                 <div class="fiche-item">
-                    <span class="fiche-label">Moteur</span>
+                    <span class="fiche-label">{% trans "Moteur" %}</span>
                     <strong class="fiche-value fiche-etat">{{ vehicle.get_moteur_display|default:"—" }}</strong>
                 </div>
             </div>
             {% if vehicle.condition_notes %}
             <div class="fiche-notes">
-                <span class="fiche-label">Commentaire</span>
+                <span class="fiche-label">{% trans "Commentaire" %}</span>
                 <p class="fiche-notes-text">{{ vehicle.condition_notes }}</p>
             </div>
             {% endif %}
             <div class="fiche-prix-row">
                 <div class="fiche-prix-block">
-                    <span class="fiche-label">Prix de vente</span>
+                    <span class="fiche-label">{% trans "Prix de vente" %}</span>
                     <strong class="fiche-prix">{{ vehicle.price }} EUR</strong>
                 </div>
                 <div class="fiche-prix-block">
-                    <span class="fiche-label">Acompte (20%)</span>
+                    <span class="fiche-label">{% trans "Acompte (20%)" %}</span>
                     <strong class="fiche-acompte">{{ vehicle.deposit_amount }} EUR</strong>
                 </div>
             </div>
         </div>
         <div class="detail-actions">
             {% if vehicle.status == 'available' %}
-                <a class="button primary" href="{% url 'reservations:reserve_vehicle' vehicle.id %}">Reserver ce vehicule</a>
+                <a class="button primary" href="{% url 'reservations:reserve_vehicle' vehicle.id %}">{% trans "Reserver ce vehicule" %}</a>
             {% elif vehicle.status == 'reserved' %}
-                <span class="vehicle-unavailable-msg">Ce vehicule est deja reserve.</span>
+                <span class="vehicle-unavailable-msg">{% trans "Ce vehicule est deja reserve." %}</span>
             {% else %}
-                <span class="vehicle-unavailable-msg">Ce vehicule n'est plus disponible.</span>
+                <span class="vehicle-unavailable-msg">{% trans "Ce vehicule n'est plus disponible." %}</span>
             {% endif %}
-            <a class="button secondary" href="{% url 'vehicles:vehicle_list' %}">Retour au catalogue</a>
+            <a class="button secondary" href="{% url 'vehicles:vehicle_list' %}">{% trans "Retour au catalogue" %}</a>
         </div>
     </article>
 </section>
@@ -109,13 +115,12 @@
 <section class="section">
     <div class="section-heading">
         <div>
-            <h2>Avis clients</h2>
+            <h2>{% trans "Avis clients" %}</h2>
             <p>
                 {% if review_count %}
-                    {{ review_count }} avis, note moyenne :
-                    {{ average_rating|floatformat:1 }}/5
+                    {% blocktrans with count=review_count avg=average_rating|floatformat:1 %}{{ count }} avis, note moyenne : {{ avg }}/5{% endblocktrans %}
                 {% else %}
-                    Aucun avis pour ce vehicule pour le moment.
+                    {% trans "Aucun avis pour ce vehicule pour le moment." %}
                 {% endif %}
             </p>
         </div>
@@ -123,7 +128,7 @@
 
     {% if can_review %}
         <div class="review-form-card">
-            <h3>{% if user_review %}Modifier mon avis{% else %}Laisser un avis{% endif %}</h3>
+            <h3>{% if user_review %}{% trans "Modifier mon avis" %}{% else %}{% trans "Laisser un avis" %}{% endif %}</h3>
             <form class="auth-form" method="post" action="{% url 'vehicles:add_review' vehicle.id %}">
                 {% csrf_token %}
                 {{ review_form.non_field_errors }}
@@ -141,16 +146,16 @@
                         <span class="field-error">{{ error }}</span>
                     {% endfor %}
                 </label>
-                <button type="submit">{% if user_review %}Mettre a jour mon avis{% else %}Publier mon avis{% endif %}</button>
+                <button type="submit">{% if user_review %}{% trans "Mettre a jour mon avis" %}{% else %}{% trans "Publier mon avis" %}{% endif %}</button>
             </form>
         </div>
     {% else %}
         <div class="review-form-card">
             <p>{{ review_gate_message }}</p>
             {% if request.user.is_authenticated %}
-                <a class="button secondary" href="{% url 'reservations:reserve_vehicle' vehicle.id %}">Faire une demande de reservation</a>
+                <a class="button secondary" href="{% url 'reservations:reserve_vehicle' vehicle.id %}">{% trans "Faire une demande de reservation" %}</a>
             {% else %}
-                <a class="button primary" href="{% url 'accounts:login' %}">Se connecter</a>
+                <a class="button primary" href="{% url 'accounts:login' %}">{% trans "Se connecter" %}</a>
             {% endif %}
         </div>
     {% endif %}
@@ -161,7 +166,7 @@
                 <div class="review-header">
                     <div>
                         <strong>{{ review.user.username }}</strong>
-                        <small>Publie le {{ review.created_at|date:"d/m/Y H:i" }}</small>
+                        <small>{% blocktrans with date=review.created_at|date:"d/m/Y H:i" %}Publie le {{ date }}{% endblocktrans %}</small>
                     </div>
                     <span>{{ review.rating }}/5</span>
                 </div>
@@ -169,8 +174,8 @@
             </article>
         {% empty %}
             <div class="empty-state">
-                <h2>Aucun avis disponible</h2>
-                <p>Ce vehicule n'a pas encore recu d'avis membre.</p>
+                <h2>{% trans "Aucun avis disponible" %}</h2>
+                <p>{% trans "Ce vehicule n'a pas encore recu d'avis membre." %}</p>
             </div>
         {% endfor %}
     </div>
@@ -178,13 +183,13 @@
 
 <section class="section">
     <div class="section-heading">
-        <h2>Vehicules similaires</h2>
+        <h2>{% trans "Vehicules similaires" %}</h2>
     </div>
     <div class="vehicle-grid">
         {% for vehicle in related_vehicles %}
             {% include "vehicles/partials/vehicle_card.html" %}
         {% empty %}
-            <p>Aucune suggestion disponible.</p>
+            <p>{% trans "Aucune suggestion disponible." %}</p>
         {% endfor %}
     </div>
 </section>
@@ -193,48 +198,18 @@
 {% block extra_js %}
 <style>
 .gallery-item--clickable { cursor: zoom-in; }
-
-.lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.88);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-}
+.lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 9999; align-items: center; justify-content: center; }
 .lightbox.active { display: flex; }
-
-.lightbox-img {
-    max-width: 92vw;
-    max-height: 88vh;
-    object-fit: contain;
-    border-radius: 6px;
-    box-shadow: 0 8px 40px rgba(0,0,0,.6);
-}
-
-.lightbox-close {
-    position: absolute;
-    top: 18px;
-    right: 24px;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 2.4rem;
-    line-height: 1;
-    cursor: pointer;
-    padding: 0 8px;
-    opacity: .8;
-}
+.lightbox-img { max-width: 92vw; max-height: 88vh; object-fit: contain; border-radius: 6px; box-shadow: 0 8px 40px rgba(0,0,0,.6); }
+.lightbox-close { position: absolute; top: 18px; right: 24px; background: none; border: none; color: #fff; font-size: 2.4rem; line-height: 1; cursor: pointer; padding: 0 8px; opacity: .8; }
 .lightbox-close:hover { opacity: 1; }
 </style>
 <script>
 (function () {
     document.addEventListener('DOMContentLoaded', function () {
-        var lb    = document.getElementById('lightbox');
+        var lb = document.getElementById('lightbox');
         var lbImg = document.getElementById('lightbox-img');
         var lbClose = document.getElementById('lightbox-close');
-
         document.querySelectorAll('.gallery-item--clickable').forEach(function (item) {
             item.addEventListener('click', function () {
                 lbImg.src = item.dataset.src;
@@ -243,13 +218,7 @@
                 document.body.style.overflow = 'hidden';
             });
         });
-
-        function close() {
-            lb.classList.remove('active');
-            lbImg.src = '';
-            document.body.style.overflow = '';
-        }
-
+        function close() { lb.classList.remove('active'); lbImg.src = ''; document.body.style.overflow = ''; }
         lbClose.addEventListener('click', close);
         lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });

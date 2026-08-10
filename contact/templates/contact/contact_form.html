@@ -1,22 +1,23 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Contact - MultiDrive{% endblock %}
+{% block title %}{% trans "Contact" %} - MultiDrive{% endblock %}
 
 {% block content %}
 <section class="page-title">
-    <p class="eyebrow">Contact</p>
-    <h1>Nous contacter</h1>
-    <p>Posez votre question, demandez une information ou laissez un message pour un rendez-vous.</p>
+    <p class="eyebrow">{% trans "Contact" %}</p>
+    <h1>{% trans "Nous contacter" %}</h1>
+    <p>{% trans "Posez votre question, demandez une information ou laissez un message pour un rendez-vous." %}</p>
 </section>
 
 <section class="auth-page">
     <article class="form-card">
-        <h2>Envoyer un message</h2>
+        <h2>{% trans "Envoyer un message" %}</h2>
         <p class="auth-intro">
             {% if request.user.is_authenticated %}
-                Votre message sera associe a votre compte et vous pourrez lire une reponse dans votre espace membre.
+                {% trans "Votre message sera associe a votre compte et vous pourrez lire une reponse dans votre espace membre." %}
             {% else %}
-                Vous pouvez nous contacter meme sans compte. Creez un compte si vous souhaitez suivre plus facilement vos echanges.
+                {% trans "Vous pouvez nous contacter meme sans compte. Creez un compte si vous souhaitez suivre plus facilement vos echanges." %}
             {% endif %}
         </p>
 
@@ -36,7 +37,7 @@
                 </label>
             {% endfor %}
 
-            <button type="submit">Envoyer le message</button>
+            <button type="submit">{% trans "Envoyer le message" %}</button>
         </form>
     </article>
 </section>

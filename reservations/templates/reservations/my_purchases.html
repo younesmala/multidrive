@@ -1,12 +1,13 @@
 {% extends "vehicles/base.html" %}
+{% load i18n %}
 
-{% block title %}Mes achats - MultiDrive{% endblock %}
+{% block title %}{% trans "Mes achats" %} - MultiDrive{% endblock %}
 
 {% block content %}
 <section class="page-title">
-    <p class="eyebrow">Espace client</p>
-    <h1>Mes achats</h1>
-    <p>Retrouvez ici tous les vehicules pour lesquels vous avez verse un acompte.</p>
+    <p class="eyebrow">{% trans "Espace client" %}</p>
+    <h1>{% trans "Mes achats" %}</h1>
+    <p>{% trans "Retrouvez ici tous les vehicules pour lesquels vous avez verse un acompte." %}</p>
 </section>
 
 <section class="section">
@@ -16,54 +17,54 @@
                 <article class="member-detail-card">
                     <div class="member-detail-head">
                         <div>
-                            <p class="eyebrow">{{ reservation.vehicle.category.name|default:"Vehicule" }}</p>
+                            <p class="eyebrow">{% trans reservation.vehicle.category.name|default:"Vehicule" %}</p>
                             <h2>
                                 <a href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">
                                     {{ reservation.vehicle.title }}
                                 </a>
                             </h2>
                         </div>
-                        <span class="status status-deposit_paid">Acompte verse</span>
+                        <span class="status status-deposit_paid">{% trans "Acompte verse" %}</span>
                     </div>
 
                     <div class="member-detail-grid">
                         <div class="member-detail-block">
-                            <strong>Prix du vehicule</strong>
+                            <strong>{% trans "Prix du vehicule" %}</strong>
                             <p>{{ reservation.vehicle.price }} EUR</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Acompte verse</strong>
+                            <strong>{% trans "Acompte verse" %}</strong>
                             <p>{{ reservation.payment.amount }} EUR</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Date du paiement</strong>
-                            <p>{{ reservation.payment.paid_at|date:"d/m/Y H:i"|default:"Non renseignee" }}</p>
+                            <strong>{% trans "Date du paiement" %}</strong>
+                            <p>{{ reservation.payment.paid_at|date:"d/m/Y H:i"|default:"—" }}</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>Reference</strong>
-                            <p class="text-truncate">{{ reservation.payment.transaction_reference|default:"Aucune" }}</p>
+                            <strong>{% trans "Reference" %}</strong>
+                            <p class="text-truncate">{{ reservation.payment.transaction_reference|default:"—" }}</p>
                         </div>
                     </div>
 
                     {% if reservation.appointment_date %}
                         <div class="member-note">
-                            <strong>Rendez-vous confirme</strong>
-                            <p>{{ reservation.appointment_date|date:"d/m/Y \a H:i" }}</p>
+                            <strong>{% trans "Rendez-vous confirme" %}</strong>
+                            <p>{% blocktrans with date=reservation.appointment_date|date:"d/m/Y" time=reservation.appointment_date|date:"H:i" %}{{ date }} a {{ time }}{% endblocktrans %}</p>
                         </div>
                     {% endif %}
 
                     <div class="hero-actions">
-                        <a class="button primary" href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">Voir le vehicule</a>
-                        <a class="button secondary" href="{% url 'reservations:my_reservations' %}">Mes reservations</a>
+                        <a class="button primary" href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">{% trans "Voir le vehicule" %}</a>
+                        <a class="button secondary" href="{% url 'reservations:my_reservations' %}">{% trans "Mes reservations" %}</a>
                     </div>
                 </article>
             {% endfor %}
         </div>
     {% else %}
         <div class="empty-state">
-            <h2>Aucun achat pour le moment</h2>
-            <p>Les vehicules pour lesquels vous avez verse un acompte apparaitront ici.</p>
-            <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">Decouvrir le catalogue</a>
+            <h2>{% trans "Aucun achat pour le moment" %}</h2>
+            <p>{% trans "Les vehicules pour lesquels vous avez verse un acompte apparaitront ici." %}</p>
+            <a class="button primary" href="{% url 'vehicles:vehicle_list' %}">{% trans "Decouvrir le catalogue" %}</a>
         </div>
     {% endif %}
 </section>
