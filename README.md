@@ -20,10 +20,9 @@ Plateforme web de vente de vehicules d'occasion, realisee dans le cadre d'un Tra
 
 ### Catalogue et fiches vehicules
 - Catalogue avec filtres (categorie, statut, recherche texte) et pagination (12 vehicules/page)
-- Fiches vehicules avec galerie photos, lightbox, note moyenne, vehicules similaires
+- Fiches vehicules avec galerie photos, lightbox, vehicules similaires
 - Fiche technique detaillee : marque, modele, annee, etat carrosserie (tres bon / bon / legerement accidente), etat moteur (tres bon / bon / reparation mineure a prevoir), notes de condition
 - Systeme de favoris (etoile AJAX, page "Mes favoris")
-- Avis membres : uniquement apres reservation acceptee, un seul avis par vehicule
 
 ### Parcours membre complet
 - Inscription / connexion / deconnexion
@@ -54,12 +53,21 @@ Plateforme web de vente de vehicules d'occasion, realisee dans le cadre d'un Tra
 - Signature MultiDrive integree en base64 sur tous les documents
 - Generation via xhtml2pdf, telechargement direct sans stockage serveur
 
+### Temoignages clients
+- Page publique `/temoignages/` accessible a tous (visiteurs et membres), lien dans nav et footer
+- Formulaire de temoignage declenche depuis "Paiements et achats" uniquement apres paiement integral
+- Un seul temoignage par achat (OneToOneField Payment → Testimonial)
+- **Moderation** : tout nouveau temoignage est en attente (`is_visible=False`) jusqu'a validation admin
+- Dashboard admin : section "En attente" (fond jaune, bouton Publier/Supprimer) + section "Publies"
+- **Traduction automatique** : a la soumission, l'avis est traduit FR→EN et FR→NL via l'API MyMemory (gratuite, sans cle) et stocke dans `comment_en` / `comment_nl`
+- Affichage dynamique selon la langue active du visiteur
+
 ### Administration
-- **Dashboard admin** restructure : KPI → fil d'activite cliquable → actions rapides → remboursements → moderation avis → statistiques
+- **Dashboard admin** restructure : KPI → fil d'activite cliquable → actions rapides → remboursements → moderation temoignages → statistiques
 - **Fil d'activite** : 10 derniers evenements (paiements, reservations, messages) avec lien direct vers admin Django
 - **Statistiques ventes** : revenus totaux, revenus du mois, ventes finalisees, acomptes en cours, vehicules vendus, top categories avec barres de progression
 - **Export CSV** des statistiques (revenus + detail des paiements + ventes par categorie)
-- **Moderation des avis** : suppression d'un avis directement depuis le dashboard
+- **Moderation des temoignages** : validation avant publication, suppression directe depuis le dashboard
 - **Remboursements** : traitement avec montant + message pour le membre
 - **Gestion des admins (superadmin uniquement)** :
   - Creer un compte administrateur (username, email, mot de passe provisoire)
@@ -76,7 +84,7 @@ Plateforme web de vente de vehicules d'occasion, realisee dans le cadre d'un Tra
 - Toutes les protections appliquees cote backend (decorateurs Django), jamais uniquement cote template
 
 ### API REST
-- Endpoints : `/api/v1/categories/`, `/api/v1/vehicles/`, `/api/v1/reservations/`, `/api/v1/payments/`, `/api/v1/invoices/`, `/api/v1/reviews/`, `/api/v1/contact-messages/`, `/api/v1/me/`
+- Endpoints : `/api/v1/categories/`, `/api/v1/vehicles/`, `/api/v1/reservations/`, `/api/v1/payments/`, `/api/v1/invoices/`, `/api/v1/contact-messages/`, `/api/v1/me/`
 - Authentification JWT (simplejwt) + session
 - Filtres, recherche, tri, pagination (20/page)
 - Documentation Swagger : `/api/docs/`
@@ -92,7 +100,8 @@ Plateforme web de vente de vehicules d'occasion, realisee dans le cadre d'un Tra
 - Fichiers .po / .mo compiles pour EN et NL
 - Locale Stripe dynamique : la page de paiement Stripe s'affiche dans la langue active
 - Documents PDF generes dans la langue active (xhtml2pdf herite du thread-local Django)
-- Descriptions vehicules en 3 langues (FR / EN / NL) saisies directement dans l'admin Django
+- Descriptions vehicules en 3 langues (FR / EN / NL) — traduction automatique via MyMemory si champs EN/NL vides lors de la sauvegarde admin
+- Temoignages traduits automatiquement FR→EN et FR→NL via MyMemory a la soumission
 - Format date rendezvous traduit (FR : "a", EN : "at", NL : "om")
 
 ---
@@ -154,6 +163,12 @@ PEXELS_API_KEY=...
 
 # Mettre a jour les descriptions des vehicules
 ..\venv\Scripts\python.exe manage.py update_descriptions
+
+# Generer des temoignages de demonstration
+..\venv\Scripts\python.exe manage.py seed_testimonials
+
+# Nettoyer le dashboard (accepter reservations en attente + repondre aux messages)
+..\venv\Scripts\python.exe manage.py cleanup_dashboard
 
 # Compiler les fichiers de traduction (apres modification des .po)
 ..\venv\Scripts\python.exe manage.py compilemessages
