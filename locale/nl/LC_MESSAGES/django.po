@@ -1875,3 +1875,98 @@ msgstr "Bericht verzenden"
 msgid "Expliquez votre demande, votre question ou votre besoin de rendez-vous."
 msgstr "Beschrijf uw vraag, opmerking of afspraakwens."
 
+# ─── Testimonial system (payments/views.py, templates) ───────────────────────
+
+msgid "Le temoignage est disponible apres paiement integral."
+msgstr "De getuigenis is beschikbaar na volledige betaling."
+
+msgid "Vous avez deja depose un temoignage pour cet achat."
+msgstr "U heeft al een getuigenis ingediend voor deze aankoop."
+
+msgid "Merci pour votre temoignage !"
+msgstr "Bedankt voor uw getuigenis!"
+
+msgid "Votre avis sur l'achat"
+msgstr "Uw mening over de aankoop"
+
+msgid "Temoignage depose"
+msgstr "Getuigenis ingediend"
+
+msgid "Deposer un temoignage"
+msgstr "Een getuigenis indienen"
+
+msgid "Note (1 a 5)"
+msgstr "Beoordeling (1 tot 5)"
+
+msgid "Votre commentaire"
+msgstr "Uw opmerking"
+
+msgid "Envoyer le temoignage"
+msgstr "Getuigenis verzenden"
+
+msgid "Achat du"
+msgstr "Aankoop van"
+
+msgid "Temoignages recents"
+msgstr "Recente getuigenissen"
+
+msgid "Supprimer ce temoignage"
+msgstr "Deze getuigenis verwijderen"
+
+msgid "Temoignage supprime."
+msgstr "Getuigenis verwijderd."
+
+msgid "Visible"
+msgstr "Zichtbaar"
+
+msgid "Masque"
+msgstr "Verborgen"
+
+msgid "Votre temoignage"
+msgstr "Uw getuigenis"
+
+msgid "Publier mon temoignage"
+msgstr "Mijn getuigenis publiceren"
+
+msgid "Retour a mes paiements"
+msgstr "Terug naar mijn betalingen"
+
+msgid "Note"
+msgstr "Beoordeling"
+
+msgid "Partagez votre experience d'achat pour %(title)s."
+msgstr "Deel uw aankoopervaring voor %(title)s."
+
+msgid "Decrivez votre experience d'achat..."
+msgstr "Beschrijf uw aankoopervaring..."
+
+msgid "Temoignages en attente"
+msgstr "Getuigenissen in afwachting"
+
+msgid "Validez ou supprimez les temoignages avant publication."
+msgstr "Keur getuigenissen goed of verwijder ze voor publicatie."
+
+msgid "Publier"
+msgstr "Publiceren"
+
+msgid "Temoignages publies"
+msgstr "Gepubliceerde getuigenissen"
+
+msgid "Voir la page publique"
+msgstr "Openbare pagina bekijken"
+
+msgid "Temoignages"
+msgstr "Getuigenissen"
+
+msgid "Clients"
+msgstr "Klanten"
+
+msgid "Ils ont achete un vehicule chez MultiDrive et partagent leur experience."
+msgstr "Zij kochten een voertuig bij MultiDrive en delen hun ervaring."
+
+msgid "Aucun temoignage publie pour le moment."
+msgstr "Nog geen getuigenis gepubliceerd."
+
+msgid "Traductions disponibles"
+msgstr "Vertalingen beschikbaar"
+

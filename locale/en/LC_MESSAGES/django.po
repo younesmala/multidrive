@@ -1875,3 +1875,98 @@ msgstr "Send message"
 msgid "Expliquez votre demande, votre question ou votre besoin de rendez-vous."
 msgstr "Describe your request, question or appointment need."
 
+# ─── Testimonial system (payments/views.py, templates) ───────────────────────
+
+msgid "Le temoignage est disponible apres paiement integral."
+msgstr "The testimonial is available after full payment."
+
+msgid "Vous avez deja depose un temoignage pour cet achat."
+msgstr "You have already submitted a testimonial for this purchase."
+
+msgid "Merci pour votre temoignage !"
+msgstr "Thank you for your testimonial!"
+
+msgid "Votre avis sur l'achat"
+msgstr "Your purchase review"
+
+msgid "Temoignage depose"
+msgstr "Testimonial submitted"
+
+msgid "Deposer un temoignage"
+msgstr "Submit a testimonial"
+
+msgid "Note (1 a 5)"
+msgstr "Rating (1 to 5)"
+
+msgid "Votre commentaire"
+msgstr "Your comment"
+
+msgid "Envoyer le temoignage"
+msgstr "Submit testimonial"
+
+msgid "Achat du"
+msgstr "Purchase of"
+
+msgid "Temoignages recents"
+msgstr "Recent testimonials"
+
+msgid "Supprimer ce temoignage"
+msgstr "Delete this testimonial"
+
+msgid "Temoignage supprime."
+msgstr "Testimonial deleted."
+
+msgid "Visible"
+msgstr "Visible"
+
+msgid "Masque"
+msgstr "Hidden"
+
+msgid "Votre temoignage"
+msgstr "Your testimonial"
+
+msgid "Publier mon temoignage"
+msgstr "Publish my testimonial"
+
+msgid "Retour a mes paiements"
+msgstr "Back to my payments"
+
+msgid "Note"
+msgstr "Rating"
+
+msgid "Partagez votre experience d'achat pour %(title)s."
+msgstr "Share your purchase experience for %(title)s."
+
+msgid "Decrivez votre experience d'achat..."
+msgstr "Describe your purchase experience..."
+
+msgid "Temoignages en attente"
+msgstr "Pending testimonials"
+
+msgid "Validez ou supprimez les temoignages avant publication."
+msgstr "Approve or delete testimonials before publishing."
+
+msgid "Publier"
+msgstr "Publish"
+
+msgid "Temoignages publies"
+msgstr "Published testimonials"
+
+msgid "Voir la page publique"
+msgstr "View public page"
+
+msgid "Temoignages"
+msgstr "Testimonials"
+
+msgid "Clients"
+msgstr "Customers"
+
+msgid "Ils ont achete un vehicule chez MultiDrive et partagent leur experience."
+msgstr "They bought a vehicle from MultiDrive and share their experience."
+
+msgid "Aucun temoignage publie pour le moment."
+msgstr "No testimonial published yet."
+
+msgid "Traductions disponibles"
+msgstr "Translations available"
+
