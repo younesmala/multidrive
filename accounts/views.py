@@ -196,6 +196,8 @@ def _superuser_required(view_func):
 def create_admin(request):
     form = CreateAdminForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
+        from django.contrib.auth.models import Permission
+        from django.contrib.contenttypes.models import ContentType
         User = get_user_model()
         user = User.objects.create_user(
             username=form.cleaned_data["username"],
@@ -205,9 +207,25 @@ def create_admin(request):
             is_superuser=False,
             is_active=True,
         )
+        # Permissions Django admin pour gérer véhicules, messages, réservations, paiements
+        allowed_apps_models = [
+            ("vehicles", "vehicle"),
+            ("vehicles", "vehicleimage"),
+            ("vehicles", "vehiclecategory"),
+            ("contact", "contactmessage"),
+            ("reservations", "reservation"),
+            ("payments", "payment"),
+        ]
+        for app_label, model_name in allowed_apps_models:
+            try:
+                ct = ContentType.objects.get(app_label=app_label, model=model_name)
+                perms = Permission.objects.filter(content_type=ct)
+                user.user_permissions.add(*perms)
+            except ContentType.DoesNotExist:
+                pass
         messages.success(
             request,
-            f"Administrateur « {user.username} » cree. Il peut maintenant se connecter et changer son mot de passe.",
+            f"Administrateur « {user.username} » cree avec acces complet aux vehicules, messages et reservations.",
         )
         return redirect("accounts:admin_dashboard")
     User = get_user_model()
