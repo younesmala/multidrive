@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Review, Vehicle, VehicleCategory, VehicleImage
+from .models import Vehicle, VehicleCategory, VehicleImage
 
 
 class VehicleImageInline(admin.TabularInline):
@@ -50,8 +50,3 @@ class VehicleImageAdmin(admin.ModelAdmin):
     search_fields = ("vehicle__title",)
 
 
-@admin.register(Review)
-class ReviewAdmin(admin.ModelAdmin):
-    list_display = ("vehicle", "user", "rating", "created_at")
-    list_filter = ("rating", "created_at")
-    search_fields = ("vehicle__title", "user__username", "comment")

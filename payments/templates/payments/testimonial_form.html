@@ -1,0 +1,44 @@
+{% extends "vehicles/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Votre temoignage" %} - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+    <div class="auth-card">
+        <p class="eyebrow">{% trans "Espace membre" %}</p>
+        <h1>{% trans "Votre temoignage" %}</h1>
+        <p class="auth-intro">
+            {% blocktrans with title=payment.reservation.vehicle.title %}
+                Partagez votre experience d'achat pour {{ title }}.
+            {% endblocktrans %}
+        </p>
+
+        <form method="post" class="auth-form">
+            {% csrf_token %}
+
+            <label for="{{ form.rating.id_for_label }}">
+                {{ form.rating.label }}
+                {{ form.rating }}
+                {% for error in form.rating.errors %}
+                    <span class="field-error">{{ error }}</span>
+                {% endfor %}
+            </label>
+
+            <label for="{{ form.comment.id_for_label }}">
+                {{ form.comment.label }}
+                {{ form.comment }}
+                {% for error in form.comment.errors %}
+                    <span class="field-error">{{ error }}</span>
+                {% endfor %}
+            </label>
+
+            <button type="submit">{% trans "Publier mon temoignage" %}</button>
+        </form>
+
+        <p class="auth-switch">
+            <a href="{% url 'accounts:payment_list' %}">{% trans "Retour a mes paiements" %}</a>
+        </p>
+    </div>
+</section>
+{% endblock %}

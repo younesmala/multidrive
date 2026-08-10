@@ -14,7 +14,8 @@ from django.utils.timezone import localtime
 from django.utils.translation import gettext_lazy as _
 from xhtml2pdf import pisa
 
-from payments.models import Payment
+from payments.forms import TestimonialForm
+from payments.models import Payment, Testimonial
 from reservations.models import Reservation
 from vehicles.models import Vehicle
 
@@ -351,3 +352,44 @@ def download_specimen(request, payment_id):
     response = HttpResponse(pdf, content_type="application/pdf")
     response["Content-Disposition"] = f'attachment; filename="{filename}"'
     return response
+
+
+@login_required
+def add_testimonial(request, payment_id):
+    payment = get_object_or_404(
+        Payment,
+        id=payment_id,
+        reservation__user=request.user,
+        status=Payment.STATUS_PAID,
+    )
+    remaining = payment.reservation.vehicle.price - payment.amount
+    if remaining > 0:
+        messages.warning(request, _("Le temoignage est disponible apres paiement integral."))
+        return redirect("accounts:payment_list")
+
+    if hasattr(payment, "testimonial"):
+        messages.info(request, _("Vous avez deja depose un temoignage pour cet achat."))
+        return redirect("accounts:payment_list")
+
+    form = TestimonialForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        t = form.save(commit=False)
+        t.payment = payment
+        t.user = request.user
+        t.save()
+        messages.success(request, _("Merci pour votre temoignage !"))
+        return redirect("accounts:payment_list")
+
+    return render(request, "payments/testimonial_form.html", {
+        "form": form,
+        "payment": payment,
+    })
+
+
+def testimonial_list(request):
+    testimonials = (
+        Testimonial.objects.filter(is_visible=True)
+        .select_related("user", "payment__reservation__vehicle")
+        .order_by("-created_at")
+    )
+    return render(request, "payments/testimonial_list.html", {"testimonials": testimonials})

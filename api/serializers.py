@@ -3,7 +3,7 @@ from rest_framework import serializers
 from contact.models import ContactMessage
 from payments.models import Invoice, Payment
 from reservations.models import Reservation
-from vehicles.models import Review, Vehicle, VehicleCategory, VehicleImage
+from vehicles.models import Vehicle, VehicleCategory, VehicleImage
 
 
 class VehicleImageSerializer(serializers.ModelSerializer):
@@ -95,24 +95,6 @@ class InvoiceSerializer(serializers.ModelSerializer):
             "notes",
         ]
 
-
-class ReviewSerializer(serializers.ModelSerializer):
-    user = serializers.StringRelatedField(read_only=True)
-    vehicle_title = serializers.CharField(source="vehicle.title", read_only=True)
-
-    class Meta:
-        model = Review
-        fields = [
-            "id",
-            "vehicle",
-            "vehicle_title",
-            "user",
-            "rating",
-            "comment",
-            "created_at",
-            "updated_at",
-        ]
-        read_only_fields = ["created_at", "updated_at"]
 
 
 class ContactMessageSerializer(serializers.ModelSerializer):

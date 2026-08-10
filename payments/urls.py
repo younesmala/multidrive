@@ -12,4 +12,6 @@ urlpatterns = [
     path("paiement/<int:payment_id>/facture.pdf",       views.download_facture,      name="download_facture"),
     path("paiement/<int:payment_id>/cession.pdf",       views.download_cession,      name="download_cession"),
     path("paiement/<int:payment_id>/specimen.pdf",      views.download_specimen,     name="download_specimen"),
+    path("paiement/<int:payment_id>/temoignage/",       views.add_testimonial,        name="add_testimonial"),
+    path("temoignages/", views.testimonial_list, name="testimonial_list"),
 ]

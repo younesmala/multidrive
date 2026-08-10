@@ -37,6 +37,9 @@
                         <a class="nav-link" href="{% url 'vehicles:vehicle_list' %}">{% trans "Catalogue" %}</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'payments:testimonial_list' %}">{% trans "Temoignages" %}</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'contact:contact_form' %}">{% trans "Contact" %}</a>
                     </li>
 
@@ -166,6 +169,7 @@
             <div class="footer-links">
                 <a href="{% url 'home' %}">{% trans "Accueil" %}</a>
                 <a href="{% url 'vehicles:vehicle_list' %}">{% trans "Catalogue" %}</a>
+                <a href="{% url 'payments:testimonial_list' %}">{% trans "Temoignages" %}</a>
                 <a href="{% url 'contact:contact_form' %}">{% trans "Contact" %}</a>
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'reservations:my_reservations' %}">{% trans "Reservations" %}</a>
