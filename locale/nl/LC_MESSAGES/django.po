@@ -1,0 +1,1877 @@
+# Nederlandse vertalingen voor MultiDrive
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# ─── Navigation / base.html ─────────────────────────────────────────────────
+
+msgid "Ouvrir le menu"
+msgstr "Menu openen"
+
+msgid "Accueil"
+msgstr "Startpagina"
+
+msgid "Catalogue"
+msgstr "Catalogus"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Bonjour, %(username)s"
+msgstr "Hallo, %(username)s"
+
+msgid "Mes reservations"
+msgstr "Mijn reserveringen"
+
+msgid "Mon profil"
+msgstr "Mijn profiel"
+
+msgid "Mes favoris"
+msgstr "Mijn favorieten"
+
+msgid "Paiements et achats"
+msgstr "Betalingen en aankopen"
+
+msgid "Mes messages"
+msgstr "Mijn berichten"
+
+msgid "Deconnexion"
+msgstr "Afmelden"
+
+msgid "Dashboard admin"
+msgstr "Beheerderspaneel"
+
+msgid "Connexion"
+msgstr "Aanmelden"
+
+msgid "Inscription"
+msgstr "Registreren"
+
+msgid "Une plateforme simple pour consulter, reserver et suivre des vehicules d'occasion accessibles."
+msgstr "Een eenvoudig platform om betaalbare tweedehands voertuigen te bekijken, te reserveren en te volgen."
+
+msgid "Navigation"
+msgstr "Navigatie"
+
+msgid "Reservations"
+msgstr "Reserveringen"
+
+msgid "Projet academique MultiDrive cree dans le cadre d'un travail de fin d'etudes."
+msgstr "MultiDrive academisch project, gemaakt als eindwerk."
+
+msgid "Conditions generales"
+msgstr "Algemene voorwaarden"
+
+msgid "Politique de cookies"
+msgstr "Cookiebeleid"
+
+msgid "MultiDrive utilise uniquement des cookies techniques necessaires a son fonctionnement (session, securite, langue). Aucun cookie publicitaire."
+msgstr "MultiDrive gebruikt alleen technische cookies die noodzakelijk zijn voor de werking (sessie, beveiliging, taal). Geen reclamecookies."
+
+msgid "En savoir plus"
+msgstr "Meer info"
+
+msgid "Accepter"
+msgstr "Accepteren"
+
+msgid "Refuser"
+msgstr "Weigeren"
+
+# ─── home.html ───────────────────────────────────────────────────────────────
+
+msgid "Occasion accessible"
+msgstr "Betaalbare tweedehands"
+
+msgid "MultiDrive rassemble des vehicules d'occasion a prix raisonnable, avec une navigation claire pour consulter, reserver et preparer un acompte."
+msgstr "MultiDrive brengt betaalbare tweedehands voertuigen samen met een duidelijke interface om te bladeren, te reserveren en een aanbetaling te doen."
+
+msgid "Voir les vehicules"
+msgstr "Voertuigen bekijken"
+
+msgid "Gerer la base"
+msgstr "Voorraad beheren"
+
+msgid "vehicules disponibles"
+msgstr "voertuigen beschikbaar"
+
+msgid "categories"
+msgstr "categorieën"
+
+msgid "Comment utiliser MultiDrive"
+msgstr "Hoe MultiDrive gebruiken"
+
+msgid "Un parcours simple pour trouver, reserver et suivre ton vehicule."
+msgstr "Een eenvoudig traject om uw voertuig te vinden, te reserveren en te volgen."
+
+msgid "Choisir un vehicule"
+msgstr "Kies een voertuig"
+
+msgid "Explore le catalogue et compare les prix, categories et disponibilites."
+msgstr "Blader door de catalogus en vergelijk prijzen, categorieën en beschikbaarheid."
+
+msgid "Reserver"
+msgstr "Reserveren"
+
+msgid "Connecte-toi et envoie une demande de reservation en quelques clics."
+msgstr "Meld u aan en dien een reserveringsaanvraag in met een paar klikken."
+
+msgid "Suivre ton dossier"
+msgstr "Uw dossier volgen"
+
+msgid "Consulte ensuite tes reservations et paiements dans ton espace membre."
+msgstr "Bekijk uw reserveringen en betalingen in uw ledenzone."
+
+msgid "Categories"
+msgstr "Categorieën"
+
+msgid "%(count)s categories disponibles dans la base."
+msgstr "%(count)s categorieën beschikbaar in de catalogus."
+
+msgid "Aucune categorie disponible."
+msgstr "Geen categorieën beschikbaar."
+
+msgid "Vehicules populaires"
+msgstr "Populaire voertuigen"
+
+msgid "Une selection de vehicules accessibles pour demarrer rapidement."
+msgstr "Een selectie betaalbare voertuigen om snel van start te gaan."
+
+msgid "Aucun vehicule populaire disponible pour le moment."
+msgstr "Momenteel geen populaire voertuigen beschikbaar."
+
+msgid "Derniers vehicules disponibles"
+msgstr "Nieuwste beschikbare voertuigen"
+
+msgid "Un apercu des nouvelles annonces actuellement publiees."
+msgstr "Een overzicht van de nieuwste gepubliceerde advertenties."
+
+msgid "Aucun vehicule disponible pour le moment."
+msgstr "Momenteel geen voertuigen beschikbaar."
+
+# ─── vehicle_list.html ───────────────────────────────────────────────────────
+
+msgid "Vehicules"
+msgstr "Voertuigen"
+
+msgid "Vehicules d'occasion"
+msgstr "Tweedehands voertuigen"
+
+msgid "Consulte le catalogue principal et affine rapidement par recherche, categorie ou statut."
+msgstr "Blader door de hoofdcatalogus en filter snel op zoekopdracht, categorie of status."
+
+msgid "Recherche"
+msgstr "Zoeken"
+
+msgid "Rechercher un modele, une marque ou un type de vehicule"
+msgstr "Zoek een model, merk of voertuigtype"
+
+msgid "Toutes"
+msgstr "Alle"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Tous"
+msgstr "Alle"
+
+msgid "Filtrer"
+msgstr "Filteren"
+
+msgid "%(count)s resultat(s)"
+msgstr "%(count)s resultaat/resultaten"
+
+msgid "Des cartes lisibles pour comparer rapidement les vehicules disponibles."
+msgstr "Duidelijke kaarten om beschikbare voertuigen snel te vergelijken."
+
+msgid "Reinitialiser"
+msgstr "Opnieuw instellen"
+
+msgid "Aucun vehicule ne correspond a ce filtre."
+msgstr "Geen voertuig voldoet aan dit filter."
+
+msgid "Pagination"
+msgstr "Paginering"
+
+msgid "Precedent"
+msgstr "Vorige"
+
+msgid "Page %(num)s sur %(total)s"
+msgstr "Pagina %(num)s van %(total)s"
+
+msgid "Suivant"
+msgstr "Volgende"
+
+# ─── vehicle_detail.html ─────────────────────────────────────────────────────
+
+msgid "Fermer"
+msgstr "Sluiten"
+
+msgid "Retirer des favoris"
+msgstr "Uit favorieten verwijderen"
+
+msgid "Ajouter aux favoris"
+msgstr "Toevoegen aan favorieten"
+
+msgid "Fiche technique"
+msgstr "Technisch blad"
+
+msgid "Marque"
+msgstr "Merk"
+
+msgid "Modele"
+msgstr "Model"
+
+msgid "Annee"
+msgstr "Jaar"
+
+msgid "Carrosserie"
+msgstr "Carrosserie"
+
+msgid "Moteur"
+msgstr "Motor"
+
+msgid "Commentaire"
+msgstr "Opmerking"
+
+msgid "Prix de vente"
+msgstr "Verkoopprijs"
+
+msgid "Acompte (20%)"
+msgstr "Aanbetaling (20%)"
+
+msgid "Reserver ce vehicule"
+msgstr "Dit voertuig reserveren"
+
+msgid "Ce vehicule est deja reserve."
+msgstr "Dit voertuig is al gereserveerd."
+
+msgid "Ce vehicule n'est plus disponible."
+msgstr "Dit voertuig is niet meer beschikbaar."
+
+msgid "Retour au catalogue"
+msgstr "Terug naar catalogus"
+
+msgid "Avis clients"
+msgstr "Klantbeoordelingen"
+
+msgid "%(count)s avis, note moyenne : %(avg)s/5"
+msgstr "%(count)s beoordeling(en), gemiddeld: %(avg)s/5"
+
+msgid "Aucun avis pour ce vehicule pour le moment."
+msgstr "Nog geen beoordelingen voor dit voertuig."
+
+msgid "Modifier mon avis"
+msgstr "Mijn beoordeling bewerken"
+
+msgid "Laisser un avis"
+msgstr "Een beoordeling achterlaten"
+
+msgid "Mettre a jour mon avis"
+msgstr "Mijn beoordeling bijwerken"
+
+msgid "Publier mon avis"
+msgstr "Mijn beoordeling plaatsen"
+
+msgid "Faire une demande de reservation"
+msgstr "Een reserveringsaanvraag indienen"
+
+msgid "Se connecter"
+msgstr "Aanmelden"
+
+msgid "Publie le %(date)s"
+msgstr "Geplaatst op %(date)s"
+
+msgid "Aucun avis disponible"
+msgstr "Geen beoordelingen beschikbaar"
+
+msgid "Ce vehicule n'a pas encore recu d'avis membre."
+msgstr "Dit voertuig heeft nog geen ledenbeoordelingen ontvangen."
+
+msgid "Vehicules similaires"
+msgstr "Gelijkaardige voertuigen"
+
+msgid "Aucune suggestion disponible."
+msgstr "Geen suggesties beschikbaar."
+
+msgid "Connectez-vous pour laisser un avis sur ce vehicule."
+msgstr "Meld u aan om een beoordeling achter te laten voor dit voertuig."
+
+msgid "Vous pourrez laisser un avis apres une reservation acceptee sur ce vehicule."
+msgstr "U kunt een beoordeling achterlaten na een geaccepteerde reservering voor dit voertuig."
+
+# ─── vehicle_card.html partial ───────────────────────────────────────────────
+
+msgid "Image a venir"
+msgstr "Afbeelding binnenkort"
+
+msgid "Voir la fiche"
+msgstr "Fiche bekijken"
+
+# ─── my_favorites.html ───────────────────────────────────────────────────────
+
+msgid "Aucun favori pour le moment."
+msgstr "Nog geen favorieten."
+
+msgid "Ajouter des vehicules a vos favoris depuis le catalogue."
+msgstr "Voeg voertuigen toe aan uw favorieten vanuit de catalogus."
+
+msgid "Retirer"
+msgstr "Verwijderen"
+
+# ─── login.html ──────────────────────────────────────────────────────────────
+
+msgid "Espace client"
+msgstr "Klantenzone"
+
+msgid "Connecte-toi pour reserver un vehicule et suivre tes demandes."
+msgstr "Meld u aan om een voertuig te reserveren en uw aanvragen te volgen."
+
+msgid "Identifiants incorrects. Verifie ton nom d'utilisateur et ton mot de passe."
+msgstr "Onjuiste inloggegevens. Controleer uw gebruikersnaam en wachtwoord."
+
+msgid "Nom d'utilisateur"
+msgstr "Gebruikersnaam"
+
+msgid "Mot de passe"
+msgstr "Wachtwoord"
+
+msgid "Mot de passe oublie ?"
+msgstr "Wachtwoord vergeten?"
+
+msgid "Pas encore de compte ?"
+msgstr "Nog geen account?"
+
+msgid "Creer un compte"
+msgstr "Account aanmaken"
+
+# ─── register.html ───────────────────────────────────────────────────────────
+
+msgid "Cree ton compte pour acceder au catalogue et reserver un vehicule."
+msgstr "Maak uw account aan om toegang te krijgen tot de catalogus en een voertuig te reserveren."
+
+msgid "S'inscrire"
+msgstr "Registreren"
+
+msgid "Deja un compte ?"
+msgstr "Heeft u al een account?"
+
+# ─── profile.html ────────────────────────────────────────────────────────────
+
+msgid "Mon compte"
+msgstr "Mijn account"
+
+msgid "Informations du compte"
+msgstr "Accountinformatie"
+
+msgid "Prenom"
+msgstr "Voornaam"
+
+msgid "Nom"
+msgstr "Naam"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Membre depuis"
+msgstr "Lid sinds"
+
+msgid "Enregistrer"
+msgstr "Opslaan"
+
+msgid "Changer mon mot de passe"
+msgstr "Mijn wachtwoord wijzigen"
+
+msgid "Supprimer mon compte"
+msgstr "Mijn account verwijderen"
+
+msgid "Profil mis a jour avec succes."
+msgstr "Profiel succesvol bijgewerkt."
+
+# ─── change_password.html ────────────────────────────────────────────────────
+
+msgid "Ancien mot de passe"
+msgstr "Huidig wachtwoord"
+
+msgid "Nouveau mot de passe"
+msgstr "Nieuw wachtwoord"
+
+msgid "Confirmer le nouveau mot de passe"
+msgstr "Nieuw wachtwoord bevestigen"
+
+msgid "Mettre a jour"
+msgstr "Bijwerken"
+
+# ─── delete_request.html / delete_request_done.html ─────────────────────────
+
+msgid "Demande de suppression"
+msgstr "Verwijderingsverzoek"
+
+msgid "Confirmer la suppression"
+msgstr "Verwijdering bevestigen"
+
+msgid "Demande enregistree"
+msgstr "Verzoek geregistreerd"
+
+msgid "Votre demande a bien ete enregistree."
+msgstr "Uw verzoek is geregistreerd."
+
+# ─── payment_list.html ───────────────────────────────────────────────────────
+
+msgid "Mes achats"
+msgstr "Mijn aankopen"
+
+msgid "Historique des paiements"
+msgstr "Betalingsgeschiedenis"
+
+msgid "Aucun paiement pour le moment."
+msgstr "Nog geen betalingen."
+
+msgid "Telecharger la facture"
+msgstr "Factuur downloaden"
+
+msgid "Telecharger le recu"
+msgstr "Ontvangstbewijs downloaden"
+
+msgid "Telecharger l'acte de cession"
+msgstr "Overdrachtsakte downloaden"
+
+msgid "Telecharger le specimen"
+msgstr "Specimen downloaden"
+
+# ─── password reset templates ────────────────────────────────────────────────
+
+msgid "Mot de passe oublie"
+msgstr "Wachtwoord vergeten"
+
+msgid "Saisis ton adresse email. Si un compte existe, tu recevras un lien pour reinitialiser ton mot de passe."
+msgstr "Voer uw e-mailadres in. Als er een account bestaat, ontvangt u een koppeling om uw wachtwoord opnieuw in te stellen."
+
+msgid "Merci de corriger les erreurs ci-dessous."
+msgstr "Corrigeer de fouten hieronder."
+
+msgid "Envoyer le lien de reinitialisation"
+msgstr "Herstelkoppeling verzenden"
+
+msgid "Tu te souviens de ton mot de passe ?"
+msgstr "Wachtwoord herinnerd?"
+
+msgid "Si un compte correspond a cette adresse, tu recevras un email dans quelques minutes avec un lien de reinitialisation."
+msgstr "Als er een account gekoppeld is aan dit adres, ontvangt u binnen enkele minuten een e-mail met een herstelkoppeling."
+
+msgid "Pense a verifier tes spams si tu ne vois pas l'email dans ta boite de reception."
+msgstr "Controleer uw spammap als u de e-mail niet in uw inbox ziet."
+
+msgid "Retour a la connexion"
+msgstr "Terug naar aanmelden"
+
+msgid "Reinitialisation"
+msgstr "Wachtwoord opnieuw instellen"
+
+msgid "Reinitialisation du mot de passe"
+msgstr "Wachtwoord opnieuw instellen"
+
+msgid "Entrez votre adresse email pour recevoir un lien de reinitialisation."
+msgstr "Voer uw e-mailadres in om een herstelkoppeling te ontvangen."
+
+msgid "Adresse email"
+msgstr "E-mailadres"
+
+msgid "Envoyer le lien"
+msgstr "Koppeling verzenden"
+
+msgid "Email envoye"
+msgstr "E-mail verzonden"
+
+msgid "Un email de reinitialisation a ete envoye si cette adresse est associee a un compte."
+msgstr "Een herstel-e-mail is verzonden als dit adres gekoppeld is aan een account."
+
+msgid "Mot de passe modifie"
+msgstr "Wachtwoord gewijzigd"
+
+msgid "Choisis un nouveau mot de passe securise pour ton compte."
+msgstr "Kies een veilig nieuw wachtwoord voor uw account."
+
+msgid "Confirmer le mot de passe"
+msgstr "Wachtwoord bevestigen"
+
+msgid "Enregistrer le nouveau mot de passe"
+msgstr "Nieuw wachtwoord opslaan"
+
+msgid "Ce lien de reinitialisation est invalide ou a expire. Les liens sont valables 24 heures."
+msgstr "Deze herstelkoppeling is ongeldig of verlopen. Koppelingen zijn 24 uur geldig."
+
+msgid "Demander un nouveau lien"
+msgstr "Nieuwe koppeling aanvragen"
+
+msgid "Ton mot de passe a ete reinitialise avec succes. Tu peux maintenant te connecter avec ton nouveau mot de passe."
+msgstr "Uw wachtwoord is succesvol opnieuw ingesteld. U kunt nu aanmelden met uw nieuwe wachtwoord."
+
+msgid "Modification enregistree."
+msgstr "Wijziging opgeslagen."
+
+# ─── reservation_form.html ───────────────────────────────────────────────────
+
+msgid "Faire une reservation"
+msgstr "Een reservering maken"
+
+msgid "Demande de reservation"
+msgstr "Reserveringsaanvraag"
+
+msgid "Date souhaitee"
+msgstr "Gewenste datum"
+
+msgid "Creneau"
+msgstr "Tijdslot"
+
+msgid "Message"
+msgstr "Bericht"
+
+msgid "Envoyer la demande"
+msgstr "Aanvraag verzenden"
+
+msgid "Week-end : rendez-vous acceptes de 9h00 a 21h00."
+msgstr "Weekend: afspraken geaccepteerd van 9:00 tot 21:00."
+
+msgid "Semaine : rendez-vous acceptes de 16h00 a 21h30."
+msgstr "Weekdagen: afspraken geaccepteerd van 16:00 tot 21:30."
+
+# ─── reservation_success.html ────────────────────────────────────────────────
+
+msgid "Demande envoyee !"
+msgstr "Aanvraag verzonden!"
+
+msgid "Votre demande de reservation a bien ete enregistree."
+msgstr "Uw reserveringsaanvraag is geregistreerd."
+
+msgid "Retour a mes reservations"
+msgstr "Terug naar mijn reserveringen"
+
+# ─── my_reservations.html ────────────────────────────────────────────────────
+
+msgid "Suivez ici vos demandes, leur statut actuel et l'etat de l'acompte lorsque la reservation avance."
+msgstr "Volg hier uw aanvragen, hun huidige status en de stand van de aanbetaling naarmate de reservering vordert."
+
+msgid "Total demandes"
+msgstr "Totaal aanvragen"
+
+msgid "En attente"
+msgstr "In behandeling"
+
+msgid "Acceptees"
+msgstr "Geaccepteerd"
+
+msgid "Refusees"
+msgstr "Geweigerd"
+
+msgid "Prix du vehicule"
+msgstr "Voertuigprijs"
+
+msgid "Reservation creee le"
+msgstr "Reservering aangemaakt op"
+
+msgid "Derniere mise a jour"
+msgstr "Laatste update"
+
+msgid "Rendez-vous souhaite"
+msgstr "Gewenste afspraak"
+
+msgid "Votre message"
+msgstr "Uw bericht"
+
+msgid "Suivi de l'acompte"
+msgstr "Aanbetalingsstatus"
+
+msgid "Methode :"
+msgstr "Methode:"
+
+msgid "Reference :"
+msgstr "Referentie:"
+
+msgid "Votre reservation a ete acceptee. L'etape suivante sera le paiement de l'acompte."
+msgstr "Uw reservering is geaccepteerd. De volgende stap is de betaling van de aanbetaling."
+
+msgid "La reservation est marquee comme acompte paye."
+msgstr "De reservering is gemarkeerd als aanbetaling betaald."
+
+msgid "Cette demande a ete refusee. Aucun acompte n'est attendu."
+msgstr "Deze aanvraag is geweigerd. Er wordt geen aanbetaling verwacht."
+
+msgid "La demande est encore en cours de traitement. Aucun acompte n'est demande pour le moment."
+msgstr "De aanvraag wordt nog verwerkt. Er wordt momenteel geen aanbetaling gevraagd."
+
+msgid "Voir le vehicule"
+msgstr "Voertuig bekijken"
+
+msgid "Payer l'acompte"
+msgstr "Aanbetaling betalen"
+
+msgid "Etes-vous sur de vouloir annuler cette reservation ?"
+msgstr "Weet u zeker dat u deze reservering wilt annuleren?"
+
+msgid "Annuler la reservation"
+msgstr "Reservering annuleren"
+
+msgid "Votre reservation a ete acceptee. Etes-vous certain de vouloir annuler ?"
+msgstr "Uw reservering is geaccepteerd. Weet u zeker dat u wilt annuleren?"
+
+msgid "Aucune reservation pour le moment"
+msgstr "Nog geen reserveringen"
+
+msgid "Vos futures demandes de reservation apparaitront ici avec leur statut et le suivi de l'acompte."
+msgstr "Uw toekomstige reserveringsaanvragen verschijnen hier met hun status en aanbetalingsstatus."
+
+msgid "Decouvrir le catalogue"
+msgstr "De catalogus ontdekken"
+
+# ─── my_purchases.html ───────────────────────────────────────────────────────
+
+msgid "Aucun achat pour le moment."
+msgstr "Nog geen aankopen."
+
+# ─── contact templates ───────────────────────────────────────────────────────
+
+msgid "Nous contacter"
+msgstr "Neem contact op"
+
+msgid "Envoyer un message"
+msgstr "Bericht sturen"
+
+msgid "Sujet"
+msgstr "Onderwerp"
+
+msgid "Envoyer"
+msgstr "Verzenden"
+
+msgid "Message envoye"
+msgstr "Bericht verzonden"
+
+msgid "Votre message a bien ete envoye. Nous vous repondrons dans les plus brefs delais."
+msgstr "Uw bericht is verzonden. We antwoorden zo snel mogelijk."
+
+msgid "Retour"
+msgstr "Terug"
+
+msgid "Aucun message pour le moment."
+msgstr "Nog geen berichten."
+
+msgid "Reponse de l'equipe"
+msgstr "Antwoord van het team"
+
+# ─── 404 / 500 ───────────────────────────────────────────────────────────────
+
+msgid "Page introuvable"
+msgstr "Pagina niet gevonden"
+
+msgid "La page que vous recherchez n'existe pas ou a ete deplacee."
+msgstr "De pagina die u zoekt bestaat niet of is verplaatst."
+
+msgid "Retour a l'accueil"
+msgstr "Terug naar startpagina"
+
+msgid "Erreur serveur"
+msgstr "Serverfout"
+
+msgid "Une erreur interne est survenue. Veuillez reessayer plus tard."
+msgstr "Er is een interne fout opgetreden. Probeer het later opnieuw."
+
+# ─── checkout.html ───────────────────────────────────────────────────────────
+
+msgid "Paiement de l'acompte"
+msgstr "Aanbetaling betalen"
+
+msgid "Recapitulatif"
+msgstr "Samenvatting"
+
+msgid "Acompte a payer"
+msgstr "Te betalen aanbetaling"
+
+msgid "Payer"
+msgstr "Betalen"
+
+msgid "Paiement securise via Stripe"
+msgstr "Veilige betaling via Stripe"
+
+# ─── PDF: pdf_facture.html ───────────────────────────────────────────────────
+
+msgid "Plateforme de vehicules d'occasion"
+msgstr "Platform voor tweedehands voertuigen"
+
+msgid "FACTURE"
+msgstr "FACTUUR"
+
+msgid "Date :"
+msgstr "Datum:"
+
+msgid "Paye"
+msgstr "Betaald"
+
+msgid "Acheteur"
+msgstr "Koper"
+
+msgid "Identifiant membre"
+msgstr "Lid-ID"
+
+msgid "Detail du paiement"
+msgstr "Betalingsdetails"
+
+msgid "Description"
+msgstr "Beschrijving"
+
+msgid "Categorie"
+msgstr "Categorie"
+
+msgid "Prix total vehicule"
+msgstr "Totale voertuigprijs"
+
+msgid "Montant verse"
+msgstr "Betaald bedrag"
+
+msgid "Solde restant"
+msgstr "Resterend saldo"
+
+msgid "Solde apure"
+msgstr "Saldo vereffend"
+
+msgid "Reference de transaction"
+msgstr "Transactiereferentie"
+
+msgid "Reference Stripe"
+msgstr "Stripe-referentie"
+
+msgid "Date du paiement"
+msgstr "Betalingsdatum"
+
+msgid "Carte bancaire (Stripe Checkout)"
+msgstr "Bankkaart (Stripe Checkout)"
+
+msgid "Ce document constitue la preuve de votre paiement aupres de MultiDrive. Conservez-le pour vos dossiers."
+msgstr "Dit document vormt het bewijs van uw betaling aan MultiDrive. Bewaar het voor uw administratie."
+
+msgid "Le solde restant de %(remaining)s EUR sera a regler avant la remise des cles du vehicule."
+msgstr "Het resterende saldo van %(remaining)s EUR dient te worden betaald vóór de sleuteloverdracht."
+
+msgid "Signature MultiDrive"
+msgstr "Handtekening MultiDrive"
+
+msgid "L'acheteur"
+msgstr "De koper"
+
+msgid "Projet academique TFE"
+msgstr "Academisch project TFE"
+
+msgid "Document genere automatiquement le %(date)s"
+msgstr "Document automatisch gegenereerd op %(date)s"
+
+# ─── PDF: pdf_recu_acompte.html ──────────────────────────────────────────────
+
+msgid "ACOMPTE UNIQUEMENT — NON VALABLE COMME FACTURE DEFINITIVE DE VENTE"
+msgstr "AANBETALING ALLEEN — NIET GELDIG ALS DEFINITIEVE VERKOOPFACTUUR"
+
+msgid "RECU D'ACOMPTE"
+msgstr "AANBETALINGSBEWIJS"
+
+msgid "Acompte paye"
+msgstr "Aanbetaling betaald"
+
+msgid "Detail de l'acompte"
+msgstr "Details van de aanbetaling"
+
+msgid "Vehicule"
+msgstr "Voertuig"
+
+msgid "Prix total"
+msgstr "Totaalprijs"
+
+msgid "Acompte verse"
+msgstr "Betaalde aanbetaling"
+
+msgid "Solde restant a regler"
+msgstr "Resterend te betalen saldo"
+
+msgid "Reference de paiement"
+msgstr "Betalingsreferentie"
+
+msgid "N° reservation"
+msgstr "Reserveringsnr."
+
+msgid "Moyen de paiement"
+msgstr "Betaalmethode"
+
+msgid "Acompte recu"
+msgstr "Aanbetaling ontvangen"
+
+msgid "Ce document est un recu d'acompte."
+msgstr "Dit document is een aanbetalingsbewijs."
+
+msgid "Il confirme uniquement le paiement partiel de %(amount)s EUR pour la reservation du vehicule %(title)s. Un solde de %(remaining)s EUR reste a regler avant la remise des cles et la finalisation de la vente."
+msgstr "Het bevestigt alleen de gedeeltelijke betaling van %(amount)s EUR voor de reservering van voertuig %(title)s. Een saldo van %(remaining)s EUR dient nog te worden betaald vóór de sleuteloverdracht en de afronding van de verkoop."
+
+msgid "La facture definitive, l'acte de cession et le specimen d'immatriculation vous seront transmis apres reglement du solde restant. Conservez ce document comme preuve de votre acompte."
+msgstr "De definitieve factuur, overdrachtsakte en het inschrijvingsbewijs worden u toegestuurd na betaling van het resterende saldo. Bewaar dit document als bewijs van uw aanbetaling."
+
+msgid "Recu d'acompte N° %(num)s &mdash; genere le %(date)s"
+msgstr "Aanbetalingsbewijs nr. %(num)s &mdash; gegenereerd op %(date)s"
+
+# ─── PDF: pdf_cession.html ───────────────────────────────────────────────────
+
+msgid "ACTE DE CESSION"
+msgstr "OVERDRACHTSAKTE"
+
+msgid "Ref. :"
+msgstr "Ref.:"
+
+msgid "Le present acte atteste de la cession du vehicule decrit ci-dessous entre les parties suivantes :"
+msgstr "Deze akte bevestigt de overdracht van het hieronder beschreven voertuig tussen de volgende partijen:"
+
+msgid "Vendeur (cedant)"
+msgstr "Verkoper (overdrager)"
+
+msgid "Plateforme de vente de vehicules d'occasion"
+msgstr "Platform voor de verkoop van tweedehands voertuigen"
+
+msgid "Membre"
+msgstr "Lid"
+
+msgid "Acheteur (cessionnaire)"
+msgstr "Koper (overnemer)"
+
+msgid "Vehicule cede"
+msgstr "Overgedragen voertuig"
+
+msgid "Designation"
+msgstr "Omschrijving"
+
+msgid "Annee estimee"
+msgstr "Geschat jaar"
+
+msgid "Numero de reservation"
+msgstr "Reserveringsnummer"
+
+msgid "Prix de cession convenu :"
+msgstr "Overeengekomen overdrachtssom:"
+
+msgid "Acompte verse a ce jour :"
+msgstr "Tot op heden betaalde aanbetaling:"
+
+msgid "Solde restant :"
+msgstr "Resterend saldo:"
+
+msgid "Neant — paiement integral"
+msgstr "Nihil — volledige betaling ontvangen"
+
+msgid "a regler avant remise des cles"
+msgstr "te betalen vóór sleuteloverdracht"
+
+msgid "Document d'immatriculation (specimen pedagogique joint)"
+msgstr "Inschrijvingsdocument (pedagogisch specimen bijgevoegd)"
+
+msgid "Dans le cadre de ce projet academique, un specimen non officiel de demande d'immatriculation est joint a ce dossier de vente a titre pedagogique. Ce document porte la mention SPECIMEN — NON VALABLE et ne constitue pas un document administratif reel."
+msgstr "In het kader van dit academisch project is een niet-officieel specimen van een inschrijvingsaanvraag pedagogisch aan dit verkoopdossier toegevoegd. Dit document is gemarkeerd als SPECIMEN — NIET GELDIG en vormt geen officieel administratief document."
+
+msgid "Conditions de la cession"
+msgstr "Overdrachtsvoorwaarden"
+
+msgid "Le vehicule est vendu en l'etat, tel que vu et accepte par l'acheteur lors de la reservation."
+msgstr "Het voertuig wordt verkocht in de huidige staat, zoals gezien en aanvaard door de koper bij de reservering."
+
+msgid "Le transfert de propriete est effectif a la reception du paiement integral."
+msgstr "De eigendomsoverdracht is van kracht bij ontvangst van de volledige betaling."
+
+msgid "L'acheteur reconnait avoir pris connaissance des conditions generales disponibles sur le site."
+msgstr "De koper erkent kennis te hebben genomen van de algemene voorwaarden op de website."
+
+msgid "Le vendeur"
+msgstr "De verkoper"
+
+msgid "Ce document est genere electroniquement par la plateforme MultiDrive a titre de preuve de transaction. Il ne se substitue pas aux documents officiels d'immatriculation. Document genere le %(date)s."
+msgstr "Dit document is elektronisch gegenereerd door het MultiDrive-platform als transactiebewijs. Het vervangt geen officiële inschrijvingsdocumenten. Document gegenereerd op %(date)s."
+
+msgid "Acte de cession N°"
+msgstr "Overdrachtsakte nr."
+
+# ─── PDF: pdf_specimen_immatriculation.html ──────────────────────────────────
+
+msgid "SPECIMEN — DOCUMENT DE DEMONSTRATION — NON VALABLE"
+msgstr "SPECIMEN — DEMONSTRATIEDOCUMENT — NIET GELDIG"
+
+msgid "SPECIMEN D'IMMATRICULATION"
+msgstr "INSCHRIJVINGSSPECIMEN"
+
+msgid "Identification du titulaire (acheteur)"
+msgstr "Identificatie van de houder (koper)"
+
+msgid "Coordonnees"
+msgstr "Contactgegevens"
+
+msgid "Adresse : Non renseignee"
+msgstr "Adres: Niet opgegeven"
+
+msgid "Identification"
+msgstr "Identificatie"
+
+msgid "Membre MultiDrive"
+msgstr "MultiDrive-lid"
+
+msgid "N° reservation :"
+msgstr "Reserveringsnr.:"
+
+msgid "Date de transaction :"
+msgstr "Transactiedatum:"
+
+msgid "Identification du vehicule"
+msgstr "Voertuigidentificatie"
+
+msgid "Vehicule neuf / usage"
+msgstr "Nieuw / gebruikt voertuig"
+
+msgid "Usage (vehicule d'occasion)"
+msgstr "Gebruikt (tweedehands voertuig)"
+
+msgid "Designation complete"
+msgstr "Volledige beschrijving"
+
+msgid "Numero de chassis (VIN)"
+msgstr "Chassisnummer (VIN)"
+
+msgid "Non disponible"
+msgstr "Niet beschikbaar"
+
+msgid "Donnees financieres"
+msgstr "Financiële gegevens"
+
+msgid "Prix de cession :"
+msgstr "Overdrachtssom:"
+
+msgid "Acompte verse :"
+msgstr "Betaalde aanbetaling:"
+
+msgid "Immatriculation & assurance (indicatif)"
+msgstr "Inschrijving & verzekering (indicatief)"
+
+msgid "Plaque d'immatriculation"
+msgstr "Nummerplaat"
+
+msgid "Plaque existante"
+msgstr "Bestaande plaat"
+
+msgid "Non renseignee"
+msgstr "Niet opgegeven"
+
+msgid "Type de plaque"
+msgstr "Type plaat"
+
+msgid "Ordinaire / Transit (a determiner)"
+msgstr "Gewoon / Transit (nader te bepalen)"
+
+msgid "Zone assurance (indicatif)"
+msgstr "Verzekeringszone (indicatief)"
+
+msgid "Zone nationale — Belgique (BE)"
+msgstr "Nationale zone — België (BE)"
+
+msgid "Compagnie d'assurance"
+msgstr "Verzekeringsmaatschappij"
+
+msgid "A choisir par l'acheteur"
+msgstr "Te kiezen door de koper"
+
+msgid "Signatures"
+msgstr "Handtekeningen"
+
+msgid "Le vendeur (cedant)"
+msgstr "De verkoper (overdrager)"
+
+msgid "L'acheteur (cessionnaire)"
+msgstr "De koper (overnemer)"
+
+msgid "Signature de l'acheteur"
+msgstr "Handtekening koper"
+
+msgid "Ce document est un specimen non officiel genere dans le cadre du projet academique MultiDrive, joint au dossier de vente en remplacement pedagogique du formulaire officiel d'immatriculation. Il ne constitue pas une demande officielle d'immatriculation et ne peut en aucun cas etre transmis a la DIV ou a un assureur. Aucun logo officiel DIV, vignette d'assurance reelle ou numero administratif officiel n'est utilise. Dans une transaction reelle, ce document serait remplace par les formulaires officiels delivres par les autorites competentes."
+msgstr "Dit document is een niet-officieel specimen gegenereerd in het kader van het academisch project MultiDrive, pedagogisch bijgevoegd aan het verkoopdossier ter vervanging van het officiële inschrijvingsformulier. Het vormt geen officiële inschrijvingsaanvraag en mag in geen geval worden ingediend bij de DIV of een verzekeraar. Er worden geen officieel DIV-logo, echte verzekeringskaart of officieel administratienummer gebruikt. In een echte transactie zou dit document worden vervangen door de officiële formulieren uitgegeven door de bevoegde autoriteiten."
+
+msgid "Specimen ref. %(ref)s &mdash; genere le %(date)s"
+msgstr "Specimen ref. %(ref)s &mdash; gegenereerd op %(date)s"
+
+# ─── email_reservation_confirmation.html ─────────────────────────────────────
+
+msgid "Confirmation de reservation — MultiDrive"
+msgstr "Reserveringsbevestiging — MultiDrive"
+
+msgid "Confirmation de votre demande de reservation"
+msgstr "Bevestiging van uw reserveringsaanvraag"
+
+msgid "Bonjour %(name)s,"
+msgstr "Hallo %(name)s,"
+
+msgid "Nous avons bien recu votre demande de reservation pour le vehicule suivant :"
+msgstr "We hebben uw reserveringsaanvraag ontvangen voor het volgende voertuig:"
+
+msgid "Vehicule :"
+msgstr "Voertuig:"
+
+msgid "Prix :"
+msgstr "Prijs:"
+
+msgid "Date souhaitee :"
+msgstr "Gewenste datum:"
+
+msgid "Creneau :"
+msgstr "Tijdslot:"
+
+msgid "Statut :"
+msgstr "Status:"
+
+msgid "En attente de validation"
+msgstr "Wachten op validatie"
+
+msgid "Notre equipe examinera votre demande et vous contactera par email pour vous confirmer l'acceptation ou vous proposer un autre creneau."
+msgstr "Ons team zal uw aanvraag bekijken en u per e-mail contacteren om de aanvaarding te bevestigen of een ander tijdslot voor te stellen."
+
+msgid "Vous pouvez suivre l'avancement de votre reservation depuis votre espace membre."
+msgstr "U kunt de voortgang van uw reservering volgen in uw ledenzone."
+
+msgid "Merci pour votre confiance."
+msgstr "Bedankt voor uw vertrouwen."
+
+msgid "L'equipe MultiDrive"
+msgstr "Het MultiDrive-team"
+
+msgid "Cet email est envoye automatiquement. Merci de ne pas y repondre directement."
+msgstr "Deze e-mail wordt automatisch verzonden. Gelieve niet rechtstreeks te antwoorden."
+
+msgid "MultiDrive — Projet academique"
+msgstr "MultiDrive — Academisch project"
+
+# ─── Admin dashboard ─────────────────────────────────────────────────────────
+
+msgid "Administration"
+msgstr "Beheer"
+
+msgid "%(n)s disponibles actuellement."
+msgstr "%(n)s momenteel beschikbaar."
+
+msgid "Reservations en attente"
+msgstr "Reserveringen in behandeling"
+
+msgid "Demandes a verifier ou a confirmer."
+msgstr "Aanvragen te controleren of te bevestigen."
+
+msgid "Messages sans reponse"
+msgstr "Onbeantwoorde berichten"
+
+msgid "Questions client ou demandes d'information."
+msgstr "Klantvragen of informatieverzoeken."
+
+msgid "Paiements a suivre"
+msgstr "Te volgen betalingen"
+
+msgid "Acomptes encore en attente de validation."
+msgstr "Aanbetalingen nog in afwachting van validatie."
+
+msgid "Membres actifs"
+msgstr "Actieve leden"
+
+msgid "Comptes clients actuellement actifs."
+msgstr "Momenteel actieve klantenaccounts."
+
+msgid "Vehicules vendus"
+msgstr "Verkochte voertuigen"
+
+msgid "Ventes finalisees dans le catalogue."
+msgstr "Afgeronde verkopen in de catalogus."
+
+msgid "Remboursements a traiter"
+msgstr "Te verwerken terugbetalingen"
+
+msgid "Annulations avec acompte verse en attente."
+msgstr "Annuleringen met uitstaande aanbetaling."
+
+msgid "Gestion des administrateurs"
+msgstr "Beheerdersmanagement"
+
+msgid "Ajouter un admin"
+msgstr "Beheerder toevoegen"
+
+msgid "Compte desactive"
+msgstr "Account gedeactiveerd"
+
+msgid "Retirer les droits admin a %(u)s ? Il repassera en compte client."
+msgstr "Beheerdersrechten van %(u)s verwijderen? Ze worden teruggeplaatst als klantenaccount."
+
+msgid "Retirer les droits"
+msgstr "Rechten verwijderen"
+
+msgid "Desactiver definitivement le compte de %(u)s ?"
+msgstr "Het account van %(u)s definitief deactiveren?"
+
+msgid "Desactiver"
+msgstr "Deactiveren"
+
+msgid "Aucun administrateur cree pour le moment. Cliquez sur « Ajouter un admin » pour commencer."
+msgstr "Nog geen beheerders aangemaakt. Klik op « Beheerder toevoegen » om te beginnen."
+
+msgid "Derniers mouvements"
+msgstr "Recente activiteit"
+
+msgid "10 derniers evenements"
+msgstr "Laatste 10 gebeurtenissen"
+
+msgid "Raccourcis"
+msgstr "Snelkoppelingen"
+
+msgid "Actions rapides"
+msgstr "Snelle acties"
+
+msgid "Acces direct aux principales zones de gestion."
+msgstr "Directe toegang tot de belangrijkste beheergebieden."
+
+msgid "Ajouter un vehicule"
+msgstr "Voertuig toevoegen"
+
+msgid "Creer une nouvelle annonce dans le catalogue."
+msgstr "Een nieuwe advertentie in de catalogus aanmaken."
+
+msgid "Gerer les vehicules"
+msgstr "Voertuigen beheren"
+
+msgid "Modifier, supprimer ou filtrer le stock."
+msgstr "Voorraad bewerken, verwijderen of filteren."
+
+msgid "Voir les reservations"
+msgstr "Reserveringen bekijken"
+
+msgid "Traiter les demandes."
+msgstr "Aanvragen verwerken."
+
+msgid "en attente."
+msgstr "in behandeling."
+
+msgid "Traiter les messages"
+msgstr "Berichten verwerken"
+
+msgid "Repondre aux questions."
+msgstr "Vragen beantwoorden."
+
+msgid "sans reponse."
+msgstr "zonder antwoord."
+
+msgid "Suivre les paiements"
+msgstr "Betalingen volgen"
+
+msgid "Verifier les acomptes et leur statut."
+msgstr "Aanbetalingen en hun status controleren."
+
+msgid "Comptes desactives"
+msgstr "Gedeactiveerde accounts"
+
+msgid "%(n)s compte(s) desactive(s) au total."
+msgstr "%(n)s gedeactiveerd(e) account(s) in totaal."
+
+msgid "Demandes de suppression"
+msgstr "Verwijderingsverzoeken"
+
+msgid "non traitee(s)."
+msgstr "onverwerkt."
+
+msgid "Aucune demande en attente."
+msgstr "Geen aanvragen in behandeling."
+
+msgid "Ouvrir l'admin Django"
+msgstr "Django-beheer openen"
+
+msgid "Acceder a la gestion complete du projet."
+msgstr "Toegang tot het volledige projectbeheer."
+
+msgid "Prioritaire"
+msgstr "Prioriteit"
+
+msgid "Remboursements en attente"
+msgstr "Terugbetalingen in behandeling"
+
+msgid "Ces membres ont annule leur reservation apres avoir verse un acompte. Saisissez le montant rembourse et un commentaire pour le membre."
+msgstr "Deze leden hebben hun reservering geannuleerd na het betalen van een aanbetaling. Voer het terugbetaalde bedrag en een opmerking voor het lid in."
+
+msgid "Annulation le"
+msgstr "Geannuleerd op"
+
+msgid "Remboursement demande"
+msgstr "Terugbetaling gevraagd"
+
+msgid "Montant a rembourser (EUR)"
+msgstr "Terug te betalen bedrag (EUR)"
+
+msgid "Message pour le membre (optionnel)"
+msgstr "Bericht voor het lid (optioneel)"
+
+msgid "Ex : Remboursement de 90 EUR apres retention de 10 % de frais administratifs conformement aux CGV."
+msgstr "Bijv.: Terugbetaling van 90 EUR na inhouding van 10% administratiekosten conform de algemene voorwaarden."
+
+msgid "Valider le remboursement"
+msgstr "Terugbetaling bevestigen"
+
+msgid "Voir dans l'admin Django"
+msgstr "Bekijken in Django-beheer"
+
+msgid "Moderation"
+msgstr "Moderatie"
+
+msgid "Derniers avis clients"
+msgstr "Laatste klantbeoordelingen"
+
+msgid "Consultez et supprimez les avis inappropries. Les avis sont visibles publiquement sur les fiches vehicules."
+msgstr "Bekijk en verwijder ongepaste beoordelingen. Beoordelingen zijn openbaar zichtbaar op voertuigfiches."
+
+msgid "sur"
+msgstr "op"
+
+msgid "Supprimer cet avis ?"
+msgstr "Deze beoordeling verwijderen?"
+
+msgid "Supprimer"
+msgstr "Verwijderen"
+
+msgid "Statistiques"
+msgstr "Statistieken"
+
+msgid "Ventes & revenus"
+msgstr "Verkopen & inkomsten"
+
+msgid "Exporter en CSV"
+msgstr "Exporteren als CSV"
+
+msgid "Revenus totaux"
+msgstr "Totale inkomsten"
+
+msgid "Tous paiements confondus"
+msgstr "Alle betalingen samen"
+
+msgid "Revenus ce mois-ci"
+msgstr "Inkomsten deze maand"
+
+msgid "Ventes finalisees"
+msgstr "Afgeronde verkopen"
+
+msgid "ventes"
+msgstr "verkopen"
+
+msgid "%(amt)s EUR encaisses"
+msgstr "%(amt)s EUR geïnd"
+
+msgid "vehicules"
+msgstr "voertuigen"
+
+msgid "Statut Vendu dans le catalogue"
+msgstr "Status Verkocht in de catalogus"
+
+msgid "Acomptes en cours"
+msgstr "Lopende aanbetalingen"
+
+msgid "dossiers"
+msgstr "dossiers"
+
+msgid "Solde restant a encaisser"
+msgstr "Resterend te innen saldo"
+
+msgid "Ventes par categorie"
+msgstr "Verkopen per categorie"
+
+msgid "Progression"
+msgstr "Voortgang"
+
+msgid "Ventes"
+msgstr "Verkopen"
+
+# ─── create_admin.html ───────────────────────────────────────────────────────
+
+msgid "Creer un administrateur"
+msgstr "Een beheerder aanmaken"
+
+msgid "Nouveau compte admin"
+msgstr "Nieuw beheerdersaccount"
+
+msgid "Creer l'administrateur"
+msgstr "Beheerder aanmaken"
+
+msgid "L'admin recevra ses identifiants et pourra changer son mot de passe depuis son espace personnel."
+msgstr "De beheerder ontvangt zijn inloggegevens en kan zijn wachtwoord wijzigen in zijn persoonlijke zone."
+
+msgid "Admins actifs (%(n)s)"
+msgstr "Actieve beheerders (%(n)s)"
+
+msgid "Retirer les droits admin a %(u)s ?"
+msgstr "Beheerdersrechten van %(u)s verwijderen?"
+
+msgid "Desactiver le compte de %(u)s ?"
+msgstr "Het account van %(u)s deactiveren?"
+
+msgid "Aucun administrateur pour le moment."
+msgstr "Nog geen beheerders."
+
+msgid "Retour au dashboard"
+msgstr "Terug naar dashboard"
+
+# ─── cgv.html ────────────────────────────────────────────────────────────────
+
+msgid "Informations legales"
+msgstr "Juridische informatie"
+
+msgid "Conditions generales d'utilisation"
+msgstr "Algemene gebruiksvoorwaarden"
+
+msgid "Derniere mise a jour : juin 2026"
+msgstr "Laatste update: juni 2026"
+
+msgid "1. Presentation de la plateforme"
+msgstr "1. Voorstelling van het platform"
+
+msgid "MultiDrive est une plateforme web de consultation et de reservation de vehicules d'occasion. Elle est exploitee dans le cadre d'un projet academique (Travail de Fin d'Etudes). Les vehicules presentes sont des donnees de demonstration et ne constituent pas des offres commerciales reelles."
+msgstr "MultiDrive is een webplatform voor het raadplegen en reserveren van tweedehands voertuigen. Het wordt geëxploiteerd in het kader van een academisch project (eindwerk). De gepresenteerde voertuigen zijn demonstratiegegevens en vormen geen echte commerciële aanbiedingen."
+
+msgid "2. Acces au service"
+msgstr "2. Toegang tot de dienst"
+
+msgid "L'acces au catalogue est libre et gratuit. La reservation d'un vehicule necessite la creation d'un compte membre. MultiDrive se reserve le droit de suspendre ou de supprimer un compte en cas d'utilisation abusive ou de non-respect des presentes conditions."
+msgstr "Toegang tot de catalogus is vrij en gratis. Het reserveren van een voertuig vereist het aanmaken van een ledenaccount. MultiDrive behoudt zich het recht voor een account op te schorten of te verwijderen bij misbruik of niet-naleving van deze voorwaarden."
+
+msgid "3. Reservations et rendez-vous"
+msgstr "3. Reserveringen en afspraken"
+
+msgid "Toute reservation est soumise a validation par l'administration. Un rendez-vous peut etre propose lors de la demande, dans les plages horaires definies :"
+msgstr "Elke reservering is onderworpen aan validatie door de administratie. Een afspraak kan worden voorgesteld bij de aanvraag, binnen de vastgestelde tijdsloten:"
+
+msgid "Du lundi au vendredi : 16h00 a 21h30"
+msgstr "Maandag tot vrijdag: 16:00 tot 21:30"
+
+msgid "Le samedi et dimanche : 9h00 a 21h00"
+msgstr "Zaterdag en zondag: 9:00 tot 21:00"
+
+msgid "Les prix et conditions de reservation sont affiches clairement avant toute validation de paiement."
+msgstr "De prijzen en reserveringsvoorwaarden worden duidelijk weergegeven vóór elke betalingsbevestiging."
+
+msgid "4. Paiement et securite des transactions"
+msgstr "4. Betaling en transactieveiligheid"
+
+msgid "Un acompte peut etre demande apres acceptation de la reservation. Cet acompte correspond a 20 % du prix du vehicule, avec un minimum de 20 EUR et un maximum de 250 EUR."
+msgstr "Een aanbetaling kan worden gevraagd na aanvaarding van de reservering. Deze aanbetaling bedraagt 20% van de voertuigprijs, met een minimum van 20 EUR en een maximum van 250 EUR."
+
+msgid "Le paiement est traite de maniere securisee via Stripe Checkout, solution conforme aux standards internationaux de securite des paiements (PCI-DSS). Les transactions sont chiffrees via HTTPS."
+msgstr "De betaling wordt veilig verwerkt via Stripe Checkout, een oplossing die voldoet aan de internationale betalingsbeveiligingsnormen (PCI-DSS). Transacties zijn versleuteld via HTTPS."
+
+msgid "Aucune donnee bancaire n'est stockee sur les serveurs de MultiDrive."
+msgstr "Er worden geen bankgegevens opgeslagen op de servers van MultiDrive."
+
+msgid "Les informations de carte sont traitees exclusivement par Stripe et ne transitent jamais par notre application."
+msgstr "Kaartgegevens worden uitsluitend verwerkt door Stripe en verlopen nooit via onze applicatie."
+
+msgid "5. Annulation et remboursement"
+msgstr "5. Annulering en terugbetaling"
+
+msgid "Une reservation peut etre annulee par le membre selon les conditions suivantes :"
+msgstr "Een reservering kan door het lid worden geannuleerd onder de volgende voorwaarden:"
+
+msgid "Reservation en attente : annulation libre, sans frais."
+msgstr "Reservering in behandeling: vrije annulering, geen kosten."
+
+msgid "Reservation acceptee : annulation possible, sans frais."
+msgstr "Aanvaarde reservering: annulering mogelijk, geen kosten."
+
+msgid "Acompte verse : annulation possible. Des frais administratifs de 10 % minimum du montant verse pourront etre retenus."
+msgstr "Aanbetaling betaald: annulering mogelijk. Er kunnen administratiekosten van minimaal 10% van het betaalde bedrag worden ingehouden."
+
+msgid "Le remboursement est traite sous 14 jours ouvrables."
+msgstr "De terugbetaling wordt verwerkt binnen 14 werkdagen."
+
+msgid "6. Donnees personnelles et RGPD"
+msgstr "6. Persoonsgegevens en AVG"
+
+msgid "MultiDrive respecte les principes du Reglement General sur la Protection des Donnees (RGPD). Les donnees collectees sont limitees au strict necessaire pour le fonctionnement du service :"
+msgstr "MultiDrive respecteert de beginselen van de Algemene Verordening Gegevensbescherming (AVG). De verzamelde gegevens zijn beperkt tot het strikt noodzakelijke voor de werking van de dienst:"
+
+msgid "Nom et prenom"
+msgstr "Voor- en achternaam"
+
+msgid "Adresse e-mail"
+msgstr "E-mailadres"
+
+msgid "Historique de reservations et de paiements"
+msgstr "Reserverings- en betalingsgeschiedenis"
+
+msgid "Ces donnees sont traitees de maniere licite, loyale et transparente. Elles ne sont jamais transmises a des tiers ni revendues."
+msgstr "Deze gegevens worden op wettige, eerlijke en transparante wijze verwerkt. Ze worden nooit doorgegeven aan derden of doorverkocht."
+
+msgid "Conformement au RGPD, tout membre dispose d'un droit d'acces, de modification et de suppression de ses donnees. La suppression du compte est accessible directement depuis l'espace personnel."
+msgstr "Overeenkomstig de AVG heeft elk lid het recht op toegang, wijziging en verwijdering van zijn gegevens. Het verwijderen van het account is rechtstreeks toegankelijk vanuit de persoonlijke zone."
+
+msgid "7. Cookies"
+msgstr "7. Cookies"
+
+msgid "MultiDrive utilise uniquement des cookies techniques strictement necessaires au bon fonctionnement de la plateforme :"
+msgstr "MultiDrive gebruikt alleen strikt noodzakelijke technische cookies voor de goede werking van het platform:"
+
+msgid "Maintien de la session utilisateur (authentification)"
+msgstr "Bijhouden van de gebruikerssessie (authenticatie)"
+
+msgid "Protection contre les attaques CSRF"
+msgstr "Bescherming tegen CSRF-aanvallen"
+
+msgid "Memorisation de la preference de langue"
+msgstr "Onthouden van de taalvoorkeur"
+
+msgid "Ces cookies ne servent pas au suivi publicitaire ou analytique et ne necessitent pas de consentement prealable selon la reglementation europeenne. Aucun cookie tiers n'est utilise."
+msgstr "Deze cookies worden niet gebruikt voor reclame- of analytische tracking en vereisen geen voorafgaande toestemming krachtens de Europese regelgeving. Er worden geen cookies van derden gebruikt."
+
+msgid "8. Propriete intellectuelle"
+msgstr "8. Intellectueel eigendom"
+
+msgid "Les contenus presentes sur MultiDrive (design, code source, textes, elements graphiques) sont proteges par le droit d'auteur. Toute reproduction ou diffusion sans autorisation prealable est interdite."
+msgstr "De inhoud van MultiDrive (ontwerp, broncode, teksten, grafische elementen) is beschermd door het auteursrecht. Elke reproductie of verspreiding zonder voorafgaande toestemming is verboden."
+
+msgid "Ce projet est realise a titre academique dans le cadre d'un Travail de Fin d'Etudes. Les images utilisees pour illustrer les vehicules sont issues de ressources libres de droits ou appartiennent au projet."
+msgstr "Dit project is uitgevoerd voor academische doeleinden als eindwerk. De afbeeldingen ter illustratie van de voertuigen zijn afkomstig van rechtenvrije bronnen of behoren tot het project."
+
+msgid "9. Responsabilite"
+msgstr "9. Aansprakelijkheid"
+
+msgid "MultiDrive est un projet academique fourni a titre demonstratif. L'administrateur du site est responsable de la gestion des contenus publies et de la securisation generale de la plateforme. MultiDrive ne saurait etre tenu responsable des dommages indirects lies a l'utilisation du service."
+msgstr "MultiDrive is een academisch project dat ter demonstratie wordt aangeboden. De sitebeheerder is verantwoordelijk voor het beheer van gepubliceerde inhoud en de algemene beveiliging van het platform. MultiDrive kan niet aansprakelijk worden gesteld voor indirecte schade in verband met het gebruik van de dienst."
+
+msgid "10. Contact"
+msgstr "10. Contact"
+
+msgid "Pour toute question relative aux conditions d'utilisation, a la protection des donnees ou a un remboursement, vous pouvez nous contacter via la"
+msgstr "Voor vragen over de gebruiksvoorwaarden, gegevensbescherming of een terugbetaling kunt u contact met ons opnemen via de"
+
+msgid "page de contact"
+msgstr "contactpagina"
+
+msgid "ou par email a"
+msgstr "of per e-mail op"
+
+# ─── password_reset_email.html ───────────────────────────────────────────────
+
+msgid "Reinitialisation de mot de passe"
+msgstr "Wachtwoord opnieuw instellen"
+
+msgid "Bonjour %(username)s,"
+msgstr "Hallo %(username)s,"
+
+msgid "Vous avez demande la reinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour choisir un nouveau mot de passe :"
+msgstr "U heeft een wachtwoordherstel aangevraagd. Klik op de onderstaande knop om een nieuw wachtwoord te kiezen:"
+
+msgid "Reinitialiser mon mot de passe"
+msgstr "Mijn wachtwoord opnieuw instellen"
+
+msgid "Ce lien est valable <strong>24 heures</strong>. Apres ce delai, vous devrez faire une nouvelle demande."
+msgstr "Deze koppeling is geldig voor <strong>24 uur</strong>. Na dit tijdstip moet u een nieuwe aanvraag doen."
+
+msgid "Si vous n'avez pas fait cette demande, ignorez simplement cet email — votre mot de passe ne sera pas modifie."
+msgstr "Als u deze aanvraag niet heeft gedaan, negeer dan gewoon deze e-mail — uw wachtwoord wordt niet gewijzigd."
+
+msgid "Cet email a ete envoye automatiquement, merci de ne pas y repondre."
+msgstr "Deze e-mail is automatisch verzonden. Gelieve niet te antwoorden."
+
+# ─── Model choices (vehicles/models.py) ─────────────────────────────────────
+
+msgid "Disponible"
+msgstr "Beschikbaar"
+
+msgid "Reserve"
+msgstr "Gereserveerd"
+
+msgid "Vendu"
+msgstr "Verkocht"
+
+msgid "Tres bon"
+msgstr "Zeer goed"
+
+msgid "Bon"
+msgstr "Goed"
+
+msgid "Legerement accidente"
+msgstr "Licht beschadigd"
+
+msgid "Roule, reparation mineure a prevoir"
+msgstr "Rijdt, kleine reparatie voorzien"
+
+# ─── Model choices (reservations/models.py) ─────────────────────────────────
+
+msgid "Acceptee"
+msgstr "Geaccepteerd"
+
+msgid "Refusee"
+msgstr "Geweigerd"
+
+msgid "Annulee"
+msgstr "Geannuleerd"
+
+# ─── Model choices (payments/models.py) ─────────────────────────────────────
+
+msgid "Echoue"
+msgstr "Mislukt"
+
+msgid "Rembourse"
+msgstr "Terugbetaald"
+
+# ─── Model choices (accounts/models.py) ─────────────────────────────────────
+
+msgid "Demande utilisateur"
+msgstr "Verzoek gebruiker"
+
+msgid "Blocage administrateur"
+msgstr "Beheerder geblokkeerd"
+
+# ─── Common vehicle category names ───────────────────────────────────────────
+
+msgid "Voiture"
+msgstr "Auto"
+
+msgid "Moto"
+msgstr "Motor"
+
+msgid "Camion"
+msgstr "Vrachtwagen"
+
+msgid "Van"
+msgstr "Bestelwagen"
+
+msgid "Quad"
+msgstr "Quad"
+
+msgid "Scooter"
+msgstr "Scooter"
+
+msgid "Camping-car"
+msgstr "Camper"
+
+msgid "Utilitaire"
+msgstr "Bedrijfsvoertuig"
+
+msgid "Break"
+msgstr "Stationwagen"
+
+msgid "Citadine"
+msgstr "Stadsauto"
+
+msgid "Compacte"
+msgstr "Compacte auto"
+
+msgid "Monospace"
+msgstr "Monovolume"
+
+msgid "Moto legere"
+msgstr "Lichte motorfiets"
+
+msgid "SUV compact"
+msgstr "Compacte SUV"
+
+msgid "Trottinette"
+msgstr "E-step"
+
+msgid "Utilitaire leger"
+msgstr "Lichte bestelwagen"
+
+msgid "Velo"
+msgstr "Fiets"
+
+# ─── Profile page (accounts/profile.html) ────────────────────────────────────
+
+msgid "Retrouvez ici les informations principales de votre compte MultiDrive."
+msgstr "Vind hier de belangrijkste informatie van uw MultiDrive-account."
+
+msgid "Date d'inscription"
+msgstr "Registratiedatum"
+
+msgid "Derniere connexion"
+msgstr "Laatste aanmelding"
+
+msgid "Suivi rapide"
+msgstr "Snel overzicht"
+
+msgid "Paiements"
+msgstr "Betalingen"
+
+msgid "Paiements valides"
+msgstr "Geldige betalingen"
+
+msgid "Voir mes reservations"
+msgstr "Mijn reserveringen bekijken"
+
+msgid "Voir mes paiements"
+msgstr "Mijn betalingen bekijken"
+
+msgid "Securite du compte"
+msgstr "Accountbeveiliging"
+
+msgid "Vous pouvez modifier votre mot de passe a tout moment depuis cette page."
+msgstr "U kunt uw wachtwoord op elk moment via deze pagina wijzigen."
+
+msgid "Suppression du compte"
+msgstr "Account verwijderen"
+
+msgid "Vous pouvez demander la desactivation de votre compte. Le compte sera conserve en base en soft delete pour l'historique et l'administration."
+msgstr "U kunt de deactivering van uw account aanvragen. Het account wordt als soft delete in de database bewaard voor de geschiedenis en het beheer."
+
+msgid "Demander la suppression du compte"
+msgstr "Accountverwijdering aanvragen"
+
+msgid "Ce compte a deja ete desactive. Libelle : {{ label }}."
+msgstr "Dit account is al gedeactiveerd. Label: {{ label }}."
+
+msgid "Motif :"
+msgstr "Reden:"
+
+msgid "desactivation administrative."
+msgstr "administratieve deactivering."
+
+msgid "demande utilisateur."
+msgstr "gebruikersverzoek."
+
+msgid "Date de desactivation : {{ date }}"
+msgstr "Deactiveringsdatum: {{ date }}"
+
+# ─── Favorites page (vehicles/my_favorites.html) ─────────────────────────────
+
+msgid "Espace membre"
+msgstr "Ledenruimte"
+
+msgid "Les vehicules que vous avez mis en favori."
+msgstr "De voertuigen die u aan uw favorieten hebt toegevoegd."
+
+msgid "Aucun favori pour l'instant"
+msgstr "Nog geen favorieten"
+
+msgid "Cliquez sur l'etoile d'un vehicule pour l'ajouter ici."
+msgstr "Klik op de ster van een voertuig om het hier toe te voegen."
+
+# ─── Payment list (accounts/payment_list.html) ───────────────────────────────
+
+msgid "Retrouvez ici tous vos acomptes verses, les vehicules acquis et les details financiers associes."
+msgstr "Vind hier al uw betaalde aanbetalingen, verworven voertuigen en bijbehorende financiële details."
+
+msgid "Total paiements"
+msgstr "Totaal betalingen"
+
+msgid "Acomptes valides"
+msgstr "Geldige aanbetalingen"
+
+msgid "Montant total verse"
+msgstr "Totaal betaald bedrag"
+
+msgid "Deja verse"
+msgstr "Al betaald"
+
+msgid "Rendez-vous"
+msgstr "Afspraak"
+
+msgid "%(date)s a %(time)s"
+msgstr "%(date)s om %(time)s"
+
+msgid "Documents"
+msgstr "Documenten"
+
+msgid "Statut reservation"
+msgstr "Reservatiestatus"
+
+msgid "Dossier de vente"
+msgstr "Verkoopdossier"
+
+msgid "Facture finale"
+msgstr "Eindfactuur"
+
+msgid "Acte de cession"
+msgstr "Overdrachtsakte"
+
+msgid "Specimen immatriculation"
+msgstr "Inschrijvingsbewijs specimen"
+
+msgid "Reference"
+msgstr "Referentie"
+
+msgid "Acompte"
+msgstr "Aanbetaling"
+
+msgid "Recu d'acompte"
+msgstr "Aanbetalingsbewijs"
+
+msgid "Dossier complet disponible apres paiement integral"
+msgstr "Volledig dossier beschikbaar na volledige betaling"
+
+msgid "Disponible apres paiement"
+msgstr "Beschikbaar na betaling"
+
+msgid "Remboursement en cours de traitement"
+msgstr "Terugbetaling wordt verwerkt"
+
+msgid "Votre demande de remboursement a ete enregistree. Notre equipe la traitera sous 14 jours. Des frais administratifs de 10 % minimum peuvent etre retenus."
+msgstr "Uw terugbetalingsverzoek is geregistreerd. Ons team verwerkt het binnen 14 dagen. Er kunnen administratiekosten van minimaal 10% worden ingehouden."
+
+msgid "Remboursement effectue"
+msgstr "Terugbetaling uitgevoerd"
+
+msgid "Montant rembourse : {{ amount }} EUR"
+msgstr "Terugbetaald bedrag: {{ amount }} EUR"
+
+msgid "Completer le paiement ({{ remaining }} EUR)"
+msgstr "Betaling voltooien ({{ remaining }} EUR)"
+
+msgid "Confirmer l annulation et la demande de remboursement ?"
+msgstr "Annulering en terugbetalingsverzoek bevestigen?"
+
+msgid "Annuler et demander un remboursement"
+msgstr "Annuleren en terugbetaling aanvragen"
+
+# ─── Register page (accounts/register.html) ──────────────────────────────────
+
+msgid "Nouveau client"
+msgstr "Nieuwe klant"
+
+msgid "Un compte est necessaire pour reserver un vehicule ou payer un acompte."
+msgstr "Een account is vereist om een voertuig te reserveren of een aanbetaling te doen."
+
+msgid "Creer mon compte"
+msgstr "Mijn account aanmaken"
+
+msgid "Deja inscrit ?"
+msgstr "Al geregistreerd?"
+
+# ─── Checkout page (payments/checkout.html) ──────────────────────────────────
+
+msgid "Selectionnez la reservation a regler et choisissez le montant."
+msgstr "Selecteer de reservering die u wilt betalen en kies het bedrag."
+
+msgid "Votre panier"
+msgstr "Uw winkelwagen"
+
+msgid "Informations de paiement"
+msgstr "Betalingsinformatie"
+
+msgid "Montant a regler"
+msgstr "Te betalen bedrag"
+
+msgid "Acompte (20 %)"
+msgstr "Aanbetaling (20%)"
+
+msgid "20 % du prix, min. 20 EUR / max. 250 EUR"
+msgstr "20% van de prijs, min. 20 EUR / max. 250 EUR"
+
+msgid "Totalite"
+msgstr "Volledig bedrag"
+
+msgid "Solde complet du vehicule"
+msgstr "Volledig saldo van het voertuig"
+
+msgid "Montant personnalise"
+msgstr "Aangepast bedrag"
+
+msgid "Saisissez le montant de votre choix"
+msgstr "Voer het bedrag naar keuze in"
+
+msgid "Montant (EUR)"
+msgstr "Bedrag (EUR)"
+
+msgid "Montant selectionne"
+msgstr "Geselecteerd bedrag"
+
+msgid "Prix total moins acompte deja verse"
+msgstr "Totaalprijs minus reeds betaalde aanbetaling"
+
+msgid "Paiement securise via Stripe — vos coordonnees bancaires ne transitent jamais par nos serveurs."
+msgstr "Beveiligde betaling via Stripe — uw bankgegevens komen nooit op onze servers terecht."
+
+msgid "Aucun paiement en attente"
+msgstr "Geen openstaande betaling"
+
+msgid "Vous n'avez pas de reservation acceptee a regler pour le moment."
+msgstr "U heeft momenteel geen geaccepteerde reservering te betalen."
+
+# ─── payments/views.py flash messages ────────────────────────────────────────
+
+msgid "Reservation introuvable. Veuillez reessayer."
+msgstr "Reservering niet gevonden. Probeer het opnieuw."
+
+msgid "Montant invalide. Veuillez saisir un montant superieur a 0 EUR."
+msgstr "Ongeldig bedrag. Voer een bedrag in van meer dan 0 EUR."
+
+msgid "Reservation MultiDrive"
+msgstr "MultiDrive reservering"
+
+msgid "Erreur Stripe :"
+msgstr "Stripe-fout:"
+
+msgid "Ce paiement a deja ete enregistre."
+msgstr "Deze betaling is al geregistreerd."
+
+msgid "Impossible de verifier le paiement. Contactez le support."
+msgstr "Kan de betaling niet verifiëren. Neem contact op met de support."
+
+msgid "Le paiement n'a pas ete complete."
+msgstr "De betaling is niet voltooid."
+
+msgid "Paiement de"
+msgstr "Betaling van"
+
+msgid "confirme. Total verse :"
+msgstr "bevestigd. Totaal betaald:"
+
+msgid "Paiement annule. Vous pouvez reessayer quand vous voulez."
+msgstr "Betaling geannuleerd. U kunt het op elk moment opnieuw proberen."
+
+msgid "Document disponible apres paiement integral."
+msgstr "Document beschikbaar na volledige betaling."
+
+# ─── Contact page (contact/contact_form.html + contact_success.html + my_messages.html) ──
+
+msgid "Posez votre question, demandez une information ou laissez un message pour un rendez-vous."
+msgstr "Stel uw vraag, vraag informatie op of laat een bericht achter voor een afspraak."
+
+msgid "Votre message sera associe a votre compte et vous pourrez lire une reponse dans votre espace membre."
+msgstr "Uw bericht wordt gekoppeld aan uw account en u kunt het antwoord lezen in uw ledenruimte."
+
+msgid "Vous pouvez nous contacter meme sans compte. Creez un compte si vous souhaitez suivre plus facilement vos echanges."
+msgstr "U kunt contact met ons opnemen zonder account. Maak een account aan als u uw berichten eenvoudig wilt opvolgen."
+
+msgid "Nous reviendrons vers vous des que possible."
+msgstr "We nemen zo snel mogelijk contact met u op."
+
+msgid "Voir mes messages"
+msgstr "Mijn berichten bekijken"
+
+msgid "Retrouvez ici vos messages envoyes a MultiDrive et les reponses eventuelles de l'administrateur."
+msgstr "Hier vindt u uw berichten aan MultiDrive en eventuele antwoorden van de beheerder."
+
+msgid "Repondu"
+msgstr "Beantwoord"
+
+msgid "Reponse de l'administration"
+msgstr "Antwoord van de beheerder"
+
+msgid "Aucune reponse n'a encore ete ajoutee pour le moment."
+msgstr "Er is nog geen antwoord toegevoegd."
+
+msgid "Aucun message pour le moment"
+msgstr "Nog geen berichten"
+
+msgid "Vous pourrez retrouver ici vos futurs echanges avec l'administration."
+msgstr "Uw toekomstige berichten met de beheerder verschijnen hier."
+
+msgid "Contacter MultiDrive"
+msgstr "Contact MultiDrive"
+
+# ─── Contact form (contact/forms.py) ─────────────────────────────────────────
+
+msgid "Nom complet"
+msgstr "Volledige naam"
+
+msgid "Telephone"
+msgstr "Telefoon"
+
+msgid "Envoyer le message"
+msgstr "Bericht verzenden"
+
+msgid "Expliquez votre demande, votre question ou votre besoin de rendez-vous."
+msgstr "Beschrijf uw vraag, opmerking of afspraakwens."
+

@@ -1,0 +1,1877 @@
+# English translations for MultiDrive
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# ─── Navigation / base.html ─────────────────────────────────────────────────
+
+msgid "Ouvrir le menu"
+msgstr "Open menu"
+
+msgid "Accueil"
+msgstr "Home"
+
+msgid "Catalogue"
+msgstr "Catalogue"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Bonjour, %(username)s"
+msgstr "Hello, %(username)s"
+
+msgid "Mes reservations"
+msgstr "My reservations"
+
+msgid "Mon profil"
+msgstr "My profile"
+
+msgid "Mes favoris"
+msgstr "My favourites"
+
+msgid "Paiements et achats"
+msgstr "Payments & purchases"
+
+msgid "Mes messages"
+msgstr "My messages"
+
+msgid "Deconnexion"
+msgstr "Sign out"
+
+msgid "Dashboard admin"
+msgstr "Admin dashboard"
+
+msgid "Connexion"
+msgstr "Sign in"
+
+msgid "Inscription"
+msgstr "Register"
+
+msgid "Une plateforme simple pour consulter, reserver et suivre des vehicules d'occasion accessibles."
+msgstr "A simple platform to browse, book, and track affordable used vehicles."
+
+msgid "Navigation"
+msgstr "Navigation"
+
+msgid "Reservations"
+msgstr "Reservations"
+
+msgid "Projet academique MultiDrive cree dans le cadre d'un travail de fin d'etudes."
+msgstr "MultiDrive academic project created as part of a final year thesis."
+
+msgid "Conditions generales"
+msgstr "Terms of service"
+
+msgid "Politique de cookies"
+msgstr "Cookie policy"
+
+msgid "MultiDrive utilise uniquement des cookies techniques necessaires a son fonctionnement (session, securite, langue). Aucun cookie publicitaire."
+msgstr "MultiDrive only uses technical cookies required for its operation (session, security, language). No advertising cookies."
+
+msgid "En savoir plus"
+msgstr "Learn more"
+
+msgid "Accepter"
+msgstr "Accept"
+
+msgid "Refuser"
+msgstr "Decline"
+
+# ─── home.html ───────────────────────────────────────────────────────────────
+
+msgid "Occasion accessible"
+msgstr "Accessible used cars"
+
+msgid "MultiDrive rassemble des vehicules d'occasion a prix raisonnable, avec une navigation claire pour consulter, reserver et preparer un acompte."
+msgstr "MultiDrive brings together affordable used vehicles with a clear interface to browse, book, and pay a deposit."
+
+msgid "Voir les vehicules"
+msgstr "Browse vehicles"
+
+msgid "Gerer la base"
+msgstr "Manage inventory"
+
+msgid "vehicules disponibles"
+msgstr "vehicles available"
+
+msgid "categories"
+msgstr "categories"
+
+msgid "Comment utiliser MultiDrive"
+msgstr "How to use MultiDrive"
+
+msgid "Un parcours simple pour trouver, reserver et suivre ton vehicule."
+msgstr "A simple journey to find, book, and track your vehicle."
+
+msgid "Choisir un vehicule"
+msgstr "Choose a vehicle"
+
+msgid "Explore le catalogue et compare les prix, categories et disponibilites."
+msgstr "Browse the catalogue and compare prices, categories, and availability."
+
+msgid "Reserver"
+msgstr "Book"
+
+msgid "Connecte-toi et envoie une demande de reservation en quelques clics."
+msgstr "Sign in and send a booking request in just a few clicks."
+
+msgid "Suivre ton dossier"
+msgstr "Track your file"
+
+msgid "Consulte ensuite tes reservations et paiements dans ton espace membre."
+msgstr "Then check your reservations and payments in your member area."
+
+msgid "Categories"
+msgstr "Categories"
+
+msgid "%(count)s categories disponibles dans la base."
+msgstr "%(count)s categories available in the catalogue."
+
+msgid "Aucune categorie disponible."
+msgstr "No categories available."
+
+msgid "Vehicules populaires"
+msgstr "Popular vehicles"
+
+msgid "Une selection de vehicules accessibles pour demarrer rapidement."
+msgstr "A selection of affordable vehicles to get started quickly."
+
+msgid "Aucun vehicule populaire disponible pour le moment."
+msgstr "No popular vehicles available at the moment."
+
+msgid "Derniers vehicules disponibles"
+msgstr "Latest available vehicles"
+
+msgid "Un apercu des nouvelles annonces actuellement publiees."
+msgstr "A preview of the latest listings currently published."
+
+msgid "Aucun vehicule disponible pour le moment."
+msgstr "No vehicles available at the moment."
+
+# ─── vehicle_list.html ───────────────────────────────────────────────────────
+
+msgid "Vehicules"
+msgstr "Vehicles"
+
+msgid "Vehicules d'occasion"
+msgstr "Used vehicles"
+
+msgid "Consulte le catalogue principal et affine rapidement par recherche, categorie ou statut."
+msgstr "Browse the main catalogue and quickly filter by search, category, or status."
+
+msgid "Recherche"
+msgstr "Search"
+
+msgid "Rechercher un modele, une marque ou un type de vehicule"
+msgstr "Search a model, brand, or vehicle type"
+
+msgid "Toutes"
+msgstr "All"
+
+msgid "Statut"
+msgstr "Status"
+
+msgid "Tous"
+msgstr "All"
+
+msgid "Filtrer"
+msgstr "Filter"
+
+msgid "%(count)s resultat(s)"
+msgstr "%(count)s result(s)"
+
+msgid "Des cartes lisibles pour comparer rapidement les vehicules disponibles."
+msgstr "Easy-to-read cards to quickly compare available vehicles."
+
+msgid "Reinitialiser"
+msgstr "Reset"
+
+msgid "Aucun vehicule ne correspond a ce filtre."
+msgstr "No vehicle matches this filter."
+
+msgid "Pagination"
+msgstr "Pagination"
+
+msgid "Precedent"
+msgstr "Previous"
+
+msgid "Page %(num)s sur %(total)s"
+msgstr "Page %(num)s of %(total)s"
+
+msgid "Suivant"
+msgstr "Next"
+
+# ─── vehicle_detail.html ─────────────────────────────────────────────────────
+
+msgid "Fermer"
+msgstr "Close"
+
+msgid "Retirer des favoris"
+msgstr "Remove from favourites"
+
+msgid "Ajouter aux favoris"
+msgstr "Add to favourites"
+
+msgid "Fiche technique"
+msgstr "Technical sheet"
+
+msgid "Marque"
+msgstr "Brand"
+
+msgid "Modele"
+msgstr "Model"
+
+msgid "Annee"
+msgstr "Year"
+
+msgid "Carrosserie"
+msgstr "Body condition"
+
+msgid "Moteur"
+msgstr "Engine"
+
+msgid "Commentaire"
+msgstr "Notes"
+
+msgid "Prix de vente"
+msgstr "Selling price"
+
+msgid "Acompte (20%)"
+msgstr "Deposit (20%)"
+
+msgid "Reserver ce vehicule"
+msgstr "Book this vehicle"
+
+msgid "Ce vehicule est deja reserve."
+msgstr "This vehicle is already reserved."
+
+msgid "Ce vehicule n'est plus disponible."
+msgstr "This vehicle is no longer available."
+
+msgid "Retour au catalogue"
+msgstr "Back to catalogue"
+
+msgid "Avis clients"
+msgstr "Customer reviews"
+
+msgid "%(count)s avis, note moyenne : %(avg)s/5"
+msgstr "%(count)s review(s), average rating: %(avg)s/5"
+
+msgid "Aucun avis pour ce vehicule pour le moment."
+msgstr "No reviews for this vehicle yet."
+
+msgid "Modifier mon avis"
+msgstr "Edit my review"
+
+msgid "Laisser un avis"
+msgstr "Leave a review"
+
+msgid "Mettre a jour mon avis"
+msgstr "Update my review"
+
+msgid "Publier mon avis"
+msgstr "Post my review"
+
+msgid "Faire une demande de reservation"
+msgstr "Make a booking request"
+
+msgid "Se connecter"
+msgstr "Sign in"
+
+msgid "Publie le %(date)s"
+msgstr "Published on %(date)s"
+
+msgid "Aucun avis disponible"
+msgstr "No reviews available"
+
+msgid "Ce vehicule n'a pas encore recu d'avis membre."
+msgstr "This vehicle has not yet received any member reviews."
+
+msgid "Vehicules similaires"
+msgstr "Similar vehicles"
+
+msgid "Aucune suggestion disponible."
+msgstr "No suggestions available."
+
+msgid "Connectez-vous pour laisser un avis sur ce vehicule."
+msgstr "Sign in to leave a review for this vehicle."
+
+msgid "Vous pourrez laisser un avis apres une reservation acceptee sur ce vehicule."
+msgstr "You will be able to leave a review after an accepted booking for this vehicle."
+
+# ─── vehicle_card.html partial ───────────────────────────────────────────────
+
+msgid "Image a venir"
+msgstr "Image coming soon"
+
+msgid "Voir la fiche"
+msgstr "View listing"
+
+# ─── my_favorites.html ───────────────────────────────────────────────────────
+
+msgid "Aucun favori pour le moment."
+msgstr "No favourites yet."
+
+msgid "Ajouter des vehicules a vos favoris depuis le catalogue."
+msgstr "Add vehicles to your favourites from the catalogue."
+
+msgid "Retirer"
+msgstr "Remove"
+
+# ─── login.html ──────────────────────────────────────────────────────────────
+
+msgid "Espace client"
+msgstr "Member area"
+
+msgid "Connecte-toi pour reserver un vehicule et suivre tes demandes."
+msgstr "Sign in to book a vehicle and track your requests."
+
+msgid "Identifiants incorrects. Verifie ton nom d'utilisateur et ton mot de passe."
+msgstr "Incorrect credentials. Please check your username and password."
+
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+msgid "Mot de passe"
+msgstr "Password"
+
+msgid "Mot de passe oublie ?"
+msgstr "Forgot your password?"
+
+msgid "Pas encore de compte ?"
+msgstr "Don't have an account?"
+
+msgid "Creer un compte"
+msgstr "Create an account"
+
+# ─── register.html ───────────────────────────────────────────────────────────
+
+msgid "Cree ton compte pour acceder au catalogue et reserver un vehicule."
+msgstr "Create your account to access the catalogue and book a vehicle."
+
+msgid "S'inscrire"
+msgstr "Register"
+
+msgid "Deja un compte ?"
+msgstr "Already have an account?"
+
+# ─── profile.html ────────────────────────────────────────────────────────────
+
+msgid "Mon compte"
+msgstr "My account"
+
+msgid "Informations du compte"
+msgstr "Account information"
+
+msgid "Prenom"
+msgstr "First name"
+
+msgid "Nom"
+msgstr "Last name"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Membre depuis"
+msgstr "Member since"
+
+msgid "Enregistrer"
+msgstr "Save"
+
+msgid "Changer mon mot de passe"
+msgstr "Change my password"
+
+msgid "Supprimer mon compte"
+msgstr "Delete my account"
+
+msgid "Profil mis a jour avec succes."
+msgstr "Profile updated successfully."
+
+# ─── change_password.html ────────────────────────────────────────────────────
+
+msgid "Ancien mot de passe"
+msgstr "Current password"
+
+msgid "Nouveau mot de passe"
+msgstr "New password"
+
+msgid "Confirmer le nouveau mot de passe"
+msgstr "Confirm new password"
+
+msgid "Mettre a jour"
+msgstr "Update"
+
+# ─── delete_request.html / delete_request_done.html ─────────────────────────
+
+msgid "Demande de suppression"
+msgstr "Deletion request"
+
+msgid "Confirmer la suppression"
+msgstr "Confirm deletion"
+
+msgid "Demande enregistree"
+msgstr "Request registered"
+
+msgid "Votre demande a bien ete enregistree."
+msgstr "Your request has been registered."
+
+# ─── payment_list.html ───────────────────────────────────────────────────────
+
+msgid "Mes achats"
+msgstr "My purchases"
+
+msgid "Historique des paiements"
+msgstr "Payment history"
+
+msgid "Aucun paiement pour le moment."
+msgstr "No payments yet."
+
+msgid "Telecharger la facture"
+msgstr "Download invoice"
+
+msgid "Telecharger le recu"
+msgstr "Download receipt"
+
+msgid "Telecharger l'acte de cession"
+msgstr "Download deed of sale"
+
+msgid "Telecharger le specimen"
+msgstr "Download specimen"
+
+# ─── password reset templates ────────────────────────────────────────────────
+
+msgid "Mot de passe oublie"
+msgstr "Forgot your password"
+
+msgid "Saisis ton adresse email. Si un compte existe, tu recevras un lien pour reinitialiser ton mot de passe."
+msgstr "Enter your email address. If an account exists, you will receive a link to reset your password."
+
+msgid "Merci de corriger les erreurs ci-dessous."
+msgstr "Please correct the errors below."
+
+msgid "Envoyer le lien de reinitialisation"
+msgstr "Send reset link"
+
+msgid "Tu te souviens de ton mot de passe ?"
+msgstr "Remember your password?"
+
+msgid "Si un compte correspond a cette adresse, tu recevras un email dans quelques minutes avec un lien de reinitialisation."
+msgstr "If an account matches this address, you will receive an email within a few minutes with a reset link."
+
+msgid "Pense a verifier tes spams si tu ne vois pas l'email dans ta boite de reception."
+msgstr "Check your spam folder if you do not see the email in your inbox."
+
+msgid "Retour a la connexion"
+msgstr "Back to login"
+
+msgid "Reinitialisation"
+msgstr "Password reset"
+
+msgid "Reinitialisation du mot de passe"
+msgstr "Password reset"
+
+msgid "Entrez votre adresse email pour recevoir un lien de reinitialisation."
+msgstr "Enter your email address to receive a reset link."
+
+msgid "Adresse email"
+msgstr "Email address"
+
+msgid "Envoyer le lien"
+msgstr "Send link"
+
+msgid "Email envoye"
+msgstr "Email sent"
+
+msgid "Un email de reinitialisation a ete envoye si cette adresse est associee a un compte."
+msgstr "A reset email has been sent if this address is linked to an account."
+
+msgid "Mot de passe modifie"
+msgstr "Password changed"
+
+msgid "Choisis un nouveau mot de passe securise pour ton compte."
+msgstr "Choose a secure new password for your account."
+
+msgid "Confirmer le mot de passe"
+msgstr "Confirm password"
+
+msgid "Enregistrer le nouveau mot de passe"
+msgstr "Save new password"
+
+msgid "Ce lien de reinitialisation est invalide ou a expire. Les liens sont valables 24 heures."
+msgstr "This reset link is invalid or has expired. Links are valid for 24 hours."
+
+msgid "Demander un nouveau lien"
+msgstr "Request a new link"
+
+msgid "Ton mot de passe a ete reinitialise avec succes. Tu peux maintenant te connecter avec ton nouveau mot de passe."
+msgstr "Your password has been reset successfully. You can now sign in with your new password."
+
+msgid "Modification enregistree."
+msgstr "Change saved."
+
+# ─── reservation_form.html ───────────────────────────────────────────────────
+
+msgid "Faire une reservation"
+msgstr "Make a booking"
+
+msgid "Demande de reservation"
+msgstr "Booking request"
+
+msgid "Date souhaitee"
+msgstr "Preferred date"
+
+msgid "Creneau"
+msgstr "Time slot"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Envoyer la demande"
+msgstr "Send request"
+
+msgid "Week-end : rendez-vous acceptes de 9h00 a 21h00."
+msgstr "Weekend: appointments accepted from 9:00 to 21:00."
+
+msgid "Semaine : rendez-vous acceptes de 16h00 a 21h30."
+msgstr "Weekdays: appointments accepted from 16:00 to 21:30."
+
+# ─── reservation_success.html ────────────────────────────────────────────────
+
+msgid "Demande envoyee !"
+msgstr "Request sent!"
+
+msgid "Votre demande de reservation a bien ete enregistree."
+msgstr "Your booking request has been registered."
+
+msgid "Retour a mes reservations"
+msgstr "Back to my reservations"
+
+# ─── my_reservations.html ────────────────────────────────────────────────────
+
+msgid "Suivez ici vos demandes, leur statut actuel et l'etat de l'acompte lorsque la reservation avance."
+msgstr "Track your requests here, their current status, and the deposit state as the booking progresses."
+
+msgid "Total demandes"
+msgstr "Total requests"
+
+msgid "En attente"
+msgstr "Pending"
+
+msgid "Acceptees"
+msgstr "Accepted"
+
+msgid "Refusees"
+msgstr "Rejected"
+
+msgid "Prix du vehicule"
+msgstr "Vehicle price"
+
+msgid "Reservation creee le"
+msgstr "Booking created on"
+
+msgid "Derniere mise a jour"
+msgstr "Last update"
+
+msgid "Rendez-vous souhaite"
+msgstr "Preferred appointment"
+
+msgid "Votre message"
+msgstr "Your message"
+
+msgid "Suivi de l'acompte"
+msgstr "Deposit tracking"
+
+msgid "Methode :"
+msgstr "Method:"
+
+msgid "Reference :"
+msgstr "Reference:"
+
+msgid "Votre reservation a ete acceptee. L'etape suivante sera le paiement de l'acompte."
+msgstr "Your booking has been accepted. The next step will be the deposit payment."
+
+msgid "La reservation est marquee comme acompte paye."
+msgstr "The booking is marked as deposit paid."
+
+msgid "Cette demande a ete refusee. Aucun acompte n'est attendu."
+msgstr "This request has been rejected. No deposit is expected."
+
+msgid "La demande est encore en cours de traitement. Aucun acompte n'est demande pour le moment."
+msgstr "The request is still being processed. No deposit is requested at this time."
+
+msgid "Voir le vehicule"
+msgstr "View vehicle"
+
+msgid "Payer l'acompte"
+msgstr "Pay the deposit"
+
+msgid "Etes-vous sur de vouloir annuler cette reservation ?"
+msgstr "Are you sure you want to cancel this booking?"
+
+msgid "Annuler la reservation"
+msgstr "Cancel booking"
+
+msgid "Votre reservation a ete acceptee. Etes-vous certain de vouloir annuler ?"
+msgstr "Your booking has been accepted. Are you sure you want to cancel?"
+
+msgid "Aucune reservation pour le moment"
+msgstr "No bookings yet"
+
+msgid "Vos futures demandes de reservation apparaitront ici avec leur statut et le suivi de l'acompte."
+msgstr "Your future booking requests will appear here with their status and deposit tracking."
+
+msgid "Decouvrir le catalogue"
+msgstr "Explore the catalogue"
+
+# ─── my_purchases.html ───────────────────────────────────────────────────────
+
+msgid "Aucun achat pour le moment."
+msgstr "No purchases yet."
+
+# ─── contact templates ───────────────────────────────────────────────────────
+
+msgid "Nous contacter"
+msgstr "Contact us"
+
+msgid "Envoyer un message"
+msgstr "Send a message"
+
+msgid "Sujet"
+msgstr "Subject"
+
+msgid "Envoyer"
+msgstr "Send"
+
+msgid "Message envoye"
+msgstr "Message sent"
+
+msgid "Votre message a bien ete envoye. Nous vous repondrons dans les plus brefs delais."
+msgstr "Your message has been sent. We will get back to you as soon as possible."
+
+msgid "Retour"
+msgstr "Back"
+
+msgid "Aucun message pour le moment."
+msgstr "No messages yet."
+
+msgid "Reponse de l'equipe"
+msgstr "Team reply"
+
+# ─── 404 / 500 ───────────────────────────────────────────────────────────────
+
+msgid "Page introuvable"
+msgstr "Page not found"
+
+msgid "La page que vous recherchez n'existe pas ou a ete deplacee."
+msgstr "The page you are looking for does not exist or has been moved."
+
+msgid "Retour a l'accueil"
+msgstr "Back to home"
+
+msgid "Erreur serveur"
+msgstr "Server error"
+
+msgid "Une erreur interne est survenue. Veuillez reessayer plus tard."
+msgstr "An internal error occurred. Please try again later."
+
+# ─── checkout.html ───────────────────────────────────────────────────────────
+
+msgid "Paiement de l'acompte"
+msgstr "Deposit payment"
+
+msgid "Recapitulatif"
+msgstr "Summary"
+
+msgid "Acompte a payer"
+msgstr "Deposit to pay"
+
+msgid "Payer"
+msgstr "Pay"
+
+msgid "Paiement securise via Stripe"
+msgstr "Secure payment via Stripe"
+
+# ─── PDF: pdf_facture.html ───────────────────────────────────────────────────
+
+msgid "Plateforme de vehicules d'occasion"
+msgstr "Used vehicle platform"
+
+msgid "FACTURE"
+msgstr "INVOICE"
+
+msgid "Date :"
+msgstr "Date:"
+
+msgid "Paye"
+msgstr "Paid"
+
+msgid "Acheteur"
+msgstr "Buyer"
+
+msgid "Identifiant membre"
+msgstr "Member ID"
+
+msgid "Detail du paiement"
+msgstr "Payment details"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Categorie"
+msgstr "Category"
+
+msgid "Prix total vehicule"
+msgstr "Total vehicle price"
+
+msgid "Montant verse"
+msgstr "Amount paid"
+
+msgid "Solde restant"
+msgstr "Remaining balance"
+
+msgid "Solde apure"
+msgstr "Balance cleared"
+
+msgid "Reference de transaction"
+msgstr "Transaction reference"
+
+msgid "Reference Stripe"
+msgstr "Stripe reference"
+
+msgid "Date du paiement"
+msgstr "Payment date"
+
+msgid "Carte bancaire (Stripe Checkout)"
+msgstr "Credit card (Stripe Checkout)"
+
+msgid "Ce document constitue la preuve de votre paiement aupres de MultiDrive. Conservez-le pour vos dossiers."
+msgstr "This document is proof of your payment to MultiDrive. Keep it for your records."
+
+msgid "Le solde restant de %(remaining)s EUR sera a regler avant la remise des cles du vehicule."
+msgstr "The remaining balance of %(remaining)s EUR must be paid before handing over the vehicle keys."
+
+msgid "Signature MultiDrive"
+msgstr "MultiDrive signature"
+
+msgid "L'acheteur"
+msgstr "Buyer"
+
+msgid "Projet academique TFE"
+msgstr "Academic project TFE"
+
+msgid "Document genere automatiquement le %(date)s"
+msgstr "Document automatically generated on %(date)s"
+
+# ─── PDF: pdf_recu_acompte.html ──────────────────────────────────────────────
+
+msgid "ACOMPTE UNIQUEMENT — NON VALABLE COMME FACTURE DEFINITIVE DE VENTE"
+msgstr "DEPOSIT ONLY — NOT VALID AS FINAL SALE INVOICE"
+
+msgid "RECU D'ACOMPTE"
+msgstr "DEPOSIT RECEIPT"
+
+msgid "Acompte paye"
+msgstr "Deposit paid"
+
+msgid "Detail de l'acompte"
+msgstr "Deposit details"
+
+msgid "Vehicule"
+msgstr "Vehicle"
+
+msgid "Prix total"
+msgstr "Total price"
+
+msgid "Acompte verse"
+msgstr "Deposit paid"
+
+msgid "Solde restant a regler"
+msgstr "Remaining balance to pay"
+
+msgid "Reference de paiement"
+msgstr "Payment reference"
+
+msgid "N° reservation"
+msgstr "Booking no."
+
+msgid "Moyen de paiement"
+msgstr "Payment method"
+
+msgid "Acompte recu"
+msgstr "Deposit received"
+
+msgid "Ce document est un recu d'acompte."
+msgstr "This document is a deposit receipt."
+
+msgid "Il confirme uniquement le paiement partiel de %(amount)s EUR pour la reservation du vehicule %(title)s. Un solde de %(remaining)s EUR reste a regler avant la remise des cles et la finalisation de la vente."
+msgstr "It confirms only the partial payment of %(amount)s EUR for the booking of vehicle %(title)s. A balance of %(remaining)s EUR remains to be paid before key handover and finalisation of the sale."
+
+msgid "La facture definitive, l'acte de cession et le specimen d'immatriculation vous seront transmis apres reglement du solde restant. Conservez ce document comme preuve de votre acompte."
+msgstr "The final invoice, deed of sale, and registration specimen will be sent to you after the remaining balance is settled. Keep this document as proof of your deposit."
+
+msgid "Recu d'acompte N° %(num)s &mdash; genere le %(date)s"
+msgstr "Deposit receipt no. %(num)s &mdash; generated on %(date)s"
+
+# ─── PDF: pdf_cession.html ───────────────────────────────────────────────────
+
+msgid "ACTE DE CESSION"
+msgstr "DEED OF SALE"
+
+msgid "Ref. :"
+msgstr "Ref.:"
+
+msgid "Le present acte atteste de la cession du vehicule decrit ci-dessous entre les parties suivantes :"
+msgstr "This document certifies the transfer of ownership of the vehicle described below between the following parties:"
+
+msgid "Vendeur (cedant)"
+msgstr "Seller (transferor)"
+
+msgid "Plateforme de vente de vehicules d'occasion"
+msgstr "Used vehicle sales platform"
+
+msgid "Membre"
+msgstr "Member"
+
+msgid "Acheteur (cessionnaire)"
+msgstr "Buyer (transferee)"
+
+msgid "Vehicule cede"
+msgstr "Transferred vehicle"
+
+msgid "Designation"
+msgstr "Description"
+
+msgid "Annee estimee"
+msgstr "Estimated year"
+
+msgid "Numero de reservation"
+msgstr "Booking number"
+
+msgid "Prix de cession convenu :"
+msgstr "Agreed transfer price:"
+
+msgid "Acompte verse a ce jour :"
+msgstr "Deposit paid to date:"
+
+msgid "Solde restant :"
+msgstr "Remaining balance:"
+
+msgid "Neant — paiement integral"
+msgstr "None — full payment received"
+
+msgid "a regler avant remise des cles"
+msgstr "to be paid before key handover"
+
+msgid "Document d'immatriculation (specimen pedagogique joint)"
+msgstr "Registration document (pedagogical specimen attached)"
+
+msgid "Dans le cadre de ce projet academique, un specimen non officiel de demande d'immatriculation est joint a ce dossier de vente a titre pedagogique. Ce document porte la mention SPECIMEN — NON VALABLE et ne constitue pas un document administratif reel."
+msgstr "As part of this academic project, an unofficial specimen registration request is attached to this sales file for educational purposes. This document bears the SPECIMEN — NOT VALID notice and does not constitute an official administrative document."
+
+msgid "Conditions de la cession"
+msgstr "Terms of transfer"
+
+msgid "Le vehicule est vendu en l'etat, tel que vu et accepte par l'acheteur lors de la reservation."
+msgstr "The vehicle is sold as-is, as seen and accepted by the buyer at the time of booking."
+
+msgid "Le transfert de propriete est effectif a la reception du paiement integral."
+msgstr "The transfer of ownership takes effect upon receipt of full payment."
+
+msgid "L'acheteur reconnait avoir pris connaissance des conditions generales disponibles sur le site."
+msgstr "The buyer acknowledges having read the terms and conditions available on the website."
+
+msgid "Le vendeur"
+msgstr "The seller"
+
+msgid "Ce document est genere electroniquement par la plateforme MultiDrive a titre de preuve de transaction. Il ne se substitue pas aux documents officiels d'immatriculation. Document genere le %(date)s."
+msgstr "This document is electronically generated by the MultiDrive platform as proof of transaction. It does not replace official registration documents. Document generated on %(date)s."
+
+msgid "Acte de cession N°"
+msgstr "Deed of sale no."
+
+# ─── PDF: pdf_specimen_immatriculation.html ──────────────────────────────────
+
+msgid "SPECIMEN — DOCUMENT DE DEMONSTRATION — NON VALABLE"
+msgstr "SPECIMEN — DEMONSTRATION DOCUMENT — NOT VALID"
+
+msgid "SPECIMEN D'IMMATRICULATION"
+msgstr "REGISTRATION SPECIMEN"
+
+msgid "Identification du titulaire (acheteur)"
+msgstr "Holder identification (buyer)"
+
+msgid "Coordonnees"
+msgstr "Contact details"
+
+msgid "Adresse : Non renseignee"
+msgstr "Address: Not provided"
+
+msgid "Identification"
+msgstr "Identification"
+
+msgid "Membre MultiDrive"
+msgstr "MultiDrive member"
+
+msgid "N° reservation :"
+msgstr "Booking no.:"
+
+msgid "Date de transaction :"
+msgstr "Transaction date:"
+
+msgid "Identification du vehicule"
+msgstr "Vehicle identification"
+
+msgid "Vehicule neuf / usage"
+msgstr "New / used vehicle"
+
+msgid "Usage (vehicule d'occasion)"
+msgstr "Used (second-hand vehicle)"
+
+msgid "Designation complete"
+msgstr "Full description"
+
+msgid "Numero de chassis (VIN)"
+msgstr "Chassis number (VIN)"
+
+msgid "Non disponible"
+msgstr "Not available"
+
+msgid "Donnees financieres"
+msgstr "Financial data"
+
+msgid "Prix de cession :"
+msgstr "Transfer price:"
+
+msgid "Acompte verse :"
+msgstr "Deposit paid:"
+
+msgid "Immatriculation & assurance (indicatif)"
+msgstr "Registration & insurance (indicative)"
+
+msgid "Plaque d'immatriculation"
+msgstr "Licence plate"
+
+msgid "Plaque existante"
+msgstr "Existing plate"
+
+msgid "Non renseignee"
+msgstr "Not provided"
+
+msgid "Type de plaque"
+msgstr "Plate type"
+
+msgid "Ordinaire / Transit (a determiner)"
+msgstr "Standard / Transit (to be determined)"
+
+msgid "Zone assurance (indicatif)"
+msgstr "Insurance zone (indicative)"
+
+msgid "Zone nationale — Belgique (BE)"
+msgstr "National zone — Belgium (BE)"
+
+msgid "Compagnie d'assurance"
+msgstr "Insurance company"
+
+msgid "A choisir par l'acheteur"
+msgstr "To be chosen by the buyer"
+
+msgid "Signatures"
+msgstr "Signatures"
+
+msgid "Le vendeur (cedant)"
+msgstr "The seller (transferor)"
+
+msgid "L'acheteur (cessionnaire)"
+msgstr "The buyer (transferee)"
+
+msgid "Signature de l'acheteur"
+msgstr "Buyer's signature"
+
+msgid "Ce document est un specimen non officiel genere dans le cadre du projet academique MultiDrive, joint au dossier de vente en remplacement pedagogique du formulaire officiel d'immatriculation. Il ne constitue pas une demande officielle d'immatriculation et ne peut en aucun cas etre transmis a la DIV ou a un assureur. Aucun logo officiel DIV, vignette d'assurance reelle ou numero administratif officiel n'est utilise. Dans une transaction reelle, ce document serait remplace par les formulaires officiels delivres par les autorites competentes."
+msgstr "This document is an unofficial specimen generated as part of the MultiDrive academic project, attached to the sales file as a pedagogical replacement for the official registration form. It does not constitute an official registration application and may not be submitted to the DIV or an insurer. No official DIV logo, real insurance sticker, or official administrative number is used. In a real transaction, this document would be replaced by official forms issued by the competent authorities."
+
+msgid "Specimen ref. %(ref)s &mdash; genere le %(date)s"
+msgstr "Specimen ref. %(ref)s &mdash; generated on %(date)s"
+
+# ─── email_reservation_confirmation.html ─────────────────────────────────────
+
+msgid "Confirmation de reservation — MultiDrive"
+msgstr "Booking confirmation — MultiDrive"
+
+msgid "Confirmation de votre demande de reservation"
+msgstr "Confirmation of your booking request"
+
+msgid "Bonjour %(name)s,"
+msgstr "Hello %(name)s,"
+
+msgid "Nous avons bien recu votre demande de reservation pour le vehicule suivant :"
+msgstr "We have received your booking request for the following vehicle:"
+
+msgid "Vehicule :"
+msgstr "Vehicle:"
+
+msgid "Prix :"
+msgstr "Price:"
+
+msgid "Date souhaitee :"
+msgstr "Preferred date:"
+
+msgid "Creneau :"
+msgstr "Time slot:"
+
+msgid "Statut :"
+msgstr "Status:"
+
+msgid "En attente de validation"
+msgstr "Awaiting validation"
+
+msgid "Notre equipe examinera votre demande et vous contactera par email pour vous confirmer l'acceptation ou vous proposer un autre creneau."
+msgstr "Our team will review your request and contact you by email to confirm acceptance or propose another time slot."
+
+msgid "Vous pouvez suivre l'avancement de votre reservation depuis votre espace membre."
+msgstr "You can track the progress of your booking from your member area."
+
+msgid "Merci pour votre confiance."
+msgstr "Thank you for your trust."
+
+msgid "L'equipe MultiDrive"
+msgstr "The MultiDrive team"
+
+msgid "Cet email est envoye automatiquement. Merci de ne pas y repondre directement."
+msgstr "This email is sent automatically. Please do not reply directly."
+
+msgid "MultiDrive — Projet academique"
+msgstr "MultiDrive — Academic project"
+
+# ─── Admin dashboard ─────────────────────────────────────────────────────────
+
+msgid "Administration"
+msgstr "Administration"
+
+msgid "%(n)s disponibles actuellement."
+msgstr "%(n)s currently available."
+
+msgid "Reservations en attente"
+msgstr "Pending reservations"
+
+msgid "Demandes a verifier ou a confirmer."
+msgstr "Requests to check or confirm."
+
+msgid "Messages sans reponse"
+msgstr "Unanswered messages"
+
+msgid "Questions client ou demandes d'information."
+msgstr "Customer questions or information requests."
+
+msgid "Paiements a suivre"
+msgstr "Payments to monitor"
+
+msgid "Acomptes encore en attente de validation."
+msgstr "Deposits still awaiting validation."
+
+msgid "Membres actifs"
+msgstr "Active members"
+
+msgid "Comptes clients actuellement actifs."
+msgstr "Currently active customer accounts."
+
+msgid "Vehicules vendus"
+msgstr "Vehicles sold"
+
+msgid "Ventes finalisees dans le catalogue."
+msgstr "Finalised sales in the catalogue."
+
+msgid "Remboursements a traiter"
+msgstr "Refunds to process"
+
+msgid "Annulations avec acompte verse en attente."
+msgstr "Cancellations with outstanding deposit."
+
+msgid "Gestion des administrateurs"
+msgstr "Administrator management"
+
+msgid "Ajouter un admin"
+msgstr "Add an admin"
+
+msgid "Compte desactive"
+msgstr "Account deactivated"
+
+msgid "Retirer les droits admin a %(u)s ? Il repassera en compte client."
+msgstr "Remove admin rights from %(u)s? They will be downgraded to a customer account."
+
+msgid "Retirer les droits"
+msgstr "Remove rights"
+
+msgid "Desactiver definitivement le compte de %(u)s ?"
+msgstr "Permanently deactivate %(u)s's account?"
+
+msgid "Desactiver"
+msgstr "Deactivate"
+
+msgid "Aucun administrateur cree pour le moment. Cliquez sur « Ajouter un admin » pour commencer."
+msgstr "No administrators created yet. Click « Add an admin » to get started."
+
+msgid "Derniers mouvements"
+msgstr "Recent activity"
+
+msgid "10 derniers evenements"
+msgstr "Last 10 events"
+
+msgid "Raccourcis"
+msgstr "Shortcuts"
+
+msgid "Actions rapides"
+msgstr "Quick actions"
+
+msgid "Acces direct aux principales zones de gestion."
+msgstr "Direct access to the main management areas."
+
+msgid "Ajouter un vehicule"
+msgstr "Add a vehicle"
+
+msgid "Creer une nouvelle annonce dans le catalogue."
+msgstr "Create a new listing in the catalogue."
+
+msgid "Gerer les vehicules"
+msgstr "Manage vehicles"
+
+msgid "Modifier, supprimer ou filtrer le stock."
+msgstr "Edit, delete, or filter the stock."
+
+msgid "Voir les reservations"
+msgstr "View reservations"
+
+msgid "Traiter les demandes."
+msgstr "Process requests."
+
+msgid "en attente."
+msgstr "pending."
+
+msgid "Traiter les messages"
+msgstr "Handle messages"
+
+msgid "Repondre aux questions."
+msgstr "Reply to questions."
+
+msgid "sans reponse."
+msgstr "without reply."
+
+msgid "Suivre les paiements"
+msgstr "Track payments"
+
+msgid "Verifier les acomptes et leur statut."
+msgstr "Check deposits and their status."
+
+msgid "Comptes desactives"
+msgstr "Deactivated accounts"
+
+msgid "%(n)s compte(s) desactive(s) au total."
+msgstr "%(n)s deactivated account(s) in total."
+
+msgid "Demandes de suppression"
+msgstr "Deletion requests"
+
+msgid "non traitee(s)."
+msgstr "unprocessed."
+
+msgid "Aucune demande en attente."
+msgstr "No pending requests."
+
+msgid "Ouvrir l'admin Django"
+msgstr "Open Django admin"
+
+msgid "Acceder a la gestion complete du projet."
+msgstr "Access the full project management."
+
+msgid "Prioritaire"
+msgstr "Priority"
+
+msgid "Remboursements en attente"
+msgstr "Pending refunds"
+
+msgid "Ces membres ont annule leur reservation apres avoir verse un acompte. Saisissez le montant rembourse et un commentaire pour le membre."
+msgstr "These members cancelled their booking after paying a deposit. Enter the refunded amount and a note for the member."
+
+msgid "Annulation le"
+msgstr "Cancelled on"
+
+msgid "Remboursement demande"
+msgstr "Refund requested"
+
+msgid "Montant a rembourser (EUR)"
+msgstr "Amount to refund (EUR)"
+
+msgid "Message pour le membre (optionnel)"
+msgstr "Message for the member (optional)"
+
+msgid "Ex : Remboursement de 90 EUR apres retention de 10 % de frais administratifs conformement aux CGV."
+msgstr "E.g.: Refund of 90 EUR after 10% administrative fee deduction per T&Cs."
+
+msgid "Valider le remboursement"
+msgstr "Confirm refund"
+
+msgid "Voir dans l'admin Django"
+msgstr "View in Django admin"
+
+msgid "Moderation"
+msgstr "Moderation"
+
+msgid "Derniers avis clients"
+msgstr "Latest customer reviews"
+
+msgid "Consultez et supprimez les avis inappropries. Les avis sont visibles publiquement sur les fiches vehicules."
+msgstr "Review and remove inappropriate comments. Reviews are publicly visible on vehicle listings."
+
+msgid "sur"
+msgstr "on"
+
+msgid "Supprimer cet avis ?"
+msgstr "Delete this review?"
+
+msgid "Supprimer"
+msgstr "Delete"
+
+msgid "Statistiques"
+msgstr "Statistics"
+
+msgid "Ventes & revenus"
+msgstr "Sales & revenue"
+
+msgid "Exporter en CSV"
+msgstr "Export as CSV"
+
+msgid "Revenus totaux"
+msgstr "Total revenue"
+
+msgid "Tous paiements confondus"
+msgstr "All payments combined"
+
+msgid "Revenus ce mois-ci"
+msgstr "Revenue this month"
+
+msgid "Ventes finalisees"
+msgstr "Finalised sales"
+
+msgid "ventes"
+msgstr "sales"
+
+msgid "%(amt)s EUR encaisses"
+msgstr "%(amt)s EUR collected"
+
+msgid "vehicules"
+msgstr "vehicles"
+
+msgid "Statut Vendu dans le catalogue"
+msgstr "Status Sold in the catalogue"
+
+msgid "Acomptes en cours"
+msgstr "Ongoing deposits"
+
+msgid "dossiers"
+msgstr "files"
+
+msgid "Solde restant a encaisser"
+msgstr "Remaining balance to collect"
+
+msgid "Ventes par categorie"
+msgstr "Sales by category"
+
+msgid "Progression"
+msgstr "Progress"
+
+msgid "Ventes"
+msgstr "Sales"
+
+# ─── create_admin.html ───────────────────────────────────────────────────────
+
+msgid "Creer un administrateur"
+msgstr "Create an administrator"
+
+msgid "Nouveau compte admin"
+msgstr "New admin account"
+
+msgid "Creer l'administrateur"
+msgstr "Create administrator"
+
+msgid "L'admin recevra ses identifiants et pourra changer son mot de passe depuis son espace personnel."
+msgstr "The admin will receive their credentials and can change their password from their personal area."
+
+msgid "Admins actifs (%(n)s)"
+msgstr "Active admins (%(n)s)"
+
+msgid "Retirer les droits admin a %(u)s ?"
+msgstr "Remove admin rights from %(u)s?"
+
+msgid "Desactiver le compte de %(u)s ?"
+msgstr "Deactivate %(u)s's account?"
+
+msgid "Aucun administrateur pour le moment."
+msgstr "No administrators yet."
+
+msgid "Retour au dashboard"
+msgstr "Back to dashboard"
+
+# ─── cgv.html ────────────────────────────────────────────────────────────────
+
+msgid "Informations legales"
+msgstr "Legal information"
+
+msgid "Conditions generales d'utilisation"
+msgstr "Terms of use"
+
+msgid "Derniere mise a jour : juin 2026"
+msgstr "Last updated: June 2026"
+
+msgid "1. Presentation de la plateforme"
+msgstr "1. Platform presentation"
+
+msgid "MultiDrive est une plateforme web de consultation et de reservation de vehicules d'occasion. Elle est exploitee dans le cadre d'un projet academique (Travail de Fin d'Etudes). Les vehicules presentes sont des donnees de demonstration et ne constituent pas des offres commerciales reelles."
+msgstr "MultiDrive is a web platform for browsing and booking used vehicles. It is operated as part of an academic project (final year thesis). The vehicles presented are demonstration data and do not constitute real commercial offers."
+
+msgid "2. Acces au service"
+msgstr "2. Access to the service"
+
+msgid "L'acces au catalogue est libre et gratuit. La reservation d'un vehicule necessite la creation d'un compte membre. MultiDrive se reserve le droit de suspendre ou de supprimer un compte en cas d'utilisation abusive ou de non-respect des presentes conditions."
+msgstr "Access to the catalogue is free of charge. Booking a vehicle requires creating a member account. MultiDrive reserves the right to suspend or delete an account in the event of misuse or non-compliance with these terms."
+
+msgid "3. Reservations et rendez-vous"
+msgstr "3. Bookings and appointments"
+
+msgid "Toute reservation est soumise a validation par l'administration. Un rendez-vous peut etre propose lors de la demande, dans les plages horaires definies :"
+msgstr "All bookings are subject to validation by the administration. An appointment may be requested at the time of the booking, within the defined time slots:"
+
+msgid "Du lundi au vendredi : 16h00 a 21h30"
+msgstr "Monday to Friday: 16:00 to 21:30"
+
+msgid "Le samedi et dimanche : 9h00 a 21h00"
+msgstr "Saturday and Sunday: 9:00 to 21:00"
+
+msgid "Les prix et conditions de reservation sont affiches clairement avant toute validation de paiement."
+msgstr "Prices and booking conditions are clearly displayed before any payment confirmation."
+
+msgid "4. Paiement et securite des transactions"
+msgstr "4. Payment and transaction security"
+
+msgid "Un acompte peut etre demande apres acceptation de la reservation. Cet acompte correspond a 20 % du prix du vehicule, avec un minimum de 20 EUR et un maximum de 250 EUR."
+msgstr "A deposit may be requested after the booking is accepted. This deposit equals 20% of the vehicle price, with a minimum of 20 EUR and a maximum of 250 EUR."
+
+msgid "Le paiement est traite de maniere securisee via Stripe Checkout, solution conforme aux standards internationaux de securite des paiements (PCI-DSS). Les transactions sont chiffrees via HTTPS."
+msgstr "Payment is processed securely via Stripe Checkout, a solution compliant with international payment security standards (PCI-DSS). Transactions are encrypted via HTTPS."
+
+msgid "Aucune donnee bancaire n'est stockee sur les serveurs de MultiDrive."
+msgstr "No banking data is stored on MultiDrive's servers."
+
+msgid "Les informations de carte sont traitees exclusivement par Stripe et ne transitent jamais par notre application."
+msgstr "Card information is processed exclusively by Stripe and never passes through our application."
+
+msgid "5. Annulation et remboursement"
+msgstr "5. Cancellation and refund"
+
+msgid "Une reservation peut etre annulee par le membre selon les conditions suivantes :"
+msgstr "A booking may be cancelled by the member under the following conditions:"
+
+msgid "Reservation en attente : annulation libre, sans frais."
+msgstr "Pending booking: free cancellation, no charge."
+
+msgid "Reservation acceptee : annulation possible, sans frais."
+msgstr "Accepted booking: cancellation possible, no charge."
+
+msgid "Acompte verse : annulation possible. Des frais administratifs de 10 % minimum du montant verse pourront etre retenus."
+msgstr "Deposit paid: cancellation possible. An administrative fee of at least 10% of the amount paid may be retained."
+
+msgid "Le remboursement est traite sous 14 jours ouvrables."
+msgstr "The refund is processed within 14 business days."
+
+msgid "6. Donnees personnelles et RGPD"
+msgstr "6. Personal data and GDPR"
+
+msgid "MultiDrive respecte les principes du Reglement General sur la Protection des Donnees (RGPD). Les donnees collectees sont limitees au strict necessaire pour le fonctionnement du service :"
+msgstr "MultiDrive complies with the principles of the General Data Protection Regulation (GDPR). Data collected is limited to the strict minimum required for the operation of the service:"
+
+msgid "Nom et prenom"
+msgstr "First and last name"
+
+msgid "Adresse e-mail"
+msgstr "Email address"
+
+msgid "Historique de reservations et de paiements"
+msgstr "Reservation and payment history"
+
+msgid "Ces donnees sont traitees de maniere licite, loyale et transparente. Elles ne sont jamais transmises a des tiers ni revendues."
+msgstr "This data is processed lawfully, fairly, and transparently. It is never shared with third parties or sold."
+
+msgid "Conformement au RGPD, tout membre dispose d'un droit d'acces, de modification et de suppression de ses donnees. La suppression du compte est accessible directement depuis l'espace personnel."
+msgstr "In accordance with the GDPR, every member has the right to access, modify, and delete their data. Account deletion is accessible directly from the personal area."
+
+msgid "7. Cookies"
+msgstr "7. Cookies"
+
+msgid "MultiDrive utilise uniquement des cookies techniques strictement necessaires au bon fonctionnement de la plateforme :"
+msgstr "MultiDrive only uses strictly necessary technical cookies for the proper functioning of the platform:"
+
+msgid "Maintien de la session utilisateur (authentification)"
+msgstr "Maintaining the user session (authentication)"
+
+msgid "Protection contre les attaques CSRF"
+msgstr "Protection against CSRF attacks"
+
+msgid "Memorisation de la preference de langue"
+msgstr "Remembering the language preference"
+
+msgid "Ces cookies ne servent pas au suivi publicitaire ou analytique et ne necessitent pas de consentement prealable selon la reglementation europeenne. Aucun cookie tiers n'est utilise."
+msgstr "These cookies are not used for advertising or analytical tracking and do not require prior consent under European regulations. No third-party cookies are used."
+
+msgid "8. Propriete intellectuelle"
+msgstr "8. Intellectual property"
+
+msgid "Les contenus presentes sur MultiDrive (design, code source, textes, elements graphiques) sont proteges par le droit d'auteur. Toute reproduction ou diffusion sans autorisation prealable est interdite."
+msgstr "The content presented on MultiDrive (design, source code, text, graphic elements) is protected by copyright. Any reproduction or distribution without prior authorisation is prohibited."
+
+msgid "Ce projet est realise a titre academique dans le cadre d'un Travail de Fin d'Etudes. Les images utilisees pour illustrer les vehicules sont issues de ressources libres de droits ou appartiennent au projet."
+msgstr "This project is carried out for academic purposes as part of a final year thesis. The images used to illustrate vehicles are from royalty-free resources or belong to the project."
+
+msgid "9. Responsabilite"
+msgstr "9. Liability"
+
+msgid "MultiDrive est un projet academique fourni a titre demonstratif. L'administrateur du site est responsable de la gestion des contenus publies et de la securisation generale de la plateforme. MultiDrive ne saurait etre tenu responsable des dommages indirects lies a l'utilisation du service."
+msgstr "MultiDrive is an academic project provided for demonstration purposes. The site administrator is responsible for managing published content and the general security of the platform. MultiDrive cannot be held liable for indirect damages related to the use of the service."
+
+msgid "10. Contact"
+msgstr "10. Contact"
+
+msgid "Pour toute question relative aux conditions d'utilisation, a la protection des donnees ou a un remboursement, vous pouvez nous contacter via la"
+msgstr "For any question regarding the terms of use, data protection, or a refund, you may contact us via the"
+
+msgid "page de contact"
+msgstr "contact page"
+
+msgid "ou par email a"
+msgstr "or by email at"
+
+# ─── password_reset_email.html ───────────────────────────────────────────────
+
+msgid "Reinitialisation de mot de passe"
+msgstr "Password reset"
+
+msgid "Bonjour %(username)s,"
+msgstr "Hello %(username)s,"
+
+msgid "Vous avez demande la reinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour choisir un nouveau mot de passe :"
+msgstr "You have requested a password reset. Click the button below to choose a new password:"
+
+msgid "Reinitialiser mon mot de passe"
+msgstr "Reset my password"
+
+msgid "Ce lien est valable <strong>24 heures</strong>. Apres ce delai, vous devrez faire une nouvelle demande."
+msgstr "This link is valid for <strong>24 hours</strong>. After this period, you will need to make a new request."
+
+msgid "Si vous n'avez pas fait cette demande, ignorez simplement cet email — votre mot de passe ne sera pas modifie."
+msgstr "If you did not make this request, simply ignore this email — your password will not be changed."
+
+msgid "Cet email a ete envoye automatiquement, merci de ne pas y repondre."
+msgstr "This email was sent automatically, please do not reply."
+
+# ─── Model choices (vehicles/models.py) ─────────────────────────────────────
+
+msgid "Disponible"
+msgstr "Available"
+
+msgid "Reserve"
+msgstr "Reserved"
+
+msgid "Vendu"
+msgstr "Sold"
+
+msgid "Tres bon"
+msgstr "Very good"
+
+msgid "Bon"
+msgstr "Good"
+
+msgid "Legerement accidente"
+msgstr "Slightly damaged"
+
+msgid "Roule, reparation mineure a prevoir"
+msgstr "Runs, minor repair needed"
+
+# ─── Model choices (reservations/models.py) ─────────────────────────────────
+
+msgid "Acceptee"
+msgstr "Accepted"
+
+msgid "Refusee"
+msgstr "Rejected"
+
+msgid "Annulee"
+msgstr "Cancelled"
+
+# ─── Model choices (payments/models.py) ─────────────────────────────────────
+
+msgid "Echoue"
+msgstr "Failed"
+
+msgid "Rembourse"
+msgstr "Refunded"
+
+# ─── Model choices (accounts/models.py) ─────────────────────────────────────
+
+msgid "Demande utilisateur"
+msgstr "User request"
+
+msgid "Blocage administrateur"
+msgstr "Admin block"
+
+# ─── Common vehicle category names ───────────────────────────────────────────
+
+msgid "Voiture"
+msgstr "Car"
+
+msgid "Moto"
+msgstr "Motorcycle"
+
+msgid "Camion"
+msgstr "Truck"
+
+msgid "Van"
+msgstr "Van"
+
+msgid "Quad"
+msgstr "Quad"
+
+msgid "Scooter"
+msgstr "Scooter"
+
+msgid "Camping-car"
+msgstr "Motorhome"
+
+msgid "Utilitaire"
+msgstr "Commercial vehicle"
+
+msgid "Break"
+msgstr "Estate"
+
+msgid "Citadine"
+msgstr "City car"
+
+msgid "Compacte"
+msgstr "Compact"
+
+msgid "Monospace"
+msgstr "Minivan"
+
+msgid "Moto legere"
+msgstr "Light motorcycle"
+
+msgid "SUV compact"
+msgstr "Compact SUV"
+
+msgid "Trottinette"
+msgstr "E-scooter"
+
+msgid "Utilitaire leger"
+msgstr "Light van"
+
+msgid "Velo"
+msgstr "Bicycle"
+
+# ─── Profile page (accounts/profile.html) ────────────────────────────────────
+
+msgid "Retrouvez ici les informations principales de votre compte MultiDrive."
+msgstr "Find here the main information for your MultiDrive account."
+
+msgid "Date d'inscription"
+msgstr "Registration date"
+
+msgid "Derniere connexion"
+msgstr "Last login"
+
+msgid "Suivi rapide"
+msgstr "Quick overview"
+
+msgid "Paiements"
+msgstr "Payments"
+
+msgid "Paiements valides"
+msgstr "Valid payments"
+
+msgid "Voir mes reservations"
+msgstr "View my bookings"
+
+msgid "Voir mes paiements"
+msgstr "View my payments"
+
+msgid "Securite du compte"
+msgstr "Account security"
+
+msgid "Vous pouvez modifier votre mot de passe a tout moment depuis cette page."
+msgstr "You can change your password at any time from this page."
+
+msgid "Suppression du compte"
+msgstr "Account deletion"
+
+msgid "Vous pouvez demander la desactivation de votre compte. Le compte sera conserve en base en soft delete pour l'historique et l'administration."
+msgstr "You can request the deactivation of your account. The account will be kept in the database as a soft delete for history and administration purposes."
+
+msgid "Demander la suppression du compte"
+msgstr "Request account deletion"
+
+msgid "Ce compte a deja ete desactive. Libelle : {{ label }}."
+msgstr "This account has already been deactivated. Label: {{ label }}."
+
+msgid "Motif :"
+msgstr "Reason:"
+
+msgid "desactivation administrative."
+msgstr "administrative deactivation."
+
+msgid "demande utilisateur."
+msgstr "user request."
+
+msgid "Date de desactivation : {{ date }}"
+msgstr "Deactivation date: {{ date }}"
+
+# ─── Favorites page (vehicles/my_favorites.html) ─────────────────────────────
+
+msgid "Espace membre"
+msgstr "Member area"
+
+msgid "Les vehicules que vous avez mis en favori."
+msgstr "The vehicles you have added to your favourites."
+
+msgid "Aucun favori pour l'instant"
+msgstr "No favourites yet"
+
+msgid "Cliquez sur l'etoile d'un vehicule pour l'ajouter ici."
+msgstr "Click the star on a vehicle to add it here."
+
+# ─── Payment list (accounts/payment_list.html) ───────────────────────────────
+
+msgid "Retrouvez ici tous vos acomptes verses, les vehicules acquis et les details financiers associes."
+msgstr "Find here all your paid deposits, acquired vehicles and associated financial details."
+
+msgid "Total paiements"
+msgstr "Total payments"
+
+msgid "Acomptes valides"
+msgstr "Valid deposits"
+
+msgid "Montant total verse"
+msgstr "Total amount paid"
+
+msgid "Deja verse"
+msgstr "Already paid"
+
+msgid "Rendez-vous"
+msgstr "Appointment"
+
+msgid "%(date)s a %(time)s"
+msgstr "%(date)s at %(time)s"
+
+msgid "Documents"
+msgstr "Documents"
+
+msgid "Statut reservation"
+msgstr "Booking status"
+
+msgid "Dossier de vente"
+msgstr "Sale file"
+
+msgid "Facture finale"
+msgstr "Final invoice"
+
+msgid "Acte de cession"
+msgstr "Transfer deed"
+
+msgid "Specimen immatriculation"
+msgstr "Registration specimen"
+
+msgid "Reference"
+msgstr "Reference"
+
+msgid "Acompte"
+msgstr "Deposit"
+
+msgid "Recu d'acompte"
+msgstr "Deposit receipt"
+
+msgid "Dossier complet disponible apres paiement integral"
+msgstr "Full file available after complete payment"
+
+msgid "Disponible apres paiement"
+msgstr "Available after payment"
+
+msgid "Remboursement en cours de traitement"
+msgstr "Refund being processed"
+
+msgid "Votre demande de remboursement a ete enregistree. Notre equipe la traitera sous 14 jours. Des frais administratifs de 10 % minimum peuvent etre retenus."
+msgstr "Your refund request has been registered. Our team will process it within 14 days. Administrative fees of at least 10% may be deducted."
+
+msgid "Remboursement effectue"
+msgstr "Refund completed"
+
+msgid "Montant rembourse : {{ amount }} EUR"
+msgstr "Refunded amount: {{ amount }} EUR"
+
+msgid "Completer le paiement ({{ remaining }} EUR)"
+msgstr "Complete payment ({{ remaining }} EUR)"
+
+msgid "Confirmer l annulation et la demande de remboursement ?"
+msgstr "Confirm cancellation and refund request?"
+
+msgid "Annuler et demander un remboursement"
+msgstr "Cancel and request a refund"
+
+# ─── Register page (accounts/register.html) ──────────────────────────────────
+
+msgid "Nouveau client"
+msgstr "New customer"
+
+msgid "Un compte est necessaire pour reserver un vehicule ou payer un acompte."
+msgstr "An account is required to book a vehicle or pay a deposit."
+
+msgid "Creer mon compte"
+msgstr "Create my account"
+
+msgid "Deja inscrit ?"
+msgstr "Already registered?"
+
+# ─── Checkout page (payments/checkout.html) ──────────────────────────────────
+
+msgid "Selectionnez la reservation a regler et choisissez le montant."
+msgstr "Select the booking to pay and choose the amount."
+
+msgid "Votre panier"
+msgstr "Your cart"
+
+msgid "Informations de paiement"
+msgstr "Payment information"
+
+msgid "Montant a regler"
+msgstr "Amount to pay"
+
+msgid "Acompte (20 %)"
+msgstr "Deposit (20%)"
+
+msgid "20 % du prix, min. 20 EUR / max. 250 EUR"
+msgstr "20% of the price, min. 20 EUR / max. 250 EUR"
+
+msgid "Totalite"
+msgstr "Full amount"
+
+msgid "Solde complet du vehicule"
+msgstr "Full vehicle balance"
+
+msgid "Montant personnalise"
+msgstr "Custom amount"
+
+msgid "Saisissez le montant de votre choix"
+msgstr "Enter the amount of your choice"
+
+msgid "Montant (EUR)"
+msgstr "Amount (EUR)"
+
+msgid "Montant selectionne"
+msgstr "Selected amount"
+
+msgid "Prix total moins acompte deja verse"
+msgstr "Total price minus deposit already paid"
+
+msgid "Paiement securise via Stripe — vos coordonnees bancaires ne transitent jamais par nos serveurs."
+msgstr "Secure payment via Stripe — your bank details never pass through our servers."
+
+msgid "Aucun paiement en attente"
+msgstr "No pending payment"
+
+msgid "Vous n'avez pas de reservation acceptee a regler pour le moment."
+msgstr "You have no accepted booking to pay at the moment."
+
+# ─── payments/views.py flash messages ────────────────────────────────────────
+
+msgid "Reservation introuvable. Veuillez reessayer."
+msgstr "Booking not found. Please try again."
+
+msgid "Montant invalide. Veuillez saisir un montant superieur a 0 EUR."
+msgstr "Invalid amount. Please enter an amount greater than 0 EUR."
+
+msgid "Reservation MultiDrive"
+msgstr "MultiDrive booking"
+
+msgid "Erreur Stripe :"
+msgstr "Stripe error:"
+
+msgid "Ce paiement a deja ete enregistre."
+msgstr "This payment has already been recorded."
+
+msgid "Impossible de verifier le paiement. Contactez le support."
+msgstr "Unable to verify the payment. Please contact support."
+
+msgid "Le paiement n'a pas ete complete."
+msgstr "The payment was not completed."
+
+msgid "Paiement de"
+msgstr "Payment of"
+
+msgid "confirme. Total verse :"
+msgstr "confirmed. Total paid:"
+
+msgid "Paiement annule. Vous pouvez reessayer quand vous voulez."
+msgstr "Payment cancelled. You can try again whenever you like."
+
+msgid "Document disponible apres paiement integral."
+msgstr "Document available after full payment."
+
+# ─── Contact page (contact/contact_form.html + contact_success.html + my_messages.html) ──
+
+msgid "Posez votre question, demandez une information ou laissez un message pour un rendez-vous."
+msgstr "Ask a question, request information, or leave a message for an appointment."
+
+msgid "Votre message sera associe a votre compte et vous pourrez lire une reponse dans votre espace membre."
+msgstr "Your message will be linked to your account and you will be able to read a reply in your member area."
+
+msgid "Vous pouvez nous contacter meme sans compte. Creez un compte si vous souhaitez suivre plus facilement vos echanges."
+msgstr "You can contact us without an account. Create one if you want to easily track your exchanges."
+
+msgid "Nous reviendrons vers vous des que possible."
+msgstr "We will get back to you as soon as possible."
+
+msgid "Voir mes messages"
+msgstr "View my messages"
+
+msgid "Retrouvez ici vos messages envoyes a MultiDrive et les reponses eventuelles de l'administrateur."
+msgstr "Find here your messages sent to MultiDrive and any replies from the administrator."
+
+msgid "Repondu"
+msgstr "Replied"
+
+msgid "Reponse de l'administration"
+msgstr "Admin reply"
+
+msgid "Aucune reponse n'a encore ete ajoutee pour le moment."
+msgstr "No reply has been added yet."
+
+msgid "Aucun message pour le moment"
+msgstr "No messages yet"
+
+msgid "Vous pourrez retrouver ici vos futurs echanges avec l'administration."
+msgstr "Your future exchanges with the administration will appear here."
+
+msgid "Contacter MultiDrive"
+msgstr "Contact MultiDrive"
+
+# ─── Contact form (contact/forms.py) ─────────────────────────────────────────
+
+msgid "Nom complet"
+msgstr "Full name"
+
+msgid "Telephone"
+msgstr "Phone"
+
+msgid "Envoyer le message"
+msgstr "Send message"
+
+msgid "Expliquez votre demande, votre question ou votre besoin de rendez-vous."
+msgstr "Describe your request, question or appointment need."
+
