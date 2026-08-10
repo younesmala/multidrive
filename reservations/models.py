@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from vehicles.models import Vehicle
 
@@ -12,11 +13,11 @@ class Reservation(models.Model):
     STATUS_CANCELLED = "cancelled"
 
     STATUS_CHOICES = [
-        (STATUS_PENDING, "En attente"),
-        (STATUS_ACCEPTED, "Acceptee"),
-        (STATUS_REJECTED, "Refusee"),
-        (STATUS_DEPOSIT_PAID, "Acompte paye"),
-        (STATUS_CANCELLED, "Annulee"),
+        (STATUS_PENDING, _("En attente")),
+        (STATUS_ACCEPTED, _("Acceptee")),
+        (STATUS_REJECTED, _("Refusee")),
+        (STATUS_DEPOSIT_PAID, _("Acompte paye")),
+        (STATUS_CANCELLED, _("Annulee")),
     ]
 
     user = models.ForeignKey(
