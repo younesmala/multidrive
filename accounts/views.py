@@ -336,12 +336,97 @@ def export_stats_csv(request):
     return response
 
 
+@staff_member_required
+def export_history_csv(request):
+    type_ = request.GET.get("type", "")
+    now = timezone.now()
+
+    response = HttpResponse(content_type="text/csv; charset=utf-8-sig")
+
+    if type_ == "comptes":
+        filename = f"multidrive_comptes_supprimes_{now.strftime('%Y%m%d_%H%M')}.csv"
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
+        writer = csv.writer(response, delimiter=";")
+        writer.writerow(["MULTIDRIVE — COMPTES SUPPRIMES", now.strftime("%d/%m/%Y %H:%M")])
+        writer.writerow([])
+        writer.writerow(["Username", "Email", "Date suppression"])
+        for a in AccountStatus.objects.filter(is_deleted=True).select_related("user").order_by("-deleted_at"):
+            writer.writerow([
+                a.user.username, a.user.email,
+                a.deleted_at.strftime("%d/%m/%Y %H:%M") if a.deleted_at else "",
+            ])
+
+    elif type_ == "reservations":
+        filename = f"multidrive_reservations_annulees_{now.strftime('%Y%m%d_%H%M')}.csv"
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
+        writer = csv.writer(response, delimiter=";")
+        writer.writerow(["MULTIDRIVE — RESERVATIONS ANNULEES", now.strftime("%d/%m/%Y %H:%M")])
+        writer.writerow([])
+        writer.writerow(["Client", "Email", "Vehicule", "Date annulation"])
+        for r in Reservation.objects.filter(status=Reservation.STATUS_CANCELLED).select_related("user", "vehicle").order_by("-updated_at"):
+            writer.writerow([
+                r.user.username, r.user.email, r.vehicle.title,
+                r.updated_at.strftime("%d/%m/%Y %H:%M") if r.updated_at else "",
+            ])
+
+    elif type_ == "remboursements":
+        filename = f"multidrive_remboursements_{now.strftime('%Y%m%d_%H%M')}.csv"
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
+        writer = csv.writer(response, delimiter=";")
+        writer.writerow(["MULTIDRIVE — REMBOURSEMENTS", now.strftime("%d/%m/%Y %H:%M")])
+        writer.writerow([])
+        writer.writerow(["Client", "Email", "Vehicule", "Montant rembourse (EUR)", "Note", "Date"])
+        for p in Payment.objects.filter(status=Payment.STATUS_REFUNDED).select_related("reservation__user", "reservation__vehicle").order_by("-updated_at"):
+            writer.writerow([
+                p.reservation.user.username, p.reservation.user.email,
+                p.reservation.vehicle.title,
+                f"{p.refund_amount:.2f}" if p.refund_amount else "",
+                p.refund_note or "",
+                p.updated_at.strftime("%d/%m/%Y %H:%M") if p.updated_at else "",
+            ])
+
+    elif type_ == "temoignages":
+        filename = f"multidrive_temoignages_masques_{now.strftime('%Y%m%d_%H%M')}.csv"
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
+        writer = csv.writer(response, delimiter=";")
+        writer.writerow(["MULTIDRIVE — TEMOIGNAGES MASQUES", now.strftime("%d/%m/%Y %H:%M")])
+        writer.writerow([])
+        writer.writerow(["Client", "Note", "Commentaire", "Date"])
+        for t in Testimonial.objects.filter(is_visible=False).select_related("user").order_by("-created_at"):
+            writer.writerow([
+                t.user.username, f"{t.rating}/5", t.comment,
+                t.created_at.strftime("%d/%m/%Y %H:%M") if t.created_at else "",
+            ])
+
+    elif type_ == "vehicules":
+        filename = f"multidrive_vehicules_vendus_{now.strftime('%Y%m%d_%H%M')}.csv"
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
+        writer = csv.writer(response, delimiter=";")
+        writer.writerow(["MULTIDRIVE — VEHICULES VENDUS", now.strftime("%d/%m/%Y %H:%M")])
+        writer.writerow([])
+        writer.writerow(["Titre", "Categorie", "Prix (EUR)", "Date ajout"])
+        for v in Vehicle.objects.filter(status=Vehicle.STATUS_SOLD).select_related("category").order_by("-created_at"):
+            writer.writerow([
+                v.title,
+                v.category.name if v.category else "",
+                f"{v.price:.2f}",
+                v.created_at.strftime("%d/%m/%Y %H:%M") if v.created_at else "",
+            ])
+
+    else:
+        from django.http import HttpResponseBadRequest
+        return HttpResponseBadRequest("Type invalide.")
+
+    return response
+
+
 @require_POST
 @staff_member_required
 def delete_testimonial(request, testimonial_id):
     testimonial = get_object_or_404(Testimonial, id=testimonial_id)
-    testimonial.delete()
-    messages.success(request, "Temoignage supprime.")
+    testimonial.is_visible = False
+    testimonial.save(update_fields=["is_visible"])
+    messages.success(request, "Temoignage masque.")
     return redirect("accounts:admin_dashboard")
 
 
@@ -516,6 +601,12 @@ def admin_dashboard(request):
         "pending_testimonials": Testimonial.objects.filter(is_visible=False).select_related("user", "payment__reservation__vehicle").order_by("-created_at"),
         "published_testimonials": Testimonial.objects.filter(is_visible=True).select_related("user", "payment__reservation__vehicle").order_by("-created_at")[:10],
         "pending_testimonial_count": Testimonial.objects.filter(is_visible=False).count(),
+        # Historique soft-delete
+        "history_deleted_accounts": AccountStatus.objects.filter(is_deleted=True).select_related("user").order_by("-deleted_at")[:20],
+        "history_cancelled_reservations": Reservation.objects.filter(status=Reservation.STATUS_CANCELLED).select_related("user", "vehicle").order_by("-updated_at")[:20],
+        "history_refunded_payments": Payment.objects.filter(status=Payment.STATUS_REFUNDED).select_related("reservation__user", "reservation__vehicle").order_by("-updated_at")[:20],
+        "history_hidden_testimonials": Testimonial.objects.filter(is_visible=False).select_related("user", "payment__reservation__vehicle").order_by("-created_at")[:20],
+        "history_sold_vehicles": Vehicle.objects.filter(status=Vehicle.STATUS_SOLD).select_related("category").order_by("-created_at")[:20],
         "admin_users": admin_users,
         "create_admin_form": CreateAdminForm(),
     }

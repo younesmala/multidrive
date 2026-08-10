@@ -37,6 +37,7 @@ urlpatterns = [
     path("temoignage/<int:testimonial_id>/delete/", views.delete_testimonial, name="delete_testimonial"),
     path("temoignage/<int:testimonial_id>/valider/", views.validate_testimonial, name="validate_testimonial"),
     path("export/stats.csv", views.export_stats_csv, name="export_stats_csv"),
+    path("export/historique.csv", views.export_history_csv, name="export_history_csv"),
     path("admins/create/", views.create_admin, name="create_admin"),
     path("admins/<int:user_id>/demote/", views.demote_admin, name="demote_admin"),
     path("admins/<int:user_id>/deactivate/", views.deactivate_admin, name="deactivate_admin"),
