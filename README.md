@@ -88,7 +88,12 @@ Plateforme web de vente de vehicules d'occasion, realisee dans le cadre d'un Tra
 
 ### Multilingue
 - Switcher FR / NL / EN dans la navbar
-- Banniere informative pour NL et EN
+- Traduction complete de toutes les pages en anglais et en neerlandais (templates, formulaires, messages flash, pages mot de passe oublie)
+- Fichiers .po / .mo compiles pour EN et NL
+- Locale Stripe dynamique : la page de paiement Stripe s'affiche dans la langue active
+- Documents PDF generes dans la langue active (xhtml2pdf herite du thread-local Django)
+- Descriptions vehicules en 3 langues (FR / EN / NL) saisies directement dans l'admin Django
+- Format date rendezvous traduit (FR : "a", EN : "at", NL : "om")
 
 ---
 
@@ -149,4 +154,7 @@ PEXELS_API_KEY=...
 
 # Mettre a jour les descriptions des vehicules
 ..\venv\Scripts\python.exe manage.py update_descriptions
+
+# Compiler les fichiers de traduction (apres modification des .po)
+..\venv\Scripts\python.exe manage.py compilemessages
 ```
