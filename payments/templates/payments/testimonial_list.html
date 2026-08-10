@@ -1,0 +1,114 @@
+{% extends "vehicles/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Temoignages" %} - MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">{% trans "Clients" %}</p>
+    <h1>{% trans "Temoignages" %}</h1>
+    <p class="page-intro">{% trans "Ils ont achete un vehicule chez MultiDrive et partagent leur experience." %}</p>
+</section>
+
+<section class="section">
+    {% if testimonials %}
+    <div class="testimonial-grid">
+        {% for t in testimonials %}
+        <article class="testimonial-card">
+            <div class="testimonial-header">
+                <div class="testimonial-avatar">{{ t.user.username|first|upper }}</div>
+                <div class="testimonial-meta">
+                    <strong class="testimonial-name">{{ t.user.username }}</strong>
+                    <span class="testimonial-vehicle">{{ t.payment.reservation.vehicle.title }}</span>
+                </div>
+            </div>
+
+            <div class="testimonial-stars">
+                {% for i in "12345" %}
+                    {% if forloop.counter <= t.rating %}
+                        <i class="fa-solid fa-star"></i>
+                    {% else %}
+                        <i class="fa-regular fa-star"></i>
+                    {% endif %}
+                {% endfor %}
+                <span class="testimonial-score">{{ t.rating }}/5</span>
+            </div>
+
+            {% get_current_language as LANG %}
+            <p class="testimonial-comment">
+                {% if LANG == "en" and t.comment_en %}{{ t.comment_en }}
+                {% elif LANG == "nl" and t.comment_nl %}{{ t.comment_nl }}
+                {% else %}{{ t.comment }}{% endif %}
+            </p>
+
+            <time class="testimonial-date" datetime="{{ t.created_at|date:'Y-m-d' }}">
+                {{ t.created_at|date:"d/m/Y" }}
+            </time>
+        </article>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <i class="fa-regular fa-comment-dots empty-state-icon"></i>
+        <p>{% trans "Aucun temoignage publie pour le moment." %}</p>
+    </div>
+    {% endif %}
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<style>
+.page-intro {
+    color: #666;
+    font-size: 1.05rem;
+    margin-top: 8px;
+    max-width: 600px;
+}
+.testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+.testimonial-card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: box-shadow .2s;
+}
+.testimonial-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+.testimonial-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.testimonial-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #1E3A8A18;
+    color: #1E3A8A;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.testimonial-meta { display: flex; flex-direction: column; gap: 2px; }
+.testimonial-name { font-size: .92rem; color: #111; }
+.testimonial-vehicle { font-size: .8rem; color: #888; }
+.testimonial-stars { display: flex; align-items: center; gap: 3px; }
+.testimonial-stars .fa-solid.fa-star { color: #F59E0B; font-size: .9rem; }
+.testimonial-stars .fa-regular.fa-star { color: #ddd; font-size: .9rem; }
+.testimonial-score { font-size: .78rem; color: #888; margin-left: 6px; }
+.testimonial-comment { font-size: .9rem; color: #444; line-height: 1.55; flex: 1; margin: 0; }
+.testimonial-date { font-size: .75rem; color: #bbb; align-self: flex-end; }
+.empty-state { text-align: center; padding: 60px 20px; color: #aaa; }
+.empty-state-icon { font-size: 3rem; display: block; margin-bottom: 16px; }
+</style>
+{% endblock %}

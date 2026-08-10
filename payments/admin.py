@@ -1,56 +1,51 @@
 from django.contrib import admin
 
-from .models import Invoice, Payment
+from .models import Invoice, Payment, Testimonial
 
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
-    list_display = (
-        "id",
-        "reservation",
-        "amount",
-        "status",
-        "payment_method",
-        "paid_at",
-        "created_at",
-    )
-    list_filter = ("status", "payment_method", "created_at")
-    search_fields = (
-        "transaction_reference",
-        "reservation__user__username",
-        "reservation__vehicle__title",
-    )
+    list_display = ("reservation", "amount", "status", "paid_at", "created_at")
+    list_filter = ("status",)
+    search_fields = ("reservation__user__username", "transaction_reference")
     ordering = ("-created_at",)
-
-    def save_model(self, request, obj, form, change):
-        previous_values = None
-        if change and obj.pk:
-            previous = Payment.objects.get(pk=obj.pk)
-            previous_values = (
-                previous.status,
-                previous.payment_method,
-                previous.transaction_reference,
-                previous.paid_at,
-                previous.amount,
-            )
-
-        current_values = (
-            obj.status,
-            obj.payment_method,
-            obj.transaction_reference,
-            obj.paid_at,
-            obj.amount,
-        )
-
-        if change and previous_values != current_values:
-            obj.user_status_read = False
-
-        super().save_model(request, obj, form, change)
 
 
 @admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
-    list_display = ("invoice_number", "payment", "total_amount", "vat_amount", "issued_at")
-    list_filter = ("issued_at",)
-    search_fields = ("invoice_number", "payment__transaction_reference")
+    list_display = ("invoice_number", "payment", "total_amount", "issued_at")
+    search_fields = ("invoice_number",)
     ordering = ("-issued_at",)
+
+
+@admin.register(Testimonial)
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = ("user", "rating", "is_visible", "created_at")
+    list_filter = ("is_visible", "rating")
+    search_fields = ("user__username", "comment")
+    ordering = ("-created_at",)
+    actions = ["masquer", "afficher"]
+    fieldsets = (
+        (None, {
+            "fields": ("payment", "user", "rating", "is_visible"),
+        }),
+        ("Commentaire (FR)", {
+            "fields": ("comment",),
+        }),
+        ("Traduction EN", {
+            "fields": ("comment_en",),
+            "description": "Laisser vide si pas de traduction anglaise.",
+        }),
+        ("Traduction NL", {
+            "fields": ("comment_nl",),
+            "description": "Laisser vide si pas de traduction neerlandaise.",
+        }),
+    )
+
+    @admin.action(description="Masquer les temoignages selectionnes")
+    def masquer(self, request, queryset):
+        queryset.update(is_visible=False)
+
+    @admin.action(description="Rendre visibles les temoignages selectionnes")
+    def afficher(self, request, queryset):
+        queryset.update(is_visible=True)
