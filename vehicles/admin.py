@@ -1,5 +1,7 @@
 from django.contrib import admin
 
+from config.translate import auto_translate
+
 from .models import Vehicle, VehicleCategory, VehicleImage
 
 
@@ -23,6 +25,16 @@ class VehicleAdmin(admin.ModelAdmin):
     search_fields = ("title", "description")
     ordering = ("title",)
     inlines = [VehicleImageInline]
+
+    def save_model(self, request, obj, form, change):
+        if obj.description and (not obj.description_en or not obj.description_nl):
+            en, nl = auto_translate(obj.description)
+            if not obj.description_en:
+                obj.description_en = en
+            if not obj.description_nl:
+                obj.description_nl = nl
+        super().save_model(request, obj, form, change)
+
     fieldsets = (
         (None, {
             "fields": ("category", "title", "price", "status")
