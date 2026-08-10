@@ -15,9 +15,9 @@ from django.utils import timezone
 from django.views.decorators.http import require_POST
 
 from contact.models import ContactMessage
-from payments.models import Payment
+from payments.models import Payment, Testimonial
 from reservations.models import Reservation
-from vehicles.models import Review, Vehicle
+from vehicles.models import Vehicle
 
 from .forms import AccountDeletionRequestForm, AccountLoginForm, CreateAdminForm, RegisterForm
 from .models import AccountDeletionRequest, AccountStatus
@@ -86,6 +86,10 @@ def payment_list(request):
         total=Sum("amount")
     )["total"] or 0
 
+    testimonial_payment_ids = set(
+        Testimonial.objects.filter(user=request.user).values_list("payment_id", flat=True)
+    )
+
     for p in payments:
         p.main_image = (
             p.reservation.vehicle.images.filter(is_main=True).first()
@@ -101,6 +105,7 @@ def payment_list(request):
             "paid_amount": paid_amount,
             "paid_count": payments.filter(status=Payment.STATUS_PAID).count(),
             "total_count": payments.count(),
+            "testimonial_payment_ids": testimonial_payment_ids,
         },
     )
 
@@ -333,11 +338,20 @@ def export_stats_csv(request):
 
 @require_POST
 @staff_member_required
-def delete_review(request, review_id):
-    review = get_object_or_404(Review, id=review_id)
-    vehicle_title = review.vehicle.title
-    review.delete()
-    messages.success(request, f"Avis sur {vehicle_title} supprime.")
+def delete_testimonial(request, testimonial_id):
+    testimonial = get_object_or_404(Testimonial, id=testimonial_id)
+    testimonial.delete()
+    messages.success(request, "Temoignage supprime.")
+    return redirect("accounts:admin_dashboard")
+
+
+@require_POST
+@staff_member_required
+def validate_testimonial(request, testimonial_id):
+    testimonial = get_object_or_404(Testimonial, id=testimonial_id)
+    testimonial.is_visible = True
+    testimonial.save(update_fields=["is_visible"])
+    messages.success(request, f"Temoignage de {testimonial.user.username} publie.")
     return redirect("accounts:admin_dashboard")
 
 
@@ -499,7 +513,9 @@ def admin_dashboard(request):
         "max_sold": max_sold,
         "current_month": now.strftime("%B %Y"),
         "activity_feed": activity_feed,
-        "recent_reviews": Review.objects.select_related("user", "vehicle").order_by("-created_at")[:10],
+        "pending_testimonials": Testimonial.objects.filter(is_visible=False).select_related("user", "payment__reservation__vehicle").order_by("-created_at"),
+        "published_testimonials": Testimonial.objects.filter(is_visible=True).select_related("user", "payment__reservation__vehicle").order_by("-created_at")[:10],
+        "pending_testimonial_count": Testimonial.objects.filter(is_visible=False).count(),
         "admin_users": admin_users,
         "create_admin_form": CreateAdminForm(),
     }
