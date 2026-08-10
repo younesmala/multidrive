@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -131,35 +130,3 @@ class Favorite(models.Model):
         return f"{self.user.username} → {self.vehicle.title}"
 
 
-class Review(models.Model):
-    vehicle = models.ForeignKey(
-        Vehicle,
-        on_delete=models.CASCADE,
-        related_name="reviews"
-    )
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="vehicle_reviews"
-    )
-    rating = models.PositiveSmallIntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)]
-    )
-    comment = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        ordering = ["-created_at"]
-        constraints = [
-            models.UniqueConstraint(
-                fields=["vehicle", "user"],
-                name="unique_vehicle_review_per_user",
-            ),
-        ]
-        indexes = [
-            models.Index(fields=["vehicle", "created_at"]),
-        ]
-
-    def __str__(self):
-        return f"Avis de {self.user.username} sur {self.vehicle.title}"
