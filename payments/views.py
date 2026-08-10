@@ -16,6 +16,7 @@ from xhtml2pdf import pisa
 
 from payments.forms import TestimonialForm
 from payments.models import Payment, Testimonial
+from payments.utils import translate_testimonial_comment
 from reservations.models import Reservation
 from vehicles.models import Vehicle
 
@@ -376,6 +377,7 @@ def add_testimonial(request, payment_id):
         t = form.save(commit=False)
         t.payment = payment
         t.user = request.user
+        t.comment_en, t.comment_nl = translate_testimonial_comment(t.comment)
         t.save()
         messages.success(request, _("Merci pour votre temoignage !"))
         return redirect("accounts:payment_list")
