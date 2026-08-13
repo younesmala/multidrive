@@ -35,6 +35,7 @@ class Reservation(models.Model):
         choices=STATUS_CHOICES,
         default=STATUS_PENDING
     )
+    phone = models.CharField(max_length=20, blank=True, default="")
     message = models.TextField(blank=True, null=True)
     appointment_date = models.DateTimeField(blank=True, null=True)
     user_status_read = models.BooleanField(default=True)

@@ -14,8 +14,14 @@ WEEKDAY_HOURS = {
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
-        fields = ["message", "appointment_date"]
+        fields = ["phone", "message", "appointment_date"]
         widgets = {
+            "phone": forms.TextInput(
+                attrs={
+                    "placeholder": "Ex : +32 470 12 34 56",
+                    "autocomplete": "tel",
+                }
+            ),
             "message": forms.Textarea(
                 attrs={
                     "rows": 5,
@@ -28,6 +34,9 @@ class ReservationForm(forms.ModelForm):
                     "id": "id_appointment_date",
                 }
             ),
+        }
+        labels = {
+            "phone": "Numero de telephone (optionnel)",
         }
 
     def clean_appointment_date(self):
