@@ -53,6 +53,12 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
+    def clean_email(self):
+        email = self.cleaned_data["email"]
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("Cette adresse email est deja associee a un compte.")
+        return email
+
 
 class AccountLoginForm(AuthenticationForm):
     def confirm_login_allowed(self, user):
