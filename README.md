@@ -83,11 +83,39 @@ Plateforme web de vente de vehicules d'occasion, realisee dans le cadre d'un Tra
 - **Superadmin** (is_superuser) : tout + creation et gestion des comptes admin
 - Toutes les protections appliquees cote backend (decorateurs Django), jamais uniquement cote template
 
+Mesures de securite implementees :
+- 4 validateurs de mot de passe Django (longueur, similarite, mots courants, numerique)
+- Reset mot de passe par email avec token HMAC a usage unique (24h)
+- Blocage connexion compte supprime/banni via `confirm_login_allowed`
+- Email unique verifie a l'inscription
+- CSRF token sur tous les formulaires POST (`CsrfViewMiddleware`)
+- Protection clickjacking (`XFrameOptionsMiddleware`)
+- Headers HTTPS securises en production : `SECURE_SSL_REDIRECT`, `SESSION_COOKIE_SECURE`, `CSRF_COOKIE_SECURE`, `SECURE_HSTS_SECONDS`
+- Secrets (SECRET_KEY, Stripe, SMTP) lus depuis variables d'environnement, jamais en dur
+- Session maintenue apres changement de mot de passe (`update_session_auth_hash`)
+
 ### API REST
-- Endpoints : `/api/v1/categories/`, `/api/v1/vehicles/`, `/api/v1/reservations/`, `/api/v1/payments/`, `/api/v1/invoices/`, `/api/v1/contact-messages/`, `/api/v1/me/`
-- Authentification JWT (simplejwt) + session
-- Filtres, recherche, tri, pagination (20/page)
-- Documentation Swagger : `/api/docs/`
+- Authentification double : **JWT Bearer token** (`POST /api/v1/token/` → access + refresh) et **session Django** (navigateur)
+- Renouvellement du token sans reconnexion : `POST /api/v1/token/refresh/`
+- Documentation interactive Swagger UI : `/api/docs/`
+
+| Endpoint | Lecture | Ecriture |
+|---|---|---|
+| `/api/v1/vehicles/` | Publique (sans auth) | Staff only |
+| `/api/v1/categories/` | Publique (sans auth) | Staff only |
+| `/api/v1/reservations/` | Utilisateur connecte (ses donnees) | Utilisateur connecte |
+| `/api/v1/payments/` | Utilisateur connecte (ses donnees) | Staff only |
+| `/api/v1/invoices/` | Utilisateur connecte (ses donnees) | Staff only |
+| `/api/v1/contact-messages/` | Staff only | Publique (formulaire contact) |
+| `/api/v1/me/` | Utilisateur connecte | — |
+
+Permissions custom (3 classes) : `IsAdminOrReadOnly`, `IsAdminOrCreateOnly`, `IsAdminWriteOrAuthenticatedRead`
+
+Isolation des donnees par propriétaire : `get_queryset` filtre automatiquement les reservations, paiements et factures au profil connecte.
+
+Filtres actifs sur les vehicules : `?status=available&category=1&search=peugeot&ordering=-price`
+
+Pagination : 20 resultats par page (`?page=N`)
 
 ### Juridique et conformite
 - Page Conditions Generales 10 sections (CGV, RGPD, cookies, propriete intellectuelle, Stripe PCI-DSS)
@@ -166,6 +194,12 @@ PEXELS_API_KEY=...
 
 # Generer des temoignages de demonstration
 ..\venv\Scripts\python.exe manage.py seed_testimonials
+
+# Generer des donnees de test reservations (acceptees, refusees, remboursees)
+..\venv\Scripts\python.exe manage.py seed_test_reservations
+
+# Peupler l'historique du dashboard (comptes supprimes, annulations, remboursements, avis masques)
+..\venv\Scripts\python.exe manage.py seed_history
 
 # Nettoyer le dashboard (accepter reservations en attente + repondre aux messages)
 ..\venv\Scripts\python.exe manage.py cleanup_dashboard
