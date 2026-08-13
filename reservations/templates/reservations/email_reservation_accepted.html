@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation confirmee — MultiDrive</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
+        .container { max-width: 580px; margin: 30px auto; background: #ffffff; border-radius: 8px; overflow: hidden; }
+        .header { background: #1E3A8A; padding: 32px 40px; text-align: center; }
+        .header h1 { color: #ffffff; margin: 0; font-size: 22px; letter-spacing: 1px; }
+        .header p { color: #a0bfff; margin: 6px 0 0; font-size: 13px; }
+        .badge { display: inline-block; background: #22c55e; color: #fff; border-radius: 99px; padding: 4px 16px; font-size: 13px; font-weight: 700; margin-bottom: 20px; }
+        .body { padding: 32px 40px; }
+        .body p { color: #333333; line-height: 1.7; font-size: 15px; margin: 0 0 14px; }
+        .info-block { background: #f0f9ff; border-left: 4px solid #1E3A8A; border-radius: 4px; padding: 16px 20px; margin: 20px 0; }
+        .info-block p { margin: 5px 0; font-size: 14px; color: #444; }
+        .info-block strong { color: #1E3A8A; }
+        .rdv-block { background: #f0fdf4; border-left: 4px solid #22c55e; border-radius: 4px; padding: 16px 20px; margin: 20px 0; }
+        .rdv-block p { margin: 5px 0; font-size: 14px; color: #444; }
+        .rdv-block strong { color: #166534; }
+        .cta { text-align: center; margin: 28px 0 16px; }
+        .cta a { background: #1E3A8A; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-size: 15px; font-weight: 600; display: inline-block; }
+        .footer { background: #f0f0f0; padding: 20px 40px; text-align: center; }
+        .footer p { color: #888; font-size: 12px; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MultiDrive</h1>
+            <p>Votre reservation a ete acceptee</p>
+        </div>
+        <div class="body">
+            <p>Bonjour <strong>{{ reservation.user.first_name|default:reservation.user.username }}</strong>,</p>
+            <p>Excellente nouvelle ! Votre demande de reservation a ete <strong style="color:#166534;">acceptee</strong> par notre equipe.</p>
+
+            <div class="info-block">
+                <p><strong>Vehicule :</strong> {{ reservation.vehicle.title }}</p>
+                <p><strong>Prix :</strong> {{ reservation.vehicle.price }} EUR</p>
+                <p><strong>Reference reservation :</strong> #{{ reservation.id }}</p>
+                {% if reservation.phone %}<p><strong>Telephone enregistre :</strong> {{ reservation.phone }}</p>{% endif %}
+            </div>
+
+            {% if reservation.appointment_date %}
+            <div class="rdv-block">
+                <p><strong>&#128197; Date du rendez-vous :</strong> {{ reservation.appointment_date|date:"l d F Y" }}</p>
+                <p><strong>&#128336; Heure :</strong> {{ reservation.appointment_date|date:"H\hi" }}</p>
+                <p style="margin-top:10px; font-size:13px; color:#555;">Merci d'etre present(e) a l'heure convenue. En cas d'empechement, contactez-nous le plus tot possible.</p>
+            </div>
+            {% endif %}
+
+            <p>La prochaine etape est le <strong>versement de l'acompte</strong> depuis votre espace membre. Cela confirme definitivement votre achat.</p>
+
+            <div class="cta">
+                <a href="https://multidrive.pythonanywhere.com/paiements/">Acceder a mon espace membre</a>
+            </div>
+
+            <p style="font-size:13px; color:#888;">Si vous avez des questions, utilisez le formulaire de contact sur le site. Notre equipe peut egalement vous contacter{% if reservation.phone %} au <strong>{{ reservation.phone }}</strong>{% endif %} si necessaire.</p>
+            <p>L'equipe MultiDrive</p>
+        </div>
+        <div class="footer">
+            <p>Cet email est envoye automatiquement suite a l'action d'un administrateur MultiDrive.</p>
+            <p style="margin-top:6px;">MultiDrive — Projet academique</p>
+        </div>
+    </div>
+</body>
+</html>

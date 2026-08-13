@@ -1,7 +1,11 @@
 import csv
 from decimal import Decimal, InvalidOperation
 
+import stripe
+from django.conf import settings
 from django.contrib import messages
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
@@ -463,11 +467,65 @@ def process_refund(request, payment_id):
     payment.admin_notif_read = True
     payment.save(update_fields=["refund_amount", "refund_note", "status", "user_status_read", "admin_notif_read", "updated_at"])
 
+    vehicle = payment.reservation.vehicle
+    if vehicle.status != Vehicle.STATUS_AVAILABLE:
+        vehicle.status = Vehicle.STATUS_AVAILABLE
+        vehicle.save(update_fields=["status"])
+
+    _stripe_refund(payment, refund_amount)
+    _send_refund_email(payment)
+
     messages.success(
         request,
         f"Remboursement de {refund_amount} EUR enregistre pour {payment.reservation.user.username}.",
     )
     return redirect("accounts:admin_dashboard")
+
+
+def _stripe_refund(payment, refund_amount):
+    ref = payment.transaction_reference or ""
+    if not ref.startswith("cs_"):
+        return
+    try:
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        session = stripe.checkout.Session.retrieve(ref)
+        pi_id = session.payment_intent
+        if pi_id:
+            stripe.Refund.create(
+                payment_intent=pi_id,
+                amount=int(refund_amount * 100),
+            )
+    except Exception:
+        pass
+
+
+def _admin_email():
+    addr = getattr(settings, "EMAIL_HOST_USER", "")
+    return [addr] if addr else []
+
+
+def _send_refund_email(payment):
+    recipient = payment.reservation.user.email
+    if not recipient:
+        return
+    subject = f"Remboursement confirme — {payment.reservation.vehicle.title}"
+    html_body = render_to_string(
+        "accounts/email_refund_confirmation.html",
+        {"payment": payment},
+    )
+    text_body = (
+        f"Bonjour {payment.reservation.user.first_name or payment.reservation.user.username},\n\n"
+        f"Votre remboursement de {payment.refund_amount} EUR a ete traite pour le vehicule "
+        f"{payment.reservation.vehicle.title}.\n"
+        + (f"\nNote : {payment.refund_note}\n" if payment.refund_note else "")
+        + "\nL'equipe MultiDrive"
+    )
+    email = EmailMultiAlternatives(subject=subject, body=text_body, to=[recipient], bcc=_admin_email())
+    email.attach_alternative(html_body, "text/html")
+    try:
+        email.send()
+    except Exception:
+        pass
 
 
 @staff_member_required

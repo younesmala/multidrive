@@ -1,11 +1,15 @@
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
-from django.core.mail import EmailMultiAlternatives
 from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404, redirect, render
-from django.template.loader import render_to_string
 from django.views.decorators.http import require_POST
+
+from .emails import (
+    send_cancellation_admin_notification,
+    send_reservation_confirmation,
+    send_reservation_status_email,
+)
 
 from payments.models import Payment
 from vehicles.models import Vehicle
@@ -27,11 +31,13 @@ def update_reservation_status(request, reservation_id):
         vehicle = reservation.vehicle
         vehicle.status = Vehicle.STATUS_RESERVED
         vehicle.save(update_fields=["status"])
+        send_reservation_status_email(reservation, "accepted")
         messages.success(request, f"Reservation de {reservation.user.username} acceptee.")
     elif action == "reject" and reservation.status == Reservation.STATUS_PENDING:
         reservation.status = Reservation.STATUS_REJECTED
         reservation.user_status_read = False
         reservation.save(update_fields=["status", "user_status_read", "updated_at"])
+        send_reservation_status_email(reservation, "rejected")
         messages.success(request, f"Reservation de {reservation.user.username} refusee.")
 
     return redirect("accounts:admin_dashboard")
@@ -62,7 +68,7 @@ def reserve_vehicle(request, vehicle_id):
             reservation.vehicle = vehicle
             reservation.status = Reservation.STATUS_PENDING
             reservation.save()
-            _send_reservation_confirmation(reservation)
+            send_reservation_confirmation(reservation)
             return redirect("reservations:reservation_success", reservation_id=reservation.id)
     else:
         form = ReservationForm()
@@ -137,6 +143,7 @@ def cancel_reservation(request, reservation_id):
     if reservation.status == Reservation.STATUS_PENDING:
         reservation.status = Reservation.STATUS_CANCELLED
         reservation.save(update_fields=["status", "updated_at"])
+        send_cancellation_admin_notification(reservation)
         messages.success(request, "Votre reservation a bien ete annulee.")
 
     elif reservation.status == Reservation.STATUS_ACCEPTED:
@@ -145,6 +152,7 @@ def cancel_reservation(request, reservation_id):
         vehicle = reservation.vehicle
         vehicle.status = Vehicle.STATUS_AVAILABLE
         vehicle.save(update_fields=["status"])
+        send_cancellation_admin_notification(reservation)
         messages.success(request, "Votre reservation a ete annulee. Le vehicule est de nouveau disponible.")
 
     elif reservation.status == Reservation.STATUS_DEPOSIT_PAID:
@@ -159,6 +167,7 @@ def cancel_reservation(request, reservation_id):
             payment.admin_notif_read = False
             payment.user_status_read = False
             payment.save(update_fields=["status", "admin_notif_read", "user_status_read", "updated_at"])
+        send_cancellation_admin_notification(reservation)
         messages.warning(
             request,
             "Votre annulation a ete enregistree. Un remboursement de votre acompte sera traite "
@@ -184,25 +193,3 @@ def my_purchases(request):
     return render(request, "reservations/my_purchases.html", {"purchases": purchases})
 
 
-def _send_reservation_confirmation(reservation):
-    recipient = reservation.user.email
-    if not recipient:
-        return
-    subject = f"Confirmation de votre demande — {reservation.vehicle.title}"
-    html_body = render_to_string(
-        "reservations/email_reservation_confirmation.html",
-        {"reservation": reservation},
-    )
-    text_body = (
-        f"Bonjour {reservation.user.first_name or reservation.user.username},\n\n"
-        f"Votre demande de reservation pour {reservation.vehicle.title} "
-        f"({reservation.vehicle.price} EUR) a bien ete enregistree.\n\n"
-        "Notre equipe vous contactera pour confirmer votre reservation.\n\n"
-        "MultiDrive"
-    )
-    email = EmailMultiAlternatives(subject=subject, body=text_body, to=[recipient])
-    email.attach_alternative(html_body, "text/html")
-    try:
-        email.send()
-    except Exception:
-        pass

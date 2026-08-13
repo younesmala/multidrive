@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mise a jour de votre reservation — MultiDrive</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
+        .container { max-width: 580px; margin: 30px auto; background: #ffffff; border-radius: 8px; overflow: hidden; }
+        .header { background: #1a1a2e; padding: 32px 40px; text-align: center; }
+        .header h1 { color: #ffffff; margin: 0; font-size: 22px; letter-spacing: 1px; }
+        .header p { color: #a0a0b0; margin: 6px 0 0; font-size: 13px; }
+        .body { padding: 32px 40px; }
+        .body p { color: #333333; line-height: 1.7; font-size: 15px; margin: 0 0 14px; }
+        .info-block { background: #fff7f7; border-left: 4px solid #ef4444; border-radius: 4px; padding: 16px 20px; margin: 20px 0; }
+        .info-block p { margin: 5px 0; font-size: 14px; color: #444; }
+        .info-block strong { color: #991b1b; }
+        .alt-block { background: #f0f9ff; border-left: 4px solid #1E3A8A; border-radius: 4px; padding: 16px 20px; margin: 20px 0; }
+        .alt-block p { margin: 5px 0; font-size: 14px; color: #444; }
+        .cta { text-align: center; margin: 28px 0 16px; }
+        .cta a { background: #1E3A8A; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 6px; font-size: 15px; font-weight: 600; display: inline-block; }
+        .footer { background: #f0f0f0; padding: 20px 40px; text-align: center; }
+        .footer p { color: #888; font-size: 12px; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MultiDrive</h1>
+            <p>Mise a jour de votre demande de reservation</p>
+        </div>
+        <div class="body">
+            <p>Bonjour <strong>{{ reservation.user.first_name|default:reservation.user.username }}</strong>,</p>
+            <p>Nous vous informons que votre demande de reservation n'a malheureusement pas pu etre acceptee en l'etat.</p>
+
+            <div class="info-block">
+                <p><strong>Vehicule :</strong> {{ reservation.vehicle.title }}</p>
+                <p><strong>Prix indicatif :</strong> {{ reservation.vehicle.price }} EUR</p>
+                <p><strong>Reference reservation :</strong> #{{ reservation.id }}</p>
+                {% if reservation.phone %}<p><strong>Telephone :</strong> {{ reservation.phone }}</p>{% endif %}
+                <p><strong>Statut :</strong> Non retenue</p>
+            </div>
+
+            <p>Cela peut etre du a un creneau indisponible ou une contrainte de planning de notre equipe. <strong>Un administrateur vous contactera ulterieurement pour organiser un rendez-vous a une date qui vous convient.</strong></p>
+
+            <div class="alt-block">
+                <p><strong>Que faire maintenant ?</strong></p>
+                <p>&#8594; Consultez notre catalogue pour decouvrir d'autres vehicules similaires.</p>
+                <p>&#8594; Contactez-nous via le formulaire si vous souhaitez plus d'informations sur ce refus.</p>
+            </div>
+
+            <div class="cta">
+                <a href="https://multidrive.pythonanywhere.com/catalogue/">Voir le catalogue</a>
+            </div>
+
+            <p>Nous esperous pouvoir vous aider a trouver le vehicule qui vous convient.</p>
+            <p>L'equipe MultiDrive</p>
+        </div>
+        <div class="footer">
+            <p>Cet email est envoye automatiquement suite a l'action d'un administrateur MultiDrive.</p>
+            <p style="margin-top:6px;">MultiDrive — Projet academique</p>
+        </div>
+    </div>
+</body>
+</html>
