@@ -64,7 +64,13 @@
                             <p>{{ reservation.updated_at|date:"d/m/Y H:i" }}</p>
                         </div>
                         <div class="member-detail-block">
-                            <strong>{% trans "Rendez-vous souhaite" %}</strong>
+                            <strong>
+                                {% if reservation.status == 'accepted' or reservation.status == 'deposit_paid' %}
+                                    {% trans "Rendez-vous confirme" %}
+                                {% else %}
+                                    {% trans "Rendez-vous souhaite" %}
+                                {% endif %}
+                            </strong>
                             <p>
                                 {% if reservation.appointment_date %}
                                     {{ reservation.appointment_date|date:"d/m/Y H:i" }}
@@ -109,7 +115,7 @@
                     <div class="hero-actions">
                         <a class="button primary" href="{% url 'vehicles:vehicle_detail' reservation.vehicle.id %}">{% trans "Voir le vehicule" %}</a>
                         {% if reservation.status == 'accepted' and not reservation.payment %}
-                            <a class="button primary" href="{% url 'payments:checkout' %}">{% trans "Payer l'acompte" %}</a>
+                            <a class="button primary" href="{% url 'payments:checkout' %}">{% trans "Payer" %}</a>
                         {% endif %}
                         {% if reservation.status == 'pending' %}
                             <form method="post" action="{% url 'reservations:cancel_reservation' reservation.id %}"
