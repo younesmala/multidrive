@@ -9,7 +9,7 @@ from payments.models import Invoice, Payment
 from reservations.models import Reservation
 from vehicles.models import Vehicle, VehicleCategory
 
-from .permissions import IsAdminOrCreateOnly, IsAdminOrReadOnly
+from .permissions import IsAdminOrCreateOnly, IsAdminOrReadOnly, IsAdminWriteOrAuthenticatedRead
 from .serializers import (
     ContactMessageSerializer,
     InvoiceSerializer,
@@ -71,7 +71,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
 class PaymentViewSet(viewsets.ModelViewSet):
     queryset = Payment.objects.select_related("reservation", "reservation__user", "reservation__vehicle").all()
     serializer_class = PaymentSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminWriteOrAuthenticatedRead]
 
     def get_queryset(self):
         queryset = Payment.objects.select_related("reservation", "reservation__user", "reservation__vehicle").order_by(
@@ -88,7 +88,7 @@ class PaymentViewSet(viewsets.ModelViewSet):
 class InvoiceViewSet(viewsets.ModelViewSet):
     queryset = Invoice.objects.select_related("payment", "payment__reservation", "payment__reservation__user").all()
     serializer_class = InvoiceSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminWriteOrAuthenticatedRead]
 
     def get_queryset(self):
         queryset = Invoice.objects.select_related("payment", "payment__reservation", "payment__reservation__user").order_by(
