@@ -443,9 +443,8 @@ def export_history_csv(request):
 @staff_member_required
 def delete_testimonial(request, testimonial_id):
     testimonial = get_object_or_404(Testimonial, id=testimonial_id)
-    testimonial.is_visible = False
-    testimonial.save(update_fields=["is_visible"])
-    messages.success(request, "Temoignage masque.")
+    testimonial.delete()
+    messages.success(request, "Temoignage supprime.")
     return redirect("accounts:admin_dashboard")
 
 
