@@ -48,10 +48,19 @@ class CreateAdminForm(forms.Form):
 
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
+    phone = forms.CharField(
+        max_length=20,
+        required=True,
+        label="Numero de telephone",
+        widget=forms.TextInput(attrs={
+            "placeholder": "Ex : +32 470 12 34 56",
+            "autocomplete": "tel",
+        }),
+    )
 
     class Meta:
         model = User
-        fields = ["username", "email", "password1", "password2"]
+        fields = ["username", "email", "phone", "password1", "password2"]
 
     def clean_email(self):
         email = self.cleaned_data["email"]

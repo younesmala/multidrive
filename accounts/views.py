@@ -43,6 +43,10 @@ def register(request):
             user = form.save(commit=False)
             user.email = form.cleaned_data["email"]
             user.save()
+            AccountStatus.objects.create(
+                user=user,
+                phone=form.cleaned_data.get("phone", ""),
+            )
             login(request, user)
             return redirect("home")
     else:
@@ -112,6 +116,17 @@ def payment_list(request):
             "testimonial_payment_ids": testimonial_payment_ids,
         },
     )
+
+
+@require_POST
+@login_required
+def update_phone(request):
+    phone = request.POST.get("phone", "").strip()
+    account_status, _ = AccountStatus.objects.get_or_create(user=request.user)
+    account_status.phone = phone
+    account_status.save(update_fields=["phone"])
+    messages.success(request, "Numero de telephone mis a jour.")
+    return redirect("accounts:profile")
 
 
 @login_required
