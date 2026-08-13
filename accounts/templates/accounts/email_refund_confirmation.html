@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Remboursement confirme — MultiDrive</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f5f5f5; margin: 0; padding: 0; }
+        .container { max-width: 580px; margin: 30px auto; background: #ffffff; border-radius: 8px; overflow: hidden; }
+        .header { background: #1a1a2e; padding: 32px 40px; text-align: center; }
+        .header h1 { color: #ffffff; margin: 0; font-size: 22px; letter-spacing: 1px; }
+        .header p { color: #a0a0b0; margin: 6px 0 0; font-size: 13px; }
+        .body { padding: 32px 40px; }
+        .body p { color: #333333; line-height: 1.7; font-size: 15px; margin: 0 0 14px; }
+        .amount-block { background: #f0fdf4; border-left: 4px solid #22c55e; border-radius: 4px; padding: 20px 24px; margin: 20px 0; }
+        .amount-block .amount { font-size: 2rem; font-weight: 800; color: #166534; margin: 0 0 6px; }
+        .amount-block p { margin: 4px 0; font-size: 14px; color: #444; }
+        .info-block { background: #f8f8f8; border-left: 4px solid #6c63ff; border-radius: 4px; padding: 16px 20px; margin: 20px 0; }
+        .info-block p { margin: 5px 0; font-size: 14px; color: #444; }
+        .info-block strong { color: #1a1a2e; }
+        .note-block { background: #fffbeb; border-left: 4px solid #f59e0b; border-radius: 4px; padding: 16px 20px; margin: 20px 0; }
+        .note-block p { margin: 4px 0; font-size: 14px; color: #444; }
+        .retention-block { background: #fff7ed; border-left: 4px solid #f97316; border-radius: 4px; padding: 16px 20px; margin: 20px 0; }
+        .retention-block p { margin: 4px 0; font-size: 14px; color: #444; }
+        .footer { background: #f0f0f0; padding: 20px 40px; text-align: center; }
+        .footer p { color: #888; font-size: 12px; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MultiDrive</h1>
+            <p>Confirmation de remboursement</p>
+        </div>
+        <div class="body">
+            <p>Bonjour <strong>{{ payment.reservation.user.first_name|default:payment.reservation.user.username }}</strong>,</p>
+            <p>Nous vous confirmons que votre remboursement a bien ete traite.</p>
+
+            <div class="amount-block">
+                <p class="amount">{{ payment.refund_amount }} EUR</p>
+                <p>Montant rembourse</p>
+            </div>
+
+            <div class="info-block">
+                <p><strong>Vehicule :</strong> {{ payment.reservation.vehicle.title }}</p>
+                <p><strong>Acompte verse initialement :</strong> {{ payment.amount }} EUR</p>
+                <p><strong>Montant rembourse :</strong> {{ payment.refund_amount }} EUR</p>
+                {% if payment.amount != payment.refund_amount %}
+                <p><strong>Montant retenu :</strong> {{ payment.amount|add:"-"|add:payment.refund_amount }} EUR</p>
+                {% endif %}
+            </div>
+
+            {% if payment.amount != payment.refund_amount %}
+            <div class="retention-block">
+                <p><strong>A propos de la retenue</strong></p>
+                <p>Une partie de votre acompte a ete retenue conformement a l'article 7 de nos Conditions Generales de Vente. Des frais administratifs sont appliques en cas d'annulation apres acceptation de la reservation.</p>
+            </div>
+            {% endif %}
+
+            {% if payment.refund_note %}
+            <div class="note-block">
+                <p><strong>Message de notre equipe :</strong></p>
+                <p>{{ payment.refund_note }}</p>
+            </div>
+            {% endif %}
+
+            <p style="font-size:13px; color:#666;">Le remboursement sera credit sur votre moyen de paiement d'origine sous <strong>5 a 10 jours ouvrables</strong>, selon votre banque.</p>
+            <p>Si vous avez des questions, utilisez le formulaire de contact sur le site.</p>
+            <p>L'equipe MultiDrive</p>
+        </div>
+        <div class="footer">
+            <p>Cet email est envoye automatiquement suite au traitement de votre dossier.</p>
+            <p style="margin-top:6px;">MultiDrive — Projet academique</p>
+        </div>
+    </div>
+</body>
+</html>
