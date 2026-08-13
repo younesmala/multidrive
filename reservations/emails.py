@@ -64,6 +64,39 @@ def send_reservation_confirmation(reservation):
         pass
 
 
+def send_appointment_update_email(reservation):
+    recipient = reservation.user.email
+    if not recipient or not reservation.appointment_date:
+        return
+    subject = f"Votre rendez-vous a ete modifie — {reservation.vehicle.title}"
+    html_body = render_to_string(
+        "reservations/email_appointment_updated.html",
+        {"reservation": reservation},
+    )
+    user = reservation.user
+    from django.utils.timezone import localtime
+    rdv = localtime(reservation.appointment_date)
+    text_body = (
+        f"Bonjour {user.first_name or user.username},\n\n"
+        f"L'equipe MultiDrive a propose un nouveau creneau pour votre reservation.\n\n"
+        f"Vehicule : {reservation.vehicle.title}\n"
+        f"Nouveau rendez-vous : {rdv.strftime('%d/%m/%Y a %H:%M')}\n"
+        + (f"Telephone : {reservation.phone}\n" if reservation.phone else "")
+        + "\nSi ce creneau ne vous convient pas, contactez-nous.\n\nL'equipe MultiDrive"
+    )
+    email = EmailMultiAlternatives(
+        subject=subject,
+        body=text_body,
+        to=[recipient],
+        bcc=_admin_bcc(),
+    )
+    email.attach_alternative(html_body, "text/html")
+    try:
+        email.send()
+    except Exception:
+        pass
+
+
 def send_cancellation_admin_notification(reservation):
     admin_emails = _admin_bcc()
     if not admin_emails:

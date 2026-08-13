@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nouveau rendez-vous</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f6f9;padding:40px 0;">
+  <tr>
+    <td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.08);">
+
+        <!-- Header -->
+        <tr>
+          <td style="background:#1E3A8A;padding:32px 40px;text-align:center;">
+            <h1 style="margin:0;color:#ffffff;font-size:22px;font-weight:700;letter-spacing:.5px;">
+              📅 Nouveau rendez-vous propose
+            </h1>
+            <p style="margin:8px 0 0;color:#93C5FD;font-size:14px;">MultiDrive</p>
+          </td>
+        </tr>
+
+        <!-- Body -->
+        <tr>
+          <td style="padding:36px 40px;">
+            <p style="margin:0 0 20px;font-size:15px;color:#374151;">
+              Bonjour <strong>{{ reservation.user.first_name|default:reservation.user.username }}</strong>,
+            </p>
+            <p style="margin:0 0 28px;font-size:15px;color:#374151;line-height:1.6;">
+              Suite a votre echange avec notre equipe, nous vous proposons un nouveau creneau pour votre rendez-vous.
+            </p>
+
+            <!-- Nouveau RDV mis en avant -->
+            <div style="background:#EFF6FF;border-left:4px solid #1E3A8A;border-radius:8px;padding:20px 24px;margin-bottom:24px;text-align:center;">
+              <p style="margin:0 0 4px;font-size:13px;color:#1E40AF;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Nouveau rendez-vous</p>
+              <p style="margin:0;font-size:28px;font-weight:700;color:#1E3A8A;">{{ reservation.appointment_date|date:"d/m/Y" }}</p>
+              <p style="margin:4px 0 0;font-size:20px;font-weight:600;color:#1D4ED8;">{{ reservation.appointment_date|date:"H:i" }}</p>
+            </div>
+
+            <!-- Détail reservation -->
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
+              <tr>
+                <td style="padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:14px;color:#6B7280;">Vehicule</td>
+                <td style="padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:14px;color:#111827;font-weight:600;text-align:right;">{{ reservation.vehicle.title }}</td>
+              </tr>
+              <tr>
+                <td style="padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:14px;color:#6B7280;">Reference reservation</td>
+                <td style="padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:14px;color:#111827;text-align:right;">#{{ reservation.id }}</td>
+              </tr>
+              {% if reservation.phone %}
+              <tr>
+                <td style="padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:14px;color:#6B7280;">Votre telephone</td>
+                <td style="padding:10px 0;border-bottom:1px solid #F3F4F6;font-size:14px;color:#111827;text-align:right;">{{ reservation.phone }}</td>
+              </tr>
+              {% endif %}
+            </table>
+
+            <!-- Info box -->
+            <div style="background:#FFFBEB;border:1px solid #FCD34D;border-radius:8px;padding:16px 20px;margin-bottom:24px;">
+              <p style="margin:0;font-size:14px;color:#92400E;line-height:1.6;">
+                Si ce nouveau creneau ne vous convient pas, contactez-nous directement par telephone ou repondez a cet email.
+              </p>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="background:#F9FAFB;padding:20px 40px;border-top:1px solid #E5E7EB;text-align:center;">
+            <p style="margin:0;font-size:12px;color:#9CA3AF;line-height:1.6;">
+              Cet email est envoye automatiquement par MultiDrive.<br>
+              Merci de ne pas repondre directement a cet email si ce n'est pas votre souhait.
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>
