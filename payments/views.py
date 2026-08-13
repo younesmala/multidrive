@@ -14,6 +14,7 @@ from django.utils.timezone import localtime
 from django.utils.translation import gettext_lazy as _
 from xhtml2pdf import pisa
 
+from payments.emails import send_payment_confirmation
 from payments.forms import TestimonialForm
 from payments.models import Payment, Testimonial
 from payments.utils import translate_testimonial_comment
@@ -229,6 +230,9 @@ def stripe_success(request):
     vehicle = reservation.vehicle
     vehicle.status = Vehicle.STATUS_SOLD
     vehicle.save(update_fields=["status"])
+
+    payment = Payment.objects.get(reservation=reservation)
+    send_payment_confirmation(payment, chosen_amount)
 
     messages.success(
         request,

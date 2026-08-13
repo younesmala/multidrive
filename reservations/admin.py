@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .emails import send_reservation_status_email
+from .emails import send_appointment_update_email, send_reservation_status_email
 from .models import Reservation
 
 
@@ -33,3 +33,7 @@ class ReservationAdmin(admin.ModelAdmin):
             ):
                 status_key = "accepted" if obj.status == Reservation.STATUS_ACCEPTED else "rejected"
                 send_reservation_status_email(obj, status_key)
+
+        if change and obj.appointment_date != previous_appointment and obj.appointment_date:
+            if obj.status == Reservation.STATUS_ACCEPTED:
+                send_appointment_update_email(obj)
