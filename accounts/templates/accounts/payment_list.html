@@ -161,7 +161,7 @@
                             {% if payment.id not in testimonial_payment_ids %}
                                 <a class="button secondary" href="{% url 'payments:add_testimonial' payment.id %}">{% trans "Votre avis sur l'achat" %}</a>
                             {% else %}
-                                <span class="button secondary" style="opacity:.55; cursor:default;">{% trans "Temoignage depose" %} ✓</span>
+                                <span class="button secondary" style="opacity:.55; cursor:default;">{% trans "Temoignage depose" %}</span>
                             {% endif %}
                         {% endif %}
                         <a class="button secondary" href="{% url 'reservations:my_reservations' %}">{% trans "Mes reservations" %}</a>
