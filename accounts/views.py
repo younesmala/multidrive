@@ -405,16 +405,16 @@ def export_history_csv(request):
             ])
 
     elif type_ == "temoignages":
-        filename = f"multidrive_temoignages_masques_{now.strftime('%Y%m%d_%H%M')}.csv"
+        filename = f"multidrive_temoignages_supprimes_{now.strftime('%Y%m%d_%H%M')}.csv"
         response["Content-Disposition"] = f'attachment; filename="{filename}"'
         writer = csv.writer(response, delimiter=";")
-        writer.writerow(["MULTIDRIVE — TEMOIGNAGES MASQUES", now.strftime("%d/%m/%Y %H:%M")])
+        writer.writerow(["MULTIDRIVE — TEMOIGNAGES SUPPRIMES", now.strftime("%d/%m/%Y %H:%M")])
         writer.writerow([])
-        writer.writerow(["Client", "Note", "Commentaire", "Date"])
-        for t in Testimonial.objects.filter(is_visible=False).select_related("user").order_by("-created_at"):
+        writer.writerow(["Client", "Note", "Commentaire (FR)", "Date suppression"])
+        for t in Testimonial.objects.filter(is_deleted=True).select_related("user").order_by("-deleted_at"):
             writer.writerow([
                 t.user.username, f"{t.rating}/5", t.comment,
-                t.created_at.strftime("%d/%m/%Y %H:%M") if t.created_at else "",
+                t.deleted_at.strftime("%d/%m/%Y %H:%M") if t.deleted_at else "",
             ])
 
     elif type_ == "vehicules":
@@ -442,9 +442,26 @@ def export_history_csv(request):
 @require_POST
 @staff_member_required
 def delete_testimonial(request, testimonial_id):
+    from django.utils import timezone
     testimonial = get_object_or_404(Testimonial, id=testimonial_id)
-    testimonial.delete()
+    testimonial.is_deleted = True
+    testimonial.is_visible = False
+    testimonial.deleted_at = timezone.now()
+    testimonial.save(update_fields=["is_deleted", "is_visible", "deleted_at"])
     messages.success(request, "Temoignage supprime.")
+    return redirect("accounts:admin_dashboard")
+
+
+@require_POST
+@staff_member_required
+def reply_testimonial(request, testimonial_id):
+    from django.utils import timezone
+    testimonial = get_object_or_404(Testimonial, id=testimonial_id)
+    reply = request.POST.get("admin_reply", "").strip()
+    testimonial.admin_reply = reply
+    testimonial.admin_reply_at = timezone.now() if reply else None
+    testimonial.save(update_fields=["admin_reply", "admin_reply_at"])
+    messages.success(request, "Reponse enregistree.")
     return redirect("accounts:admin_dashboard")
 
 
@@ -670,14 +687,14 @@ def admin_dashboard(request):
         "max_sold": max_sold,
         "current_month": now.strftime("%B %Y"),
         "activity_feed": activity_feed,
-        "pending_testimonials": Testimonial.objects.filter(is_visible=False).select_related("user", "payment__reservation__vehicle").order_by("-created_at"),
-        "published_testimonials": Testimonial.objects.filter(is_visible=True).select_related("user", "payment__reservation__vehicle").order_by("-created_at")[:10],
-        "pending_testimonial_count": Testimonial.objects.filter(is_visible=False).count(),
+        "pending_testimonials": Testimonial.objects.filter(is_visible=False, is_deleted=False).select_related("user", "payment__reservation__vehicle").order_by("-created_at"),
+        "published_testimonials": Testimonial.objects.filter(is_visible=True, is_deleted=False).select_related("user", "payment__reservation__vehicle").order_by("-created_at")[:10],
+        "pending_testimonial_count": Testimonial.objects.filter(is_visible=False, is_deleted=False).count(),
         # Historique soft-delete
         "history_deleted_accounts": AccountStatus.objects.filter(is_deleted=True).select_related("user").order_by("-deleted_at")[:20],
         "history_cancelled_reservations": Reservation.objects.filter(status=Reservation.STATUS_CANCELLED).select_related("user", "vehicle").order_by("-updated_at")[:20],
         "history_refunded_payments": Payment.objects.filter(status=Payment.STATUS_REFUNDED).select_related("reservation__user", "reservation__vehicle").order_by("-updated_at")[:20],
-        "history_hidden_testimonials": Testimonial.objects.filter(is_visible=False).select_related("user", "payment__reservation__vehicle").order_by("-created_at")[:20],
+        "history_deleted_testimonials": Testimonial.objects.filter(is_deleted=True).select_related("user", "payment__reservation__vehicle").order_by("-deleted_at")[:20],
         "history_sold_vehicles": Vehicle.objects.filter(status=Vehicle.STATUS_SOLD).select_related("category").order_by("-created_at")[:20],
         "admin_users": admin_users,
         "create_admin_form": CreateAdminForm(),
