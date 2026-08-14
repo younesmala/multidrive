@@ -382,14 +382,15 @@ h3 {
 }
 
 .button.danger {
-    color: #c0392b;
-    background: var(--white);
+    color: #fff !important;
+    background: #c0392b;
     border: 1.5px solid #c0392b;
 }
 
 .button.danger:hover {
-    color: var(--white);
-    background: #c0392b;
+    color: #fff !important;
+    background: #991B1B;
+    border-color: #991B1B;
 }
 
 .section,
@@ -1441,6 +1442,18 @@ h3 {
     background: #fff3cd;
     color: #1a1a1a;
     border: 1px solid #ffc107;
+}
+
+.status-paid {
+    background: var(--success);
+}
+
+.status-refunded {
+    background: #6c757d;
+}
+
+.status-failed {
+    background: var(--danger);
 }
 
 .refund-list {

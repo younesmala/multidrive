@@ -1,1972 +1,3747 @@
 # English translations for MultiDrive
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-14 11:20+0200\n"
+"Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-# ─── Navigation / base.html ─────────────────────────────────────────────────
+# ─── Model choices (accounts/models.py) ─────────────────────────────────────
+#: .\accounts\models.py:12
+msgid "Demande utilisateur"
+msgstr "User request"
 
-msgid "Ouvrir le menu"
-msgstr "Open menu"
+#: .\accounts\models.py:13
+msgid "Blocage administrateur"
+msgstr "Admin block"
 
-msgid "Accueil"
-msgstr "Home"
-
-msgid "Catalogue"
-msgstr "Catalogue"
-
-msgid "Contact"
-msgstr "Contact"
-
-msgid "Bonjour, %(username)s"
-msgstr "Hello, %(username)s"
-
-msgid "Mes reservations"
-msgstr "My reservations"
-
-msgid "Mon profil"
-msgstr "My profile"
-
-msgid "Mes favoris"
-msgstr "My favourites"
-
-msgid "Paiements et achats"
-msgstr "Payments & purchases"
-
-msgid "Mes messages"
-msgstr "My messages"
-
-msgid "Deconnexion"
-msgstr "Sign out"
-
+#: .\accounts\templates\accounts\admin_dashboard.html:4
+#: .\accounts\templates\accounts\admin_dashboard.html:9
+#: .\vehicles\templates\vehicles\base.html:98
 msgid "Dashboard admin"
 msgstr "Admin dashboard"
 
-msgid "Connexion"
-msgstr "Sign in"
-
-msgid "Inscription"
-msgstr "Register"
-
-msgid "Une plateforme simple pour consulter, reserver et suivre des vehicules d'occasion accessibles."
-msgstr "A simple platform to browse, book, and track affordable used vehicles."
-
-msgid "Navigation"
-msgstr "Navigation"
-
-msgid "Reservations"
-msgstr "Reservations"
-
-msgid "Projet academique MultiDrive cree dans le cadre d'un travail de fin d'etudes."
-msgstr "MultiDrive academic project created as part of a final year thesis."
-
-msgid "Conditions generales"
-msgstr "Terms of service"
-
-msgid "Politique de cookies"
-msgstr "Cookie policy"
-
-msgid "MultiDrive utilise uniquement des cookies techniques necessaires a son fonctionnement (session, securite, langue). Aucun cookie publicitaire."
-msgstr "MultiDrive only uses technical cookies required for its operation (session, security, language). No advertising cookies."
-
-msgid "En savoir plus"
-msgstr "Learn more"
-
-msgid "Accepter"
-msgstr "Accept"
-
-msgid "Refuser"
-msgstr "Decline"
-
-# ─── home.html ───────────────────────────────────────────────────────────────
-
-msgid "Occasion accessible"
-msgstr "Accessible used cars"
-
-msgid "MultiDrive rassemble des vehicules d'occasion a prix raisonnable, avec une navigation claire pour consulter, reserver et preparer un acompte."
-msgstr "MultiDrive brings together affordable used vehicles with a clear interface to browse, book, and pay a deposit."
-
-msgid "Voir les vehicules"
-msgstr "Browse vehicles"
-
-msgid "Gerer la base"
-msgstr "Manage inventory"
-
-msgid "vehicules disponibles"
-msgstr "vehicles available"
-
-msgid "categories"
-msgstr "categories"
-
-msgid "Comment utiliser MultiDrive"
-msgstr "How to use MultiDrive"
-
-msgid "Un parcours simple pour trouver, reserver et suivre ton vehicule."
-msgstr "A simple journey to find, book, and track your vehicle."
-
-msgid "Choisir un vehicule"
-msgstr "Choose a vehicle"
-
-msgid "Explore le catalogue et compare les prix, categories et disponibilites."
-msgstr "Browse the catalogue and compare prices, categories, and availability."
-
-msgid "Reserver"
-msgstr "Book"
-
-msgid "Connecte-toi et envoie une demande de reservation en quelques clics."
-msgstr "Sign in and send a booking request in just a few clicks."
-
-msgid "Suivre ton dossier"
-msgstr "Track your file"
-
-msgid "Consulte ensuite tes reservations et paiements dans ton espace membre."
-msgstr "Then check your reservations and payments in your member area."
-
-msgid "Categories"
-msgstr "Categories"
-
-msgid "%(count)s categories disponibles dans la base."
-msgstr "%(count)s categories available in the catalogue."
-
-msgid "Aucune categorie disponible."
-msgstr "No categories available."
-
-msgid "Vehicules populaires"
-msgstr "Popular vehicles"
-
-msgid "Une selection de vehicules accessibles pour demarrer rapidement."
-msgstr "A selection of affordable vehicles to get started quickly."
-
-msgid "Aucun vehicule populaire disponible pour le moment."
-msgstr "No popular vehicles available at the moment."
-
-msgid "Derniers vehicules disponibles"
-msgstr "Latest available vehicles"
-
-msgid "Un apercu des nouvelles annonces actuellement publiees."
-msgstr "A preview of the latest listings currently published."
-
-msgid "Aucun vehicule disponible pour le moment."
-msgstr "No vehicles available at the moment."
+# ─── Admin dashboard ─────────────────────────────────────────────────────────
+#: .\accounts\templates\accounts\admin_dashboard.html:8
+msgid "Administration"
+msgstr "Administration"
 
 # ─── vehicle_list.html ───────────────────────────────────────────────────────
-
+#: .\accounts\templates\accounts\admin_dashboard.html:25
+#: .\vehicles\templates\vehicles\vehicle_list.html:4
 msgid "Vehicules"
 msgstr "Vehicles"
 
-msgid "Vehicules d'occasion"
-msgstr "Used vehicles"
+#: .\accounts\templates\accounts\admin_dashboard.html:26
+#, python-format
+msgid "%(n)s disponibles actuellement."
+msgstr "%(n)s currently available."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:30
+msgid "Reservations en attente"
+msgstr "Pending reservations"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:31
+msgid "Demandes a verifier ou a confirmer."
+msgstr "Requests to check or confirm."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:35
+msgid "Messages sans reponse"
+msgstr "Unanswered messages"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:36
+msgid "Questions client ou demandes d'information."
+msgstr "Customer questions or information requests."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:40
+msgid "Paiements a suivre"
+msgstr "Payments to monitor"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:41
+msgid "Acomptes encore en attente de validation."
+msgstr "Deposits still awaiting validation."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:45
+msgid "Membres actifs"
+msgstr "Active members"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:46
+msgid "Comptes clients actuellement actifs."
+msgstr "Currently active customer accounts."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:50
+#: .\accounts\templates\accounts\admin_dashboard.html:426
+#: .\accounts\templates\accounts\admin_dashboard.html:589
+msgid "Vehicules vendus"
+msgstr "Vehicles sold"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:51
+msgid "Ventes finalisees dans le catalogue."
+msgstr "Finalised sales in the catalogue."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:55
+msgid "Remboursements a traiter"
+msgstr "Refunds to process"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:56
+msgid "Annulations avec acompte verse en attente."
+msgstr "Cancellations with outstanding deposit."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:68
+msgid "Gestion des administrateurs"
+msgstr "Administrator management"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:72
+msgid "Ajouter un admin"
+msgstr "Add an admin"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:84
+#: .\accounts\templates\accounts\delete_request_done.html:4
+#: .\accounts\templates\accounts\delete_request_done.html:8
+msgid "Compte desactive"
+msgstr "Account deactivated"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:89
+#, python-format
+msgid "Retirer les droits admin a %(u)s ? Il repassera en compte client."
+msgstr "Remove admin rights from %(u)s? They will become a regular client account."
+"Remove admin rights from %(u)s? They will become a regular client "
+"account.Remove admin rights from %(u)s? They will be downgraded to a "
+"customer account."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:91
+msgid "Retirer les droits"
+msgstr "Remove rights"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:96
+#, python-format
+msgid "Desactiver definitivement le compte de %(u)s ?"
+msgstr "Permanently deactivate %(u)s's account?"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:98
+#: .\accounts\templates\accounts\create_admin.html:69
+msgid "Desactiver"
+msgstr "Deactivate"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:106
+msgid ""
+"Aucun administrateur cree pour le moment. Cliquez sur « Ajouter un admin » "
+"pour commencer."
+msgstr "No administrators created yet. Click « Add an admin » to get started."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:118
+msgid "Derniers mouvements"
+msgstr "Recent activity"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:119
+msgid "10 derniers evenements"
+msgstr "Last 10 events"
 
-msgid "Consulte le catalogue principal et affine rapidement par recherche, categorie ou statut."
-msgstr "Browse the main catalogue and quickly filter by search, category, or status."
-
-msgid "Recherche"
-msgstr "Search"
-
-msgid "Rechercher un modele, une marque ou un type de vehicule"
-msgstr "Search a model, brand, or vehicle type"
-
-msgid "Toutes"
-msgstr "All"
-
-msgid "Statut"
-msgstr "Status"
-
-msgid "Tous"
-msgstr "All"
-
-msgid "Filtrer"
-msgstr "Filter"
-
-msgid "%(count)s resultat(s)"
-msgstr "%(count)s result(s)"
-
-msgid "Des cartes lisibles pour comparer rapidement les vehicules disponibles."
-msgstr "Easy-to-read cards to quickly compare available vehicles."
-
-msgid "Reinitialiser"
-msgstr "Reset"
-
-msgid "Aucun vehicule ne correspond a ce filtre."
-msgstr "No vehicle matches this filter."
-
-msgid "Pagination"
-msgstr "Pagination"
-
-msgid "Precedent"
-msgstr "Previous"
-
-msgid "Page %(num)s sur %(total)s"
-msgstr "Page %(num)s of %(total)s"
-
-msgid "Suivant"
-msgstr "Next"
-
-# ─── vehicle_detail.html ─────────────────────────────────────────────────────
-
-msgid "Fermer"
-msgstr "Close"
-
-msgid "Retirer des favoris"
-msgstr "Remove from favourites"
-
-msgid "Ajouter aux favoris"
-msgstr "Add to favourites"
-
-msgid "Fiche technique"
-msgstr "Technical sheet"
-
-msgid "Marque"
-msgstr "Brand"
-
-msgid "Modele"
-msgstr "Model"
-
-msgid "Annee"
-msgstr "Year"
-
-msgid "Carrosserie"
-msgstr "Body condition"
-
-msgid "Moteur"
-msgstr "Engine"
-
-msgid "Commentaire"
-msgstr "Notes"
-
-msgid "Prix de vente"
-msgstr "Selling price"
-
-msgid "Acompte (20%)"
-msgstr "Deposit (20%)"
-
-msgid "Reserver ce vehicule"
-msgstr "Book this vehicle"
-
-msgid "Ce vehicule est deja reserve."
-msgstr "This vehicle is already reserved."
-
-msgid "Ce vehicule n'est plus disponible."
-msgstr "This vehicle is no longer available."
-
-msgid "Retour au catalogue"
-msgstr "Back to catalogue"
-
-msgid "Avis clients"
-msgstr "Customer reviews"
-
-msgid "%(count)s avis, note moyenne : %(avg)s/5"
-msgstr "%(count)s review(s), average rating: %(avg)s/5"
-
-msgid "Aucun avis pour ce vehicule pour le moment."
-msgstr "No reviews for this vehicle yet."
-
-msgid "Modifier mon avis"
-msgstr "Edit my review"
-
-msgid "Laisser un avis"
-msgstr "Leave a review"
-
-msgid "Mettre a jour mon avis"
-msgstr "Update my review"
-
-msgid "Publier mon avis"
-msgstr "Post my review"
-
-msgid "Faire une demande de reservation"
-msgstr "Make a booking request"
-
-msgid "Se connecter"
-msgstr "Sign in"
-
-msgid "Publie le %(date)s"
-msgstr "Published on %(date)s"
-
-msgid "Aucun avis disponible"
-msgstr "No reviews available"
-
-msgid "Ce vehicule n'a pas encore recu d'avis membre."
-msgstr "This vehicle has not yet received any member reviews."
-
-msgid "Vehicules similaires"
-msgstr "Similar vehicles"
-
-msgid "Aucune suggestion disponible."
-msgstr "No suggestions available."
-
-msgid "Connectez-vous pour laisser un avis sur ce vehicule."
-msgstr "Sign in to leave a review for this vehicle."
-
-msgid "Vous pourrez laisser un avis apres une reservation acceptee sur ce vehicule."
-msgstr "You will be able to leave a review after an accepted booking for this vehicle."
-
-# ─── vehicle_card.html partial ───────────────────────────────────────────────
-
-msgid "Image a venir"
-msgstr "Image coming soon"
-
-msgid "Voir la fiche"
-msgstr "View listing"
-
-# ─── my_favorites.html ───────────────────────────────────────────────────────
-
-msgid "Aucun favori pour le moment."
-msgstr "No favourites yet."
-
-msgid "Ajouter des vehicules a vos favoris depuis le catalogue."
-msgstr "Add vehicles to your favourites from the catalogue."
-
-msgid "Retirer"
-msgstr "Remove"
-
-# ─── login.html ──────────────────────────────────────────────────────────────
-
-msgid "Espace client"
-msgstr "Member area"
-
-msgid "Connecte-toi pour reserver un vehicule et suivre tes demandes."
-msgstr "Sign in to book a vehicle and track your requests."
-
-msgid "Identifiants incorrects. Verifie ton nom d'utilisateur et ton mot de passe."
-msgstr "Incorrect credentials. Please check your username and password."
-
-msgid "Nom d'utilisateur"
-msgstr "Username"
-
-msgid "Mot de passe"
-msgstr "Password"
-
-msgid "Mot de passe oublie ?"
-msgstr "Forgot your password?"
-
-msgid "Pas encore de compte ?"
-msgstr "Don't have an account?"
-
-msgid "Creer un compte"
-msgstr "Create an account"
-
-# ─── register.html ───────────────────────────────────────────────────────────
-
-msgid "Cree ton compte pour acceder au catalogue et reserver un vehicule."
-msgstr "Create your account to access the catalogue and book a vehicle."
-
-msgid "S'inscrire"
-msgstr "Register"
-
-msgid "Deja un compte ?"
-msgstr "Already have an account?"
-
-# ─── profile.html ────────────────────────────────────────────────────────────
-
-msgid "Mon compte"
-msgstr "My account"
-
-msgid "Informations du compte"
-msgstr "Account information"
-
-msgid "Prenom"
-msgstr "First name"
-
-msgid "Nom"
-msgstr "Last name"
-
-msgid "Email"
-msgstr "Email"
-
-msgid "Membre depuis"
-msgstr "Member since"
-
-msgid "Enregistrer"
-msgstr "Save"
-
-msgid "Changer mon mot de passe"
-msgstr "Change my password"
-
-msgid "Supprimer mon compte"
-msgstr "Delete my account"
-
-msgid "Profil mis a jour avec succes."
-msgstr "Profile updated successfully."
-
-# ─── change_password.html ────────────────────────────────────────────────────
-
-msgid "Ancien mot de passe"
-msgstr "Current password"
-
-msgid "Nouveau mot de passe"
-msgstr "New password"
-
-msgid "Confirmer le nouveau mot de passe"
-msgstr "Confirm new password"
-
-msgid "Mettre a jour"
-msgstr "Update"
-
-# ─── delete_request.html / delete_request_done.html ─────────────────────────
-
-msgid "Demande de suppression"
-msgstr "Deletion request"
-
-msgid "Confirmer la suppression"
-msgstr "Confirm deletion"
-
-msgid "Demande enregistree"
-msgstr "Request registered"
-
-msgid "Votre demande a bien ete enregistree."
-msgstr "Your request has been registered."
-
-# ─── payment_list.html ───────────────────────────────────────────────────────
-
-msgid "Mes achats"
-msgstr "My purchases"
-
-msgid "Historique des paiements"
-msgstr "Payment history"
-
-msgid "Aucun paiement pour le moment."
-msgstr "No payments yet."
-
-msgid "Telecharger la facture"
-msgstr "Download invoice"
-
-msgid "Telecharger le recu"
-msgstr "Download receipt"
-
-msgid "Telecharger l'acte de cession"
-msgstr "Download deed of sale"
-
-msgid "Telecharger le specimen"
-msgstr "Download specimen"
-
-# ─── password reset templates ────────────────────────────────────────────────
-
-msgid "Mot de passe oublie"
-msgstr "Forgot your password"
-
-msgid "Saisis ton adresse email. Si un compte existe, tu recevras un lien pour reinitialiser ton mot de passe."
-msgstr "Enter your email address. If an account exists, you will receive a link to reset your password."
-
-msgid "Merci de corriger les erreurs ci-dessous."
-msgstr "Please correct the errors below."
-
-msgid "Envoyer le lien de reinitialisation"
-msgstr "Send reset link"
-
-msgid "Tu te souviens de ton mot de passe ?"
-msgstr "Remember your password?"
-
-msgid "Si un compte correspond a cette adresse, tu recevras un email dans quelques minutes avec un lien de reinitialisation."
-msgstr "If an account matches this address, you will receive an email within a few minutes with a reset link."
-
-msgid "Pense a verifier tes spams si tu ne vois pas l'email dans ta boite de reception."
-msgstr "Check your spam folder if you do not see the email in your inbox."
-
-msgid "Retour a la connexion"
-msgstr "Back to login"
-
-msgid "Reinitialisation"
-msgstr "Password reset"
-
-msgid "Reinitialisation du mot de passe"
-msgstr "Password reset"
-
-msgid "Entrez votre adresse email pour recevoir un lien de reinitialisation."
-msgstr "Enter your email address to receive a reset link."
-
-msgid "Adresse email"
-msgstr "Email address"
-
-msgid "Envoyer le lien"
-msgstr "Send link"
-
-msgid "Email envoye"
-msgstr "Email sent"
-
-msgid "Un email de reinitialisation a ete envoye si cette adresse est associee a un compte."
-msgstr "A reset email has been sent if this address is linked to an account."
-
-msgid "Mot de passe modifie"
-msgstr "Password changed"
-
-msgid "Choisis un nouveau mot de passe securise pour ton compte."
-msgstr "Choose a secure new password for your account."
-
-msgid "Confirmer le mot de passe"
-msgstr "Confirm password"
-
-msgid "Enregistrer le nouveau mot de passe"
-msgstr "Save new password"
-
-msgid "Ce lien de reinitialisation est invalide ou a expire. Les liens sont valables 24 heures."
-msgstr "This reset link is invalid or has expired. Links are valid for 24 hours."
-
-msgid "Demander un nouveau lien"
-msgstr "Request a new link"
-
-msgid "Ton mot de passe a ete reinitialise avec succes. Tu peux maintenant te connecter avec ton nouveau mot de passe."
-msgstr "Your password has been reset successfully. You can now sign in with your new password."
-
-msgid "Modification enregistree."
-msgstr "Change saved."
-
-# ─── reservation_form.html ───────────────────────────────────────────────────
-
-msgid "Faire une reservation"
-msgstr "Make a booking"
-
-msgid "Demande de reservation"
-msgstr "Booking request"
-
-msgid "Date souhaitee"
-msgstr "Preferred date"
-
-msgid "Creneau"
-msgstr "Time slot"
-
-msgid "Message"
-msgstr "Message"
-
-msgid "Envoyer la demande"
-msgstr "Send request"
-
-msgid "Week-end : rendez-vous acceptes de 9h00 a 21h00."
-msgstr "Weekend: appointments accepted from 9:00 to 21:00."
-
-msgid "Semaine : rendez-vous acceptes de 16h00 a 21h30."
-msgstr "Weekdays: appointments accepted from 16:00 to 21:30."
-
-# ─── reservation_success.html ────────────────────────────────────────────────
-
-msgid "Demande envoyee !"
-msgstr "Request sent!"
-
-msgid "Votre demande de reservation a bien ete enregistree."
-msgstr "Your booking request has been registered."
-
-msgid "Retour a mes reservations"
-msgstr "Back to my reservations"
-
-# ─── my_reservations.html ────────────────────────────────────────────────────
-
-msgid "Suivez ici vos demandes, leur statut actuel et l'etat de l'acompte lorsque la reservation avance."
-msgstr "Track your requests here, their current status, and the deposit state as the booking progresses."
-
-msgid "Total demandes"
-msgstr "Total requests"
-
-msgid "En attente"
-msgstr "Pending"
-
-msgid "Acceptees"
-msgstr "Accepted"
-
-msgid "Refusees"
-msgstr "Rejected"
-
-msgid "Prix du vehicule"
-msgstr "Vehicle price"
-
-msgid "Reservation creee le"
-msgstr "Booking created on"
-
-msgid "Derniere mise a jour"
-msgstr "Last update"
-
-msgid "Rendez-vous souhaite"
-msgstr "Preferred appointment"
-
-msgid "Votre message"
-msgstr "Your message"
-
-msgid "Suivi de l'acompte"
-msgstr "Deposit tracking"
-
-msgid "Methode :"
-msgstr "Method:"
-
-msgid "Reference :"
-msgstr "Reference:"
-
-msgid "Votre reservation a ete acceptee. L'etape suivante sera le paiement de l'acompte."
-msgstr "Your booking has been accepted. The next step will be the deposit payment."
-
-msgid "La reservation est marquee comme acompte paye."
-msgstr "The booking is marked as deposit paid."
-
-msgid "Cette demande a ete refusee. Aucun acompte n'est attendu."
-msgstr "This request has been rejected. No deposit is expected."
-
-msgid "La demande est encore en cours de traitement. Aucun acompte n'est demande pour le moment."
-msgstr "The request is still being processed. No deposit is requested at this time."
-
-msgid "Voir le vehicule"
-msgstr "View vehicle"
-
-msgid "Payer l'acompte"
-msgstr "Pay the deposit"
-
-msgid "Etes-vous sur de vouloir annuler cette reservation ?"
-msgstr "Are you sure you want to cancel this booking?"
-
-msgid "Annuler la reservation"
-msgstr "Cancel booking"
-
-msgid "Votre reservation a ete acceptee. Etes-vous certain de vouloir annuler ?"
-msgstr "Your booking has been accepted. Are you sure you want to cancel?"
-
-msgid "Aucune reservation pour le moment"
-msgstr "No bookings yet"
-
-msgid "Vos futures demandes de reservation apparaitront ici avec leur statut et le suivi de l'acompte."
-msgstr "Your future booking requests will appear here with their status and deposit tracking."
-
-msgid "Decouvrir le catalogue"
-msgstr "Explore the catalogue"
-
-# ─── my_purchases.html ───────────────────────────────────────────────────────
-
-msgid "Aucun achat pour le moment."
-msgstr "No purchases yet."
-
-# ─── contact templates ───────────────────────────────────────────────────────
-
-msgid "Nous contacter"
-msgstr "Contact us"
-
-msgid "Envoyer un message"
-msgstr "Send a message"
-
-msgid "Sujet"
-msgstr "Subject"
-
-msgid "Envoyer"
-msgstr "Send"
-
-msgid "Message envoye"
-msgstr "Message sent"
-
-msgid "Votre message a bien ete envoye. Nous vous repondrons dans les plus brefs delais."
-msgstr "Your message has been sent. We will get back to you as soon as possible."
-
-msgid "Retour"
-msgstr "Back"
-
-msgid "Aucun message pour le moment."
-msgstr "No messages yet."
-
-msgid "Reponse de l'equipe"
-msgstr "Team reply"
-
-# ─── 404 / 500 ───────────────────────────────────────────────────────────────
-
-msgid "Page introuvable"
-msgstr "Page not found"
-
-msgid "La page que vous recherchez n'existe pas ou a ete deplacee."
-msgstr "The page you are looking for does not exist or has been moved."
-
-msgid "Retour a l'accueil"
-msgstr "Back to home"
-
-msgid "Erreur serveur"
-msgstr "Server error"
-
-msgid "Une erreur interne est survenue. Veuillez reessayer plus tard."
-msgstr "An internal error occurred. Please try again later."
-
-# ─── checkout.html ───────────────────────────────────────────────────────────
-
-msgid "Paiement de l'acompte"
-msgstr "Deposit payment"
-
-msgid "Recapitulatif"
-msgstr "Summary"
-
-msgid "Acompte a payer"
-msgstr "Deposit to pay"
-
-msgid "Payer"
-msgstr "Pay"
-
-msgid "Paiement securise via Stripe"
-msgstr "Secure payment via Stripe"
-
-# ─── PDF: pdf_facture.html ───────────────────────────────────────────────────
-
-msgid "Plateforme de vehicules d'occasion"
-msgstr "Used vehicle platform"
-
-msgid "FACTURE"
-msgstr "INVOICE"
-
-msgid "Date :"
-msgstr "Date:"
-
-msgid "Paye"
-msgstr "Paid"
-
-msgid "Acheteur"
-msgstr "Buyer"
-
-msgid "Identifiant membre"
-msgstr "Member ID"
-
-msgid "Detail du paiement"
-msgstr "Payment details"
-
-msgid "Description"
-msgstr "Description"
-
+#: .\accounts\templates\accounts\admin_dashboard.html:144
+msgid "Raccourcis"
+msgstr "Shortcuts"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:145
+msgid "Actions rapides"
+msgstr "Quick actions"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:147
+msgid "Acces direct aux principales zones de gestion."
+msgstr "Direct access to the main management areas."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:152
+msgid "Ajouter un vehicule"
+msgstr "Add a vehicle"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:153
+msgid "Creer une nouvelle annonce dans le catalogue."
+msgstr "Create a new listing in the catalogue."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:156
+msgid "Gerer les vehicules"
+msgstr "Manage vehicles"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:157
+msgid "Modifier, supprimer ou filtrer le stock."
+msgstr "Edit, delete, or filter the stock."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:160
+msgid "Voir les reservations"
+msgstr "View reservations"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:161
+msgid "Traiter les demandes."
+msgstr "Process requests."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:161
+msgid "en attente."
+msgstr "pending."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:164
+msgid "Traiter les messages"
+msgstr "Handle messages"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:165
+msgid "Repondre aux questions."
+msgstr "Reply to questions."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:165
+msgid "sans reponse."
+msgstr "without reply."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:168
+msgid "Suivre les paiements"
+msgstr "Track payments"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:169
+msgid "Verifier les acomptes et leur statut."
+msgstr "Check deposits and their status."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:172
+msgid "Comptes desactives"
+msgstr "Deactivated accounts"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:173
+#, python-format
+msgid "%(n)s compte(s) desactive(s) au total."
+msgstr "%(n)s deactivated account(s) in total."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:176
+msgid "Demandes de suppression"
+msgstr "Deletion requests"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:177
+msgid "non traitee(s)."
+msgstr "unprocessed."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:177
+msgid "Aucune demande en attente."
+msgstr "No pending requests."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:180
+msgid "Ouvrir l'admin Django"
+msgstr "Open Django admin"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:181
+msgid "Acceder a la gestion complete du projet."
+msgstr "Access the full project management."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:191
+msgid "Prioritaire"
+msgstr "Priority"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:192
+msgid "Remboursements en attente"
+msgstr "Pending refunds"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:194
+msgid ""
+"Ces membres ont annule leur reservation apres avoir verse un acompte. "
+"Saisissez le montant rembourse et un commentaire pour le membre."
+msgstr ""
+"These members cancelled their booking after paying a deposit. Enter the "
+"refunded amount and a note for the member."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:205
+#: .\accounts\templates\accounts\admin_dashboard.html:219
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:130
+msgid "Acompte verse :"
+msgstr "Deposit paid:"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:206
+msgid "Annulation le"
+msgstr "Cancelled on"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:209
+#: .\payments\models.py:21
+msgid "Remboursement demande"
+msgstr "Refund requested"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:217
+msgid "Montant a rembourser (EUR)"
+msgstr "Amount to refund (EUR)"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:230
+msgid "Message pour le membre (optionnel)"
+msgstr "Message for the member (optional)"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:233
+msgid ""
+"Ex : Remboursement de 90 EUR apres retention de 10 %% de frais "
+"administratifs conformement aux CGV."
+msgstr ""
+"E.g.: Refund of 90 EUR after 10% administrative fee deduction per T&Cs."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:236
+msgid "Valider le remboursement"
+msgstr "Confirm refund"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:239
+msgid "Voir dans l'admin Django"
+msgstr "View in Django admin"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:254
+#: .\accounts\templates\accounts\admin_dashboard.html:328
+msgid "Moderation"
+msgstr "Moderation"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:255
+msgid "Temoignages en attente"
+msgstr "Pending testimonials"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:257
+msgid "Validez ou supprimez les temoignages avant publication."
+msgstr "Approve or delete testimonials before publishing."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:291
+#: .\accounts\templates\accounts\admin_dashboard.html:368
+msgid "Reponse MultiDrive"
+msgstr "The MultiDrive team"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:298
+#: .\accounts\templates\accounts\admin_dashboard.html:375
+msgid "Repondre a ce commentaire..."
+msgstr "Your comment"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:299
+#: .\accounts\templates\accounts\admin_dashboard.html:376
+msgid "Repondre"
+msgstr "Replied"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:307
+msgid "Publier"
+msgstr "Publish"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:310
+#: .\accounts\templates\accounts\admin_dashboard.html:380
+msgid "Supprimer ce temoignage ?"
+msgstr "Delete this testimonial"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:313
+#: .\accounts\templates\accounts\admin_dashboard.html:383
+msgid "Supprimer"
+msgstr "Delete"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:329
+msgid "Temoignages publies"
+msgstr "Published testimonials"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:331
+msgid "Voir la page publique"
+msgstr "View public page"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:363
+msgid "Traductions disponibles"
+msgstr "Translations available"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:396
+msgid "Statistiques"
+msgstr "Statistics"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:397
+msgid "Ventes & revenus"
+msgstr "Sales & revenue"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:401
+msgid "Exporter en CSV"
+msgstr "Export as CSV"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:408
+msgid "Revenus totaux"
+msgstr "Total revenue"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:410
+msgid "Tous paiements confondus"
+msgstr "All payments combined"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:416
+msgid "Revenus ce mois-ci"
+msgstr "Revenue this month"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:420
+msgid "Ventes finalisees"
+msgstr "Finalised sales"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:421
+msgid "ventes"
+msgstr "sales"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:422
+#, python-format
+msgid "%(amt)s EUR encaisses"
+msgstr "%(amt)s EUR collected"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:427
+msgid "vehicules"
+msgstr "vehicles"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:428
+msgid "Statut Vendu dans le catalogue"
+msgstr "Status Sold in the catalogue"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:432
+msgid "Acomptes en cours"
+msgstr "Ongoing deposits"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:433
+msgid "dossiers"
+msgstr "files"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:434
+msgid "Solde restant a encaisser"
+msgstr "Remaining balance to collect"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:441
+msgid "Ventes par categorie"
+msgstr "Sales by category"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:445
+#: .\payments\templates\payments\pdf_cession.html:75
+#: .\payments\templates\payments\pdf_facture.html:60
+#: .\payments\templates\payments\pdf_recu_acompte.html:66
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:120
+#: .\vehicles\templates\vehicles\vehicle_detail.html:73
+#: .\vehicles\templates\vehicles\vehicle_list.html:20
 msgid "Categorie"
 msgstr "Category"
 
-msgid "Prix total vehicule"
-msgstr "Total vehicle price"
+#: .\accounts\templates\accounts\admin_dashboard.html:446
+msgid "Progression"
+msgstr "Progress"
 
-msgid "Montant verse"
-msgstr "Amount paid"
+#: .\accounts\templates\accounts\admin_dashboard.html:447
+msgid "Ventes"
+msgstr "Sales"
 
+#: .\accounts\templates\accounts\admin_dashboard.html:472
+msgid "Tracabilite"
+msgstr "Full amount"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:473
+msgid "Historique"
+msgstr "Statistics"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:475
+msgid "Donnees conservees en base — aucune suppression definitive."
+msgstr "Data retained in database — no permanent deletion."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:497
+msgid "Comptes supprimes"
+msgstr "Deactivated accounts"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:511
+msgid "Aucun compte supprime."
+msgstr "No categories available."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:520
+msgid "Reservations annulees"
+msgstr "Pending reservations"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:534
+msgid "Aucune reservation annulee."
+msgstr "No bookings yet"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:543
+msgid "Remboursements"
+msgstr "Refunded"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:557
+msgid "Aucun remboursement."
+msgstr "5. Cancellation and refund"
+
+#: .\accounts\templates\accounts\admin_dashboard.html:566
+msgid "Temoignages supprimes"
+msgstr "Testimonial deleted."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:580
+msgid "Aucun temoignage supprime."
+msgstr "Testimonial deleted."
+
+#: .\accounts\templates\accounts\admin_dashboard.html:603
+msgid "Aucun vehicule vendu."
+msgstr "Vehicles sold"
+
+#: .\accounts\templates\accounts\change_password.html:4
+#: .\accounts\templates\accounts\change_password.html:9
+#: .\accounts\templates\accounts\profile.html:93
+msgid "Changer mon mot de passe"
+msgstr "Change my password"
+
+#: .\accounts\templates\accounts\change_password.html:8
+#: .\accounts\templates\accounts\profile.html:90
+msgid "Securite du compte"
+msgstr "Account security"
+
+#: .\accounts\templates\accounts\change_password.html:10
+msgid ""
+"Choisissez un nouveau mot de passe securise pour votre compte MultiDrive."
+msgstr "Choose a secure new password for your account."
+
+#: .\accounts\templates\accounts\change_password.html:43
+#: .\accounts\templates\accounts\password_reset_confirm.html:35
+msgid "Enregistrer le nouveau mot de passe"
+msgstr "Save new password"
+
+#: .\accounts\templates\accounts\change_password.html:44
+msgid "Annuler"
+msgstr "Cancelled"
+
+# ─── create_admin.html ───────────────────────────────────────────────────────
+#: .\accounts\templates\accounts\create_admin.html:4
+#: .\accounts\templates\accounts\create_admin.html:9
+msgid "Creer un administrateur"
+msgstr "Create an administrator"
+
+#: .\accounts\templates\accounts\create_admin.html:16
+msgid "Nouveau compte admin"
+msgstr "New admin account"
+
+#: .\accounts\templates\accounts\create_admin.html:38
+msgid "Creer l'administrateur"
+msgstr "Create administrator"
+
+#: .\accounts\templates\accounts\create_admin.html:42
+msgid ""
+"L'admin recevra ses identifiants et pourra changer son mot de passe depuis "
+"son espace personnel."
+msgstr ""
+"The admin will receive their credentials and can change their password from "
+"their personal area."
+
+#: .\accounts\templates\accounts\create_admin.html:47
+#, python-format
+msgid "Admins actifs (%(n)s)"
+msgstr "Active admins (%(n)s)"
+
+#: .\accounts\templates\accounts\create_admin.html:60
+#, python-format
+msgid "Retirer les droits admin a %(u)s ?"
+msgstr "Remove admin rights from %(u)s?"
+
+#: .\accounts\templates\accounts\create_admin.html:62
+msgid "Retirer"
+msgstr "Remove"
+
+#: .\accounts\templates\accounts\create_admin.html:67
+#, python-format
+msgid "Desactiver le compte de %(u)s ?"
+msgstr "Deactivate %(u)s's account?"
+
+#: .\accounts\templates\accounts\create_admin.html:75
+msgid "Aucun administrateur pour le moment."
+msgstr "No administrators yet."
+
+#: .\accounts\templates\accounts\create_admin.html:82
+msgid "Retour au dashboard"
+msgstr "Back to dashboard"
+
+#: .\accounts\templates\accounts\delete_request.html:4
+#: .\accounts\templates\accounts\profile.html:100
+msgid "Suppression du compte"
+msgstr "Account deletion"
+
+# ─── login.html ──────────────────────────────────────────────────────────────
+#: .\accounts\templates\accounts\delete_request.html:8
+#: .\accounts\templates\accounts\login.html:9
+#: .\accounts\templates\accounts\password_reset_form.html:9
+#: .\accounts\templates\accounts\payment_list.html:8
+#: .\accounts\templates\accounts\profile.html:8
+#: .\contact\templates\contact\my_messages.html:8
+#: .\reservations\templates\reservations\my_purchases.html:8
+#: .\reservations\templates\reservations\my_reservations.html:8
+msgid "Espace client"
+msgstr "Member area"
+
+#: .\accounts\templates\accounts\delete_request.html:9
+msgid "Desactiver mon compte"
+msgstr "Create my account"
+
+#: .\accounts\templates\accounts\delete_request.html:10
+msgid ""
+"La suppression est geree en soft delete : votre compte reste visible pour "
+"l'administration, mais il ne pourra plus etre utilise pour se connecter."
+msgstr ""
+
+#: .\accounts\templates\accounts\delete_request.html:15
+#: .\accounts\templates\accounts\delete_request_done.html:15
+msgid "Confirmation"
+msgstr "Moderation"
+
+#: .\accounts\templates\accounts\delete_request.html:17
+msgid ""
+"Cette action desactive votre compte. Les reservations, paiements et traces "
+"utiles au projet sont conserves dans la base."
+msgstr ""
+
+#: .\accounts\templates\accounts\delete_request.html:41
+msgid "Confirmer la desactivation"
+msgstr "Confirm deletion"
+
+#: .\accounts\templates\accounts\delete_request.html:42
+msgid "Retour au profil"
+msgstr "Back to home"
+
+#: .\accounts\templates\accounts\delete_request_done.html:9
+msgid "Votre demande a ete prise en compte"
+msgstr "Your request has been registered."
+
+#: .\accounts\templates\accounts\delete_request_done.html:10
+msgid ""
+"Le compte a ete desactive en soft delete. Il reste conserve en base pour "
+"l'historique et l'administration."
+msgstr ""
+"You can request the deactivation of your account. The account will be kept "
+"in the database as a soft delete for history and administration purposes."
+
+#: .\accounts\templates\accounts\delete_request_done.html:17
+msgid ""
+"Votre compte n'est plus utilisable pour la connexion. L'administrateur peut "
+"toujours voir qu'il a ete desactive."
+msgstr ""
+
+# ─── delete_request.html / delete_request_done.html ─────────────────────────
+#: .\accounts\templates\accounts\delete_request_done.html:22
+#: .\accounts\templates\accounts\delete_request_done.html:33
+msgid "Libelle de suppression"
+msgstr "Deletion request"
+
+#: .\accounts\templates\accounts\delete_request_done.html:26
+#: .\accounts\templates\accounts\delete_request_done.html:37
+msgid "Date de desactivation"
+msgstr "Deactivation date: {{ date }}"
+
+#: .\accounts\templates\accounts\delete_request_done.html:43
+#: .\contact\templates\contact\contact_success.html:22 .\templates\404.html:14
+#: .\templates\500.html:14
+msgid "Retour a l'accueil"
+msgstr "Back to home"
+
+#: .\accounts\templates\accounts\login.html:4
+#: .\accounts\templates\accounts\login.html:10
+#: .\vehicles\templates\vehicles\base.html:108
+#: .\vehicles\templates\vehicles\base.html:177
+msgid "Connexion"
+msgstr "Sign in"
+
+#: .\accounts\templates\accounts\login.html:11
+msgid "Connecte-toi pour reserver un vehicule et suivre tes demandes."
+msgstr "Sign in to book a vehicle and track your requests."
+
+#: .\accounts\templates\accounts\login.html:15
+msgid ""
+"Identifiants incorrects. Verifie ton nom d'utilisateur et ton mot de passe."
+msgstr "Incorrect credentials. Please check your username and password."
+
+#: .\accounts\templates\accounts\login.html:22
+#: .\accounts\templates\accounts\profile.html:19
+#: .\vehicles\templates\vehicles\confidentialite.html:51
+msgid "Nom d'utilisateur"
+msgstr "Username"
+
+#: .\accounts\templates\accounts\login.html:26
+msgid "Mot de passe"
+msgstr "Password"
+
+#: .\accounts\templates\accounts\login.html:29
+#: .\accounts\templates\accounts\password_reset_complete.html:20
+#: .\accounts\templates\accounts\password_reset_form.html:35
+#: .\accounts\templates\accounts\register.html:38
+msgid "Se connecter"
+msgstr "Sign in"
+
+#: .\accounts\templates\accounts\login.html:33
+msgid "Mot de passe oublie ?"
+msgstr "Forgot your password?"
+
+#: .\accounts\templates\accounts\login.html:36
+msgid "Pas encore de compte ?"
+msgstr "Don't have an account?"
+
+#: .\accounts\templates\accounts\login.html:37
+#: .\accounts\templates\accounts\register.html:4
+#: .\accounts\templates\accounts\register.html:10
+msgid "Creer un compte"
+msgstr "Create an account"
+
+#: .\accounts\templates\accounts\password_reset_complete.html:4
+#: .\accounts\templates\accounts\password_reset_complete.html:10
+msgid "Mot de passe modifie"
+msgstr "Password changed"
+
+#: .\accounts\templates\accounts\password_reset_complete.html:9
+#: .\accounts\templates\accounts\password_reset_confirm.html:9
+#: .\accounts\templates\accounts\password_reset_done.html:9
+msgid "Reinitialisation"
+msgstr "Password reset"
+
+#: .\accounts\templates\accounts\password_reset_complete.html:12
+msgid ""
+"Ton mot de passe a ete reinitialise avec succes. Tu peux maintenant te "
+"connecter avec ton nouveau mot de passe."
+msgstr ""
+"Your password has been reset successfully. You can now sign in with your new "
+"password."
+
+#: .\accounts\templates\accounts\password_reset_complete.html:16
+msgid "Modification enregistree."
+msgstr "Change saved."
+
+#: .\accounts\templates\accounts\password_reset_confirm.html:4
+#: .\accounts\templates\accounts\password_reset_confirm.html:10
+#: .\accounts\templates\accounts\password_reset_confirm.html:18
+msgid "Nouveau mot de passe"
+msgstr "New password"
+
+#: .\accounts\templates\accounts\password_reset_confirm.html:13
+msgid "Choisis un nouveau mot de passe securise pour ton compte."
+msgstr "Choose a secure new password for your account."
+
+#: .\accounts\templates\accounts\password_reset_confirm.html:27
+msgid "Confirmer le mot de passe"
+msgstr "Confirm password"
+
+#: .\accounts\templates\accounts\password_reset_confirm.html:39
+msgid ""
+"Ce lien de reinitialisation est invalide ou a expire. Les liens sont "
+"valables 24 heures."
+msgstr ""
+"This reset link is invalid or has expired. Links are valid for 24 hours."
+
+#: .\accounts\templates\accounts\password_reset_confirm.html:42
+msgid "Demander un nouveau lien"
+msgstr "Request a new link"
+
+#: .\accounts\templates\accounts\password_reset_done.html:4
+#: .\accounts\templates\accounts\password_reset_done.html:10
+msgid "Email envoye"
+msgstr "Email sent"
+
+#: .\accounts\templates\accounts\password_reset_done.html:12
+msgid ""
+"Si un compte correspond a cette adresse, tu recevras un email dans quelques "
+"minutes avec un lien de reinitialisation."
+msgstr ""
+"If an account matches this address, you will receive an email within a few "
+"minutes with a reset link."
+
+#: .\accounts\templates\accounts\password_reset_done.html:16
+msgid ""
+"Pense a verifier tes spams si tu ne vois pas l'email dans ta boite de "
+"reception."
+msgstr "Check your spam folder if you do not see the email in your inbox."
+
+#: .\accounts\templates\accounts\password_reset_done.html:20
+msgid "Retour a la connexion"
+msgstr "Back to login"
+
+# ─── password_reset_email.html ───────────────────────────────────────────────
+#: .\accounts\templates\accounts\password_reset_email.html:22
+msgid "Reinitialisation de mot de passe"
+msgstr "Password reset"
+
+#: .\accounts\templates\accounts\password_reset_email.html:25
+#, python-format
+msgid "Bonjour <strong>%(username)s</strong>,"
+msgstr "Hello %(username)s,"
+
+#: .\accounts\templates\accounts\password_reset_email.html:26
+msgid ""
+"Vous avez demande la reinitialisation de votre mot de passe. Cliquez sur le "
+"bouton ci-dessous pour choisir un nouveau mot de passe :"
+msgstr ""
+"You have requested a password reset. Click the button below to choose a new "
+"password:"
+
+#: .\accounts\templates\accounts\password_reset_email.html:29
+msgid "Reinitialiser mon mot de passe"
+msgstr "Reset my password"
+
+#: .\accounts\templates\accounts\password_reset_email.html:33
+msgid ""
+"Ce lien est valable <strong>24 heures</strong>. Apres ce delai, vous devrez "
+"faire une nouvelle demande."
+msgstr ""
+"This link is valid for <strong>24 hours</strong>. After this period, you "
+"will need to make a new request."
+
+#: .\accounts\templates\accounts\password_reset_email.html:34
+msgid ""
+"Si vous n'avez pas fait cette demande, ignorez simplement cet email — votre "
+"mot de passe ne sera pas modifie."
+msgstr ""
+"If you did not make this request, simply ignore this email — your password "
+"will not be changed."
+
+#: .\accounts\templates\accounts\password_reset_email.html:39
+msgid "Cet email a ete envoye automatiquement, merci de ne pas y repondre."
+msgstr "This email was sent automatically, please do not reply."
+
+# ─── password reset templates ────────────────────────────────────────────────
+#: .\accounts\templates\accounts\password_reset_form.html:4
+#: .\accounts\templates\accounts\password_reset_form.html:10
+msgid "Mot de passe oublie"
+msgstr "Forgot your password"
+
+#: .\accounts\templates\accounts\password_reset_form.html:12
+msgid ""
+"Saisis ton adresse email. Si un compte existe, tu recevras un lien pour "
+"reinitialiser ton mot de passe."
+msgstr ""
+"Enter your email address. If an account exists, you will receive a link to "
+"reset your password."
+
+#: .\accounts\templates\accounts\password_reset_form.html:16
+msgid "Merci de corriger les erreurs ci-dessous."
+msgstr "Please correct the errors below."
+
+#: .\accounts\templates\accounts\password_reset_form.html:22
+#: .\accounts\templates\accounts\profile.html:23 .\contact\forms.py:21
+msgid "Adresse email"
+msgstr "Email address"
+
+#: .\accounts\templates\accounts\password_reset_form.html:30
+msgid "Envoyer le lien de reinitialisation"
+msgstr "Send reset link"
+
+#: .\accounts\templates\accounts\password_reset_form.html:34
+msgid "Tu te souviens de ton mot de passe ?"
+msgstr "Remember your password?"
+
+#: .\accounts\templates\accounts\payment_list.html:4
+#: .\accounts\templates\accounts\payment_list.html:9
+#: .\reservations\templates\reservations\my_reservations.html:133
+#: .\vehicles\templates\vehicles\base.html:74
+#: .\vehicles\templates\vehicles\fonctionnement.html:121
+msgid "Paiements et achats"
+msgstr "Payments & purchases"
+
+# ─── Payment list (accounts/payment_list.html) ───────────────────────────────
+#: .\accounts\templates\accounts\payment_list.html:10
+msgid ""
+"Retrouvez ici tous vos acomptes verses, les vehicules acquis et les details "
+"financiers associes."
+msgstr ""
+"Find here all your paid deposits, acquired vehicles and associated financial "
+"details."
+
+#: .\accounts\templates\accounts\payment_list.html:17
+msgid "Total paiements"
+msgstr "Total payments"
+
+#: .\accounts\templates\accounts\payment_list.html:21
+msgid "Acomptes valides"
+msgstr "Valid deposits"
+
+#: .\accounts\templates\accounts\payment_list.html:25
+msgid "Montant total verse"
+msgstr "Total amount paid"
+
+#: .\accounts\templates\accounts\payment_list.html:58
+#: .\payments\templates\payments\checkout.html:60
+#: .\reservations\templates\reservations\my_purchases.html:32
+#: .\reservations\templates\reservations\my_reservations.html:55
+msgid "Prix du vehicule"
+msgstr "Vehicle price"
+
+#: .\accounts\templates\accounts\payment_list.html:62
+#: .\payments\templates\payments\checkout.html:64
+msgid "Deja verse"
+msgstr "Already paid"
+
+#: .\accounts\templates\accounts\payment_list.html:66
+#: .\payments\templates\payments\checkout.html:131
+#: .\payments\templates\payments\pdf_facture.html:71
 msgid "Solde restant"
 msgstr "Remaining balance"
 
+#: .\accounts\templates\accounts\payment_list.html:71
+#: .\payments\templates\payments\pdf_facture.html:73
 msgid "Solde apure"
 msgstr "Balance cleared"
 
-msgid "Reference de transaction"
-msgstr "Transaction reference"
-
-msgid "Reference Stripe"
-msgstr "Stripe reference"
-
+#: .\accounts\templates\accounts\payment_list.html:76
+#: .\payments\templates\payments\pdf_facture.html:81
+#: .\payments\templates\payments\pdf_recu_acompte.html:85
+#: .\reservations\templates\reservations\my_purchases.html:40
 msgid "Date du paiement"
 msgstr "Payment date"
 
-msgid "Carte bancaire (Stripe Checkout)"
-msgstr "Credit card (Stripe Checkout)"
+#: .\accounts\templates\accounts\payment_list.html:83
+#: .\reservations\templates\reservations\my_purchases.html:44
+msgid "Reference"
+msgstr "Reference"
 
-msgid "Ce document constitue la preuve de votre paiement aupres de MultiDrive. Conservez-le pour vos dossiers."
-msgstr "This document is proof of your payment to MultiDrive. Keep it for your records."
+#: .\accounts\templates\accounts\payment_list.html:87
+msgid "Rendez-vous"
+msgstr "Appointment"
 
-msgid "Le solde restant de %(remaining)s EUR sera a regler avant la remise des cles du vehicule."
-msgstr "The remaining balance of %(remaining)s EUR must be paid before handing over the vehicle keys."
+#: .\accounts\templates\accounts\payment_list.html:90
+#: .\reservations\templates\reservations\my_purchases.html:52
+#, python-format
+msgid "%(date)s a %(time)s"
+msgstr "%(date)s at %(time)s"
 
+#: .\accounts\templates\accounts\payment_list.html:97
+msgid "Documents"
+msgstr "Documents"
+
+#: .\accounts\templates\accounts\payment_list.html:101
+msgid "Dossier de vente"
+msgstr "Sale file"
+
+#: .\accounts\templates\accounts\payment_list.html:103
+msgid "Facture finale"
+msgstr "Final invoice"
+
+#: .\accounts\templates\accounts\payment_list.html:106
+msgid "Acte de cession"
+msgstr "Transfer deed"
+
+#: .\accounts\templates\accounts\payment_list.html:109
+msgid "Specimen immatriculation"
+msgstr "Registration specimen"
+
+#: .\accounts\templates\accounts\payment_list.html:112
+#: .\payments\templates\payments\checkout.html:92
+msgid "Acompte"
+msgstr "Deposit"
+
+#: .\accounts\templates\accounts\payment_list.html:114
+msgid "Recu d'acompte"
+msgstr "Deposit receipt"
+
+#: .\accounts\templates\accounts\payment_list.html:117
+msgid "Dossier complet disponible apres paiement integral"
+msgstr "Full file available after complete payment"
+
+#: .\accounts\templates\accounts\payment_list.html:121
+msgid "Disponible apres paiement"
+msgstr "Available after payment"
+
+#: .\accounts\templates\accounts\payment_list.html:126
+msgid "Statut reservation"
+msgstr "Booking status"
+
+#: .\accounts\templates\accounts\payment_list.html:133
+msgid "Remboursement en cours de traitement"
+msgstr "Refund being processed"
+
+#: .\accounts\templates\accounts\payment_list.html:134
+msgid ""
+"Votre demande de remboursement a ete enregistree. Notre equipe la traitera "
+"sous 14 jours. Des frais administratifs de 10 %% minimum peuvent etre "
+"retenus."
+msgstr ""
+"Your refund request has been registered. Our team will process it within 14 "
+"days. Administrative fees of at least 10% may be deducted."
+
+#: .\accounts\templates\accounts\payment_list.html:138
+msgid "Remboursement effectue"
+msgstr "Refund completed"
+
+#: .\accounts\templates\accounts\payment_list.html:140
+msgid "Montant rembourse : %(amount)s EUR"
+msgstr "Refunded amount: {{ amount }} EUR"
+
+#: .\accounts\templates\accounts\payment_list.html:149
+#: .\reservations\templates\reservations\my_purchases.html:57
+#: .\reservations\templates\reservations\my_reservations.html:116
+msgid "Voir le vehicule"
+msgstr "View vehicle"
+
+#: .\accounts\templates\accounts\payment_list.html:151
+msgid "Completer le paiement (%(remaining)s EUR)"
+msgstr "Complete payment ({{ remaining }} EUR)"
+
+#: .\accounts\templates\accounts\payment_list.html:155
+msgid "Confirmer l annulation et la demande de remboursement ?"
+msgstr "Confirm cancellation and refund request?"
+
+#: .\accounts\templates\accounts\payment_list.html:157
+msgid "Annuler et demander un remboursement"
+msgstr "Cancel and request a refund"
+
+#: .\accounts\templates\accounts\payment_list.html:162
+msgid "Votre avis sur l'achat"
+msgstr "Your purchase review"
+
+#: .\accounts\templates\accounts\payment_list.html:164
+msgid "Temoignage depose"
+msgstr "Testimonial submitted"
+
+#: .\accounts\templates\accounts\payment_list.html:167
+#: .\reservations\templates\reservations\my_purchases.html:58
+#: .\reservations\templates\reservations\my_reservations.html:4
+#: .\reservations\templates\reservations\my_reservations.html:9
+#: .\vehicles\templates\vehicles\base.html:60
+#: .\vehicles\templates\vehicles\fonctionnement.html:120
+#: .\vehicles\templates\vehicles\home.html:21
+msgid "Mes reservations"
+msgstr "My reservations"
+
+# ─── my_purchases.html ───────────────────────────────────────────────────────
+#: .\accounts\templates\accounts\payment_list.html:174
+#: .\reservations\templates\reservations\my_purchases.html:65
+msgid "Aucun achat pour le moment"
+msgstr "No purchases yet."
+
+#: .\accounts\templates\accounts\payment_list.html:175
+msgid ""
+"Les vehicules pour lesquels vous avez verse un acompte apparaitront ici avec "
+"tous les details financiers."
+msgstr ""
+
+#: .\accounts\templates\accounts\payment_list.html:176
+#: .\reservations\templates\reservations\my_purchases.html:67
+#: .\reservations\templates\reservations\my_reservations.html:142
+msgid "Decouvrir le catalogue"
+msgstr "Explore the catalogue"
+
+#: .\accounts\templates\accounts\profile.html:4
+#: .\accounts\templates\accounts\profile.html:9
+#: .\vehicles\templates\vehicles\base.html:67
+#: .\vehicles\templates\vehicles\fonctionnement.html:124
+msgid "Mon profil"
+msgstr "My profile"
+
+# ─── Profile page (accounts/profile.html) ────────────────────────────────────
+#: .\accounts\templates\accounts\profile.html:10
+msgid "Retrouvez ici les informations principales de votre compte MultiDrive."
+msgstr "Find here the main information for your MultiDrive account."
+
+#: .\accounts\templates\accounts\profile.html:16
+msgid "Informations du compte"
+msgstr "Account information"
+
+#: .\accounts\templates\accounts\profile.html:27
+msgid "Date d'inscription"
+msgstr "Registration date"
+
+#: .\accounts\templates\accounts\profile.html:31
+msgid "Derniere connexion"
+msgstr "Last login"
+
+#: .\accounts\templates\accounts\profile.html:35
+msgid "Numero de telephone"
+msgstr "Phone number"
+
+#: .\accounts\templates\accounts\profile.html:40
+msgid "Non renseigne"
+msgstr "Not provided"
+
+#: .\accounts\templates\accounts\profile.html:48
+msgid "Modifier mon numero de telephone"
+msgstr "Edit my phone number"
+
+#: .\accounts\templates\accounts\profile.html:57
+msgid "Enregistrer"
+msgstr "Save"
+
+#: .\accounts\templates\accounts\profile.html:64
+msgid "Suivi rapide"
+msgstr "Quick overview"
+
+#: .\accounts\templates\accounts\profile.html:68
+#: .\vehicles\templates\vehicles\base.html:175
+msgid "Reservations"
+msgstr "Reservations"
+
+#: .\accounts\templates\accounts\profile.html:72
+msgid "Paiements"
+msgstr "Payments"
+
+#: .\accounts\templates\accounts\profile.html:76
+msgid "Paiements valides"
+msgstr "Valid payments"
+
+#: .\accounts\templates\accounts\profile.html:80
+#: .\payments\templates\payments\checkout.html:164
+#: .\reservations\templates\reservations\reservation_success.html:15
+msgid "Voir mes reservations"
+msgstr "View my bookings"
+
+#: .\accounts\templates\accounts\profile.html:81
+msgid "Voir mes paiements"
+msgstr "View my payments"
+
+#: .\accounts\templates\accounts\profile.html:82
+#: .\contact\templates\contact\contact_success.html:20
+msgid "Voir mes messages"
+msgstr "View my messages"
+
+#: .\accounts\templates\accounts\profile.html:91
+msgid ""
+"Vous pouvez modifier votre mot de passe a tout moment depuis cette page."
+msgstr "You can change your password at any time from this page."
+
+#: .\accounts\templates\accounts\profile.html:103
+msgid "Ce compte a deja ete desactive. Libelle : %(label)s."
+msgstr "This account has already been deactivated. Label: {{ label }}."
+
+#: .\accounts\templates\accounts\profile.html:106
+msgid "Motif :"
+msgstr "Reason:"
+
+#: .\accounts\templates\accounts\profile.html:108
+msgid "desactivation administrative."
+msgstr "administrative deactivation."
+
+#: .\accounts\templates\accounts\profile.html:110
+msgid "demande utilisateur."
+msgstr "user request."
+
+#: .\accounts\templates\accounts\profile.html:114
+msgid "Date de desactivation : %(date)s"
+msgstr "Deactivation date: {{ date }}"
+
+#: .\accounts\templates\accounts\profile.html:118
+msgid ""
+"Vous pouvez demander la desactivation de votre compte. Le compte sera "
+"conserve en base en soft delete pour l'historique et l'administration."
+msgstr ""
+"You can request the deactivation of your account. The account will be kept "
+"in the database as a soft delete for history and administration purposes."
+
+#: .\accounts\templates\accounts\profile.html:121
+msgid "Demander la suppression du compte"
+msgstr "Request account deletion"
+
+# ─── Register page (accounts/register.html) ──────────────────────────────────
+#: .\accounts\templates\accounts\register.html:9
+msgid "Nouveau client"
+msgstr "New customer"
+
+#: .\accounts\templates\accounts\register.html:11
+msgid "Un compte est necessaire pour reserver un vehicule ou payer un acompte."
+msgstr "An account is required to book a vehicle or pay a deposit."
+
+#: .\accounts\templates\accounts\register.html:33
+msgid "Creer mon compte"
+msgstr "Create my account"
+
+#: .\accounts\templates\accounts\register.html:37
+msgid "Deja inscrit ?"
+msgstr "Already registered?"
+
+#: .\contact\forms.py:15
+msgid "Expliquez votre demande, votre question ou votre besoin de rendez-vous."
+msgstr "Describe your request, question or appointment need."
+
+# ─── Contact form (contact/forms.py) ─────────────────────────────────────────
+#: .\contact\forms.py:20
+msgid "Nom complet"
+msgstr "Full name"
+
+#: .\contact\forms.py:22
+msgid "Telephone"
+msgstr "Phone"
+
+#: .\contact\forms.py:23
+msgid "Sujet"
+msgstr "Subject"
+
+#: .\contact\forms.py:24
+msgid "Message"
+msgstr "Message"
+
+#: .\contact\templates\contact\contact_form.html:4
+#: .\contact\templates\contact\contact_form.html:8
+#: .\vehicles\templates\vehicles\base.html:43
+#: .\vehicles\templates\vehicles\base.html:173
+msgid "Contact"
+msgstr "Contact"
+
+# ─── contact templates ───────────────────────────────────────────────────────
+#: .\contact\templates\contact\contact_form.html:9
+msgid "Nous contacter"
+msgstr "Contact us"
+
+# ─── Contact page (contact/contact_form.html + contact_success.html + my_messages.html) ──
+#: .\contact\templates\contact\contact_form.html:10
+msgid ""
+"Posez votre question, demandez une information ou laissez un message pour un "
+"rendez-vous."
+msgstr ""
+"Ask a question, request information, or leave a message for an appointment."
+
+#: .\contact\templates\contact\contact_form.html:15
+msgid "Envoyer un message"
+msgstr "Send a message"
+
+#: .\contact\templates\contact\contact_form.html:18
+msgid ""
+"Votre message sera associe a votre compte et vous pourrez lire une reponse "
+"dans votre espace membre."
+msgstr ""
+"Your message will be linked to your account and you will be able to read a "
+"reply in your member area."
+
+#: .\contact\templates\contact\contact_form.html:20
+msgid ""
+"Vous pouvez nous contacter meme sans compte. Creez un compte si vous "
+"souhaitez suivre plus facilement vos echanges."
+msgstr ""
+"You can contact us without an account. Create one if you want to easily "
+"track your exchanges."
+
+#: .\contact\templates\contact\contact_form.html:40
+msgid "Envoyer le message"
+msgstr "Send message"
+
+#: .\contact\templates\contact\contact_success.html:4
+#: .\contact\templates\contact\contact_success.html:9
+msgid "Message envoye"
+msgstr "Message sent"
+
+#: .\contact\templates\contact\contact_success.html:12
+msgid ""
+"Votre demande a bien ete enregistree pour le sujet <strong>%(sub)s</strong>."
+msgstr "Your request has been registered."
+
+#: .\contact\templates\contact\contact_success.html:14
+msgid "Votre demande a bien ete enregistree."
+msgstr "Your request has been registered."
+
+#: .\contact\templates\contact\contact_success.html:17
+msgid "Nous reviendrons vers vous des que possible."
+msgstr "We will get back to you as soon as possible."
+
+#: .\contact\templates\contact\my_messages.html:4
+#: .\contact\templates\contact\my_messages.html:9
+#: .\vehicles\templates\vehicles\base.html:82
+#: .\vehicles\templates\vehicles\fonctionnement.html:123
+msgid "Mes messages"
+msgstr "My messages"
+
+#: .\contact\templates\contact\my_messages.html:10
+msgid ""
+"Retrouvez ici vos messages envoyes a MultiDrive et les reponses eventuelles "
+"de l'administrateur."
+msgstr ""
+"Find here your messages sent to MultiDrive and any replies from the "
+"administrator."
+
+#: .\contact\templates\contact\my_messages.html:21
+#, python-format
+msgid "Envoye le %(date)s"
+msgstr "Published on %(date)s"
+
+#: .\contact\templates\contact\my_messages.html:24
+msgid "Repondu"
+msgstr "Replied"
+
+#: .\contact\templates\contact\my_messages.html:24 .\payments\models.py:17
+#: .\reservations\models.py:16
+#: .\reservations\templates\reservations\my_reservations.html:21
+#: .\vehicles\templates\vehicles\fonctionnement.html:92
+msgid "En attente"
+msgstr "Pending"
+
+#: .\contact\templates\contact\my_messages.html:29
+#: .\reservations\templates\reservations\my_reservations.html:86
+msgid "Votre message"
+msgstr "Your message"
+
+#: .\contact\templates\contact\my_messages.html:35
+msgid "Reponse de l'administration"
+msgstr "Admin reply"
+
+#: .\contact\templates\contact\my_messages.html:38
+#, python-format
+msgid "Reponse ajoutee le %(date)s"
+msgstr "Published on %(date)s"
+
+#: .\contact\templates\contact\my_messages.html:43
+msgid "Aucune reponse n'a encore ete ajoutee pour le moment."
+msgstr "No reply has been added yet."
+
+#: .\contact\templates\contact\my_messages.html:51
+msgid "Aucun message pour le moment"
+msgstr "No messages yet"
+
+#: .\contact\templates\contact\my_messages.html:52
+msgid "Vous pourrez retrouver ici vos futurs echanges avec l'administration."
+msgstr "Your future exchanges with the administration will appear here."
+
+#: .\contact\templates\contact\my_messages.html:53
+msgid "Contacter MultiDrive"
+msgstr "Contact MultiDrive"
+
+#: .\payments\forms.py:17
+msgid "Decrivez votre experience d'achat..."
+msgstr "Describe your purchase experience..."
+
+#: .\payments\forms.py:21
+msgid "Note"
+msgstr "Rating"
+
+#: .\payments\forms.py:22 .\payments\templates\payments\testimonial_form.html:4
+#: .\payments\templates\payments\testimonial_form.html:10
+msgid "Votre temoignage"
+msgstr "Your testimonial"
+
+#: .\payments\models.py:18 .\payments\templates\payments\pdf_facture.html:42
+msgid "Paye"
+msgstr "Paid"
+
+# ─── Model choices (payments/models.py) ─────────────────────────────────────
+#: .\payments\models.py:19
+msgid "Echoue"
+msgstr "Failed"
+
+#: .\payments\models.py:20
+msgid "Rembourse"
+msgstr "Refunded"
+
+#: .\payments\templates\payments\checkout.html:4
+#: .\payments\templates\payments\checkout.html:8
+msgid "Paiement"
+msgstr "Payments"
+
+# ─── Checkout page (payments/checkout.html) ──────────────────────────────────
+#: .\payments\templates\payments\checkout.html:10
+msgid "Selectionnez la reservation a regler et choisissez le montant."
+msgstr "Select the booking to pay and choose the amount."
+
+#: .\payments\templates\payments\checkout.html:19
+msgid "Votre panier"
+msgstr "Your cart"
+
+#: .\payments\templates\payments\checkout.html:68
+msgid "Acompte (20 %%)"
+msgstr "Deposit (20%)"
+
+#: .\payments\templates\payments\checkout.html:72
+msgid "Montant selectionne"
+msgstr "Selected amount"
+
+#: .\payments\templates\payments\checkout.html:79
+msgid "Informations de paiement"
+msgstr "Payment information"
+
+#: .\payments\templates\payments\checkout.html:87
+msgid "Montant a regler"
+msgstr "Amount to pay"
+
+#: .\payments\templates\payments\checkout.html:93
+msgid "20 %% du prix, min. 20 EUR / max. 250 EUR"
+msgstr "20% of the price, min. 20 EUR / max. 250 EUR"
+
+#: .\payments\templates\payments\checkout.html:103
+msgid "Totalite"
+msgstr "Full amount"
+
+#: .\payments\templates\payments\checkout.html:104
+msgid "Solde complet du vehicule"
+msgstr "Full vehicle balance"
+
+#: .\payments\templates\payments\checkout.html:114
+msgid "Montant personnalise"
+msgstr "Custom amount"
+
+#: .\payments\templates\payments\checkout.html:115
+msgid "Saisissez le montant de votre choix"
+msgstr "Enter the amount of your choice"
+
+#: .\payments\templates\payments\checkout.html:121
+msgid "Montant (EUR)"
+msgstr "Amount (EUR)"
+
+#: .\payments\templates\payments\checkout.html:128
+#: .\payments\templates\payments\pdf_recu_acompte.html:77
+msgid "Solde restant a regler"
+msgstr "Remaining balance to pay"
+
+#: .\payments\templates\payments\checkout.html:133
+msgid "Prix total moins acompte deja verse"
+msgstr "Total price minus deposit already paid"
+
+#: .\payments\templates\payments\checkout.html:143
+#: .\payments\templates\payments\checkout.html:195
+#: .\reservations\templates\reservations\my_reservations.html:118
+msgid "Payer"
+msgstr "Pay"
+
+#: .\payments\templates\payments\checkout.html:151
+msgid ""
+"Paiement securise via Stripe — vos coordonnees bancaires ne transitent "
+"jamais par nos serveurs."
+msgstr ""
+"Secure payment via Stripe — your bank details never pass through our servers."
+
+#: .\payments\templates\payments\checkout.html:162
+msgid "Aucun paiement en attente"
+msgstr "No pending payment"
+
+#: .\payments\templates\payments\checkout.html:163
+msgid "Vous n'avez pas de reservation acceptee a regler pour le moment."
+msgstr "You have no accepted booking to pay at the moment."
+
+# ─── PDF: pdf_facture.html ───────────────────────────────────────────────────
+#: .\payments\templates\payments\pdf_cession.html:40
+#: .\payments\templates\payments\pdf_facture.html:35
+#: .\payments\templates\payments\pdf_recu_acompte.html:41
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:84
+msgid "Plateforme de vehicules d'occasion"
+msgstr "Used vehicle platform"
+
+# ─── PDF: pdf_cession.html ───────────────────────────────────────────────────
+#: .\payments\templates\payments\pdf_cession.html:43
+msgid "ACTE DE CESSION"
+msgstr "DEED OF SALE"
+
+#: .\payments\templates\payments\pdf_cession.html:45
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:89
+msgid "Ref. :"
+msgstr "Ref.:"
+
+#: .\payments\templates\payments\pdf_cession.html:46
+#: .\payments\templates\payments\pdf_facture.html:41
+#: .\payments\templates\payments\pdf_recu_acompte.html:47
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:90
+msgid "Date :"
+msgstr "Date:"
+
+#: .\payments\templates\payments\pdf_cession.html:54
+msgid ""
+"Le present acte atteste de la cession du vehicule decrit ci-dessous entre "
+"les parties suivantes :"
+msgstr ""
+"This document certifies the transfer of ownership of the vehicle described "
+"below between the following parties:"
+
+#: .\payments\templates\payments\pdf_cession.html:59
+msgid "Vendeur (cedant)"
+msgstr "Seller (transferor)"
+
+#: .\payments\templates\payments\pdf_cession.html:61
+msgid "Plateforme de vente de vehicules d'occasion"
+msgstr "Used vehicle sales platform"
+
+#: .\payments\templates\payments\pdf_cession.html:65
+msgid "Acheteur (cessionnaire)"
+msgstr "Buyer (transferee)"
+
+#: .\payments\templates\payments\pdf_cession.html:68
+#: .\vehicles\templates\vehicles\fonctionnement.html:158
+msgid "Membre"
+msgstr "Member"
+
+#: .\payments\templates\payments\pdf_cession.html:72
+msgid "Vehicule cede"
+msgstr "Transferred vehicle"
+
+#: .\payments\templates\payments\pdf_cession.html:74
+msgid "Designation"
+msgstr "Description"
+
+#: .\payments\templates\payments\pdf_cession.html:76
+msgid "Annee estimee"
+msgstr "Estimated year"
+
+#: .\payments\templates\payments\pdf_cession.html:77
+msgid "Numero de reservation"
+msgstr "Booking number"
+
+#: .\payments\templates\payments\pdf_cession.html:81
+msgid "Prix de cession convenu :"
+msgstr "Agreed transfer price:"
+
+#: .\payments\templates\payments\pdf_cession.html:82
+msgid "Acompte verse a ce jour :"
+msgstr "Deposit paid to date:"
+
+#: .\payments\templates\payments\pdf_cession.html:84
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:132
+msgid "Solde restant :"
+msgstr "Remaining balance:"
+
+#: .\payments\templates\payments\pdf_cession.html:86
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:134
+msgid "Neant — paiement integral"
+msgstr "None — full payment received"
+
+#: .\payments\templates\payments\pdf_cession.html:88
+msgid "a regler avant remise des cles"
+msgstr "to be paid before key handover"
+
+#: .\payments\templates\payments\pdf_cession.html:94
+msgid "Document d'immatriculation (specimen pedagogique joint)"
+msgstr "Registration document (pedagogical specimen attached)"
+
+#: .\payments\templates\payments\pdf_cession.html:95
+msgid ""
+"Dans le cadre de ce projet academique, un specimen non officiel de demande "
+"d'immatriculation est joint a ce dossier de vente a titre pedagogique. Ce "
+"document porte la mention SPECIMEN — NON VALABLE et ne constitue pas un "
+"document administratif reel."
+msgstr ""
+"As part of this academic project, an unofficial specimen registration "
+"request is attached to this sales file for educational purposes. This "
+"document bears the SPECIMEN — NOT VALID notice and does not constitute an "
+"official administrative document."
+
+#: .\payments\templates\payments\pdf_cession.html:98
+msgid "Conditions de la cession"
+msgstr "Terms of transfer"
+
+#: .\payments\templates\payments\pdf_cession.html:100
+msgid ""
+"Le vehicule est vendu en l'etat, tel que vu et accepte par l'acheteur lors "
+"de la reservation."
+msgstr ""
+"The vehicle is sold as-is, as seen and accepted by the buyer at the time of "
+"booking."
+
+#: .\payments\templates\payments\pdf_cession.html:101
+msgid ""
+"Le transfert de propriete est effectif a la reception du paiement integral."
+msgstr "The transfer of ownership takes effect upon receipt of full payment."
+
+#: .\payments\templates\payments\pdf_cession.html:102
+msgid ""
+"L'acheteur reconnait avoir pris connaissance des conditions generales "
+"disponibles sur le site."
+msgstr ""
+"The buyer acknowledges having read the terms and conditions available on the "
+"website."
+
+#: .\payments\templates\payments\pdf_cession.html:108
+msgid "Le vendeur"
+msgstr "The seller"
+
+#: .\payments\templates\payments\pdf_cession.html:110
+#: .\payments\templates\payments\pdf_facture.html:97
+#: .\payments\templates\payments\pdf_recu_acompte.html:105
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:163
 msgid "Signature MultiDrive"
 msgstr "MultiDrive signature"
 
+#: .\payments\templates\payments\pdf_cession.html:113
+#: .\payments\templates\payments\pdf_facture.html:100
+#: .\payments\templates\payments\pdf_recu_acompte.html:108
 msgid "L'acheteur"
 msgstr "Buyer"
 
+#: .\payments\templates\payments\pdf_cession.html:120
+#, python-format
+msgid ""
+"Ce document est genere electroniquement par la plateforme MultiDrive a titre "
+"de preuve de transaction. Il ne se substitue pas aux documents officiels "
+"d'immatriculation. Document genere le %(date)s."
+msgstr ""
+"This document is electronically generated by the MultiDrive platform as "
+"proof of transaction. It does not replace official registration documents. "
+"Document generated on %(date)s."
+
+#: .\payments\templates\payments\pdf_cession.html:124
+#: .\payments\templates\payments\pdf_facture.html:107
+#: .\payments\templates\payments\pdf_recu_acompte.html:115
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:178
 msgid "Projet academique TFE"
 msgstr "Academic project TFE"
 
+#: .\payments\templates\payments\pdf_cession.html:125
+msgid "Acte de cession N°"
+msgstr "Deed of sale no."
+
+#: .\payments\templates\payments\pdf_facture.html:38
+msgid "FACTURE"
+msgstr "INVOICE"
+
+#: .\payments\templates\payments\pdf_facture.html:49
+#: .\payments\templates\payments\pdf_recu_acompte.html:55
+msgid "Acheteur"
+msgstr "Buyer"
+
+#: .\payments\templates\payments\pdf_facture.html:51
+#: .\payments\templates\payments\pdf_recu_acompte.html:57
+#: .\vehicles\templates\vehicles\confidentialite.html:19
+msgid "Nom"
+msgstr "Last name"
+
+#: .\payments\templates\payments\pdf_facture.html:52
+#: .\payments\templates\payments\pdf_recu_acompte.html:58
+#: .\vehicles\templates\vehicles\confidentialite.html:21
+msgid "Email"
+msgstr "Email"
+
+#: .\payments\templates\payments\pdf_facture.html:53
+#: .\payments\templates\payments\pdf_recu_acompte.html:59
+msgid "Identifiant membre"
+msgstr "Member ID"
+
+#: .\payments\templates\payments\pdf_facture.html:56
+msgid "Detail du paiement"
+msgstr "Payment details"
+
+#: .\payments\templates\payments\pdf_facture.html:59
+msgid "Description"
+msgstr "Description"
+
+#: .\payments\templates\payments\pdf_facture.html:61
+msgid "Prix total vehicule"
+msgstr "Total vehicle price"
+
+#: .\payments\templates\payments\pdf_facture.html:62
+msgid "Montant verse"
+msgstr "Amount paid"
+
+#: .\payments\templates\payments\pdf_facture.html:78
+msgid "Reference de transaction"
+msgstr "Transaction reference"
+
+#: .\payments\templates\payments\pdf_facture.html:80
+#: .\payments\templates\payments\pdf_recu_acompte.html:84
+msgid "Reference Stripe"
+msgstr "Stripe reference"
+
+#: .\payments\templates\payments\pdf_facture.html:82
+#: .\payments\templates\payments\pdf_recu_acompte.html:87
+msgid "Moyen de paiement"
+msgstr "Payment method"
+
+#: .\payments\templates\payments\pdf_facture.html:82
+#: .\payments\templates\payments\pdf_recu_acompte.html:87
+msgid "Carte bancaire (Stripe Checkout)"
+msgstr "Credit card (Stripe Checkout)"
+
+#: .\payments\templates\payments\pdf_facture.html:86
+msgid ""
+"Ce document constitue la preuve de votre paiement aupres de MultiDrive. "
+"Conservez-le pour vos dossiers."
+msgstr ""
+"This document is proof of your payment to MultiDrive. Keep it for your "
+"records."
+
+#: .\payments\templates\payments\pdf_facture.html:88
+#, python-format
+msgid ""
+"Le solde restant de %(remaining)s EUR sera a regler avant la remise des cles "
+"du vehicule."
+msgstr ""
+"The remaining balance of %(remaining)s EUR must be paid before handing over "
+"the vehicle keys."
+
+#: .\payments\templates\payments\pdf_facture.html:108
+#, python-format
 msgid "Document genere automatiquement le %(date)s"
 msgstr "Document automatically generated on %(date)s"
 
 # ─── PDF: pdf_recu_acompte.html ──────────────────────────────────────────────
-
+#: .\payments\templates\payments\pdf_recu_acompte.html:35
 msgid "ACOMPTE UNIQUEMENT — NON VALABLE COMME FACTURE DEFINITIVE DE VENTE"
 msgstr "DEPOSIT ONLY — NOT VALID AS FINAL SALE INVOICE"
 
+#: .\payments\templates\payments\pdf_recu_acompte.html:44
 msgid "RECU D'ACOMPTE"
 msgstr "DEPOSIT RECEIPT"
 
+#: .\payments\templates\payments\pdf_recu_acompte.html:48
+#: .\reservations\models.py:19
 msgid "Acompte paye"
 msgstr "Deposit paid"
 
+#: .\payments\templates\payments\pdf_recu_acompte.html:62
 msgid "Detail de l'acompte"
 msgstr "Deposit details"
 
+#: .\payments\templates\payments\pdf_recu_acompte.html:65
 msgid "Vehicule"
 msgstr "Vehicle"
 
+#: .\payments\templates\payments\pdf_recu_acompte.html:67
 msgid "Prix total"
 msgstr "Total price"
 
+#: .\payments\templates\payments\pdf_recu_acompte.html:68
+#: .\reservations\templates\reservations\my_purchases.html:27
+#: .\reservations\templates\reservations\my_purchases.html:36
+#: .\vehicles\templates\vehicles\fonctionnement.html:100
 msgid "Acompte verse"
 msgstr "Deposit paid"
 
-msgid "Solde restant a regler"
-msgstr "Remaining balance to pay"
-
+#: .\payments\templates\payments\pdf_recu_acompte.html:82
 msgid "Reference de paiement"
 msgstr "Payment reference"
 
+#: .\payments\templates\payments\pdf_recu_acompte.html:86
 msgid "N° reservation"
 msgstr "Booking no."
 
-msgid "Moyen de paiement"
-msgstr "Payment method"
+#: .\payments\templates\payments\pdf_recu_acompte.html:88
+#: .\vehicles\templates\vehicles\fonctionnement.html:86
+#: .\vehicles\templates\vehicles\vehicle_list.html:31
+msgid "Statut"
+msgstr "Status"
 
+#: .\payments\templates\payments\pdf_recu_acompte.html:88
 msgid "Acompte recu"
 msgstr "Deposit received"
 
+#: .\payments\templates\payments\pdf_recu_acompte.html:92
 msgid "Ce document est un recu d'acompte."
 msgstr "This document is a deposit receipt."
 
-msgid "Il confirme uniquement le paiement partiel de %(amount)s EUR pour la reservation du vehicule %(title)s. Un solde de %(remaining)s EUR reste a regler avant la remise des cles et la finalisation de la vente."
-msgstr "It confirms only the partial payment of %(amount)s EUR for the booking of vehicle %(title)s. A balance of %(remaining)s EUR remains to be paid before key handover and finalisation of the sale."
+#: .\payments\templates\payments\pdf_recu_acompte.html:93
+#, python-format
+msgid ""
+"Il confirme uniquement le paiement partiel de %(amount)s EUR pour la "
+"reservation du vehicule %(title)s. Un solde de %(remaining)s EUR reste a "
+"regler avant la remise des cles et la finalisation de la vente."
+msgstr ""
+"It confirms only the partial payment of %(amount)s EUR for the booking of "
+"vehicle %(title)s. A balance of %(remaining)s EUR remains to be paid before "
+"key handover and finalisation of the sale."
 
-msgid "La facture definitive, l'acte de cession et le specimen d'immatriculation vous seront transmis apres reglement du solde restant. Conservez ce document comme preuve de votre acompte."
-msgstr "The final invoice, deed of sale, and registration specimen will be sent to you after the remaining balance is settled. Keep this document as proof of your deposit."
+#: .\payments\templates\payments\pdf_recu_acompte.html:97
+msgid ""
+"La facture definitive, l'acte de cession et le specimen d'immatriculation "
+"vous seront transmis apres reglement du solde restant. Conservez ce document "
+"comme preuve de votre acompte."
+msgstr ""
+"The final invoice, deed of sale, and registration specimen will be sent to "
+"you after the remaining balance is settled. Keep this document as proof of "
+"your deposit."
 
+#: .\payments\templates\payments\pdf_recu_acompte.html:116
+#, python-format
 msgid "Recu d'acompte N° %(num)s &mdash; genere le %(date)s"
 msgstr "Deposit receipt no. %(num)s &mdash; generated on %(date)s"
 
-# ─── PDF: pdf_cession.html ───────────────────────────────────────────────────
-
-msgid "ACTE DE CESSION"
-msgstr "DEED OF SALE"
-
-msgid "Ref. :"
-msgstr "Ref.:"
-
-msgid "Le present acte atteste de la cession du vehicule decrit ci-dessous entre les parties suivantes :"
-msgstr "This document certifies the transfer of ownership of the vehicle described below between the following parties:"
-
-msgid "Vendeur (cedant)"
-msgstr "Seller (transferor)"
-
-msgid "Plateforme de vente de vehicules d'occasion"
-msgstr "Used vehicle sales platform"
-
-msgid "Membre"
-msgstr "Member"
-
-msgid "Acheteur (cessionnaire)"
-msgstr "Buyer (transferee)"
-
-msgid "Vehicule cede"
-msgstr "Transferred vehicle"
-
-msgid "Designation"
-msgstr "Description"
-
-msgid "Annee estimee"
-msgstr "Estimated year"
-
-msgid "Numero de reservation"
-msgstr "Booking number"
-
-msgid "Prix de cession convenu :"
-msgstr "Agreed transfer price:"
-
-msgid "Acompte verse a ce jour :"
-msgstr "Deposit paid to date:"
-
-msgid "Solde restant :"
-msgstr "Remaining balance:"
-
-msgid "Neant — paiement integral"
-msgstr "None — full payment received"
-
-msgid "a regler avant remise des cles"
-msgstr "to be paid before key handover"
-
-msgid "Document d'immatriculation (specimen pedagogique joint)"
-msgstr "Registration document (pedagogical specimen attached)"
-
-msgid "Dans le cadre de ce projet academique, un specimen non officiel de demande d'immatriculation est joint a ce dossier de vente a titre pedagogique. Ce document porte la mention SPECIMEN — NON VALABLE et ne constitue pas un document administratif reel."
-msgstr "As part of this academic project, an unofficial specimen registration request is attached to this sales file for educational purposes. This document bears the SPECIMEN — NOT VALID notice and does not constitute an official administrative document."
-
-msgid "Conditions de la cession"
-msgstr "Terms of transfer"
-
-msgid "Le vehicule est vendu en l'etat, tel que vu et accepte par l'acheteur lors de la reservation."
-msgstr "The vehicle is sold as-is, as seen and accepted by the buyer at the time of booking."
-
-msgid "Le transfert de propriete est effectif a la reception du paiement integral."
-msgstr "The transfer of ownership takes effect upon receipt of full payment."
-
-msgid "L'acheteur reconnait avoir pris connaissance des conditions generales disponibles sur le site."
-msgstr "The buyer acknowledges having read the terms and conditions available on the website."
-
-msgid "Le vendeur"
-msgstr "The seller"
-
-msgid "Ce document est genere electroniquement par la plateforme MultiDrive a titre de preuve de transaction. Il ne se substitue pas aux documents officiels d'immatriculation. Document genere le %(date)s."
-msgstr "This document is electronically generated by the MultiDrive platform as proof of transaction. It does not replace official registration documents. Document generated on %(date)s."
-
-msgid "Acte de cession N°"
-msgstr "Deed of sale no."
-
 # ─── PDF: pdf_specimen_immatriculation.html ──────────────────────────────────
-
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:78
 msgid "SPECIMEN — DOCUMENT DE DEMONSTRATION — NON VALABLE"
 msgstr "SPECIMEN — DEMONSTRATION DOCUMENT — NOT VALID"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:87
 msgid "SPECIMEN D'IMMATRICULATION"
 msgstr "REGISTRATION SPECIMEN"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:97
 msgid "Identification du titulaire (acheteur)"
 msgstr "Holder identification (buyer)"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:101
 msgid "Coordonnees"
 msgstr "Contact details"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:104
 msgid "Adresse : Non renseignee"
 msgstr "Address: Not provided"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:107
 msgid "Identification"
 msgstr "Identification"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:108
 msgid "Membre MultiDrive"
 msgstr "MultiDrive member"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:109
 msgid "N° reservation :"
 msgstr "Booking no.:"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:110
 msgid "Date de transaction :"
 msgstr "Transaction date:"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:114
 msgid "Identification du vehicule"
 msgstr "Vehicle identification"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:117
+#: .\vehicles\templates\vehicles\vehicle_detail.html:61
+msgid "Marque"
+msgstr "Brand"
+
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:118
+#: .\vehicles\templates\vehicles\vehicle_detail.html:65
+msgid "Modele"
+msgstr "Model"
+
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:119
+#: .\vehicles\templates\vehicles\vehicle_detail.html:69
+msgid "Annee"
+msgstr "Year"
+
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:121
 msgid "Vehicule neuf / usage"
 msgstr "New / used vehicle"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:121
 msgid "Usage (vehicule d'occasion)"
 msgstr "Used (second-hand vehicle)"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:122
 msgid "Designation complete"
 msgstr "Full description"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:123
 msgid "Numero de chassis (VIN)"
 msgstr "Chassis number (VIN)"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:123
 msgid "Non disponible"
 msgstr "Not available"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:126
 msgid "Donnees financieres"
 msgstr "Financial data"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:129
 msgid "Prix de cession :"
 msgstr "Transfer price:"
 
-msgid "Acompte verse :"
-msgstr "Deposit paid:"
-
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:141
 msgid "Immatriculation & assurance (indicatif)"
 msgstr "Registration & insurance (indicative)"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:144
 msgid "Plaque d'immatriculation"
 msgstr "Licence plate"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:146
 msgid "Plaque existante"
 msgstr "Existing plate"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:146
 msgid "Non renseignee"
 msgstr "Not provided"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:147
 msgid "Type de plaque"
 msgstr "Plate type"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:147
 msgid "Ordinaire / Transit (a determiner)"
 msgstr "Standard / Transit (to be determined)"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:148
 msgid "Zone assurance (indicatif)"
 msgstr "Insurance zone (indicative)"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:148
 msgid "Zone nationale — Belgique (BE)"
 msgstr "National zone — Belgium (BE)"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:149
 msgid "Compagnie d'assurance"
 msgstr "Insurance company"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:149
 msgid "A choisir par l'acheteur"
 msgstr "To be chosen by the buyer"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:153
 msgid "Signatures"
 msgstr "Signatures"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:158
 msgid "Le vendeur (cedant)"
 msgstr "The seller (transferor)"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:166
 msgid "L'acheteur (cessionnaire)"
 msgstr "The buyer (transferee)"
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:168
 msgid "Signature de l'acheteur"
 msgstr "Buyer's signature"
 
-msgid "Ce document est un specimen non officiel genere dans le cadre du projet academique MultiDrive, joint au dossier de vente en remplacement pedagogique du formulaire officiel d'immatriculation. Il ne constitue pas une demande officielle d'immatriculation et ne peut en aucun cas etre transmis a la DIV ou a un assureur. Aucun logo officiel DIV, vignette d'assurance reelle ou numero administratif officiel n'est utilise. Dans une transaction reelle, ce document serait remplace par les formulaires officiels delivres par les autorites competentes."
-msgstr "This document is an unofficial specimen generated as part of the MultiDrive academic project, attached to the sales file as a pedagogical replacement for the official registration form. It does not constitute an official registration application and may not be submitted to the DIV or an insurer. No official DIV logo, real insurance sticker, or official administrative number is used. In a real transaction, this document would be replaced by official forms issued by the competent authorities."
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:174
+msgid ""
+"Ce document est un specimen non officiel genere dans le cadre du projet "
+"academique MultiDrive, joint au dossier de vente en remplacement pedagogique "
+"du formulaire officiel d'immatriculation. Il ne constitue pas une demande "
+"officielle d'immatriculation et ne peut en aucun cas etre transmis a la DIV "
+"ou a un assureur. Aucun logo officiel DIV, vignette d'assurance reelle ou "
+"numero administratif officiel n'est utilise. Dans une transaction reelle, ce "
+"document serait remplace par les formulaires officiels delivres par les "
+"autorites competentes."
+msgstr ""
+"This document is an unofficial specimen generated as part of the MultiDrive "
+"academic project, attached to the sales file as a pedagogical replacement "
+"for the official registration form. It does not constitute an official "
+"registration application and may not be submitted to the DIV or an insurer. "
+"No official DIV logo, real insurance sticker, or official administrative "
+"number is used. In a real transaction, this document would be replaced by "
+"official forms issued by the competent authorities."
 
+#: .\payments\templates\payments\pdf_specimen_immatriculation.html:179
+#, python-format
 msgid "Specimen ref. %(ref)s &mdash; genere le %(date)s"
 msgstr "Specimen ref. %(ref)s &mdash; generated on %(date)s"
 
-# ─── email_reservation_confirmation.html ─────────────────────────────────────
-
-msgid "Confirmation de reservation — MultiDrive"
-msgstr "Booking confirmation — MultiDrive"
-
-msgid "Confirmation de votre demande de reservation"
-msgstr "Confirmation of your booking request"
-
-msgid "Bonjour %(name)s,"
-msgstr "Hello %(name)s,"
-
-msgid "Nous avons bien recu votre demande de reservation pour le vehicule suivant :"
-msgstr "We have received your booking request for the following vehicle:"
-
-msgid "Vehicule :"
-msgstr "Vehicle:"
-
-msgid "Prix :"
-msgstr "Price:"
-
-msgid "Date souhaitee :"
-msgstr "Preferred date:"
-
-msgid "Creneau :"
-msgstr "Time slot:"
-
-msgid "Statut :"
-msgstr "Status:"
-
-msgid "En attente de validation"
-msgstr "Awaiting validation"
-
-msgid "Notre equipe examinera votre demande et vous contactera par email pour vous confirmer l'acceptation ou vous proposer un autre creneau."
-msgstr "Our team will review your request and contact you by email to confirm acceptance or propose another time slot."
-
-msgid "Vous pouvez suivre l'avancement de votre reservation depuis votre espace membre."
-msgstr "You can track the progress of your booking from your member area."
-
-msgid "Merci pour votre confiance."
-msgstr "Thank you for your trust."
-
-msgid "L'equipe MultiDrive"
-msgstr "The MultiDrive team"
-
-msgid "Cet email est envoye automatiquement. Merci de ne pas y repondre directement."
-msgstr "This email is sent automatically. Please do not reply directly."
-
-msgid "MultiDrive — Projet academique"
-msgstr "MultiDrive — Academic project"
-
-# ─── Admin dashboard ─────────────────────────────────────────────────────────
-
-msgid "Administration"
-msgstr "Administration"
-
-msgid "%(n)s disponibles actuellement."
-msgstr "%(n)s currently available."
-
-msgid "Reservations en attente"
-msgstr "Pending reservations"
-
-msgid "Demandes a verifier ou a confirmer."
-msgstr "Requests to check or confirm."
-
-msgid "Messages sans reponse"
-msgstr "Unanswered messages"
-
-msgid "Questions client ou demandes d'information."
-msgstr "Customer questions or information requests."
-
-msgid "Paiements a suivre"
-msgstr "Payments to monitor"
-
-msgid "Acomptes encore en attente de validation."
-msgstr "Deposits still awaiting validation."
-
-msgid "Membres actifs"
-msgstr "Active members"
-
-msgid "Comptes clients actuellement actifs."
-msgstr "Currently active customer accounts."
-
-msgid "Vehicules vendus"
-msgstr "Vehicles sold"
-
-msgid "Ventes finalisees dans le catalogue."
-msgstr "Finalised sales in the catalogue."
-
-msgid "Remboursements a traiter"
-msgstr "Refunds to process"
-
-msgid "Annulations avec acompte verse en attente."
-msgstr "Cancellations with outstanding deposit."
-
-msgid "Gestion des administrateurs"
-msgstr "Administrator management"
-
-msgid "Ajouter un admin"
-msgstr "Add an admin"
-
-msgid "Compte desactive"
-msgstr "Account deactivated"
-
-msgid "Retirer les droits admin a %(u)s ? Il repassera en compte client."
-msgstr "Remove admin rights from %(u)s? They will be downgraded to a customer account."
-
-msgid "Retirer les droits"
-msgstr "Remove rights"
-
-msgid "Desactiver definitivement le compte de %(u)s ?"
-msgstr "Permanently deactivate %(u)s's account?"
-
-msgid "Desactiver"
-msgstr "Deactivate"
-
-msgid "Aucun administrateur cree pour le moment. Cliquez sur « Ajouter un admin » pour commencer."
-msgstr "No administrators created yet. Click « Add an admin » to get started."
-
-msgid "Derniers mouvements"
-msgstr "Recent activity"
-
-msgid "10 derniers evenements"
-msgstr "Last 10 events"
-
-msgid "Raccourcis"
-msgstr "Shortcuts"
-
-msgid "Actions rapides"
-msgstr "Quick actions"
-
-msgid "Acces direct aux principales zones de gestion."
-msgstr "Direct access to the main management areas."
-
-msgid "Ajouter un vehicule"
-msgstr "Add a vehicle"
-
-msgid "Creer une nouvelle annonce dans le catalogue."
-msgstr "Create a new listing in the catalogue."
-
-msgid "Gerer les vehicules"
-msgstr "Manage vehicles"
-
-msgid "Modifier, supprimer ou filtrer le stock."
-msgstr "Edit, delete, or filter the stock."
-
-msgid "Voir les reservations"
-msgstr "View reservations"
-
-msgid "Traiter les demandes."
-msgstr "Process requests."
-
-msgid "en attente."
-msgstr "pending."
-
-msgid "Traiter les messages"
-msgstr "Handle messages"
-
-msgid "Repondre aux questions."
-msgstr "Reply to questions."
-
-msgid "sans reponse."
-msgstr "without reply."
-
-msgid "Suivre les paiements"
-msgstr "Track payments"
-
-msgid "Verifier les acomptes et leur statut."
-msgstr "Check deposits and their status."
-
-msgid "Comptes desactives"
-msgstr "Deactivated accounts"
-
-msgid "%(n)s compte(s) desactive(s) au total."
-msgstr "%(n)s deactivated account(s) in total."
-
-msgid "Demandes de suppression"
-msgstr "Deletion requests"
-
-msgid "non traitee(s)."
-msgstr "unprocessed."
-
-msgid "Aucune demande en attente."
-msgstr "No pending requests."
-
-msgid "Ouvrir l'admin Django"
-msgstr "Open Django admin"
-
-msgid "Acceder a la gestion complete du projet."
-msgstr "Access the full project management."
-
-msgid "Prioritaire"
-msgstr "Priority"
-
-msgid "Remboursements en attente"
-msgstr "Pending refunds"
-
-msgid "Ces membres ont annule leur reservation apres avoir verse un acompte. Saisissez le montant rembourse et un commentaire pour le membre."
-msgstr "These members cancelled their booking after paying a deposit. Enter the refunded amount and a note for the member."
-
-msgid "Annulation le"
-msgstr "Cancelled on"
-
-msgid "Remboursement demande"
-msgstr "Refund requested"
-
-msgid "Montant a rembourser (EUR)"
-msgstr "Amount to refund (EUR)"
-
-msgid "Message pour le membre (optionnel)"
-msgstr "Message for the member (optional)"
-
-msgid "Ex : Remboursement de 90 EUR apres retention de 10 % de frais administratifs conformement aux CGV."
-msgstr "E.g.: Refund of 90 EUR after 10% administrative fee deduction per T&Cs."
-
-msgid "Valider le remboursement"
-msgstr "Confirm refund"
-
-msgid "Voir dans l'admin Django"
-msgstr "View in Django admin"
-
-msgid "Moderation"
-msgstr "Moderation"
-
-msgid "Derniers avis clients"
-msgstr "Latest customer reviews"
-
-msgid "Consultez et supprimez les avis inappropries. Les avis sont visibles publiquement sur les fiches vehicules."
-msgstr "Review and remove inappropriate comments. Reviews are publicly visible on vehicle listings."
-
+# ─── Favorites page (vehicles/my_favorites.html) ─────────────────────────────
+#: .\payments\templates\payments\testimonial_form.html:9
+#: .\vehicles\templates\vehicles\my_favorites.html:8
+msgid "Espace membre"
+msgstr "Member area"
+
+#: .\payments\templates\payments\testimonial_form.html:12
+#, python-format
+msgid ""
+"\n"
+"                Partagez votre experience d'achat pour %(title)s.\n"
+"            "
+msgstr ""
+"\n"
+"                Share your purchase experience for %(title)s.\n"
+"            "
+
+#: .\payments\templates\payments\testimonial_form.html:36
+msgid "Publier mon temoignage"
+msgstr "Publish my testimonial"
+
+#: .\payments\templates\payments\testimonial_form.html:40
+msgid "Retour a mes paiements"
+msgstr "Back to my payments"
+
+#: .\payments\templates\payments\testimonial_list.html:4
+#: .\payments\templates\payments\testimonial_list.html:9
+#: .\vehicles\templates\vehicles\base.html:40
+#: .\vehicles\templates\vehicles\base.html:172
+#: .\vehicles\templates\vehicles\confidentialite.html:91
+msgid "Temoignages"
+msgstr "Testimonials"
+
+#: .\payments\templates\payments\testimonial_list.html:8
+msgid "Clients"
+msgstr "Customers"
+
+#: .\payments\templates\payments\testimonial_list.html:10
+msgid ""
+"Ils ont achete un vehicule chez MultiDrive et partagent leur experience."
+msgstr "They bought a vehicle from MultiDrive and share their experience."
+
+#: .\payments\templates\payments\testimonial_list.html:60
+msgid "Aucun temoignage publie pour le moment."
+msgstr "No testimonial published yet."
+
+# ─── payments/views.py flash messages ────────────────────────────────────────
+#: .\payments\views.py:97
+msgid "Reservation introuvable. Veuillez reessayer."
+msgstr "Booking not found. Please try again."
+
+#: .\payments\views.py:117
+msgid "Montant invalide. Veuillez saisir un montant superieur a 0 EUR."
+msgstr "Invalid amount. Please enter an amount greater than 0 EUR."
+
+#: .\payments\views.py:136
+msgid "Reservation MultiDrive"
+msgstr "MultiDrive booking"
+
+#: .\payments\views.py:157
+msgid "Erreur Stripe :"
+msgstr "Stripe error:"
+
+#: .\payments\views.py:193
+msgid "Ce paiement a deja ete enregistre."
+msgstr "This payment has already been recorded."
+
+#: .\payments\views.py:200
+msgid "Impossible de verifier le paiement. Contactez le support."
+msgstr "Unable to verify the payment. Please contact support."
+
+#: .\payments\views.py:204
+msgid "Le paiement n'a pas ete complete."
+msgstr "The payment was not completed."
+
+#: .\payments\views.py:239
+msgid "Paiement de"
+msgstr "Payment of"
+
+#: .\payments\views.py:239
+msgid "confirme. Total verse :"
+msgstr "confirmed. Total paid:"
+
+#: .\payments\views.py:239
 msgid "sur"
 msgstr "on"
 
-msgid "Supprimer cet avis ?"
-msgstr "Delete this review?"
-
-msgid "Supprimer"
-msgstr "Delete"
-
-msgid "Statistiques"
-msgstr "Statistics"
-
-msgid "Ventes & revenus"
-msgstr "Sales & revenue"
-
-msgid "Exporter en CSV"
-msgstr "Export as CSV"
-
-msgid "Revenus totaux"
-msgstr "Total revenue"
-
-msgid "Tous paiements confondus"
-msgstr "All payments combined"
-
-msgid "Revenus ce mois-ci"
-msgstr "Revenue this month"
-
-msgid "Ventes finalisees"
-msgstr "Finalised sales"
-
-msgid "ventes"
-msgstr "sales"
-
-msgid "%(amt)s EUR encaisses"
-msgstr "%(amt)s EUR collected"
-
-msgid "vehicules"
-msgstr "vehicles"
-
-msgid "Statut Vendu dans le catalogue"
-msgstr "Status Sold in the catalogue"
-
-msgid "Acomptes en cours"
-msgstr "Ongoing deposits"
-
-msgid "dossiers"
-msgstr "files"
-
-msgid "Solde restant a encaisser"
-msgstr "Remaining balance to collect"
-
-msgid "Ventes par categorie"
-msgstr "Sales by category"
-
-msgid "Progression"
-msgstr "Progress"
-
-msgid "Ventes"
-msgstr "Sales"
-
-# ─── create_admin.html ───────────────────────────────────────────────────────
-
-msgid "Creer un administrateur"
-msgstr "Create an administrator"
-
-msgid "Nouveau compte admin"
-msgstr "New admin account"
-
-msgid "Creer l'administrateur"
-msgstr "Create administrator"
-
-msgid "L'admin recevra ses identifiants et pourra changer son mot de passe depuis son espace personnel."
-msgstr "The admin will receive their credentials and can change their password from their personal area."
-
-msgid "Admins actifs (%(n)s)"
-msgstr "Active admins (%(n)s)"
-
-msgid "Retirer les droits admin a %(u)s ?"
-msgstr "Remove admin rights from %(u)s?"
-
-msgid "Desactiver le compte de %(u)s ?"
-msgstr "Deactivate %(u)s's account?"
-
-msgid "Aucun administrateur pour le moment."
-msgstr "No administrators yet."
-
-msgid "Retour au dashboard"
-msgstr "Back to dashboard"
-
-# ─── cgv.html ────────────────────────────────────────────────────────────────
-
-msgid "Informations legales"
-msgstr "Legal information"
-
-msgid "Conditions generales d'utilisation"
-msgstr "Terms of use"
-
-msgid "Derniere mise a jour : juin 2026"
-msgstr "Last updated: June 2026"
-
-msgid "1. Presentation de la plateforme"
-msgstr "1. Platform presentation"
-
-msgid "MultiDrive est une plateforme web de consultation et de reservation de vehicules d'occasion. Elle est exploitee dans le cadre d'un projet academique (Travail de Fin d'Etudes). Les vehicules presentes sont des donnees de demonstration et ne constituent pas des offres commerciales reelles."
-msgstr "MultiDrive is a web platform for browsing and booking used vehicles. It is operated as part of an academic project (final year thesis). The vehicles presented are demonstration data and do not constitute real commercial offers."
-
-msgid "2. Acces au service"
-msgstr "2. Access to the service"
-
-msgid "L'acces au catalogue est libre et gratuit. La reservation d'un vehicule necessite la creation d'un compte membre. MultiDrive se reserve le droit de suspendre ou de supprimer un compte en cas d'utilisation abusive ou de non-respect des presentes conditions."
-msgstr "Access to the catalogue is free of charge. Booking a vehicle requires creating a member account. MultiDrive reserves the right to suspend or delete an account in the event of misuse or non-compliance with these terms."
-
-msgid "3. Reservations et rendez-vous"
-msgstr "3. Bookings and appointments"
-
-msgid "Toute reservation est soumise a validation par l'administration. Un rendez-vous peut etre propose lors de la demande, dans les plages horaires definies :"
-msgstr "All bookings are subject to validation by the administration. An appointment may be requested at the time of the booking, within the defined time slots:"
-
-msgid "Du lundi au vendredi : 16h00 a 21h30"
-msgstr "Monday to Friday: 16:00 to 21:30"
-
-msgid "Le samedi et dimanche : 9h00 a 21h00"
-msgstr "Saturday and Sunday: 9:00 to 21:00"
-
-msgid "Les prix et conditions de reservation sont affiches clairement avant toute validation de paiement."
-msgstr "Prices and booking conditions are clearly displayed before any payment confirmation."
-
-msgid "4. Paiement et securite des transactions"
-msgstr "4. Payment and transaction security"
-
-msgid "Un acompte peut etre demande apres acceptation de la reservation. Cet acompte correspond a 20 % du prix du vehicule, avec un minimum de 20 EUR et un maximum de 250 EUR."
-msgstr "A deposit may be requested after the booking is accepted. This deposit equals 20% of the vehicle price, with a minimum of 20 EUR and a maximum of 250 EUR."
-
-msgid "Le paiement est traite de maniere securisee via Stripe Checkout, solution conforme aux standards internationaux de securite des paiements (PCI-DSS). Les transactions sont chiffrees via HTTPS."
-msgstr "Payment is processed securely via Stripe Checkout, a solution compliant with international payment security standards (PCI-DSS). Transactions are encrypted via HTTPS."
-
-msgid "Aucune donnee bancaire n'est stockee sur les serveurs de MultiDrive."
-msgstr "No banking data is stored on MultiDrive's servers."
-
-msgid "Les informations de carte sont traitees exclusivement par Stripe et ne transitent jamais par notre application."
-msgstr "Card information is processed exclusively by Stripe and never passes through our application."
-
-msgid "5. Annulation et remboursement"
-msgstr "5. Cancellation and refund"
-
-msgid "Une reservation peut etre annulee par le membre selon les conditions suivantes :"
-msgstr "A booking may be cancelled by the member under the following conditions:"
-
-msgid "Reservation en attente : annulation libre, sans frais."
-msgstr "Pending booking: free cancellation, no charge."
-
-msgid "Reservation acceptee : annulation possible, sans frais."
-msgstr "Accepted booking: cancellation possible, no charge."
-
-msgid "Acompte verse : annulation possible. Des frais administratifs de 10 % minimum du montant verse pourront etre retenus."
-msgstr "Deposit paid: cancellation possible. An administrative fee of at least 10% of the amount paid may be retained."
-
-msgid "Le remboursement est traite sous 14 jours ouvrables."
-msgstr "The refund is processed within 14 business days."
-
-msgid "6. Donnees personnelles et RGPD"
-msgstr "6. Personal data and GDPR"
-
-msgid "MultiDrive respecte les principes du Reglement General sur la Protection des Donnees (RGPD). Les donnees collectees sont limitees au strict necessaire pour le fonctionnement du service :"
-msgstr "MultiDrive complies with the principles of the General Data Protection Regulation (GDPR). Data collected is limited to the strict minimum required for the operation of the service:"
-
-msgid "Nom et prenom"
-msgstr "First and last name"
-
-msgid "Adresse e-mail"
-msgstr "Email address"
-
-msgid "Historique de reservations et de paiements"
-msgstr "Reservation and payment history"
-
-msgid "Ces donnees sont traitees de maniere licite, loyale et transparente. Elles ne sont jamais transmises a des tiers ni revendues."
-msgstr "This data is processed lawfully, fairly, and transparently. It is never shared with third parties or sold."
-
-msgid "Conformement au RGPD, tout membre dispose d'un droit d'acces, de modification et de suppression de ses donnees. La suppression du compte est accessible directement depuis l'espace personnel."
-msgstr "In accordance with the GDPR, every member has the right to access, modify, and delete their data. Account deletion is accessible directly from the personal area."
-
-msgid "7. Cookies"
-msgstr "7. Cookies"
-
-msgid "MultiDrive utilise uniquement des cookies techniques strictement necessaires au bon fonctionnement de la plateforme :"
-msgstr "MultiDrive only uses strictly necessary technical cookies for the proper functioning of the platform:"
-
-msgid "Maintien de la session utilisateur (authentification)"
-msgstr "Maintaining the user session (authentication)"
-
-msgid "Protection contre les attaques CSRF"
-msgstr "Protection against CSRF attacks"
-
-msgid "Memorisation de la preference de langue"
-msgstr "Remembering the language preference"
-
-msgid "Ces cookies ne servent pas au suivi publicitaire ou analytique et ne necessitent pas de consentement prealable selon la reglementation europeenne. Aucun cookie tiers n'est utilise."
-msgstr "These cookies are not used for advertising or analytical tracking and do not require prior consent under European regulations. No third-party cookies are used."
-
-msgid "8. Propriete intellectuelle"
-msgstr "8. Intellectual property"
-
-msgid "Les contenus presentes sur MultiDrive (design, code source, textes, elements graphiques) sont proteges par le droit d'auteur. Toute reproduction ou diffusion sans autorisation prealable est interdite."
-msgstr "The content presented on MultiDrive (design, source code, text, graphic elements) is protected by copyright. Any reproduction or distribution without prior authorisation is prohibited."
-
-msgid "Ce projet est realise a titre academique dans le cadre d'un Travail de Fin d'Etudes. Les images utilisees pour illustrer les vehicules sont issues de ressources libres de droits ou appartiennent au projet."
-msgstr "This project is carried out for academic purposes as part of a final year thesis. The images used to illustrate vehicles are from royalty-free resources or belong to the project."
-
-msgid "9. Responsabilite"
-msgstr "9. Liability"
-
-msgid "MultiDrive est un projet academique fourni a titre demonstratif. L'administrateur du site est responsable de la gestion des contenus publies et de la securisation generale de la plateforme. MultiDrive ne saurait etre tenu responsable des dommages indirects lies a l'utilisation du service."
-msgstr "MultiDrive is an academic project provided for demonstration purposes. The site administrator is responsible for managing published content and the general security of the platform. MultiDrive cannot be held liable for indirect damages related to the use of the service."
-
-msgid "10. Contact"
-msgstr "10. Contact"
-
-msgid "Pour toute question relative aux conditions d'utilisation, a la protection des donnees ou a un remboursement, vous pouvez nous contacter via la"
-msgstr "For any question regarding the terms of use, data protection, or a refund, you may contact us via the"
-
-msgid "page de contact"
-msgstr "contact page"
-
-msgid "ou par email a"
-msgstr "or by email at"
-
-# ─── password_reset_email.html ───────────────────────────────────────────────
-
-msgid "Reinitialisation de mot de passe"
-msgstr "Password reset"
-
-msgid "Bonjour %(username)s,"
-msgstr "Hello %(username)s,"
-
-msgid "Vous avez demande la reinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour choisir un nouveau mot de passe :"
-msgstr "You have requested a password reset. Click the button below to choose a new password:"
-
-msgid "Reinitialiser mon mot de passe"
-msgstr "Reset my password"
-
-msgid "Ce lien est valable <strong>24 heures</strong>. Apres ce delai, vous devrez faire une nouvelle demande."
-msgstr "This link is valid for <strong>24 hours</strong>. After this period, you will need to make a new request."
-
-msgid "Si vous n'avez pas fait cette demande, ignorez simplement cet email — votre mot de passe ne sera pas modifie."
-msgstr "If you did not make this request, simply ignore this email — your password will not be changed."
-
-msgid "Cet email a ete envoye automatiquement, merci de ne pas y repondre."
-msgstr "This email was sent automatically, please do not reply."
-
-# ─── Model choices (vehicles/models.py) ─────────────────────────────────────
-
-msgid "Disponible"
-msgstr "Available"
-
-msgid "Reserve"
-msgstr "Reserved"
-
-msgid "Vendu"
-msgstr "Sold"
-
-msgid "Tres bon"
-msgstr "Very good"
-
-msgid "Bon"
-msgstr "Good"
-
-msgid "Legerement accidente"
-msgstr "Slightly damaged"
-
-msgid "Roule, reparation mineure a prevoir"
-msgstr "Runs, minor repair needed"
+#: .\payments\views.py:246
+msgid "Paiement annule. Vous pouvez reessayer quand vous voulez."
+msgstr "Payment cancelled. You can try again whenever you like."
+
+#: .\payments\views.py:328 .\payments\views.py:341 .\payments\views.py:354
+msgid "Document disponible apres paiement integral."
+msgstr "Document available after full payment."
+
+# ─── Testimonial system (payments/views.py, templates) ───────────────────────
+#: .\payments\views.py:372
+msgid "Le temoignage est disponible apres paiement integral."
+msgstr "The testimonial is available after full payment."
+
+#: .\payments\views.py:376
+msgid "Vous avez deja depose un temoignage pour cet achat."
+msgstr "You have already submitted a testimonial for this purchase."
+
+#: .\payments\views.py:386
+msgid "Merci pour votre temoignage !"
+msgstr "Thank you for your testimonial!"
 
 # ─── Model choices (reservations/models.py) ─────────────────────────────────
-
+#: .\reservations\models.py:17
+#: .\vehicles\templates\vehicles\fonctionnement.html:96
 msgid "Acceptee"
 msgstr "Accepted"
 
+#: .\reservations\models.py:18
+#: .\vehicles\templates\vehicles\fonctionnement.html:104
 msgid "Refusee"
 msgstr "Rejected"
 
+#: .\reservations\models.py:20
+#: .\vehicles\templates\vehicles\fonctionnement.html:108
 msgid "Annulee"
 msgstr "Cancelled"
 
-# ─── Model choices (payments/models.py) ─────────────────────────────────────
+# ─── email_reservation_confirmation.html ─────────────────────────────────────
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:5
+msgid "Confirmation de reservation — MultiDrive"
+msgstr "Booking confirmation — MultiDrive"
 
-msgid "Echoue"
-msgstr "Failed"
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:25
+msgid "Confirmation de votre demande de reservation"
+msgstr "Confirmation of your booking request"
 
-msgid "Rembourse"
-msgstr "Refunded"
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:28
+#, python-format
+msgid "Bonjour <strong>%(name)s</strong>,"
+msgstr "Hello %(name)s,"
 
-# ─── Model choices (accounts/models.py) ─────────────────────────────────────
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:29
+msgid ""
+"Nous avons bien recu votre demande de reservation pour le vehicule suivant :"
+msgstr "We have received your booking request for the following vehicle:"
 
-msgid "Demande utilisateur"
-msgstr "User request"
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:32
+msgid "Vehicule :"
+msgstr "Vehicle:"
 
-msgid "Blocage administrateur"
-msgstr "Admin block"
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:33
+msgid "Prix :"
+msgstr "Price:"
 
-# ─── Common vehicle category names ───────────────────────────────────────────
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:35
+msgid "Date souhaitee :"
+msgstr "Preferred date:"
 
-msgid "Voiture"
-msgstr "Car"
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:38
+msgid "Creneau :"
+msgstr "Time slot:"
 
-msgid "Moto"
-msgstr "Motorcycle"
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:40
+msgid "Statut :"
+msgstr "Status:"
 
-msgid "Camion"
-msgstr "Truck"
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:40
+msgid "En attente de validation"
+msgstr "Awaiting validation"
 
-msgid "Van"
-msgstr "Van"
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:43
+msgid ""
+"Notre equipe examinera votre demande et vous contactera par email pour vous "
+"confirmer l'acceptation ou vous proposer un autre creneau."
+msgstr ""
+"Our team will review your request and contact you by email to confirm "
+"acceptance or propose another time slot."
 
-msgid "Quad"
-msgstr "Quad"
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:44
+msgid ""
+"Vous pouvez suivre l'avancement de votre reservation depuis votre espace "
+"membre."
+msgstr "You can track the progress of your booking from your member area."
+
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:45
+msgid "Merci pour votre confiance."
+msgstr "Thank you for your trust."
+
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:46
+msgid "L'equipe MultiDrive"
+msgstr "The MultiDrive team"
+
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:49
+msgid ""
+"Cet email est envoye automatiquement. Merci de ne pas y repondre directement."
+msgstr "This email is sent automatically. Please do not reply directly."
+
+#: .\reservations\templates\reservations\email_reservation_confirmation.html:50
+msgid "MultiDrive — Projet academique"
+msgstr "MultiDrive — Academic project"
+
+# ─── payment_list.html ───────────────────────────────────────────────────────
+#: .\reservations\templates\reservations\my_purchases.html:4
+#: .\reservations\templates\reservations\my_purchases.html:9
+msgid "Mes achats"
+msgstr "My purchases"
+
+# ─── Payment list (accounts/payment_list.html) ───────────────────────────────
+#: .\reservations\templates\reservations\my_purchases.html:10
+msgid ""
+"Retrouvez ici tous les vehicules pour lesquels vous avez verse un acompte."
+msgstr ""
+"Find here all your paid deposits, acquired vehicles and associated financial "
+"details."
+
+#: .\reservations\templates\reservations\my_purchases.html:51
+#: .\reservations\templates\reservations\my_reservations.html:69
+msgid "Rendez-vous confirme"
+msgstr "Preferred appointment"
+
+#: .\reservations\templates\reservations\my_purchases.html:66
+msgid ""
+"Les vehicules pour lesquels vous avez verse un acompte apparaitront ici."
+msgstr "The vehicles you have added to your favourites."
+
+# ─── my_reservations.html ────────────────────────────────────────────────────
+#: .\reservations\templates\reservations\my_reservations.html:10
+msgid ""
+"Suivez ici vos demandes, leur statut actuel et l'etat de l'acompte lorsque "
+"la reservation avance."
+msgstr ""
+"Track your requests here, their current status, and the deposit state as the "
+"booking progresses."
+
+#: .\reservations\templates\reservations\my_reservations.html:17
+msgid "Total demandes"
+msgstr "Total requests"
+
+#: .\reservations\templates\reservations\my_reservations.html:25
+msgid "Acceptees"
+msgstr "Accepted"
+
+#: .\reservations\templates\reservations\my_reservations.html:29
+msgid "Refusees"
+msgstr "Rejected"
+
+#: .\reservations\templates\reservations\my_reservations.html:59
+msgid "Reservation creee le"
+msgstr "Booking created on"
+
+#: .\reservations\templates\reservations\my_reservations.html:63
+msgid "Derniere mise a jour"
+msgstr "Last update"
+
+#: .\reservations\templates\reservations\my_reservations.html:71
+msgid "Rendez-vous souhaite"
+msgstr "Preferred appointment"
+
+#: .\reservations\templates\reservations\my_reservations.html:92
+msgid "Suivi de l'acompte"
+msgstr "Deposit tracking"
+
+#: .\reservations\templates\reservations\my_reservations.html:101
+msgid "Methode :"
+msgstr "Method:"
+
+#: .\reservations\templates\reservations\my_reservations.html:102
+msgid "Reference :"
+msgstr "Reference:"
+
+#: .\reservations\templates\reservations\my_reservations.html:105
+msgid ""
+"Votre reservation a ete acceptee. L'etape suivante sera le paiement de "
+"l'acompte."
+msgstr ""
+"Your booking has been accepted. The next step will be the deposit payment."
+
+#: .\reservations\templates\reservations\my_reservations.html:107
+msgid "La reservation est marquee comme acompte paye."
+msgstr "The booking is marked as deposit paid."
+
+#: .\reservations\templates\reservations\my_reservations.html:109
+msgid "Cette demande a ete refusee. Aucun acompte n'est attendu."
+msgstr "This request has been rejected. No deposit is expected."
+
+#: .\reservations\templates\reservations\my_reservations.html:111
+msgid ""
+"La demande est encore en cours de traitement. Aucun acompte n'est demande "
+"pour le moment."
+msgstr ""
+"The request is still being processed. No deposit is requested at this time."
+
+#: .\reservations\templates\reservations\my_reservations.html:122
+msgid "Etes-vous sur de vouloir annuler cette reservation ?"
+msgstr "Are you sure you want to cancel this booking?"
+
+#: .\reservations\templates\reservations\my_reservations.html:124
+#: .\reservations\templates\reservations\my_reservations.html:130
+msgid "Annuler la reservation"
+msgstr "Cancel booking"
+
+#: .\reservations\templates\reservations\my_reservations.html:128
+msgid ""
+"Votre reservation a ete acceptee. Etes-vous certain de vouloir annuler ?"
+msgstr "Your booking has been accepted. Are you sure you want to cancel?"
+
+#: .\reservations\templates\reservations\my_reservations.html:140
+msgid "Aucune reservation pour le moment"
+msgstr "No bookings yet"
+
+#: .\reservations\templates\reservations\my_reservations.html:141
+msgid ""
+"Vos futures demandes de reservation apparaitront ici avec leur statut et le "
+"suivi de l'acompte."
+msgstr ""
+"Your future booking requests will appear here with their status and deposit "
+"tracking."
+
+#: .\reservations\templates\reservations\reservation_form.html:4
+msgid "Reserver %(title)s"
+msgstr "Book this vehicle"
+
+#: .\reservations\templates\reservations\reservation_form.html:9
+msgid "Reservation"
+msgstr "Reservations"
+
+#: .\reservations\templates\reservations\reservation_form.html:10
+#: .\vehicles\templates\vehicles\vehicle_detail.html:104
+msgid "Reserver ce vehicule"
+msgstr "Book this vehicle"
+
+#: .\reservations\templates\reservations\reservation_form.html:36
+msgid "Envoyer ma demande"
+msgstr "Send request"
+
+#: .\reservations\templates\reservations\reservation_form.html:44
+msgid "Week-end : rendez-vous acceptes de 9h00 a 21h00."
+msgstr "Weekend: appointments accepted from 9:00 to 21:00."
+
+#: .\reservations\templates\reservations\reservation_form.html:45
+msgid "Semaine : rendez-vous acceptes de 16h00 a 21h30."
+msgstr "Weekdays: appointments accepted from 16:00 to 21:30."
+
+#: .\reservations\templates\reservations\reservation_success.html:4
+msgid "Reservation envoyee"
+msgstr "Booking created on"
+
+# ─── reservation_success.html ────────────────────────────────────────────────
+#: .\reservations\templates\reservations\reservation_success.html:9
+msgid "Demande envoyee"
+msgstr "Request sent!"
+
+#: .\reservations\templates\reservations\reservation_success.html:10
+msgid "Reservation en attente"
+msgstr "Pending reservations"
+
+#: .\reservations\templates\reservations\reservation_success.html:12
+#, python-format
+msgid ""
+"Votre demande pour <strong>%(title)s</strong> a bien ete enregistree. Son "
+"statut actuel est <strong>%(status)s</strong>."
+msgstr ""
+
+#: .\reservations\templates\reservations\reservation_success.html:16
+#: .\vehicles\templates\vehicles\vehicle_detail.html:110
+msgid "Retour au catalogue"
+msgstr "Back to catalogue"
+
+# ─── 404 / 500 ───────────────────────────────────────────────────────────────
+#: .\templates\404.html:4 .\templates\404.html:9
+msgid "Page introuvable"
+msgstr "Page not found"
+
+#: .\templates\404.html:8
+msgid "Erreur 404"
+msgstr "404 Error"
+
+#: .\templates\404.html:11
+msgid "La page que vous cherchez n'existe pas ou a ete deplacee."
+msgstr "The page you are looking for does not exist or has been moved."
+
+#: .\templates\404.html:15 .\vehicles\templates\vehicles\my_favorites.html:25
+msgid "Voir le catalogue"
+msgstr "Explore the catalogue"
+
+#: .\templates\500.html:4
+msgid "Erreur serveur"
+msgstr "Server error"
+
+#: .\templates\500.html:8
+msgid "Erreur 500"
+msgstr "500 Error"
+
+#: .\templates\500.html:9
+msgid "Une erreur est survenue"
+msgstr "An error has occurred"
+
+#: .\templates\500.html:11
+msgid ""
+"Une erreur interne s'est produite. Notre equipe en est informee. Veuillez "
+"reessayer dans quelques instants."
+msgstr "An internal error occurred. Please try again later."
+
+#: .\templates\500.html:15
+msgid "Contacter le support"
+msgstr "Contact MultiDrive"
+
+# ─── Model choices (vehicles/models.py) ─────────────────────────────────────
+#: .\vehicles\models.py:26
+msgid "Disponible"
+msgstr "Available"
+
+#: .\vehicles\models.py:27
+msgid "Reserve"
+msgstr "Reserved"
+
+#: .\vehicles\models.py:28
+msgid "Vendu"
+msgstr "Sold"
+
+#: .\vehicles\models.py:35 .\vehicles\models.py:44
+msgid "Tres bon"
+msgstr "Very good"
+
+#: .\vehicles\models.py:36 .\vehicles\models.py:45
+msgid "Bon"
+msgstr "Good"
+
+#: .\vehicles\models.py:37
+msgid "Legerement accidente"
+msgstr "Slightly damaged"
+
+#: .\vehicles\models.py:46
+msgid "Roule, reparation mineure a prevoir"
+msgstr "Runs, minor repair needed"
+
+# ─── Navigation / base.html ─────────────────────────────────────────────────
+#: .\vehicles\templates\vehicles\base.html:26
+msgid "Ouvrir le menu"
+msgstr "Open menu"
+
+#: .\vehicles\templates\vehicles\base.html:34
+#: .\vehicles\templates\vehicles\base.html:170
+#: .\vehicles\templates\vehicles\home.html:4
+msgid "Accueil"
+msgstr "Home"
+
+#: .\vehicles\templates\vehicles\base.html:37
+#: .\vehicles\templates\vehicles\base.html:171
+#: .\vehicles\templates\vehicles\vehicle_list.html:8
+msgid "Catalogue"
+msgstr "Catalogue"
+
+#: .\vehicles\templates\vehicles\base.html:52
+#, python-format
+msgid "Bonjour, %(username)s"
+msgstr "Hello, %(username)s"
+
+#: .\vehicles\templates\vehicles\base.html:70
+#: .\vehicles\templates\vehicles\fonctionnement.html:122
+#: .\vehicles\templates\vehicles\my_favorites.html:4
+#: .\vehicles\templates\vehicles\my_favorites.html:9
+msgid "Mes favoris"
+msgstr "My favourites"
+
+#: .\vehicles\templates\vehicles\base.html:90
+msgid "Deconnexion"
+msgstr "Sign out"
+
+#: .\vehicles\templates\vehicles\base.html:111
+#: .\vehicles\templates\vehicles\home.html:23
+msgid "Inscription"
+msgstr "Register"
+
+#: .\vehicles\templates\vehicles\base.html:165
+msgid ""
+"Une plateforme simple pour consulter, reserver et suivre des vehicules "
+"d'occasion accessibles."
+msgstr "A simple platform to browse, book, and track affordable used vehicles."
+
+#: .\vehicles\templates\vehicles\base.html:168
+msgid "Navigation"
+msgstr "Navigation"
+
+#: .\vehicles\templates\vehicles\base.html:183
+msgid ""
+"Projet academique MultiDrive cree dans le cadre d'un travail de fin d'etudes."
+msgstr "MultiDrive academic project created as part of a final year thesis."
+
+#: .\vehicles\templates\vehicles\base.html:185
+#: .\vehicles\templates\vehicles\cgv.html:4
+#: .\vehicles\templates\vehicles\confidentialite.html:154
+#: .\vehicles\templates\vehicles\confidentialite.html:178
+#: .\vehicles\templates\vehicles\fonctionnement.html:186
+msgid "Conditions generales"
+msgstr "Terms of service"
+
+#: .\vehicles\templates\vehicles\base.html:186
+msgid "Confidentialite"
+msgstr "Full amount"
+
+#: .\vehicles\templates\vehicles\base.html:187
+#: .\vehicles\templates\vehicles\fonctionnement.html:4
+msgid "Fonctionnement"
+msgstr "How it works"
+
+#: .\vehicles\templates\vehicles\base.html:194
+msgid "Politique de cookies"
+msgstr "Cookie policy"
+
+#: .\vehicles\templates\vehicles\base.html:199
+msgid ""
+"MultiDrive utilise uniquement des cookies techniques necessaires a son "
+"fonctionnement (session, securite, langue). Aucun cookie publicitaire."
+msgstr ""
+"MultiDrive only uses technical cookies required for its operation (session, "
+"security, language). No advertising cookies."
+
+#: .\vehicles\templates\vehicles\base.html:200
+msgid "En savoir plus"
+msgstr "Learn more"
+
+#: .\vehicles\templates\vehicles\base.html:203
+msgid "Accepter"
+msgstr "Accept"
+
+#: .\vehicles\templates\vehicles\base.html:204
+msgid "Refuser"
+msgstr "Decline"
+
+# ─── cgv.html ────────────────────────────────────────────────────────────────
+#: .\vehicles\templates\vehicles\cgv.html:8
+#: .\vehicles\templates\vehicles\confidentialite.html:8
+msgid "Informations legales"
+msgstr "Legal information"
+
+#: .\vehicles\templates\vehicles\cgv.html:9
+msgid "Conditions generales de vente et d'utilisation"
+msgstr "General terms of sale and use"
+
+#: .\vehicles\templates\vehicles\cgv.html:10
+msgid "Derniere mise a jour : aout 2026"
+msgstr "Last updated: June 2026"
+
+#: .\vehicles\templates\vehicles\cgv.html:16
+msgid "1. Presentation de la plateforme"
+msgstr "1. Platform presentation"
+
+#: .\vehicles\templates\vehicles\cgv.html:17
+msgid ""
+"MultiDrive est une plateforme web de consultation et de reservation de "
+"vehicules d'occasion. Elle est realisee dans le cadre d'un Travail de Fin "
+"d'Etudes (TFE) a titre academique et demonstratif. Les vehicules presentes "
+"sont des donnees de demonstration et ne constituent pas des offres "
+"commerciales reelles au sens du droit belge de la vente."
+msgstr "MultiDrive is a web platform for browsing and booking used vehicles. It was created as part of a final year thesis (TFE) for academic and demonstrative purposes. The vehicles presented are demonstration data and do not constitute real commercial offers under Belgian sales law."
+"MultiDrive is a web platform for browsing and booking used vehicles. It is "
+"operated as part of an academic project (final year thesis). The vehicles "
+"presented are demonstration data and do not constitute real commercial "
+"offers."
+
+#: .\vehicles\templates\vehicles\cgv.html:18
+msgid ""
+"Responsable de la plateforme : Younes El-Mallahi — contact : "
+"multidrive25@gmail.com"
+msgstr "Platform manager: Younes El-Mallahi — contact: multidrive25@gmail.com"
+
+#: .\vehicles\templates\vehicles\cgv.html:22
+msgid "2. Acces au service"
+msgstr "2. Access to the service"
+
+#: .\vehicles\templates\vehicles\cgv.html:23
+msgid ""
+"L'acces au catalogue est libre et gratuit. La reservation d'un vehicule "
+"necessite la creation d'un compte membre. L'utilisateur doit etre age d'au "
+"moins 18 ans et disposer de la capacite juridique necessaire pour "
+"contracter, conformement au Code civil belge."
+msgstr "Access to the catalogue is free of charge. Booking a vehicle requires creating a member account. The user must be at least 18 years old and have the legal capacity to contract, in accordance with the Belgian Civil Code."
+"Access to the catalogue is free of charge. Booking a vehicle requires "
+"creating a member account. MultiDrive reserves the right to suspend or "
+"delete an account in the event of misuse or non-compliance with these terms."
+
+#: .\vehicles\templates\vehicles\cgv.html:24
+msgid ""
+"MultiDrive se reserve le droit de suspendre ou de supprimer un compte en cas "
+"d'utilisation abusive, de fausse identite ou de non-respect des presentes "
+"conditions, sans prejudice de toute autre action legale."
+msgstr ""
+"MultiDrive reserves the right to suspend or delete an account in the event "
+"of misuse, false identity or non-compliance with these terms, without "
+"prejudice to any other legal action."
+
+#: .\vehicles\templates\vehicles\cgv.html:28
+msgid "3. Reservations et rendez-vous"
+msgstr "3. Bookings and appointments"
+
+#: .\vehicles\templates\vehicles\cgv.html:29
+msgid ""
+"Toute reservation est soumise a validation par l'administration. Un rendez-"
+"vous peut etre propose lors de la demande, dans les plages horaires "
+"definies :"
+msgstr ""
+"All bookings are subject to validation by the administration. An appointment "
+"may be requested at the time of the booking, within the defined time slots:"
+
+#: .\vehicles\templates\vehicles\cgv.html:31
+msgid "Du lundi au vendredi : 16h00 a 21h30"
+msgstr "Monday to Friday: 16:00 to 21:30"
+
+#: .\vehicles\templates\vehicles\cgv.html:32
+msgid "Le samedi et dimanche : 9h00 a 21h00"
+msgstr "Saturday and Sunday: 9:00 to 21:00"
+
+#: .\vehicles\templates\vehicles\cgv.html:34
+msgid ""
+"La confirmation de reservation n'entraine pas de transfert de propriete du "
+"vehicule. Le vehicule reste disponible jusqu'au paiement effectif de "
+"l'acompte ou du solde integral."
+msgstr ""
+"Booking confirmation does not transfer ownership of the vehicle. The vehicle "
+"remains available until the deposit or full balance is actually paid."
+
+#: .\vehicles\templates\vehicles\cgv.html:35
+msgid ""
+"Les prix et conditions de reservation sont affiches clairement avant toute "
+"validation de paiement, conformement aux obligations d'information prealable "
+"du consommateur prevues par le Code de droit economique belge (Livre VI)."
+msgstr "Prices and booking conditions are clearly displayed before any payment confirmation, in accordance with the pre-contractual consumer information obligations set out in the Belgian Code of Economic Law (Book VI)."
+"Prices and booking conditions are clearly displayed before any payment "
+"confirmation."
+
+#: .\vehicles\templates\vehicles\cgv.html:39
+msgid "4. Paiement et securite des transactions"
+msgstr "4. Payment and transaction security"
+
+#: .\vehicles\templates\vehicles\cgv.html:40
+msgid ""
+"Un acompte peut etre demande apres acceptation de la reservation. Cet "
+"acompte correspond a 20 %% du prix du vehicule, avec un minimum de 20 EUR et "
+"un maximum de 250 EUR."
+msgstr "A deposit may be requested after the booking is accepted. This deposit equals 20%% of the vehicle price, with a minimum of €20 and a maximum of €250."
+"A deposit may be requested after the booking is accepted. This deposit "
+"equals 20% of the vehicle price, with a minimum of 20 EUR and a maximum of "
+"250 EUR."
+
+#: .\vehicles\templates\vehicles\cgv.html:41
+msgid ""
+"Le paiement est traite de maniere securisee via Stripe Checkout, solution "
+"certifiee PCI-DSS niveau 1, conforme aux exigences de securite bancaire "
+"internationales. Les transactions sont chiffrees via HTTPS (TLS)."
+msgstr "Payment is processed securely via Stripe Checkout, a PCI-DSS Level 1 certified solution compliant with international banking security standards. Transactions are encrypted via HTTPS (TLS)."
+"Payment is processed securely via Stripe Checkout, a solution compliant with "
+"international payment security standards (PCI-DSS). Transactions are "
+"encrypted via HTTPS."
+
+#: .\vehicles\templates\vehicles\cgv.html:42
+msgid "Aucune donnee bancaire n'est stockee sur les serveurs de MultiDrive."
+msgstr "No banking data is stored on MultiDrive's servers."
+
+#: .\vehicles\templates\vehicles\cgv.html:42
+msgid ""
+"Les informations de carte sont traitees exclusivement par Stripe Inc. "
+"(responsable de traitement independant) et ne transitent jamais par notre "
+"application."
+msgstr "Card information is processed exclusively by Stripe Inc. (independent data controller) and never passes through our application."
+"Card information is processed exclusively by Stripe and never passes through "
+"our application."
+
+#: .\vehicles\templates\vehicles\cgv.html:43
+msgid ""
+"Conformement a la directive europeenne sur les services de paiement (DSP2), "
+"les paiements en ligne sont soumis a une authentification forte (3D Secure) "
+"geree par Stripe."
+msgstr "In accordance with the European Payment Services Directive (PSD2), online payments are subject to strong authentication (3D Secure) managed by Stripe."
+"In accordance with the European Payment Services Directive (PSD2), online "
+"payments are subject to strong authentication (3D Secure) managed by Stripe."
+
+#: .\vehicles\templates\vehicles\cgv.html:47
+msgid "5. Annulation et remboursement"
+msgstr "5. Cancellation and refund"
+
+#: .\vehicles\templates\vehicles\cgv.html:48
+msgid ""
+"Une reservation peut etre annulee par le membre selon les conditions "
+"suivantes :"
+msgstr ""
+"A booking may be cancelled by the member under the following conditions:"
+
+#: .\vehicles\templates\vehicles\cgv.html:50
+msgid ""
+"Reservation en attente (pending) : annulation libre, sans frais, a tout "
+"moment avant validation admin."
+msgstr "Pending booking: free cancellation, no charge."
+
+#: .\vehicles\templates\vehicles\cgv.html:51
+msgid ""
+"Reservation acceptee : annulation possible sans frais, avant tout versement."
+msgstr "Accepted booking: cancellation possible, no charge."
+
+#: .\vehicles\templates\vehicles\cgv.html:52
+msgid ""
+"Acompte verse : annulation possible. Des frais administratifs de 10 %% "
+"minimum du montant verse pourront etre retenus pour couvrir les frais de "
+"gestion engages."
+msgstr ""
+"Deposit paid: cancellation possible. An administrative fee of at least "
+"10% of the amount paid may be retained."
+
+#: .\vehicles\templates\vehicles\cgv.html:54
+msgid ""
+"Tout remboursement est traite par virement dans un delai maximal de 14 jours "
+"ouvrables a compter de la validation de la demande. Le membre est informe "
+"par notification dans son espace membre."
+msgstr "All refunds are processed by bank transfer within a maximum of 14 working days from the approval of the request. The member is notified in their member area."
+"All refunds are processed by bank transfer within a maximum of 14 working "
+"days from the approval of the request. The member is notified in their "
+"member area."
+
+#: .\vehicles\templates\vehicles\cgv.html:55
+msgid ""
+"Conformement a l'article VI.47 du Code de droit economique belge, le droit "
+"de retractation ne s'applique pas aux contrats de vente de biens dont la "
+"valeur est susceptible de fluctuer dans un delai court."
+msgstr "In accordance with Article VI.47 of the Belgian Code of Economic Law, the right of withdrawal does not apply to contracts for the sale of goods whose value is subject to fluctuation within a short period."
+"In accordance with Article VI.47 of the Belgian Code of Economic Law, the "
+"right of withdrawal does not apply to contracts for the sale of goods whose "
+"value is subject to fluctuation within a short period."
+
+#: .\vehicles\templates\vehicles\cgv.html:59
+msgid "6. Donnees personnelles"
+msgstr "6. Personal data"
+
+#: .\vehicles\templates\vehicles\cgv.html:60
+msgid ""
+"Le traitement des donnees personnelles est regi par le Reglement (UE) "
+"2016/679 du Parlement europeen et du Conseil (RGPD) et par la loi belge du "
+"30 juillet 2018 relative a la protection des personnes physiques a l'egard "
+"des traitements de donnees a caractere personnel."
+msgstr "The processing of personal data is governed by Regulation (EU) 2016/679 of the European Parliament and of the Council (GDPR) and by the Belgian law of 30 July 2018 on the protection of natural persons with regard to the processing of personal data."
+
+#: .\vehicles\templates\vehicles\cgv.html:61
+msgid ""
+"Pour le detail complet de la politique de traitement des donnees, veuillez "
+"consulter notre"
+msgstr "For full details of our data processing policy, please consult our"
+
+#: .\vehicles\templates\vehicles\cgv.html:62
+#: .\vehicles\templates\vehicles\cgv.html:104
+#: .\vehicles\templates\vehicles\confidentialite.html:4
+#: .\vehicles\templates\vehicles\confidentialite.html:9
+#: .\vehicles\templates\vehicles\fonctionnement.html:188
+msgid "Politique de confidentialite"
+msgstr "Privacy policy"
+
+#: .\vehicles\templates\vehicles\cgv.html:66
+msgid "7. Cookies"
+msgstr "7. Cookies"
+
+#: .\vehicles\templates\vehicles\cgv.html:67
+msgid ""
+"MultiDrive utilise uniquement des cookies techniques strictement necessaires "
+"au bon fonctionnement de la plateforme :"
+msgstr ""
+"MultiDrive only uses technical cookies required for its operation (session, "
+"security, language). No advertising cookies."
+
+#: .\vehicles\templates\vehicles\cgv.html:69
+msgid "Maintien de la session utilisateur (authentification Django)"
+msgstr "Maintaining the user session (Django authentication)"
+
+#: .\vehicles\templates\vehicles\cgv.html:70
+msgid "Protection contre les attaques CSRF (securite des formulaires)"
+msgstr "Protection against CSRF attacks (form security)"
+
+#: .\vehicles\templates\vehicles\cgv.html:71
+msgid "Memorisation de la preference de langue (choix FR / NL / EN)"
+msgstr "Remembering the language preference (FR / NL / EN)"
+
+#: .\vehicles\templates\vehicles\cgv.html:73
+msgid ""
+"Ces cookies sont strictement necessaires et ne necessitent pas de "
+"consentement prealable conformement a la directive europeenne ePrivacy "
+"(2002/58/CE) et a la recommandation de l'Autorite de Protection des Donnees "
+"belge. Aucun cookie publicitaire, analytique ou tiers n'est utilise."
+msgstr "These cookies are strictly necessary and do not require prior consent in accordance with the European ePrivacy Directive (2002/58/EC) and the recommendation of the Belgian Data Protection Authority. No advertising, analytical or third-party cookies are used."
+
+#: .\vehicles\templates\vehicles\cgv.html:77
+msgid "8. Propriete intellectuelle"
+msgstr "8. Intellectual property"
+
+#: .\vehicles\templates\vehicles\cgv.html:78
+msgid ""
+"Les contenus presentes sur MultiDrive (design, code source, textes, elements "
+"graphiques) sont proteges par la loi belge du 19 avril 2014 relative au "
+"droit d'auteur et aux droits voisins et par la Convention de Berne. Toute "
+"reproduction ou diffusion sans autorisation prealable est interdite."
+msgstr "The content presented on MultiDrive (design, source code, texts, graphics) is protected by the Belgian law of 19 April 2014 on copyright and related rights and by the Berne Convention. Any reproduction or distribution without prior authorisation is prohibited."
+
+#: .\vehicles\templates\vehicles\cgv.html:79
+msgid ""
+"Ce projet est realise a titre academique dans le cadre d'un Travail de Fin "
+"d'Etudes. Les images utilisees pour illustrer les vehicules proviennent de "
+"ressources libres de droits ou appartiennent au projet."
+msgstr "This project is carried out for academic purposes as part of a final year thesis. The images used to illustrate vehicles come from royalty-free resources or belong to the project."
+
+#: .\vehicles\templates\vehicles\cgv.html:83
+msgid "9. Responsabilite"
+msgstr "9. Liability"
+
+#: .\vehicles\templates\vehicles\cgv.html:84
+msgid ""
+"MultiDrive est un projet academique fourni a titre demonstratif. La "
+"plateforme est mise a disposition en l'etat, sans garantie de disponibilite "
+"continue. MultiDrive ne saurait etre tenu responsable des dommages directs "
+"ou indirects resultant de l'utilisation ou de l'impossibilite d'utiliser le "
+"service."
+msgstr "MultiDrive is an academic project provided for demonstrative purposes. The platform is provided as-is, without guarantee of continuous availability. MultiDrive cannot be held liable for direct or indirect damages resulting from the use or inability to use the service."
+
+#: .\vehicles\templates\vehicles\cgv.html:85
+msgid ""
+"En cas de litige, les parties s'engagent a rechercher une solution amiable "
+"avant tout recours judiciaire. Le droit belge est applicable. Les tribunaux "
+"de Bruxelles sont seuls competents."
+msgstr "In the event of a dispute, the parties agree to seek an amicable solution before taking legal action. Belgian law applies. The courts of Brussels have sole jurisdiction."
+
+#: .\vehicles\templates\vehicles\cgv.html:89
+msgid "10. Modification des conditions"
+msgstr "Change saved."
+
+#: .\vehicles\templates\vehicles\cgv.html:90
+msgid ""
+"MultiDrive se reserve le droit de modifier les presentes conditions a tout "
+"moment. Les utilisateurs seront informes de toute modification "
+"substantielle. La version en vigueur est celle affichee sur cette page avec "
+"la date de derniere mise a jour."
+msgstr "MultiDrive reserves the right to modify these terms at any time. Users will be informed of any substantial changes. The version in force is the one displayed on this page with the last update date."
+
+#: .\vehicles\templates\vehicles\cgv.html:94
+msgid "11. Contact"
+msgstr "Contact"
+
+#: .\vehicles\templates\vehicles\cgv.html:96
+msgid ""
+"Pour toute question relative aux conditions d'utilisation, a la protection "
+"des donnees ou a un remboursement, vous pouvez nous contacter via la"
+msgstr "For any question regarding the terms of use, data protection or a refund, you may contact us via the"
+
+#: .\vehicles\templates\vehicles\cgv.html:97
+#: .\vehicles\templates\vehicles\confidentialite.html:171
+msgid "page de contact"
+msgstr "contact page"
+
+#: .\vehicles\templates\vehicles\cgv.html:98
+msgid "ou par email a"
+msgstr "or by email at"
+
+#: .\vehicles\templates\vehicles\cgv.html:106
+#: .\vehicles\templates\vehicles\confidentialite.html:180
+#: .\vehicles\templates\vehicles\fonctionnement.html:9
+msgid "Fonctionnement et conditions d'utilisation"
+msgstr "How it works and terms of use"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:10
+msgid ""
+"Derniere mise a jour : aout 2026 — Conforme au RGPD (UE 2016/679) et a la "
+"loi belge du 30 juillet 2018"
+msgstr "Last updated: August 2026 — Compliant with GDPR (EU 2016/679) and Belgian law of 30 July 2018"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:16
+msgid "1. Responsable du traitement"
+msgstr "Payment details"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:17
+msgid ""
+"Le responsable du traitement des donnees a caractere personnel collectees "
+"sur la plateforme MultiDrive est :"
+msgstr "The controller of personal data collected on the MultiDrive platform is:"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:20
+msgid "Qualite"
+msgstr "Full amount"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:20
+msgid "Etudiant — Travail de Fin d'Etudes (TFE)"
+msgstr "Student — Final Year Project (TFE)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:23
+msgid ""
+"Ce traitement est realise dans un cadre strictement academique et "
+"demonstratif. Les donnees ne sont pas utilisees a des fins commerciales."
+msgstr "This processing is carried out in a strictly academic and demonstrative context. Data is not used for commercial purposes."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:27
+msgid "2. Base legale des traitements"
+msgstr "2. Legal basis for processing"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:28
+msgid ""
+"Conformement a l'article 6 du RGPD, les traitements realises sur MultiDrive "
+"reposent sur les bases legales suivantes :"
+msgstr ""
+
+#: .\vehicles\templates\vehicles\confidentialite.html:30
+msgid "Execution du contrat (art. 6.1.b)"
+msgstr "Contract performance (art. 6.1.b)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:30
+msgid "traitement du compte, des reservations et des paiements"
+msgstr "account, booking and payment processing"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:31
+msgid "Interet legitime (art. 6.1.f)"
+msgstr "Legitimate interest (art. 6.1.f)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:31
+msgid ""
+"securite de la plateforme, prevention des abus, historique de moderation"
+msgstr "platform security, abuse prevention, moderation history"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:32
+msgid "Consentement (art. 6.1.a)"
+msgstr "Consent (art. 6.1.a)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:32
+msgid "publication des temoignages sur la page publique"
+msgstr "publication of testimonials on the public page"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:37
+msgid "3. Donnees collectees"
+msgstr "6. Personal data"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:38
+msgid ""
+"MultiDrive collecte uniquement les donnees strictement necessaires au "
+"fonctionnement du service (principe de minimisation — art. 5.1.c RGPD) :"
+msgstr "MultiDrive collects only the data strictly necessary for the operation of the service (data minimisation principle — Art. 5.1.c GDPR):"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:44
+msgid "Donnee"
+msgstr "Year"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:45
+msgid "Finalite"
+msgstr "Full amount"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:46
+msgid "Obligatoire"
+msgstr "Required"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:52
+msgid "Identification du compte"
+msgstr "Vehicle identification"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:53
+#: .\vehicles\templates\vehicles\confidentialite.html:58
+#: .\vehicles\templates\vehicles\confidentialite.html:63
+#: .\vehicles\templates\vehicles\confidentialite.html:78
+#: .\vehicles\templates\vehicles\confidentialite.html:83
+msgid "Oui"
+msgstr "Yes"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:56
+msgid "Adresse e-mail"
+msgstr "Email address"
+
+# ─── password_reset_email.html ───────────────────────────────────────────────
+#: .\vehicles\templates\vehicles\confidentialite.html:57
+msgid "Authentification, notifications, reset de mot de passe"
+msgstr "Password reset"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:61
+msgid "Mot de passe (chiffre)"
+msgstr "Password changed"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:62
+msgid "Securisation du compte"
+msgstr "Account security"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:66
+msgid "Prenom (optionnel)"
+msgstr "First name (optional)"
+
+# ─── password_reset_email.html ───────────────────────────────────────────────
+#: .\vehicles\templates\vehicles\confidentialite.html:67
+msgid "Personnalisation des emails"
+msgstr "Password reset"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:68
+#: .\vehicles\templates\vehicles\confidentialite.html:73
+#: .\vehicles\templates\vehicles\confidentialite.html:88
+#: .\vehicles\templates\vehicles\confidentialite.html:93
+msgid "Non"
+msgstr "Last name"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:71
+msgid "Telephone (optionnel)"
+msgstr "Message for the member (optional)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:72
+msgid "Coordination des rendez-vous"
+msgstr "3. Bookings and appointments"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:76
+msgid "Historique reservations"
+msgstr "View reservations"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:77
+msgid "Suivi du parcours d'achat"
+msgstr "Purchase journey tracking"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:81
+msgid "Historique paiements"
+msgstr "View my payments"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:82
+msgid "Facturation, documents PDF, remboursements"
+msgstr "5. Cancellation and refund"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:86
+msgid "Messages de contact"
+msgstr "Message sent"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:87
+msgid "Gestion du support"
+msgstr "Support management"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:92
+msgid "Publication apres consentement explicite et validation admin"
+msgstr "Published after explicit consent and admin validation"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:99
+msgid ""
+"Les mots de passe sont stockes sous forme de hachage irreversible (PBKDF2-"
+"SHA256). Aucun mot de passe n'est lisible par l'administration."
+msgstr ""
+
+#: .\vehicles\templates\vehicles\confidentialite.html:103
+msgid "4. Duree de conservation"
+msgstr "Booking number"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:104
+msgid ""
+"Conformement au principe de limitation de la conservation (art. 5.1.e RGPD) :"
+msgstr "In accordance with the storage limitation principle (Art. 5.1.e GDPR):"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:106
+msgid ""
+"Donnees de compte : conservees pendant toute la duree d'activite du compte."
+msgstr "Account data: retained for the entire duration of account activity."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:107
+msgid ""
+"Apres suppression du compte : suppression logique (soft delete) conservant "
+"l'historique transactionnel pendant 3 ans a des fins de preuve, conformement "
+"a la prescription quinquennale du droit belge (art. 2262bis Code civil)."
+msgstr "After account deletion: logical deletion (soft delete) retaining transaction history for 3 years for evidentiary purposes, in accordance with the five-year prescription period under Belgian law (Art. 2262bis Civil Code)."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:108
+msgid ""
+"Temoignages supprimes : conserves en base de donnees pendant 1 an pour "
+"permettre toute action en justice en cas de contenu illicite."
+msgstr "Deleted testimonials: retained in the database for 1 year to allow legal action in the event of unlawful content."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:109
+msgid "Messages de contact : conserves 2 ans apres la derniere interaction."
+msgstr "Contact messages: retained for 2 years after the last interaction."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:114
+msgid "5. Destinataires des donnees"
+msgstr "5. Data recipients"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:115
+msgid ""
+"Les donnees personnelles ne sont jamais vendues, cedees ou louees a des "
+"tiers."
+msgstr "Personal data is never sold, transferred or rented to third parties."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:116
+msgid "Les seuls destinataires sont :"
+msgstr "The only recipients are:"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:118
+msgid ""
+"sous-traitant pour le traitement securise des paiements. Stripe agit en tant "
+"que responsable de traitement independant pour les donnees bancaires. "
+"Politique de confidentialite Stripe : stripe.com/privacy."
+msgstr "sub-processor for secure payment processing. Stripe acts as an independent data controller for banking data. Stripe privacy policy: stripe.com/privacy."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:119
+msgid ""
+"routage des emails transactionnels (confirmations, notifications). Les "
+"emails sont transmis via SMTP chiffre TLS."
+msgstr "routing of transactional emails (confirmations, notifications). Emails are transmitted via TLS-encrypted SMTP."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:121
+msgid ""
+"Aucun transfert de donnees en dehors de l'Espace Economique Europeen (EEE) "
+"n'est effectue, sauf pour Stripe dont les transferts sont encadres par des "
+"clauses contractuelles types (CCT) approuvees par la Commission europeenne."
+msgstr "No data transfer outside the European Economic Area (EEA) takes place, except for Stripe whose transfers are governed by Standard Contractual Clauses (SCCs) approved by the European Commission."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:125
+msgid "6. Vos droits"
+msgstr "6. Your rights"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:126
+msgid ""
+"Conformement aux articles 15 a 22 du RGPD et a la loi belge du 30 juillet "
+"2018, vous disposez des droits suivants :"
+msgstr "In accordance with Articles 15 to 22 of the GDPR and the Belgian law of 30 July 2018, you have the following rights:"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:128
+msgid "Droit d'acces (art. 15)"
+msgstr "Right of access (art. 15)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:128
+msgid ""
+"obtenir la confirmation que vos donnees sont traitees et en recevoir une "
+"copie."
+msgstr "obtain confirmation that your data is being processed and receive a copy."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:129
+msgid "Droit de rectification (art. 16)"
+msgstr "Deactivation date: {{ date }}"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:129
+msgid ""
+"corriger des donnees inexactes depuis votre profil ou en nous contactant."
+msgstr "correct inaccurate data from your profile or by contacting us."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:130
+msgid "Droit a l'effacement (art. 17)"
+msgstr "Right to erasure (art. 17)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:130
+msgid ""
+"demander la suppression de votre compte directement depuis votre espace "
+"personnel."
+msgstr "request deletion of your account directly from your personal area."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:131
+msgid "Droit a la limitation (art. 18)"
+msgstr "Right to restriction (art. 18)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:131
+msgid "demander la suspension temporaire du traitement de vos donnees."
+msgstr "request the temporary suspension of the processing of your data."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:132
+msgid "Droit a la portabilite (art. 20)"
+msgstr "Right to data portability (art. 20)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:132
+msgid "recevoir vos donnees dans un format structure et lisible par machine."
+msgstr "receive your data in a structured, machine-readable format."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:133
+msgid "Droit d'opposition (art. 21)"
+msgstr "Right to object (art. 21)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:133
+msgid "vous opposer a un traitement base sur notre interet legitime."
+msgstr "object to processing based on our legitimate interest."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:135
+msgid "Pour exercer ces droits, contactez-nous a"
+msgstr "To exercise these rights, contact us at"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:135
+msgid ""
+"Nous repondons dans un delai maximum de 30 jours conformement a l'art. 12 "
+"RGPD."
+msgstr "We respond within a maximum of 30 days in accordance with Art. 12 GDPR."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:139
+msgid "7. Securite des donnees"
+msgstr "Account security"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:140
+msgid ""
+"MultiDrive met en oeuvre les mesures techniques et organisationnelles "
+"suivantes pour proteger vos donnees (art. 32 RGPD) :"
+msgstr "MultiDrive implements the following technical and organisational measures to protect your data (Art. 32 GDPR):"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:142
+msgid "Chiffrement HTTPS (TLS) sur toutes les pages"
+msgstr "HTTPS (TLS) encryption on all pages"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:143
+msgid "Headers de securite HTTP : HSTS, X-Frame-Options, CSRF protection"
+msgstr "HTTP security headers: HSTS, X-Frame-Options, CSRF protection"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:144
+msgid "Hachage irreversible des mots de passe (PBKDF2-SHA256)"
+msgstr "Irreversible password hashing (PBKDF2-SHA256)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:145
+msgid "Tokens de reinitialisation de mot de passe a usage unique, valables 24h"
+msgstr "Single-use password reset tokens, valid for 24 hours"
+"This reset link is invalid or has expired. Links are valid for 24 hours."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:146
+msgid ""
+"Secrets d'application stockes dans des variables d'environnement (jamais "
+"dans le code source)"
+msgstr "Application secrets stored in environment variables (never in source code)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:147
+msgid ""
+"Acces aux donnees sensibles restreint aux comptes staff et superadmin "
+"authentifies"
+msgstr "Access to sensitive data restricted to authenticated staff and superadmin accounts"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:152
+msgid "8. Cookies"
+msgstr "8. Cookies"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:153
+msgid ""
+"MultiDrive n'utilise que des cookies techniques strictement necessaires, "
+"exempts de consentement selon la recommandation de l'APD belge. Aucun cookie "
+"publicitaire ou de suivi tiers n'est pose."
+msgstr "MultiDrive uses only strictly necessary technical cookies, exempt from consent under the Belgian DPA recommendation. No advertising or third-party tracking cookies are placed."
+"MultiDrive only uses technical cookies required for its operation (session, "
+"security, language). No advertising cookies."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:154
+msgid "Pour plus de details, consultez la section Cookies de nos"
+msgstr "For more details, see the Cookies section of our"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:158
+msgid "9. Autorite de controle"
+msgstr "9. Supervisory authority"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:159
+msgid ""
+"Si vous estimez que le traitement de vos donnees personnelles constitue une "
+"violation du RGPD ou de la loi du 30 juillet 2018, vous avez le droit "
+"d'introduire une reclamation aupres de l'autorite de controle belge :"
+msgstr "If you believe that the processing of your personal data constitutes a violation of the GDPR or the law of 30 July 2018, you have the right to lodge a complaint with the Belgian supervisory authority:"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:161
+msgid "Autorite de Protection des Donnees (APD)"
+msgstr "Data Protection Authority (APD)"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:164
+msgid ""
+"Cette demarche ne vous prive pas de votre droit de recours judiciaire aupres "
+"des tribunaux belges competents."
+msgstr "This action does not deprive you of your right to judicial redress before the competent Belgian courts."
+
+#: .\vehicles\templates\vehicles\confidentialite.html:168
+msgid "10. Contact"
+msgstr "Contact"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:170
+msgid ""
+"Pour toute question relative au traitement de vos donnees personnelles ou "
+"pour exercer vos droits, contactez-nous via la"
+msgstr "For any question regarding the processing of your personal data or to exercise your rights, contact us via the"
+
+#: .\vehicles\templates\vehicles\confidentialite.html:172
+msgid "ou directement a"
+msgstr "or directly at"
+
+# ─── cgv.html ────────────────────────────────────────────────────────────────
+#: .\vehicles\templates\vehicles\fonctionnement.html:8
+msgid "Informations"
+msgstr "Legal information"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:10
+msgid "Tout ce que vous devez savoir pour utiliser MultiDrive."
+msgstr "Everything you need to know to use MultiDrive."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:16
+msgid "1. Qu'est-ce que MultiDrive ?"
+msgstr "The MultiDrive team"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:17
+msgid ""
+"MultiDrive est une plateforme web de consultation, de reservation et de "
+"suivi de vehicules d'occasion accessibles. Elle regroupe plusieurs types de "
+"vehicules :"
+msgstr "A simple platform to browse, book, and track affordable used vehicles."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:19
+msgid "Velos et trottinettes"
+msgstr "Bicycles and scooters"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:20
+msgid "Scooters et motos legeres"
+msgstr "Scooters and light motorcycles"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:21
+msgid "Petites voitures et citadines"
+msgstr "Small cars and city vehicles"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:22
+msgid "Utilitaires legers"
+msgstr "Light vans"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:24
+msgid ""
+"L'objectif est de proposer une interface claire et moderne permettant a tout "
+"particulier de trouver un vehicule adapte a ses besoins, de faire une "
+"demande de reservation en ligne et de suivre l'evolution de son dossier "
+"depuis son espace membre."
+msgstr "The aim is to provide a clear, modern interface allowing any individual to find a vehicle suited to their needs, submit an online booking request and track the progress of their file from their member area."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:26
+msgid ""
+"MultiDrive est realise dans le cadre d'un Travail de Fin d'Etudes (TFE) "
+"academique. Les vehicules et les prix affiches sont des donnees de "
+"demonstration. Aucune vente reelle n'est effectuee."
+msgstr ""
+"MultiDrive is a web platform for browsing and booking used vehicles. It is "
+"operated as part of an academic project (final year thesis). The vehicles "
+"presented are demonstration data and do not constitute real commercial "
+"offers."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:31
+msgid "2. Comment ca fonctionne ?"
+msgstr "2. How does it work?"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:32
+msgid "Le parcours complet se deroule en 5 etapes simples :"
+msgstr "The complete process takes place in 5 simple steps:"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:39
+msgid "Consulter le catalogue"
+msgstr "Browse the catalogue"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:40
+msgid ""
+"Parcourez les vehicules disponibles, filtrez par categorie, prix ou statut. "
+"Chaque fiche vehicule affiche les photos, les caracteristiques techniques "
+"(etat carrosserie, moteur) et les temoignages d'acheteurs."
+msgstr "Browse available vehicles, filter by category, price or status. Each vehicle page shows photos, technical specifications (bodywork condition, engine) and buyer testimonials."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:47
+msgid "Creer un compte et se connecter"
+msgstr "Create an account"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:48
+msgid ""
+"La reservation necessite un compte membre. L'inscription est gratuite et ne "
+"demande qu'un nom d'utilisateur et une adresse email. Vous pouvez "
+"reinitialiser votre mot de passe a tout moment par email."
+msgstr "Booking requires a member account. Registration is free and only requires a username and email address. You can reset your password at any time by email."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:55
+msgid "Faire une demande de reservation"
+msgstr "Confirmation of your booking request"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:56
+msgid ""
+"Depuis la fiche vehicule, cliquez sur Reserver. Indiquez votre creneau "
+"souhaite (lundi-vendredi 16h-21h30, week-end 9h-21h), un numero de telephone "
+"optionnel et un message pour l'equipe. La reservation est soumise a "
+"validation."
+msgstr "From the vehicle page, click Reserve. Indicate your preferred time slot (Monday–Friday 16:00–21:30, weekends 9:00–21:00), an optional phone number and a message for the team. The booking is subject to validation."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:63
+msgid "Payer l'acompte via Stripe"
+msgstr "Pay the deposit via Stripe"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:64
+#, python-format
+msgid ""
+"Une fois la reservation acceptee, vous pouvez verser un acompte (20 %% du "
+"prix, min 20 EUR, max 250 EUR) ou payer la totalite directement. Le paiement "
+"est securise via Stripe Checkout. Aucune donnee bancaire ne passe par nos "
+"serveurs."
+msgstr ""
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:71
+msgid "Finaliser et recevoir vos documents"
+msgstr "Finalise and receive your documents"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:72
+msgid ""
+"Apres paiement integral, vos documents sont disponibles en telechargement "
+"depuis votre espace membre : recu d'acompte, facture finale, acte de cession "
+"et specimen d'immatriculation. Vous pouvez egalement laisser un temoignage "
+"sur votre experience."
+msgstr "After full payment, your documents are available for download from your member area: deposit receipt, final invoice, transfer deed and registration specimen. You can also leave a testimonial about your experience."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:80
+msgid "3. Statuts de votre reservation"
+msgstr "Booking status"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:81
+msgid ""
+"Votre reservation evolue selon le cycle suivant, visible a tout moment dans "
+"votre espace membre :"
+msgstr "Your booking progresses through the following cycle, visible at any time in your member area:"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:87
+msgid "Signification"
+msgstr "Identification"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:93
+msgid "Votre demande est soumise et en cours de traitement par l'equipe."
+msgstr "Refund being processed"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:97
+msgid ""
+"La reservation est validee. Le vehicule est reserve pour vous. Vous pouvez "
+"proceder au paiement."
+msgstr "The booking is confirmed. The vehicle is reserved for you. You may proceed to payment."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:101
+msgid ""
+"L'acompte a ete recu. Le vehicule vous est reserve jusqu'au rendez-vous de "
+"remise."
+msgstr "The deposit has been received. The vehicle is reserved for you until the handover appointment."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:105
+msgid ""
+"La reservation n'a pas pu etre acceptee (vehicule deja reserve, creneau "
+"indisponible)."
+msgstr "The booking could not be accepted (vehicle already reserved, slot unavailable)."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:109
+msgid ""
+"La reservation a ete annulee. Si un acompte avait ete verse, un "
+"remboursement est en cours de traitement."
+msgstr "The booking has been cancelled. If a deposit was paid, a refund is being processed."
+
+# ─── Favorites page (vehicles/my_favorites.html) ─────────────────────────────
+#: .\vehicles\templates\vehicles\fonctionnement.html:117
+msgid "4. Votre espace membre"
+msgstr "Member area"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:118
+msgid "Une fois connecte, votre espace membre vous donne acces a :"
+msgstr "Once logged in, your member area gives you access to:"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:120
+msgid "suivi en temps reel de toutes vos demandes avec statut et rendez-vous"
+msgstr "real-time tracking of all your requests with status and appointment"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:121
+msgid ""
+"historique des versements, solde restant, telechargement des documents PDF"
+msgstr "payment history, remaining balance, PDF document download"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:122
+msgid "vehicules mis en favoris pour les retrouver rapidement"
+msgstr "vehicles saved as favourites for quick access"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:123
+msgid "echanges avec l'equipe MultiDrive et suivi des reponses"
+msgstr "exchanges with the MultiDrive team and response tracking"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:124
+msgid ""
+"modification des informations personnelles, changement de mot de passe, "
+"suppression du compte"
+msgstr "editing personal information, changing password, deleting account"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:126
+msgid ""
+"Des badges de notification (bulles rouges) apparaissent dans le menu des "
+"qu'une action requiert votre attention (reservation acceptee, reponse a un "
+"message, etc.)."
+msgstr "Notification badges (red bubbles) appear in the menu as soon as an action requires your attention (booking accepted, reply to a message, etc.)."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:130
+msgid "5. Conditions d'utilisation"
+msgstr "Terms of transfer"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:131
+msgid "Pour utiliser MultiDrive, vous vous engagez a :"
+msgstr "To use MultiDrive, you agree to:"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:133
+msgid ""
+"Fournir des informations exactes lors de l'inscription et lors de toute "
+"demande."
+msgstr "Provide accurate information at registration and for any request."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:134
+msgid "Ne pas creer plusieurs comptes pour un meme utilisateur."
+msgstr "Not to create multiple accounts for the same user."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:135
+msgid ""
+"Respecter les creneaux de rendez-vous valides et prevenir en cas "
+"d'empechement."
+msgstr "Respect confirmed appointment slots and give notice if unable to attend."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:136
+msgid ""
+"Ne pas utiliser la plateforme a des fins frauduleuses, abusives ou "
+"contraires aux lois belges en vigueur."
+msgstr "Not to use the platform for fraudulent, abusive or unlawful purposes under Belgian law."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:137
+msgid ""
+"Ne pas tenter d'acceder aux donnees d'autres membres ou de contourner les "
+"mecanismes de securite."
+msgstr "Not to attempt to access other members' data or bypass security mechanisms."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:139
+msgid ""
+"Tout manquement a ces regles peut entrainer la suspension ou la suppression "
+"du compte, sans prejudice de toute action legale eventuelle."
+msgstr "Any breach of these rules may result in account suspension or deletion, without prejudice to any legal action."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:143
+msgid "6. Roles et acces"
+msgstr "6. Roles and access"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:148
+msgid "Role"
+msgstr "Role"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:149
+msgid "Acces"
+msgstr "Accepted"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:154
+msgid "Visiteur"
+msgstr "Visitor"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:155
+msgid ""
+"Catalogue, fiches vehicules, temoignages, page de contact (sans compte "
+"requis)."
+msgstr "Catalogue, vehicle pages, testimonials, contact page (no account required)."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:159
+msgid ""
+"Tout le catalogue + reservations, paiements, favoris, profil, messages, "
+"temoignages."
+msgstr "Full catalogue + bookings, payments, favourites, profile, messages, testimonials."
+
+# ─── Admin dashboard ─────────────────────────────────────────────────────────
+#: .\vehicles\templates\vehicles\fonctionnement.html:162
+msgid "Administrateur"
+msgstr "Administration"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:163
+msgid ""
+"Dashboard de gestion : reservations, paiements, vehicules, temoignages, "
+"messages, remboursements."
+msgstr "Management dashboard: bookings, payments, vehicles, testimonials, messages, refunds."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:166
+msgid "Superadmin"
+msgstr "Add an admin"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:167
+msgid ""
+"Tout + gestion des comptes administrateurs (creation, desactivation, retrait "
+"de droits)."
+msgstr "Everything + administrator account management (creation, deactivation, removal of rights)."
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:175
+msgid "7. Contact et support"
+msgstr "Contact MultiDrive"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:176
+msgid ""
+"Pour toute question, signalement ou demande d'assistance, plusieurs options "
+"sont disponibles :"
+msgstr "For any question, report or assistance request, several options are available:"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:178
+msgid "Formulaire de contact"
+msgstr "Contact form"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:178
+msgid "accessible sans connexion"
+msgstr "Last login"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:179
+msgid "Email direct"
+msgstr "Direct email"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:180
+msgid "Espace Mes messages"
+msgstr "My messages"
+
+#: .\vehicles\templates\vehicles\fonctionnement.html:180
+msgid "pour les membres connectes, avec suivi des reponses admin"
+msgstr "for connected members, with admin response tracking"
+
+#: .\vehicles\templates\vehicles\home.html:11
+msgid "Occasion accessible"
+msgstr "Affordable used vehicle"
+
+#: .\vehicles\templates\vehicles\home.html:14
+msgid ""
+"MultiDrive rassemble des vehicules d'occasion a prix raisonnable, avec une "
+"navigation claire pour consulter, reserver et preparer un acompte."
+msgstr ""
+"MultiDrive brings together second-hand vehicles at reasonable prices, with "
+"clear navigation to browse, reserve and prepare a deposit."
+
+#: .\vehicles\templates\vehicles\home.html:17
+msgid "Voir les vehicules"
+msgstr "View vehicle"
+
+#: .\vehicles\templates\vehicles\home.html:19
+msgid "Gerer la base"
+msgstr "Manage the database"
+
+#: .\vehicles\templates\vehicles\home.html:29
+msgid "vehicules disponibles"
+msgstr "Translations available"
+
+#: .\vehicles\templates\vehicles\home.html:33
+msgid "categories"
+msgstr "Category"
+
+#: .\vehicles\templates\vehicles\home.html:39
+msgid "Comment utiliser MultiDrive"
+msgstr "Contact MultiDrive"
+
+#: .\vehicles\templates\vehicles\home.html:40
+msgid "Un parcours simple pour trouver, reserver et suivre ton vehicule."
+msgstr "A simple platform to browse, book, and track affordable used vehicles."
+
+#: .\vehicles\templates\vehicles\home.html:45
+msgid "Choisir un vehicule"
+msgstr "View vehicle"
+
+#: .\vehicles\templates\vehicles\home.html:46
+msgid "Explore le catalogue et compare les prix, categories et disponibilites."
+msgstr "Browse the catalogue and compare prices, categories and availability."
+
+#: .\vehicles\templates\vehicles\home.html:52
+msgid "Reserver"
+msgstr "Reserved"
+
+#: .\vehicles\templates\vehicles\home.html:53
+msgid "Connecte-toi et envoie une demande de reservation en quelques clics."
+msgstr "Confirmation of your booking request"
+
+#: .\vehicles\templates\vehicles\home.html:59
+msgid "Suivre ton dossier"
+msgstr "Track your file"
+
+#: .\vehicles\templates\vehicles\home.html:60
+msgid "Consulte ensuite tes reservations et paiements dans ton espace membre."
+msgstr "You can track the progress of your booking from your member area."
+
+#: .\vehicles\templates\vehicles\home.html:71
+msgid "Categories"
+msgstr "Category"
+
+#: .\vehicles\templates\vehicles\home.html:72
+#, python-format
+msgid "%(count)s categories disponibles dans la base."
+msgstr "%(count)s categories available."
+
+#: .\vehicles\templates\vehicles\home.html:80
+msgid "Aucune categorie disponible."
+msgstr "Testimonial deleted."
+
+#: .\vehicles\templates\vehicles\home.html:87
+msgid "Vehicules populaires"
+msgstr "Vehicles sold"
+
+#: .\vehicles\templates\vehicles\home.html:88
+msgid "Une selection de vehicules accessibles pour demarrer rapidement."
+msgstr "A selection of affordable vehicles to get started quickly."
+
+#: .\vehicles\templates\vehicles\home.html:94
+msgid "Aucun vehicule populaire disponible pour le moment."
+msgstr "No testimonial published yet."
+
+#: .\vehicles\templates\vehicles\home.html:101
+msgid "Derniers vehicules disponibles"
+msgstr "Manage vehicles"
+
+#: .\vehicles\templates\vehicles\home.html:102
+msgid "Un apercu des nouvelles annonces actuellement publiees."
+msgstr "An overview of the latest listings currently published."
+
+#: .\vehicles\templates\vehicles\home.html:108
+msgid "Aucun vehicule disponible pour le moment."
+msgstr "No testimonial published yet."
+
+#: .\vehicles\templates\vehicles\my_favorites.html:10
+msgid "Les vehicules que vous avez mis en favori."
+msgstr "The vehicles you have added to your favourites."
+
+# ─── my_purchases.html ───────────────────────────────────────────────────────
+#: .\vehicles\templates\vehicles\my_favorites.html:23
+msgid "Aucun favori pour l'instant"
+msgstr "No purchases yet."
+
+#: .\vehicles\templates\vehicles\my_favorites.html:24
+msgid "Cliquez sur l'etoile d'un vehicule pour l'ajouter ici."
+msgstr "Click the star on a vehicle to add it here."
+
+#: .\vehicles\templates\vehicles\partials\vehicle_card.html:7
+msgid "Image a venir"
+msgstr "Image coming soon"
+
+#: .\vehicles\templates\vehicles\partials\vehicle_card.html:15
+#: .\vehicles\templates\vehicles\vehicle_detail.html:44
+msgid "Retirer des favoris"
+msgstr "Remove rights"
+
+#: .\vehicles\templates\vehicles\partials\vehicle_card.html:15
+#: .\vehicles\templates\vehicles\vehicle_detail.html:44
+msgid "Ajouter aux favoris"
+msgstr "Add an admin"
+
+#: .\vehicles\templates\vehicles\partials\vehicle_card.html:24
+#, python-format
+msgid "Annee %(year)s"
+msgstr "Year %(year)s"
+
+#: .\vehicles\templates\vehicles\partials\vehicle_card.html:25
+#, python-format
+msgid "Acompte estime %(deposit)s EUR"
+msgstr "Estimated deposit %(deposit)s EUR"
+
+#: .\vehicles\templates\vehicles\partials\vehicle_card.html:32
+msgid "Voir la fiche"
+msgstr "View vehicle"
+
+#: .\vehicles\templates\vehicles\vehicle_detail.html:33
+msgid "Fermer"
+msgstr "Close"
+
+#: .\vehicles\templates\vehicles\vehicle_detail.html:58
+msgid "Fiche technique"
+msgstr "Technical specifications"
+
+#: .\vehicles\templates\vehicles\vehicle_detail.html:77
+msgid "Carrosserie"
+msgstr "Body"
+
+#: .\vehicles\templates\vehicles\vehicle_detail.html:81
+msgid "Moteur"
+msgstr "Engine"
+
+#: .\vehicles\templates\vehicles\vehicle_detail.html:87
+msgid "Commentaire"
+msgstr "Comment"
+
+#: .\vehicles\templates\vehicles\vehicle_detail.html:93
+msgid "Prix de vente"
+msgstr "Sale file"
+
+#: .\vehicles\templates\vehicles\vehicle_detail.html:97
+msgid "Acompte (20%%)"
+msgstr "Deposit (20%)"
+
+#: .\vehicles\templates\vehicles\vehicle_detail.html:106
+msgid "Ce vehicule est deja reserve."
+msgstr "This payment has already been recorded."
+
+#: .\vehicles\templates\vehicles\vehicle_detail.html:108
+msgid "Ce vehicule n'est plus disponible."
+msgstr "This vehicle is no longer available."
+
+#: .\vehicles\templates\vehicles\vehicle_detail.html:117
+msgid "Vehicules similaires"
+msgstr "Vehicles sold"
+
+#: .\vehicles\templates\vehicles\vehicle_detail.html:123
+msgid "Aucune suggestion disponible."
+msgstr "Translations available"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:9
+msgid "Vehicules d'occasion"
+msgstr "Used (second-hand vehicle)"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:10
+msgid ""
+"Consulte le catalogue principal et affine rapidement par recherche, "
+"categorie ou statut."
+msgstr ""
+"Browse the main catalogue and quickly filter by search, category or status."
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:16
+msgid "Recherche"
+msgstr "Search"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:17
+msgid "Rechercher un modele, une marque ou un type de vehicule"
+msgstr "Search by model, brand or vehicle type"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:22
+msgid "Toutes"
+msgstr "All"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:33
+msgid "Tous"
+msgstr "All"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:41
+msgid "Filtrer"
+msgstr "Filter"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:48
+#, python-format
+msgid "%(count)s resultat(s)"
+msgstr "%(count)s result(s)"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:49
+msgid "Des cartes lisibles pour comparer rapidement les vehicules disponibles."
+msgstr "Clear cards to quickly compare available vehicles."
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:51
+msgid "Reinitialiser"
+msgstr "Password reset"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:57
+msgid "Aucun vehicule ne correspond a ce filtre."
+msgstr "Vehicles sold"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:62
+msgid "Pagination"
+msgstr "Navigation"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:64
+#: .\vehicles\templates\vehicles\vehicle_list.html:66
+msgid "Precedent"
+msgstr "Previous"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:69
+#, python-format
+msgid "Page %(num)s sur %(total)s"
+msgstr "Page %(num)s of %(total)s"
+
+#: .\vehicles\templates\vehicles\vehicle_list.html:72
+#: .\vehicles\templates\vehicles\vehicle_list.html:74
+msgid "Suivant"
+msgstr "Next"
+
+msgid "Velo"
+msgstr "Bicycle"
+
+msgid "Trottinette"
+msgstr "Kick scooter"
 
 msgid "Scooter"
 msgstr "Scooter"
 
-msgid "Camping-car"
-msgstr "Motorhome"
-
-msgid "Utilitaire"
-msgstr "Commercial vehicle"
-
-msgid "Break"
-msgstr "Estate"
+msgid "Moto legere"
+msgstr "Light motorcycle"
 
 msgid "Citadine"
 msgstr "City car"
 
 msgid "Compacte"
-msgstr "Compact"
+msgstr "Compact car"
 
-msgid "Monospace"
-msgstr "Minivan"
-
-msgid "Moto legere"
-msgstr "Light motorcycle"
-
-msgid "SUV compact"
-msgstr "Compact SUV"
-
-msgid "Trottinette"
-msgstr "E-scooter"
+msgid "Break"
+msgstr "Station wagon"
 
 msgid "Utilitaire leger"
 msgstr "Light van"
 
-msgid "Velo"
-msgstr "Bicycle"
+msgid "Monospace"
+msgstr "Minivan"
 
-# ─── Profile page (accounts/profile.html) ────────────────────────────────────
+msgid "SUV compact"
+msgstr "Compact SUV"
 
-msgid "Retrouvez ici les informations principales de votre compte MultiDrive."
-msgstr "Find here the main information for your MultiDrive account."
+msgid "Ex : +32 470 12 34 56"
+msgstr "e.g. +32 470 12 34 56"
 
-msgid "Date d'inscription"
-msgstr "Registration date"
-
-msgid "Derniere connexion"
-msgstr "Last login"
-
-msgid "Suivi rapide"
-msgstr "Quick overview"
-
-msgid "Paiements"
-msgstr "Payments"
-
-msgid "Paiements valides"
-msgstr "Valid payments"
-
-msgid "Voir mes reservations"
-msgstr "View my bookings"
-
-msgid "Voir mes paiements"
-msgstr "View my payments"
-
-msgid "Securite du compte"
-msgstr "Account security"
-
-msgid "Vous pouvez modifier votre mot de passe a tout moment depuis cette page."
-msgstr "You can change your password at any time from this page."
-
-msgid "Suppression du compte"
-msgstr "Account deletion"
-
-msgid "Vous pouvez demander la desactivation de votre compte. Le compte sera conserve en base en soft delete pour l'historique et l'administration."
-msgstr "You can request the deactivation of your account. The account will be kept in the database as a soft delete for history and administration purposes."
-
-msgid "Demander la suppression du compte"
-msgstr "Request account deletion"
-
-msgid "Ce compte a deja ete desactive. Libelle : {{ label }}."
-msgstr "This account has already been deactivated. Label: {{ label }}."
-
-msgid "Motif :"
-msgstr "Reason:"
-
-msgid "desactivation administrative."
-msgstr "administrative deactivation."
-
-msgid "demande utilisateur."
-msgstr "user request."
-
-msgid "Date de desactivation : {{ date }}"
-msgstr "Deactivation date: {{ date }}"
-
-# ─── Favorites page (vehicles/my_favorites.html) ─────────────────────────────
-
-msgid "Espace membre"
-msgstr "Member area"
-
-msgid "Les vehicules que vous avez mis en favori."
-msgstr "The vehicles you have added to your favourites."
-
-msgid "Aucun favori pour l'instant"
-msgstr "No favourites yet"
-
-msgid "Cliquez sur l'etoile d'un vehicule pour l'ajouter ici."
-msgstr "Click the star on a vehicle to add it here."
-
-# ─── Payment list (accounts/payment_list.html) ───────────────────────────────
-
-msgid "Retrouvez ici tous vos acomptes verses, les vehicules acquis et les details financiers associes."
-msgstr "Find here all your paid deposits, acquired vehicles and associated financial details."
-
-msgid "Total paiements"
-msgstr "Total payments"
-
-msgid "Acomptes valides"
-msgstr "Valid deposits"
-
-msgid "Montant total verse"
-msgstr "Total amount paid"
-
-msgid "Deja verse"
-msgstr "Already paid"
-
-msgid "Rendez-vous"
-msgstr "Appointment"
-
-msgid "%(date)s a %(time)s"
-msgstr "%(date)s at %(time)s"
-
-msgid "Documents"
-msgstr "Documents"
-
-msgid "Statut reservation"
-msgstr "Booking status"
-
-msgid "Dossier de vente"
-msgstr "Sale file"
-
-msgid "Facture finale"
-msgstr "Final invoice"
-
-msgid "Acte de cession"
-msgstr "Transfer deed"
-
-msgid "Specimen immatriculation"
-msgstr "Registration specimen"
-
-msgid "Reference"
-msgstr "Reference"
-
-msgid "Acompte"
-msgstr "Deposit"
-
-msgid "Recu d'acompte"
-msgstr "Deposit receipt"
-
-msgid "Dossier complet disponible apres paiement integral"
-msgstr "Full file available after complete payment"
-
-msgid "Disponible apres paiement"
-msgstr "Available after payment"
-
-msgid "Remboursement en cours de traitement"
-msgstr "Refund being processed"
-
-msgid "Votre demande de remboursement a ete enregistree. Notre equipe la traitera sous 14 jours. Des frais administratifs de 10 % minimum peuvent etre retenus."
-msgstr "Your refund request has been registered. Our team will process it within 14 days. Administrative fees of at least 10% may be deducted."
-
-msgid "Remboursement effectue"
-msgstr "Refund completed"
-
-msgid "Montant rembourse : {{ amount }} EUR"
-msgstr "Refunded amount: {{ amount }} EUR"
-
-msgid "Completer le paiement ({{ remaining }} EUR)"
-msgstr "Complete payment ({{ remaining }} EUR)"
-
-msgid "Confirmer l annulation et la demande de remboursement ?"
-msgstr "Confirm cancellation and refund request?"
-
-msgid "Annuler et demander un remboursement"
-msgstr "Cancel and request a refund"
-
-# ─── Register page (accounts/register.html) ──────────────────────────────────
-
-msgid "Nouveau client"
-msgstr "New customer"
-
-msgid "Un compte est necessaire pour reserver un vehicule ou payer un acompte."
-msgstr "An account is required to book a vehicle or pay a deposit."
-
-msgid "Creer mon compte"
-msgstr "Create my account"
-
-msgid "Deja inscrit ?"
-msgstr "Already registered?"
-
-# ─── Checkout page (payments/checkout.html) ──────────────────────────────────
-
-msgid "Selectionnez la reservation a regler et choisissez le montant."
-msgstr "Select the booking to pay and choose the amount."
-
-msgid "Votre panier"
-msgstr "Your cart"
-
-msgid "Informations de paiement"
-msgstr "Payment information"
-
-msgid "Montant a regler"
-msgstr "Amount to pay"
-
-msgid "Acompte (20 %)"
-msgstr "Deposit (20%)"
-
-msgid "20 % du prix, min. 20 EUR / max. 250 EUR"
-msgstr "20% of the price, min. 20 EUR / max. 250 EUR"
-
-msgid "Totalite"
-msgstr "Full amount"
-
-msgid "Solde complet du vehicule"
-msgstr "Full vehicle balance"
-
-msgid "Montant personnalise"
-msgstr "Custom amount"
-
-msgid "Saisissez le montant de votre choix"
-msgstr "Enter the amount of your choice"
-
-msgid "Montant (EUR)"
-msgstr "Amount (EUR)"
-
-msgid "Montant selectionne"
-msgstr "Selected amount"
-
-msgid "Prix total moins acompte deja verse"
-msgstr "Total price minus deposit already paid"
-
-msgid "Paiement securise via Stripe — vos coordonnees bancaires ne transitent jamais par nos serveurs."
-msgstr "Secure payment via Stripe — your bank details never pass through our servers."
-
-msgid "Aucun paiement en attente"
-msgstr "No pending payment"
-
-msgid "Vous n'avez pas de reservation acceptee a regler pour le moment."
-msgstr "You have no accepted booking to pay at the moment."
-
-# ─── payments/views.py flash messages ────────────────────────────────────────
-
-msgid "Reservation introuvable. Veuillez reessayer."
-msgstr "Booking not found. Please try again."
-
-msgid "Montant invalide. Veuillez saisir un montant superieur a 0 EUR."
-msgstr "Invalid amount. Please enter an amount greater than 0 EUR."
-
-msgid "Reservation MultiDrive"
-msgstr "MultiDrive booking"
-
-msgid "Erreur Stripe :"
-msgstr "Stripe error:"
-
-msgid "Ce paiement a deja ete enregistre."
-msgstr "This payment has already been recorded."
-
-msgid "Impossible de verifier le paiement. Contactez le support."
-msgstr "Unable to verify the payment. Please contact support."
-
-msgid "Le paiement n'a pas ete complete."
-msgstr "The payment was not completed."
-
-msgid "Paiement de"
-msgstr "Payment of"
-
-msgid "confirme. Total verse :"
-msgstr "confirmed. Total paid:"
-
-msgid "Paiement annule. Vous pouvez reessayer quand vous voulez."
-msgstr "Payment cancelled. You can try again whenever you like."
-
-msgid "Document disponible apres paiement integral."
-msgstr "Document available after full payment."
-
-# ─── Contact page (contact/contact_form.html + contact_success.html + my_messages.html) ──
-
-msgid "Posez votre question, demandez une information ou laissez un message pour un rendez-vous."
-msgstr "Ask a question, request information, or leave a message for an appointment."
-
-msgid "Votre message sera associe a votre compte et vous pourrez lire une reponse dans votre espace membre."
-msgstr "Your message will be linked to your account and you will be able to read a reply in your member area."
-
-msgid "Vous pouvez nous contacter meme sans compte. Creez un compte si vous souhaitez suivre plus facilement vos echanges."
-msgstr "You can contact us without an account. Create one if you want to easily track your exchanges."
-
-msgid "Nous reviendrons vers vous des que possible."
-msgstr "We will get back to you as soon as possible."
-
-msgid "Voir mes messages"
-msgstr "View my messages"
-
-msgid "Retrouvez ici vos messages envoyes a MultiDrive et les reponses eventuelles de l'administrateur."
-msgstr "Find here your messages sent to MultiDrive and any replies from the administrator."
-
-msgid "Repondu"
-msgstr "Replied"
-
-msgid "Reponse de l'administration"
-msgstr "Admin reply"
-
-msgid "Aucune reponse n'a encore ete ajoutee pour le moment."
-msgstr "No reply has been added yet."
-
-msgid "Aucun message pour le moment"
-msgstr "No messages yet"
-
-msgid "Vous pourrez retrouver ici vos futurs echanges avec l'administration."
-msgstr "Your future exchanges with the administration will appear here."
-
-msgid "Contacter MultiDrive"
-msgstr "Contact MultiDrive"
-
-# ─── Contact form (contact/forms.py) ─────────────────────────────────────────
-
-msgid "Nom complet"
-msgstr "Full name"
-
-msgid "Telephone"
-msgstr "Phone"
-
-msgid "Envoyer le message"
-msgstr "Send message"
-
-msgid "Expliquez votre demande, votre question ou votre besoin de rendez-vous."
-msgstr "Describe your request, question or appointment need."
-
-# ─── Testimonial system (payments/views.py, templates) ───────────────────────
-
-msgid "Le temoignage est disponible apres paiement integral."
-msgstr "The testimonial is available after full payment."
-
-msgid "Vous avez deja depose un temoignage pour cet achat."
-msgstr "You have already submitted a testimonial for this purchase."
-
-msgid "Merci pour votre temoignage !"
-msgstr "Thank you for your testimonial!"
-
-msgid "Votre avis sur l'achat"
-msgstr "Your purchase review"
-
-msgid "Temoignage depose"
-msgstr "Testimonial submitted"
-
-msgid "Deposer un temoignage"
-msgstr "Submit a testimonial"
-
-msgid "Note (1 a 5)"
-msgstr "Rating (1 to 5)"
-
-msgid "Votre commentaire"
-msgstr "Your comment"
-
-msgid "Envoyer le temoignage"
-msgstr "Submit testimonial"
-
-msgid "Achat du"
-msgstr "Purchase of"
-
-msgid "Temoignages recents"
-msgstr "Recent testimonials"
-
-msgid "Supprimer ce temoignage"
-msgstr "Delete this testimonial"
-
-msgid "Temoignage supprime."
-msgstr "Testimonial deleted."
-
-msgid "Visible"
-msgstr "Visible"
-
-msgid "Masque"
-msgstr "Hidden"
-
-msgid "Votre temoignage"
-msgstr "Your testimonial"
-
-msgid "Publier mon temoignage"
-msgstr "Publish my testimonial"
-
-msgid "Retour a mes paiements"
-msgstr "Back to my payments"
-
-msgid "Note"
-msgstr "Rating"
-
-msgid "Partagez votre experience d'achat pour %(title)s."
-msgstr "Share your purchase experience for %(title)s."
-
-msgid "Decrivez votre experience d'achat..."
-msgstr "Describe your purchase experience..."
-
-msgid "Temoignages en attente"
-msgstr "Pending testimonials"
-
-msgid "Validez ou supprimez les temoignages avant publication."
-msgstr "Approve or delete testimonials before publishing."
-
-msgid "Publier"
-msgstr "Publish"
-
-msgid "Temoignages publies"
-msgstr "Published testimonials"
-
-msgid "Voir la page publique"
-msgstr "View public page"
-
-msgid "Temoignages"
-msgstr "Testimonials"
-
-msgid "Clients"
-msgstr "Customers"
-
-msgid "Ils ont achete un vehicule chez MultiDrive et partagent leur experience."
-msgstr "They bought a vehicle from MultiDrive and share their experience."
-
-msgid "Aucun temoignage publie pour le moment."
-msgstr "No testimonial published yet."
-
-msgid "Traductions disponibles"
-msgstr "Translations available"
-
+msgid "Numero de telephone (optionnel)"
+msgstr "Phone number (optional)"

@@ -1,5 +1,5 @@
 {% extends "vehicles/base.html" %}
-{% load i18n %}
+{% load i18n translate_tags %}
 
 {% block title %}{% trans "Mes messages" %} - MultiDrive{% endblock %}
 
@@ -33,7 +33,7 @@
                     {% if contact_message.admin_response %}
                         <div class="message-block message-response">
                             <strong>{% trans "Reponse de l'administration" %}</strong>
-                            <p>{{ contact_message.admin_response|linebreaksbr }}</p>
+                            <p>{{ contact_message.admin_response|autotranslate:request.LANGUAGE_CODE|linebreaksbr }}</p>
                             {% if contact_message.responded_at %}
                                 <small>{% blocktrans with date=contact_message.responded_at|date:"d/m/Y H:i" %}Reponse ajoutee le {{ date }}{% endblocktrans %}</small>
                             {% endif %}
