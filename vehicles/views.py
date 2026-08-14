@@ -58,6 +58,14 @@ def cgv(request):
     return render(request, "vehicles/cgv.html")
 
 
+def confidentialite(request):
+    return render(request, "vehicles/confidentialite.html")
+
+
+def fonctionnement(request):
+    return render(request, "vehicles/fonctionnement.html")
+
+
 def _attach_favorites(vehicles, user):
     if user.is_authenticated:
         ids = set(Favorite.objects.filter(user=user).values_list("vehicle_id", flat=True))

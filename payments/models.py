@@ -102,6 +102,10 @@ class Testimonial(models.Model):
     comment_en = models.TextField(blank=True, default="")
     comment_nl = models.TextField(blank=True, default="")
     is_visible = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=False)
+    deleted_at = models.DateTimeField(null=True, blank=True)
+    admin_reply = models.TextField(blank=True, default="")
+    admin_reply_at = models.DateTimeField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

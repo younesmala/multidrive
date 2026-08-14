@@ -1,0 +1,185 @@
+{% extends "vehicles/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Politique de confidentialite" %} — MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">{% trans "Informations legales" %}</p>
+    <h1>{% trans "Politique de confidentialite" %}</h1>
+    <p>{% trans "Derniere mise a jour : aout 2026 — Conforme au RGPD (UE 2016/679) et a la loi belge du 30 juillet 2018" %}</p>
+</section>
+
+<section class="section" style="max-width: 820px; margin: 0 auto;">
+
+    <article class="member-detail-card">
+        <h2>{% trans "1. Responsable du traitement" %}</h2>
+        <p>{% trans "Le responsable du traitement des donnees a caractere personnel collectees sur la plateforme MultiDrive est :" %}</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li><strong>{% trans "Nom" %} :</strong> Younes El-Mallahi</li>
+            <li><strong>{% trans "Qualite" %} :</strong> {% trans "Etudiant — Travail de Fin d'Etudes (TFE)" %}</li>
+            <li><strong>{% trans "Email" %} :</strong> multidrive25@gmail.com</li>
+        </ul>
+        <p style="margin-top:12px;">{% trans "Ce traitement est realise dans un cadre strictement academique et demonstratif. Les donnees ne sont pas utilisees a des fins commerciales." %}</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "2. Base legale des traitements" %}</h2>
+        <p>{% trans "Conformement a l'article 6 du RGPD, les traitements realises sur MultiDrive reposent sur les bases legales suivantes :" %}</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li><strong>{% trans "Execution du contrat (art. 6.1.b)" %} :</strong> {% trans "traitement du compte, des reservations et des paiements" %}</li>
+            <li><strong>{% trans "Interet legitime (art. 6.1.f)" %} :</strong> {% trans "securite de la plateforme, prevention des abus, historique de moderation" %}</li>
+            <li><strong>{% trans "Consentement (art. 6.1.a)" %} :</strong> {% trans "publication des temoignages sur la page publique" %}</li>
+        </ul>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "3. Donnees collectees" %}</h2>
+        <p>{% trans "MultiDrive collecte uniquement les donnees strictement necessaires au fonctionnement du service (principe de minimisation — art. 5.1.c RGPD) :" %}</p>
+
+        <div style="overflow-x:auto; margin-top:14px;">
+            <table style="width:100%; border-collapse:collapse; font-size:.88rem;">
+                <thead>
+                    <tr style="background:#F3F4F6;">
+                        <th style="padding:10px 12px; text-align:left; border-bottom:1px solid #E5E7EB;">{% trans "Donnee" %}</th>
+                        <th style="padding:10px 12px; text-align:left; border-bottom:1px solid #E5E7EB;">{% trans "Finalite" %}</th>
+                        <th style="padding:10px 12px; text-align:left; border-bottom:1px solid #E5E7EB;">{% trans "Obligatoire" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Nom d'utilisateur" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Identification du compte" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Oui" %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Adresse e-mail" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Authentification, notifications, reset de mot de passe" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Oui" %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Mot de passe (chiffre)" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Securisation du compte" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Oui" %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Prenom (optionnel)" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Personnalisation des emails" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Non" %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Telephone (optionnel)" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Coordination des rendez-vous" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Non" %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Historique reservations" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Suivi du parcours d'achat" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Oui" %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Historique paiements" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Facturation, documents PDF, remboursements" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Oui" %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Messages de contact" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Gestion du support" %}</td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Non" %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px;">{% trans "Temoignages" %}</td>
+                        <td style="padding:10px 12px;">{% trans "Publication apres consentement explicite et validation admin" %}</td>
+                        <td style="padding:10px 12px;">{% trans "Non" %}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p style="margin-top:14px; font-size:.85rem; color:#6B7280;">{% trans "Les mots de passe sont stockes sous forme de hachage irreversible (PBKDF2-SHA256). Aucun mot de passe n'est lisible par l'administration." %}</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "4. Duree de conservation" %}</h2>
+        <p>{% trans "Conformement au principe de limitation de la conservation (art. 5.1.e RGPD) :" %}</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li>{% trans "Donnees de compte : conservees pendant toute la duree d'activite du compte." %}</li>
+            <li>{% trans "Apres suppression du compte : suppression logique (soft delete) conservant l'historique transactionnel pendant 3 ans a des fins de preuve, conformement a la prescription quinquennale du droit belge (art. 2262bis Code civil)." %}</li>
+            <li>{% trans "Temoignages supprimes : conserves en base de donnees pendant 1 an pour permettre toute action en justice en cas de contenu illicite." %}</li>
+            <li>{% trans "Messages de contact : conserves 2 ans apres la derniere interaction." %}</li>
+        </ul>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "5. Destinataires des donnees" %}</h2>
+        <p>{% trans "Les donnees personnelles ne sont jamais vendues, cedees ou louees a des tiers." %}</p>
+        <p style="margin-top:10px;">{% trans "Les seuls destinataires sont :" %}</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li><strong>Stripe Inc.</strong> — {% trans "sous-traitant pour le traitement securise des paiements. Stripe agit en tant que responsable de traitement independant pour les donnees bancaires. Politique de confidentialite Stripe : stripe.com/privacy." %}</li>
+            <li><strong>Google (Gmail SMTP)</strong> — {% trans "routage des emails transactionnels (confirmations, notifications). Les emails sont transmis via SMTP chiffre TLS." %}</li>
+        </ul>
+        <p style="margin-top:12px;">{% trans "Aucun transfert de donnees en dehors de l'Espace Economique Europeen (EEE) n'est effectue, sauf pour Stripe dont les transferts sont encadres par des clauses contractuelles types (CCT) approuvees par la Commission europeenne." %}</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "6. Vos droits" %}</h2>
+        <p>{% trans "Conformement aux articles 15 a 22 du RGPD et a la loi belge du 30 juillet 2018, vous disposez des droits suivants :" %}</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2.2;">
+            <li><strong>{% trans "Droit d'acces (art. 15)" %} :</strong> {% trans "obtenir la confirmation que vos donnees sont traitees et en recevoir une copie." %}</li>
+            <li><strong>{% trans "Droit de rectification (art. 16)" %} :</strong> {% trans "corriger des donnees inexactes depuis votre profil ou en nous contactant." %}</li>
+            <li><strong>{% trans "Droit a l'effacement (art. 17)" %} :</strong> {% trans "demander la suppression de votre compte directement depuis votre espace personnel." %}</li>
+            <li><strong>{% trans "Droit a la limitation (art. 18)" %} :</strong> {% trans "demander la suspension temporaire du traitement de vos donnees." %}</li>
+            <li><strong>{% trans "Droit a la portabilite (art. 20)" %} :</strong> {% trans "recevoir vos donnees dans un format structure et lisible par machine." %}</li>
+            <li><strong>{% trans "Droit d'opposition (art. 21)" %} :</strong> {% trans "vous opposer a un traitement base sur notre interet legitime." %}</li>
+        </ul>
+        <p style="margin-top:14px;">{% trans "Pour exercer ces droits, contactez-nous a" %} <strong>multidrive25@gmail.com</strong>. {% trans "Nous repondons dans un delai maximum de 30 jours conformement a l'art. 12 RGPD." %}</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "7. Securite des donnees" %}</h2>
+        <p>{% trans "MultiDrive met en oeuvre les mesures techniques et organisationnelles suivantes pour proteger vos donnees (art. 32 RGPD) :" %}</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li>{% trans "Chiffrement HTTPS (TLS) sur toutes les pages" %}</li>
+            <li>{% trans "Headers de securite HTTP : HSTS, X-Frame-Options, CSRF protection" %}</li>
+            <li>{% trans "Hachage irreversible des mots de passe (PBKDF2-SHA256)" %}</li>
+            <li>{% trans "Tokens de reinitialisation de mot de passe a usage unique, valables 24h" %}</li>
+            <li>{% trans "Secrets d'application stockes dans des variables d'environnement (jamais dans le code source)" %}</li>
+            <li>{% trans "Acces aux donnees sensibles restreint aux comptes staff et superadmin authentifies" %}</li>
+        </ul>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "8. Cookies" %}</h2>
+        <p>{% trans "MultiDrive n'utilise que des cookies techniques strictement necessaires, exempts de consentement selon la recommandation de l'APD belge. Aucun cookie publicitaire ou de suivi tiers n'est pose." %}</p>
+        <p style="margin-top:10px;">{% trans "Pour plus de details, consultez la section Cookies de nos" %} <a href="{% url 'vehicles:cgv' %}#cookies">{% trans "Conditions generales" %}</a>.</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "9. Autorite de controle" %}</h2>
+        <p>{% trans "Si vous estimez que le traitement de vos donnees personnelles constitue une violation du RGPD ou de la loi du 30 juillet 2018, vous avez le droit d'introduire une reclamation aupres de l'autorite de controle belge :" %}</p>
+        <div style="margin-top:12px; padding:14px 18px; background:#F9FAFB; border-radius:8px; border:1px solid #E5E7EB;">
+            <p style="margin:0; font-weight:600;">{% trans "Autorite de Protection des Donnees (APD)" %}</p>
+            <p style="margin:4px 0 0; font-size:.88rem; color:#6B7280;">Rue de la Presse 35, 1000 Bruxelles — contact@apd-gba.be — www.autoriteprotectiondonnees.be</p>
+        </div>
+        <p style="margin-top:12px; font-size:.85rem; color:#6B7280;">{% trans "Cette demarche ne vous prive pas de votre droit de recours judiciaire aupres des tribunaux belges competents." %}</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "10. Contact" %}</h2>
+        <p>
+            {% trans "Pour toute question relative au traitement de vos donnees personnelles ou pour exercer vos droits, contactez-nous via la" %}
+            <a href="{% url 'contact:contact_form' %}">{% trans "page de contact" %}</a>
+            {% trans "ou directement a" %} <strong>multidrive25@gmail.com</strong>.
+        </p>
+    </article>
+
+    <div style="margin-top:24px; padding:16px 20px; background:#F9FAFB; border-radius:8px; border:1px solid #E5E7EB; text-align:center;">
+        <p style="margin:0; font-size:.85rem; color:#6B7280;">
+            <a href="{% url 'vehicles:cgv' %}">{% trans "Conditions generales" %}</a>
+            &nbsp;&mdash;&nbsp;
+            <a href="{% url 'vehicles:fonctionnement' %}">{% trans "Fonctionnement et conditions d'utilisation" %}</a>
+        </p>
+    </div>
+
+</section>
+{% endblock %}

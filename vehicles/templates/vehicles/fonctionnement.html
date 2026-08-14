@@ -1,0 +1,193 @@
+{% extends "vehicles/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Fonctionnement" %} — MultiDrive{% endblock %}
+
+{% block content %}
+<section class="page-title">
+    <p class="eyebrow">{% trans "Informations" %}</p>
+    <h1>{% trans "Fonctionnement et conditions d'utilisation" %}</h1>
+    <p>{% trans "Tout ce que vous devez savoir pour utiliser MultiDrive." %}</p>
+</section>
+
+<section class="section" style="max-width: 820px; margin: 0 auto;">
+
+    <article class="member-detail-card">
+        <h2>{% trans "1. Qu'est-ce que MultiDrive ?" %}</h2>
+        <p>{% trans "MultiDrive est une plateforme web de consultation, de reservation et de suivi de vehicules d'occasion accessibles. Elle regroupe plusieurs types de vehicules :" %}</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li>{% trans "Velos et trottinettes" %}</li>
+            <li>{% trans "Scooters et motos legeres" %}</li>
+            <li>{% trans "Petites voitures et citadines" %}</li>
+            <li>{% trans "Utilitaires legers" %}</li>
+        </ul>
+        <p style="margin-top:12px;">{% trans "L'objectif est de proposer une interface claire et moderne permettant a tout particulier de trouver un vehicule adapte a ses besoins, de faire une demande de reservation en ligne et de suivre l'evolution de son dossier depuis son espace membre." %}</p>
+        <div style="margin-top:14px; padding:12px 16px; background:#FEF9C3; border-left:4px solid #EAB308; border-radius:6px;">
+            <p style="margin:0; font-size:.88rem; color:#713F12;">{% trans "MultiDrive est realise dans le cadre d'un Travail de Fin d'Etudes (TFE) academique. Les vehicules et les prix affiches sont des donnees de demonstration. Aucune vente reelle n'est effectuee." %}</p>
+        </div>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "2. Comment ca fonctionne ?" %}</h2>
+        <p>{% trans "Le parcours complet se deroule en 5 etapes simples :" %}</p>
+
+        <div style="margin-top:16px; display:flex; flex-direction:column; gap:14px;">
+
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+                <div style="width:32px; height:32px; border-radius:50%; background:#1E3A8A; color:#fff; font-weight:700; font-size:.9rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">1</div>
+                <div>
+                    <strong>{% trans "Consulter le catalogue" %}</strong>
+                    <p style="margin:4px 0 0; font-size:.88rem; color:#555; line-height:1.5;">{% trans "Parcourez les vehicules disponibles, filtrez par categorie, prix ou statut. Chaque fiche vehicule affiche les photos, les caracteristiques techniques (etat carrosserie, moteur) et les temoignages d'acheteurs." %}</p>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+                <div style="width:32px; height:32px; border-radius:50%; background:#1E3A8A; color:#fff; font-weight:700; font-size:.9rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">2</div>
+                <div>
+                    <strong>{% trans "Creer un compte et se connecter" %}</strong>
+                    <p style="margin:4px 0 0; font-size:.88rem; color:#555; line-height:1.5;">{% trans "La reservation necessite un compte membre. L'inscription est gratuite et ne demande qu'un nom d'utilisateur et une adresse email. Vous pouvez reinitialiser votre mot de passe a tout moment par email." %}</p>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+                <div style="width:32px; height:32px; border-radius:50%; background:#1E3A8A; color:#fff; font-weight:700; font-size:.9rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">3</div>
+                <div>
+                    <strong>{% trans "Faire une demande de reservation" %}</strong>
+                    <p style="margin:4px 0 0; font-size:.88rem; color:#555; line-height:1.5;">{% trans "Depuis la fiche vehicule, cliquez sur Reserver. Indiquez votre creneau souhaite (lundi-vendredi 16h-21h30, week-end 9h-21h), un numero de telephone optionnel et un message pour l'equipe. La reservation est soumise a validation." %}</p>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+                <div style="width:32px; height:32px; border-radius:50%; background:#1E3A8A; color:#fff; font-weight:700; font-size:.9rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">4</div>
+                <div>
+                    <strong>{% trans "Payer l'acompte via Stripe" %}</strong>
+                    <p style="margin:4px 0 0; font-size:.88rem; color:#555; line-height:1.5;">{% trans "Une fois la reservation acceptee, vous pouvez verser un acompte (20 % du prix, min 20 EUR, max 250 EUR) ou payer la totalite directement. Le paiement est securise via Stripe Checkout. Aucune donnee bancaire ne passe par nos serveurs." %}</p>
+                </div>
+            </div>
+
+            <div style="display:flex; gap:14px; align-items:flex-start;">
+                <div style="width:32px; height:32px; border-radius:50%; background:#1E3A8A; color:#fff; font-weight:700; font-size:.9rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">5</div>
+                <div>
+                    <strong>{% trans "Finaliser et recevoir vos documents" %}</strong>
+                    <p style="margin:4px 0 0; font-size:.88rem; color:#555; line-height:1.5;">{% trans "Apres paiement integral, vos documents sont disponibles en telechargement depuis votre espace membre : recu d'acompte, facture finale, acte de cession et specimen d'immatriculation. Vous pouvez egalement laisser un temoignage sur votre experience." %}</p>
+                </div>
+            </div>
+
+        </div>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "3. Statuts de votre reservation" %}</h2>
+        <p>{% trans "Votre reservation evolue selon le cycle suivant, visible a tout moment dans votre espace membre :" %}</p>
+        <div style="overflow-x:auto; margin-top:14px;">
+            <table style="width:100%; border-collapse:collapse; font-size:.88rem;">
+                <thead>
+                    <tr style="background:#F3F4F6;">
+                        <th style="padding:10px 12px; text-align:left; border-bottom:1px solid #E5E7EB;">{% trans "Statut" %}</th>
+                        <th style="padding:10px 12px; text-align:left; border-bottom:1px solid #E5E7EB;">{% trans "Signification" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;"><span class="status status-pending" style="font-size:.78rem;">{% trans "En attente" %}</span></td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Votre demande est soumise et en cours de traitement par l'equipe." %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;"><span class="status status-accepted" style="font-size:.78rem;">{% trans "Acceptee" %}</span></td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "La reservation est validee. Le vehicule est reserve pour vous. Vous pouvez proceder au paiement." %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;"><span class="status status-deposit_paid" style="font-size:.78rem;">{% trans "Acompte verse" %}</span></td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "L'acompte a ete recu. Le vehicule vous est reserve jusqu'au rendez-vous de remise." %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;"><span class="status status-rejected" style="font-size:.78rem;">{% trans "Refusee" %}</span></td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "La reservation n'a pas pu etre acceptee (vehicule deja reserve, creneau indisponible)." %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px;"><span class="status status-cancelled" style="font-size:.78rem;">{% trans "Annulee" %}</span></td>
+                        <td style="padding:10px 12px;">{% trans "La reservation a ete annulee. Si un acompte avait ete verse, un remboursement est en cours de traitement." %}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "4. Votre espace membre" %}</h2>
+        <p>{% trans "Une fois connecte, votre espace membre vous donne acces a :" %}</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li><strong>{% trans "Mes reservations" %}</strong> — {% trans "suivi en temps reel de toutes vos demandes avec statut et rendez-vous" %}</li>
+            <li><strong>{% trans "Paiements et achats" %}</strong> — {% trans "historique des versements, solde restant, telechargement des documents PDF" %}</li>
+            <li><strong>{% trans "Mes favoris" %}</strong> — {% trans "vehicules mis en favoris pour les retrouver rapidement" %}</li>
+            <li><strong>{% trans "Mes messages" %}</strong> — {% trans "echanges avec l'equipe MultiDrive et suivi des reponses" %}</li>
+            <li><strong>{% trans "Mon profil" %}</strong> — {% trans "modification des informations personnelles, changement de mot de passe, suppression du compte" %}</li>
+        </ul>
+        <p style="margin-top:12px;">{% trans "Des badges de notification (bulles rouges) apparaissent dans le menu des qu'une action requiert votre attention (reservation acceptee, reponse a un message, etc.)." %}</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "5. Conditions d'utilisation" %}</h2>
+        <p><strong>{% trans "Pour utiliser MultiDrive, vous vous engagez a :" %}</strong></p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li>{% trans "Fournir des informations exactes lors de l'inscription et lors de toute demande." %}</li>
+            <li>{% trans "Ne pas creer plusieurs comptes pour un meme utilisateur." %}</li>
+            <li>{% trans "Respecter les creneaux de rendez-vous valides et prevenir en cas d'empechement." %}</li>
+            <li>{% trans "Ne pas utiliser la plateforme a des fins frauduleuses, abusives ou contraires aux lois belges en vigueur." %}</li>
+            <li>{% trans "Ne pas tenter d'acceder aux donnees d'autres membres ou de contourner les mecanismes de securite." %}</li>
+        </ul>
+        <p style="margin-top:12px;">{% trans "Tout manquement a ces regles peut entrainer la suspension ou la suppression du compte, sans prejudice de toute action legale eventuelle." %}</p>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "6. Roles et acces" %}</h2>
+        <div style="overflow-x:auto; margin-top:14px;">
+            <table style="width:100%; border-collapse:collapse; font-size:.88rem;">
+                <thead>
+                    <tr style="background:#F3F4F6;">
+                        <th style="padding:10px 12px; text-align:left; border-bottom:1px solid #E5E7EB;">{% trans "Role" %}</th>
+                        <th style="padding:10px 12px; text-align:left; border-bottom:1px solid #E5E7EB;">{% trans "Acces" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;"><strong>{% trans "Visiteur" %}</strong></td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Catalogue, fiches vehicules, temoignages, page de contact (sans compte requis)." %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;"><strong>{% trans "Membre" %}</strong></td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Tout le catalogue + reservations, paiements, favoris, profil, messages, temoignages." %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;"><strong>{% trans "Administrateur" %}</strong></td>
+                        <td style="padding:10px 12px; border-bottom:1px solid #F3F4F6;">{% trans "Dashboard de gestion : reservations, paiements, vehicules, temoignages, messages, remboursements." %}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:10px 12px;"><strong>{% trans "Superadmin" %}</strong></td>
+                        <td style="padding:10px 12px;">{% trans "Tout + gestion des comptes administrateurs (creation, desactivation, retrait de droits)." %}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <article class="member-detail-card">
+        <h2>{% trans "7. Contact et support" %}</h2>
+        <p>{% trans "Pour toute question, signalement ou demande d'assistance, plusieurs options sont disponibles :" %}</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li><a href="{% url 'contact:contact_form' %}">{% trans "Formulaire de contact" %}</a> — {% trans "accessible sans connexion" %}</li>
+            <li>{% trans "Email direct" %} : <strong>multidrive25@gmail.com</strong></li>
+            <li>{% trans "Espace Mes messages" %} — {% trans "pour les membres connectes, avec suivi des reponses admin" %}</li>
+        </ul>
+    </article>
+
+    <div style="margin-top:24px; padding:16px 20px; background:#F9FAFB; border-radius:8px; border:1px solid #E5E7EB; text-align:center;">
+        <p style="margin:0; font-size:.85rem; color:#6B7280;">
+            <a href="{% url 'vehicles:cgv' %}">{% trans "Conditions generales" %}</a>
+            &nbsp;&mdash;&nbsp;
+            <a href="{% url 'vehicles:confidentialite' %}">{% trans "Politique de confidentialite" %}</a>
+        </p>
+    </div>
+
+</section>
+{% endblock %}

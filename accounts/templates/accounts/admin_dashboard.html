@@ -285,6 +285,19 @@
                 </div>
 
                 <p style="margin:0; font-size:.87rem; color:#444; line-height:1.45;">{{ t.comment|truncatechars:240 }}</p>
+
+                {% if t.admin_reply %}
+                <div style="margin-top:8px; background:#EFF6FF; border-left:3px solid #1E3A8A; border-radius:4px; padding:8px 12px;">
+                    <p style="margin:0 0 2px; font-size:.72rem; font-weight:700; color:#1E40AF; text-transform:uppercase; letter-spacing:.4px;">{% trans "Reponse MultiDrive" %}</p>
+                    <p style="margin:0; font-size:.84rem; color:#1E3A8A; line-height:1.4;">{{ t.admin_reply }}</p>
+                </div>
+                {% endif %}
+
+                <form method="post" action="{% url 'accounts:reply_testimonial' t.id %}" style="margin-top:10px; display:flex; gap:6px; align-items:flex-end;">
+                    {% csrf_token %}
+                    <textarea name="admin_reply" rows="2" placeholder="{% trans "Repondre a ce commentaire..." %}" style="flex:1; font-size:.82rem; border:1px solid #ddd; border-radius:6px; padding:6px 10px; resize:vertical;">{{ t.admin_reply }}</textarea>
+                    <button type="submit" style="background:#1E3A8A; color:#fff; border:none; border-radius:6px; padding:7px 12px; font-size:.78rem; font-weight:600; cursor:pointer; white-space:nowrap; flex-shrink:0;">{% trans "Repondre" %}</button>
+                </form>
             </div>
 
             <div style="display:flex; flex-direction:column; gap:6px; flex-shrink:0;">
@@ -349,6 +362,19 @@
                 {% if t.comment_en or t.comment_nl %}
                 <p style="margin:4px 0 0; font-size:.75rem; color:#aaa;"><i class="fa-solid fa-language" style="margin-right:3px;"></i>{% trans "Traductions disponibles" %} : {% if t.comment_en %}EN{% endif %}{% if t.comment_en and t.comment_nl %} / {% endif %}{% if t.comment_nl %}NL{% endif %}</p>
                 {% endif %}
+
+                {% if t.admin_reply %}
+                <div style="margin-top:8px; background:#EFF6FF; border-left:3px solid #1E3A8A; border-radius:4px; padding:8px 12px;">
+                    <p style="margin:0 0 2px; font-size:.72rem; font-weight:700; color:#1E40AF; text-transform:uppercase; letter-spacing:.4px;">{% trans "Reponse MultiDrive" %}</p>
+                    <p style="margin:0; font-size:.84rem; color:#1E3A8A; line-height:1.4;">{{ t.admin_reply }}</p>
+                </div>
+                {% endif %}
+
+                <form method="post" action="{% url 'accounts:reply_testimonial' t.id %}" style="margin-top:10px; display:flex; gap:6px; align-items:flex-end;">
+                    {% csrf_token %}
+                    <textarea name="admin_reply" rows="2" placeholder="{% trans "Repondre a ce commentaire..." %}" style="flex:1; font-size:.82rem; border:1px solid #ddd; border-radius:6px; padding:6px 10px; resize:vertical;">{{ t.admin_reply }}</textarea>
+                    <button type="submit" style="background:#1E3A8A; color:#fff; border:none; border-radius:6px; padding:7px 12px; font-size:.78rem; font-weight:600; cursor:pointer; white-space:nowrap; flex-shrink:0;">{% trans "Repondre" %}</button>
+                </form>
             </div>
 
             <form method="post" action="{% url 'accounts:delete_testimonial' t.id %}" style="flex-shrink:0;" onsubmit="return confirm('{% trans "Supprimer ce temoignage ?" %}');">
@@ -533,25 +559,25 @@
         </div>
     </div>
 
-    {# Temoignages masques #}
+    {# Temoignages supprimes (soft delete) #}
     <div class="hist-accordion" id="hist-temoignages">
         <div class="hist-header" onclick="toggleHist('hist-temoignages')">
             <i class="fa-solid fa-eye-slash" style="color:#6B7280; width:16px; text-align:center;"></i>
-            <strong style="font-size:.9rem;">{% trans "Temoignages masques" %}</strong>
-            <span class="hist-badge" style="background:#F3F4F6; color:#374151; margin-left:auto;">{{ history_hidden_testimonials|length }}</span>
+            <strong style="font-size:.9rem;">{% trans "Temoignages supprimes" %}</strong>
+            <span class="hist-badge" style="background:#F3F4F6; color:#374151; margin-left:auto;">{{ history_deleted_testimonials|length }}</span>
             <a href="{% url 'accounts:export_history_csv' %}?type=temoignages" class="hist-export" onclick="event.stopPropagation()">
                 <i class="fa-solid fa-file-csv"></i> CSV
             </a>
             <i class="fa-solid fa-chevron-down hist-chevron"></i>
         </div>
         <div class="hist-body">
-            {% for t in history_hidden_testimonials %}
+            {% for t in history_deleted_testimonials %}
             <div class="hist-row">
-                <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ t.user.username }} — {{ t.rating }}/5</span>
-                <span style="color:#aaa; flex-shrink:0;">{{ t.created_at|date:"d/m/Y" }}</span>
+                <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ t.user.username }} — {{ t.rating }}/5 — {{ t.comment|truncatechars:60 }}</span>
+                <span style="color:#aaa; flex-shrink:0;">{{ t.deleted_at|date:"d/m/Y" }}</span>
             </div>
             {% empty %}
-            <div class="hist-empty">{% trans "Aucun temoignage masque." %}</div>
+            <div class="hist-empty">{% trans "Aucun temoignage supprime." %}</div>
             {% endfor %}
         </div>
     </div>
