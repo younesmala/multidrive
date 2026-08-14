@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 
 from .models import AccountDeletionRequest
 
@@ -51,9 +52,9 @@ class RegisterForm(UserCreationForm):
     phone = forms.CharField(
         max_length=20,
         required=True,
-        label="Numero de telephone",
+        label=_("Numero de telephone"),
         widget=forms.TextInput(attrs={
-            "placeholder": "Ex : +32 470 12 34 56",
+            "placeholder": _("Ex : +32 470 12 34 56"),
             "autocomplete": "tel",
         }),
     )

@@ -2,6 +2,7 @@ from datetime import time as dt_time
 
 from django import forms
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 from .models import Reservation
 
@@ -18,7 +19,7 @@ class ReservationForm(forms.ModelForm):
         widgets = {
             "phone": forms.TextInput(
                 attrs={
-                    "placeholder": "Ex : +32 470 12 34 56",
+                    "placeholder": _("Ex : +32 470 12 34 56"),
                     "autocomplete": "tel",
                 }
             ),
@@ -36,7 +37,7 @@ class ReservationForm(forms.ModelForm):
             ),
         }
         labels = {
-            "phone": "Numero de telephone (optionnel)",
+            "phone": _("Numero de telephone (optionnel)"),
         }
 
     def clean_appointment_date(self):

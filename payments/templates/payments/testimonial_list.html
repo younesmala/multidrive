@@ -1,5 +1,5 @@
 {% extends "vehicles/base.html" %}
-{% load i18n %}
+{% load i18n translate_tags %}
 
 {% block title %}{% trans "Temoignages" %} - MultiDrive{% endblock %}
 
@@ -40,6 +40,13 @@
                 {% elif LANG == "nl" and t.comment_nl %}{{ t.comment_nl }}
                 {% else %}{{ t.comment }}{% endif %}
             </p>
+
+            {% if t.admin_reply %}
+            <div style="margin-top:10px; background:#EFF6FF; border-left:3px solid #1E3A8A; border-radius:4px; padding:8px 12px;">
+                <p style="margin:0 0 3px; font-size:.72rem; font-weight:700; color:#1E40AF; text-transform:uppercase; letter-spacing:.4px;">MultiDrive</p>
+                <p style="margin:0; font-size:.84rem; color:#1E3A8A; line-height:1.45;">{{ t.admin_reply|autotranslate:request.LANGUAGE_CODE }}</p>
+            </div>
+            {% endif %}
 
             <time class="testimonial-date" datetime="{{ t.created_at|date:'Y-m-d' }}">
                 {{ t.created_at|date:"d/m/Y" }}
