@@ -1,4 +1,5 @@
 import csv
+from datetime import timedelta
 from decimal import Decimal, InvalidOperation
 
 import stripe
@@ -46,6 +47,9 @@ def register(request):
             AccountStatus.objects.create(
                 user=user,
                 phone=form.cleaned_data.get("phone", ""),
+                bank_holder=form.cleaned_data.get("bank_holder", ""),
+                bank_iban=form.cleaned_data.get("bank_iban", ""),
+                accepted_cgv=form.cleaned_data.get("accepted_cgv", False),
             )
             login(request, user)
             return redirect("home")
@@ -126,6 +130,19 @@ def update_phone(request):
     account_status.phone = phone
     account_status.save(update_fields=["phone"])
     messages.success(request, "Numero de telephone mis a jour.")
+    return redirect("accounts:profile")
+
+
+@require_POST
+@login_required
+def update_bank(request):
+    bank_holder = request.POST.get("bank_holder", "").strip()
+    bank_iban = request.POST.get("bank_iban", "").strip().replace(" ", "")
+    account_status, _ = AccountStatus.objects.get_or_create(user=request.user)
+    account_status.bank_holder = bank_holder
+    account_status.bank_iban = bank_iban
+    account_status.save(update_fields=["bank_holder", "bank_iban"])
+    messages.success(request, "Coordonnees bancaires mises a jour.")
     return redirect("accounts:profile")
 
 
@@ -477,11 +494,30 @@ def validate_testimonial(request, testimonial_id):
 
 @require_POST
 @staff_member_required
+def mark_nopresentation(request, reservation_id):
+    from reservations.models import Reservation as Res
+    reservation = get_object_or_404(Res, id=reservation_id)
+    acct, _ = AccountStatus.objects.get_or_create(user=reservation.user)
+    acct.no_show_count = (acct.no_show_count or 0) + 1
+    ban_msg = ""
+    if acct.no_show_count >= 3:
+        acct.banned_until = timezone.now() + timedelta(days=30)
+        ban_msg = f" — compte suspendu 30 jours (3 non-présentations atteintes)."
+    acct.save(update_fields=["no_show_count", "banned_until"])
+    messages.warning(request, f"Non-présentation signalée pour {reservation.user.username} (total : {acct.no_show_count}/3){ban_msg}")
+    return redirect("accounts:admin_dashboard")
+
+
+@require_POST
+@staff_member_required
 def process_refund(request, payment_id):
     payment = get_object_or_404(Payment, id=payment_id, status=Payment.STATUS_REFUND_REQUESTED)
 
     raw = request.POST.get("refund_amount", "").replace(",", ".").strip()
     note = request.POST.get("refund_note", "").strip()
+    refund_method = request.POST.get("refund_method", "cash")
+    bank_iban = request.POST.get("bank_iban", "").strip()
+    bank_holder = request.POST.get("bank_holder", "").strip()
 
     try:
         refund_amount = Decimal(raw).quantize(Decimal("0.01"))
@@ -491,8 +527,13 @@ def process_refund(request, payment_id):
         messages.error(request, "Montant de remboursement invalide.")
         return redirect("accounts:admin_dashboard")
 
+    full_note = note
+    if refund_method == "virement" and (bank_iban or bank_holder):
+        bank_info = f"[Virement] IBAN : {bank_iban} — Titulaire : {bank_holder}"
+        full_note = f"{bank_info}\n{note}" if note else bank_info
+
     payment.refund_amount = refund_amount
-    payment.refund_note = note if note else None
+    payment.refund_note = full_note if full_note else None
     payment.status = Payment.STATUS_REFUNDED
     payment.user_status_read = False
     payment.admin_notif_read = True
@@ -503,20 +544,21 @@ def process_refund(request, payment_id):
         vehicle.status = Vehicle.STATUS_AVAILABLE
         vehicle.save(update_fields=["status"])
 
-    _stripe_refund(payment, refund_amount)
-    _send_refund_email(payment)
+    username = payment.reservation.user.username
+    if refund_method == "virement":
+        iban_info = f" (IBAN : {bank_iban})" if bank_iban else ""
+        messages.success(request, f"Remboursement par virement de {refund_amount} EUR enregistre pour {username}{iban_info}. Effectuez le virement manuellement.")
+    else:
+        messages.success(request, f"Remboursement en especes de {refund_amount} EUR enregistre pour {username}.")
 
-    messages.success(
-        request,
-        f"Remboursement de {refund_amount} EUR enregistre pour {payment.reservation.user.username}.",
-    )
+    _send_refund_email(payment)
     return redirect("accounts:admin_dashboard")
 
 
 def _stripe_refund(payment, refund_amount):
     ref = payment.transaction_reference or ""
     if not ref.startswith("cs_"):
-        return
+        return False
     try:
         stripe.api_key = settings.STRIPE_SECRET_KEY
         session = stripe.checkout.Session.retrieve(ref)
@@ -526,8 +568,10 @@ def _stripe_refund(payment, refund_amount):
                 payment_intent=pi_id,
                 amount=int(refund_amount * 100),
             )
+            return True
     except Exception:
         pass
+    return False
 
 
 def _admin_email():
@@ -687,6 +731,7 @@ def admin_dashboard(request):
         "max_sold": max_sold,
         "current_month": now.strftime("%B %Y"),
         "activity_feed": activity_feed,
+        "retenue_choices": [0, 10, 20, 30, 50],
         "pending_testimonials": Testimonial.objects.filter(is_visible=False, is_deleted=False).select_related("user", "payment__reservation__vehicle").order_by("-created_at"),
         "published_testimonials": Testimonial.objects.filter(is_visible=True, is_deleted=False).select_related("user", "payment__reservation__vehicle").order_by("-created_at")[:10],
         "pending_testimonial_count": Testimonial.objects.filter(is_visible=False, is_deleted=False).count(),

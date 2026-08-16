@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -28,6 +30,15 @@ class AccountStatus(models.Model):
         default=REASON_USER_REQUEST,
     )
     admin_note = models.TextField(blank=True)
+    no_show_count = models.PositiveSmallIntegerField(default=0)
+    banned_until = models.DateTimeField(null=True, blank=True)
+    bank_iban = models.CharField(max_length=34, blank=True, default="")
+    bank_holder = models.CharField(max_length=100, blank=True, default="")
+    accepted_cgv = models.BooleanField(default=False)
+
+    @property
+    def is_currently_banned(self):
+        return self.banned_until is not None and self.banned_until > timezone.now()
 
     class Meta:
         verbose_name = "Account status"

@@ -2797,7 +2797,7 @@ msgstr "2. Rechtsgrondslag van de verwerking"
 msgid ""
 "Conformement a l'article 6 du RGPD, les traitements realises sur MultiDrive "
 "reposent sur les bases legales suivantes :"
-msgstr ""
+msgstr "Overeenkomstig artikel 6 van de AVG zijn de verwerkingen op MultiDrive gebaseerd op de volgende rechtsgrondslagen:"
 
 #: .\vehicles\templates\vehicles\confidentialite.html:30
 msgid "Execution du contrat (art. 6.1.b)"
@@ -2931,7 +2931,7 @@ msgstr "Gepubliceerd na uitdrukkelijke toestemming en beheerdervalidatie"
 msgid ""
 "Les mots de passe sont stockes sous forme de hachage irreversible (PBKDF2-"
 "SHA256). Aucun mot de passe n'est lisible par l'administration."
-msgstr ""
+msgstr "Wachtwoorden worden opgeslagen als onomkeerbare hash (PBKDF2-SHA256). Geen enkel wachtwoord is leesbaar door de beheerder."
 
 #: .\vehicles\templates\vehicles\confidentialite.html:103
 msgid "4. Duree de conservation"
@@ -3273,7 +3273,7 @@ msgid ""
 "prix, min 20 EUR, max 250 EUR) ou payer la totalite directement. Le paiement "
 "est securise via Stripe Checkout. Aucune donnee bancaire ne passe par nos "
 "serveurs."
-msgstr ""
+msgstr "Zodra de reservering is geaccepteerd, kunt u een aanbetaling doen (20%% van de prijs, min. 20 EUR, max. 250 EUR) of het volledige bedrag rechtstreeks betalen. De betaling verloopt veilig via Stripe Checkout. Er worden geen bankgegevens via onze servers verstuurd."
 
 #: .\vehicles\templates\vehicles\fonctionnement.html:71
 msgid "Finaliser et recevoir vos documents"
@@ -3776,3 +3776,127 @@ msgstr "Bijv. +32 470 12 34 56"
 
 msgid "Numero de telephone (optionnel)"
 msgstr "Telefoonnummer (optioneel)"
+
+# ─── Non-présentation / ban system ───────────────────────────────────────────
+msgid "Politique de non-presentation"
+msgstr "Beleid bij niet-verschijnen"
+
+msgid "En cas de non-presentation sans annulation prealable, un signalement sera enregistre sur votre compte. Au bout de 3 non-presentations, votre compte sera suspendu pendant 30 jours."
+msgstr "Bij niet-verschijnen zonder voorafgaande annulering wordt een melding geregistreerd op uw account. Na 3 niet-verschijningen wordt uw account 30 dagen geschorst."
+
+msgid "En cas de non-presentation sans annulation prealable, un signalement sera enregistre sur votre compte. Au bout de 3 non-presentations, votre compte sera suspendu 30 jours et vous ne pourrez plus effectuer de reservations."
+msgstr "Bij niet-verschijnen zonder voorafgaande annulering wordt een melding geregistreerd op uw account. Na 3 niet-verschijningen wordt uw account 30 dagen geschorst en kunt u geen reserveringen meer maken."
+
+msgid "Votre compte est suspendu jusqu'au %(until)s suite a des non-presentations. Vous ne pouvez pas effectuer de reservation."
+msgstr "Uw account is geschorst tot %(until)s wegens niet-verschijningen. U kunt geen reserveringen maken."
+
+# ─── Réservations en cours (dashboard admin) ─────────────────────────────────
+msgid "Suivi"
+msgstr "Opvolging"
+
+msgid "Reservations en cours"
+msgstr "Lopende reserveringen"
+
+msgid "Reservations acceptees. En cas de non-presentation du client, signalez-le ici."
+msgstr "Geaccepteerde reserveringen. Meld hier als een klant niet verschijnt."
+
+msgid "RDV le"
+msgstr "Afspraak op"
+
+msgid "Date non precisee"
+msgstr "Datum niet opgegeven"
+
+msgid "non-presentation(s) au compteur"
+msgstr "niet-verschijning(en) geteld"
+
+msgid "Signaler une non-presentation"
+msgstr "Niet-verschijnen melden"
+
+# ─── Coordonnées bancaires ────────────────────────────────────────────────────
+msgid "Titulaire du compte bancaire"
+msgstr "Rekeninghouder"
+
+msgid "IBAN"
+msgstr "IBAN"
+
+msgid "Ex : Jean Dupont"
+msgstr "Bijv. Jean Dupont"
+
+msgid "Ex : BE68 5390 0754 7034"
+msgstr "Bijv. BE68 5390 0754 7034"
+
+msgid "Coordonnees bancaires (optionnel)"
+msgstr "Bankgegevens (optioneel)"
+
+msgid "Utilisees uniquement en cas de remboursement par virement bancaire."
+msgstr "Alleen gebruikt bij terugbetaling via bankoverschrijving."
+
+msgid "Modifier mes coordonnees bancaires (IBAN)"
+msgstr "Mijn bankgegevens wijzigen (IBAN)"
+
+msgid "Titulaire"
+msgstr "Rekeninghouder"
+
+msgid "Utilises uniquement en cas de remboursement par virement bancaire. Ne sont jamais partages."
+msgstr "Alleen gebruikt bij terugbetaling via bankoverschrijving. Worden nooit gedeeld."
+
+# ─── Checkbox CGV ─────────────────────────────────────────────────────────────
+# ─── En-têtes documents PDF ──────────────────────────────────────────────────
+msgid "N° BCE"
+msgstr "Ondernemingsnr."
+
+msgid "N° TVA"
+msgstr "BTW-nr."
+
+# ─── CGV article 6 : Non-présentation ────────────────────────────────────────
+msgid "6. Non-presentation et suspension de compte"
+msgstr "6. Niet-verschijnen en schorsing van account"
+
+msgid "Est consideree comme non-presentation toute situation ou le membre reserve un vehicule, obtient un rendez-vous valide, puis ne se presente pas sans avoir annule sa reservation au prealable."
+msgstr "Als niet-verschijnen wordt beschouwd elke situatie waarbij het lid een voertuig reserveert, een geldig afspraak krijgt en vervolgens niet komt opdagen zonder de reservering vooraf te annuleren."
+
+msgid "1re non-presentation : avertissement enregistre sur le compte."
+msgstr "1e niet-verschijnen: waarschuwing geregistreerd op het account."
+
+msgid "2e non-presentation : second avertissement. L'utilisateur est informe du risque de suspension."
+msgstr "2e niet-verschijnen: tweede waarschuwing. De gebruiker wordt geïnformeerd over het risico van schorsing."
+
+msgid "3e non-presentation : suspension automatique du compte pour une duree de 30 jours calendriers. Durant cette periode, aucune nouvelle reservation ne peut etre effectuee."
+msgstr "3e niet-verschijnen: automatische schorsing van het account voor 30 kalenderdagen. Gedurende deze periode kan geen nieuwe reservering worden gedaan."
+
+msgid "Le compteur de non-presentations est visible dans l'historique administrateur. Toute contestation doit etre formulee par email a multidrive25@gmail.com dans un delai de 7 jours suivant le signalement."
+msgstr "De teller van niet-verschijningen is zichtbaar in de beheerdersgeschiedenis. Elk bezwaar moet per e-mail worden ingediend bij multidrive25@gmail.com binnen 7 dagen na de melding."
+
+msgid "En cas d'absence justifiee (force majeure, urgence medicale), le membre peut contacter l'administration pour demander la revision du signalement. La decision de l'administrateur est sans appel."
+msgstr "Bij gerechtvaardigde afwezigheid (overmacht, medische noodsituatie) kan het lid contact opnemen met de beheerder om herziening van de melding te vragen. De beslissing van de beheerder is definitief."
+
+msgid "J'accepte les conditions generales de vente"
+msgstr "Ik accepteer de algemene verkoopvoorwaarden"
+
+msgid "J'accepte les"
+msgstr "Ik accepteer de"
+
+msgid "conditions generales de vente"
+msgstr "algemene verkoopvoorwaarden"
+
+msgid "de MultiDrive."
+msgstr "van MultiDrive."
+
+# ─── Champ raison remboursement ──────────────────────────────────────────────
+msgid "Demande de remboursement"
+msgstr "Terugbetalingsverzoek"
+
+msgid "Raison de l'annulation"
+msgstr "Reden van de annulering"
+
+msgid "optionnel"
+msgstr "optioneel"
+
+msgid "Ex : changement de situation, vehicule plus adapte..."
+msgstr "Bijv.: verandering van situatie, voertuig niet meer geschikt..."
+
+msgid "Confirmer l'annulation"
+msgstr "Annulering bevestigen"
+
+msgid "Raison invoquee par le membre"
+msgstr "Reden opgegeven door het lid"

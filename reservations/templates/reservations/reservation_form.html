@@ -13,6 +13,11 @@
             <span>{{ vehicle.price }} EUR</span>
         </div>
 
+        <div style="background:#FEF3C7; border:1px solid #FCD34D; border-radius:8px; padding:12px 16px; margin-bottom:20px; font-size:.85rem; color:#92400E;">
+            ⚠️ <strong>{% trans "Politique de non-presentation" %}</strong><br>
+            {% trans "En cas de non-presentation sans annulation prealable, un signalement sera enregistre sur votre compte. Au bout de 3 non-presentations, votre compte sera suspendu pendant 30 jours." %}
+        </div>
+
         <form method="post" class="auth-form">
             {% csrf_token %}
 

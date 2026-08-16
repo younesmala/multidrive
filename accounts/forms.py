@@ -58,10 +58,29 @@ class RegisterForm(UserCreationForm):
             "autocomplete": "tel",
         }),
     )
+    bank_holder = forms.CharField(
+        max_length=100,
+        required=False,
+        label=_("Titulaire du compte bancaire"),
+        widget=forms.TextInput(attrs={"placeholder": _("Ex : Jean Dupont")}),
+    )
+    bank_iban = forms.CharField(
+        max_length=34,
+        required=False,
+        label=_("IBAN"),
+        widget=forms.TextInput(attrs={
+            "placeholder": _("Ex : BE68 5390 0754 7034"),
+            "style": "font-family:monospace;",
+        }),
+    )
+    accepted_cgv = forms.BooleanField(
+        required=True,
+        label=_("J'accepte les conditions generales de vente"),
+    )
 
     class Meta:
         model = User
-        fields = ["username", "email", "phone", "password1", "password2"]
+        fields = ["username", "email", "phone", "bank_holder", "bank_iban", "password1", "password2", "accepted_cgv"]
 
     def clean_email(self):
         email = self.cleaned_data["email"]

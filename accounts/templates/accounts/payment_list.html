@@ -151,11 +151,10 @@
                             <a class="button primary" href="{% url 'payments:checkout' %}">{% blocktrans with remaining=payment.remaining %}Completer le paiement ({{ remaining }} EUR){% endblocktrans %}</a>
                         {% endif %}
                         {% if payment.reservation.status == 'deposit_paid' and payment.status == 'paid' %}
-                            <form method="post" action="{% url 'reservations:cancel_reservation' payment.reservation.id %}"
-                                  onsubmit="return confirm('{% trans "Confirmer l annulation et la demande de remboursement ?" %}');">
-                                {% csrf_token %}
-                                <button type="submit" class="button danger">{% trans "Annuler et demander un remboursement" %}</button>
-                            </form>
+                            <button type="button" class="button danger" id="cancel-btn-{{ payment.id }}"
+                                    onclick="document.getElementById('refund-form-{{ payment.id }}').style.display='block'; this.style.display='none';">
+                                {% trans "Annuler et demander un remboursement" %}
+                            </button>
                         {% endif %}
                         {% if payment.remaining <= 0 and payment.status == 'paid' %}
                             {% if payment.id not in testimonial_payment_ids %}
@@ -166,6 +165,32 @@
                         {% endif %}
                         <a class="button secondary" href="{% url 'reservations:my_reservations' %}">{% trans "Mes reservations" %}</a>
                     </div>
+                    {% if payment.reservation.status == 'deposit_paid' and payment.status == 'paid' %}
+                    <div id="refund-form-{{ payment.id }}" style="display:none; margin-top:12px; background:#fafafa; border:1px solid #e0e0e0; border-radius:8px; padding:16px 18px;">
+                        <p style="font-weight:600; margin:0 0 10px; font-size:0.95rem;">{% trans "Demande de remboursement" %}</p>
+                        <form method="post" action="{% url 'reservations:cancel_reservation' payment.reservation.id %}">
+                            {% csrf_token %}
+                            <label for="refund-reason-{{ payment.id }}" style="display:block; font-size:0.88rem; margin-bottom:4px;">
+                                {% trans "Raison de l'annulation" %} <span style="color:var(--muted); font-weight:400;">({% trans "optionnel" %})</span>
+                            </label>
+                            <textarea id="refund-reason-{{ payment.id }}" name="refund_reason"
+                                      rows="3" placeholder="{% trans "Ex : changement de situation, vehicule plus adapte..." %}"
+                                      style="width:100%; padding:8px 10px; border:1px solid #ccc; border-radius:6px; font-size:0.9rem; resize:vertical; box-sizing:border-box; margin-bottom:10px;"></textarea>
+                            <div style="display:flex; gap:8px;">
+                                <button type="submit"
+                                        style="padding:7px 16px; font-size:0.88rem; background:#c0392b; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:600;"
+                                        onclick="return confirm('{% trans "Confirmer l annulation et la demande de remboursement ?" %}');">
+                                    {% trans "Confirmer l'annulation" %}
+                                </button>
+                                <button type="button"
+                                        style="padding:7px 16px; font-size:0.88rem; background:transparent; color:#444; border:1px solid #ccc; border-radius:6px; cursor:pointer;"
+                                        onclick="document.getElementById('refund-form-{{ payment.id }}').style.display='none'; document.getElementById('cancel-btn-{{ payment.id }}').style.display='';">
+                                    {% trans "Annuler" %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    {% endif %}
                 </article>
             {% endfor %}
         </div>

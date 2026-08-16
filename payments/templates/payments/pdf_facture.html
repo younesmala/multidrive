@@ -32,13 +32,20 @@
 <div class="header">
     <div class="header-left">
         <div class="brand">MultiDrive</div>
-        <div class="brand-sub">{% trans "Plateforme de vehicules d'occasion" %}<br>multidrive25@gmail.com</div>
+        <div class="brand-sub">
+            {% trans "Plateforme de vehicules d'occasion" %}<br>
+            multidrive25@gmail.com<br>
+            {% trans "N° BCE" %} : BE 0789.456.123<br>
+            {% trans "N° TVA" %} : BE 0789.456.123<br>
+            IBAN : BE68 5390 0754 7034 — BIC : TRIOBEBB
+        </div>
     </div>
     <div class="header-right">
         <div class="doc-title">{% trans "FACTURE" %}</div>
         <div class="doc-meta">
             N° {{ invoice_number }}<br>
             {% trans "Date :" %} {{ issued_date }}<br>
+            {% trans "Echeance :" %} {{ issued_date }}<br>
             <span class="badge">{% trans "Paye" %}</span>
         </div>
     </div>
@@ -58,21 +65,35 @@
     <tr>
         <th>{% trans "Description" %}</th>
         <th>{% trans "Categorie" %}</th>
-        <th class="right">{% trans "Prix total vehicule" %}</th>
-        <th class="right">{% trans "Montant verse" %}</th>
+        <th class="right">{% trans "Qte" %}</th>
+        <th class="right">{% trans "PU HT" %}</th>
+        <th class="right">{% trans "TVA" %}</th>
+        <th class="right">{% trans "Montant TTC" %}</th>
     </tr>
     <tr>
         <td>{{ vehicle_title }}</td>
         <td>{{ vehicle_category }}</td>
+        <td class="right">1</td>
         <td class="right">{{ vehicle_price }} EUR</td>
-        <td class="right">{{ amount_paid }} EUR</td>
+        <td class="right">0 %</td>
+        <td class="right">{{ vehicle_price }} EUR</td>
+    </tr>
+    <tr style="background:#f9f9f9;">
+        <td colspan="5" style="font-size:9pt; color:#555; padding:6px 10px;">{% trans "Acompte verse (present reglement)" %}</td>
+        <td class="right" style="font-weight:600; color:#2a7a3b;">- {{ amount_paid }} EUR</td>
     </tr>
     <tr class="total-row">
-        <td colspan="3">{% trans "Solde restant" %}</td>
+        <td colspan="5">{% trans "Solde restant a regler" %}</td>
         <td class="right">
             {% if remaining == "0.00" %}{% trans "Solde apure" %}{% else %}{{ remaining }} EUR{% endif %}
         </td>
     </tr>
+</table>
+
+<table class="info-table" style="margin-top:10px; font-size:9pt; color:#555;">
+    <tr><td>{% trans "Base TVA (0%)" %}</td><td>{{ vehicle_price }} EUR</td></tr>
+    <tr><td>{% trans "TVA due" %}</td><td>0,00 EUR</td></tr>
+    <tr><td style="font-weight:bold; font-size:10pt; color:#1a1a2e;">{% trans "TOTAL TTC" %}</td><td style="font-weight:bold; font-size:10pt; color:#1a1a2e;">{{ vehicle_price }} EUR</td></tr>
 </table>
 
 <p class="section-title">{% trans "Reference de transaction" %}</p>
@@ -104,7 +125,8 @@
 </table>
 
 <div class="footer">
-    MultiDrive — {% trans "Projet academique TFE" %} &bull; multidrive25@gmail.com<br>
+    MultiDrive — N° BCE BE 0789.456.123 — multidrive25@gmail.com — IBAN BE68 5390 0754 7034<br>
+    {% trans "Tout remboursement sera effectue dans un delai de 14 jours ouvrables. Retenue de 10 % minimum en cas d'annulation apres versement de l'acompte (CGV art. 5)." %}<br>
     {% blocktrans with date=issued_date %}Document genere automatiquement le {{ date }}{% endblocktrans %}
 </div>
 

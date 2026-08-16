@@ -55,15 +55,27 @@
         <p style="margin-top:10px;">{% trans "Conformement a l'article VI.47 du Code de droit economique belge, le droit de retractation ne s'applique pas aux contrats de vente de biens dont la valeur est susceptible de fluctuer dans un delai court." %}</p>
     </article>
 
+    <article class="member-detail-card" id="non-presentation">
+        <h2>{% trans "6. Non-presentation et suspension de compte" %}</h2>
+        <p>{% trans "Est consideree comme non-presentation toute situation ou le membre reserve un vehicule, obtient un rendez-vous valide, puis ne se presente pas sans avoir annule sa reservation au prealable." %}</p>
+        <ul style="margin: 12px 0 0 20px; line-height: 2;">
+            <li>{% trans "1re non-presentation : avertissement enregistre sur le compte." %}</li>
+            <li>{% trans "2e non-presentation : second avertissement. L'utilisateur est informe du risque de suspension." %}</li>
+            <li>{% trans "3e non-presentation : suspension automatique du compte pour une duree de 30 jours calendriers. Durant cette periode, aucune nouvelle reservation ne peut etre effectuee." %}</li>
+        </ul>
+        <p style="margin-top:12px;">{% trans "Le compteur de non-presentations est visible dans l'historique administrateur. Toute contestation doit etre formulee par email a multidrive25@gmail.com dans un delai de 7 jours suivant le signalement." %}</p>
+        <p style="margin-top:10px;">{% trans "En cas d'absence justifiee (force majeure, urgence medicale), le membre peut contacter l'administration pour demander la revision du signalement. La decision de l'administrateur est sans appel." %}</p>
+    </article>
+
     <article class="member-detail-card" id="rgpd">
-        <h2>{% trans "6. Donnees personnelles" %}</h2>
+        <h2>{% trans "7. Donnees personnelles" %}</h2>
         <p>{% trans "Le traitement des donnees personnelles est regi par le Reglement (UE) 2016/679 du Parlement europeen et du Conseil (RGPD) et par la loi belge du 30 juillet 2018 relative a la protection des personnes physiques a l'egard des traitements de donnees a caractere personnel." %}</p>
         <p style="margin-top:10px;">{% trans "Pour le detail complet de la politique de traitement des donnees, veuillez consulter notre" %}
         <a href="{% url 'vehicles:confidentialite' %}">{% trans "Politique de confidentialite" %}</a>.</p>
     </article>
 
     <article class="member-detail-card" id="cookies">
-        <h2>{% trans "7. Cookies" %}</h2>
+        <h2>{% trans "8. Cookies" %}</h2>
         <p>{% trans "MultiDrive utilise uniquement des cookies techniques strictement necessaires au bon fonctionnement de la plateforme :" %}</p>
         <ul style="margin: 12px 0 0 20px; line-height: 2;">
             <li>{% trans "Maintien de la session utilisateur (authentification Django)" %}</li>
@@ -74,24 +86,24 @@
     </article>
 
     <article class="member-detail-card">
-        <h2>{% trans "8. Propriete intellectuelle" %}</h2>
+        <h2>{% trans "9. Propriete intellectuelle" %}</h2>
         <p>{% trans "Les contenus presentes sur MultiDrive (design, code source, textes, elements graphiques) sont proteges par la loi belge du 19 avril 2014 relative au droit d'auteur et aux droits voisins et par la Convention de Berne. Toute reproduction ou diffusion sans autorisation prealable est interdite." %}</p>
         <p style="margin-top:12px;">{% trans "Ce projet est realise a titre academique dans le cadre d'un Travail de Fin d'Etudes. Les images utilisees pour illustrer les vehicules proviennent de ressources libres de droits ou appartiennent au projet." %}</p>
     </article>
 
     <article class="member-detail-card">
-        <h2>{% trans "9. Responsabilite" %}</h2>
+        <h2>{% trans "10. Responsabilite" %}</h2>
         <p>{% trans "MultiDrive est un projet academique fourni a titre demonstratif. La plateforme est mise a disposition en l'etat, sans garantie de disponibilite continue. MultiDrive ne saurait etre tenu responsable des dommages directs ou indirects resultant de l'utilisation ou de l'impossibilite d'utiliser le service." %}</p>
         <p style="margin-top:10px;">{% trans "En cas de litige, les parties s'engagent a rechercher une solution amiable avant tout recours judiciaire. Le droit belge est applicable. Les tribunaux de Bruxelles sont seuls competents." %}</p>
     </article>
 
     <article class="member-detail-card">
-        <h2>{% trans "10. Modification des conditions" %}</h2>
+        <h2>{% trans "11. Modification des conditions" %}</h2>
         <p>{% trans "MultiDrive se reserve le droit de modifier les presentes conditions a tout moment. Les utilisateurs seront informes de toute modification substantielle. La version en vigueur est celle affichee sur cette page avec la date de derniere mise a jour." %}</p>
     </article>
 
     <article class="member-detail-card">
-        <h2>{% trans "11. Contact" %}</h2>
+        <h2>{% trans "12. Contact" %}</h2>
         <p>
             {% trans "Pour toute question relative aux conditions d'utilisation, a la protection des donnees ou a un remboursement, vous pouvez nous contacter via la" %}
             <a href="{% url 'contact:contact_form' %}">{% trans "page de contact" %}</a>

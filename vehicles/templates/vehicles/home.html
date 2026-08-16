@@ -109,4 +109,155 @@
         {% endfor %}
     </div>
 </section>
+
+{% if testimonials %}
+<section class="section testimonials-section">
+    <div class="section-heading">
+        <div>
+            <h2>{% trans "Ce que disent nos clients" %}</h2>
+            <p>{% trans "Avis verifies de membres ayant effectue un achat sur MultiDrive." %}</p>
+        </div>
+        <a class="button secondary" href="{% url 'payments:testimonial_list' %}" style="white-space:nowrap; align-self:center;">
+            {% trans "Voir tous les avis" %}
+        </a>
+    </div>
+
+    <div class="carousel-wrapper">
+        <button class="carousel-btn carousel-prev" onclick="shiftCarousel(-1)" aria-label="Précédent">&#8249;</button>
+        <div class="carousel-track-outer">
+            <div class="carousel-track" id="carousel-track">
+                {% for t in testimonials %}
+                <article class="testimonial-card">
+                    <div class="testimonial-stars">
+                        {% for i in "12345" %}
+                            <span style="color:{% if forloop.counter <= t.rating %}#F59E0B{% else %}#D1D5DB{% endif %};">★</span>
+                        {% endfor %}
+                    </div>
+                    <p class="testimonial-comment">"{{ t.comment|truncatechars:160 }}"</p>
+                    <p class="testimonial-author">— {{ t.user.first_name|default:t.user.username }}</p>
+                    {% if t.admin_reply %}
+                    <div class="testimonial-reply">
+                        <strong>MultiDrive :</strong> {{ t.admin_reply|truncatechars:120 }}
+                    </div>
+                    {% endif %}
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+        <button class="carousel-btn carousel-next" onclick="shiftCarousel(1)" aria-label="Suivant">&#8250;</button>
+    </div>
+    <div class="carousel-dots" id="carousel-dots"></div>
+</section>
+
+<style>
+.testimonials-section { padding-bottom: 3rem; }
+.carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.carousel-track-outer {
+    overflow: hidden;
+    flex: 1;
+}
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform .4s ease;
+}
+.testimonial-card {
+    flex: 0 0 calc(33.333% - 14px);
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border, #E5E7EB);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+@media (max-width: 900px) { .testimonial-card { flex: 0 0 calc(50% - 10px); } }
+@media (max-width: 580px) { .testimonial-card { flex: 0 0 100%; } }
+.testimonial-stars { font-size: 1.1rem; letter-spacing: 2px; }
+.testimonial-comment { font-size: .92rem; line-height: 1.65; color: var(--text, #374151); font-style: italic; margin: 0; }
+.testimonial-author { font-size: .82rem; font-weight: 600; color: var(--muted, #6B7280); margin: 0; }
+.testimonial-reply {
+    font-size: .78rem;
+    color: #4F46E5;
+    background: #EEF2FF;
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin-top: 4px;
+}
+.carousel-btn {
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border, #E5E7EB);
+    border-radius: 50%;
+    width: 40px; height: 40px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s;
+    color: var(--text, #374151);
+}
+.carousel-btn:hover { background: var(--border, #E5E7EB); }
+.carousel-dots { display: flex; justify-content: center; gap: 6px; margin-top: 16px; }
+.carousel-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #D1D5DB; border: none; cursor: pointer; padding: 0;
+    transition: background .2s;
+}
+.carousel-dot.active { background: #1E3A8A; }
+</style>
+
+<script>
+(function(){
+    var track = document.getElementById('carousel-track');
+    var dotsContainer = document.getElementById('carousel-dots');
+    var cards = track ? track.querySelectorAll('.testimonial-card') : [];
+    var perPage = 3;
+    var current = 0;
+
+    function getPerPage() {
+        if (window.innerWidth <= 580) return 1;
+        if (window.innerWidth <= 900) return 2;
+        return 3;
+    }
+
+    function totalPages() { return Math.ceil(cards.length / getPerPage()); }
+
+    function buildDots() {
+        dotsContainer.innerHTML = '';
+        var n = totalPages();
+        for (var i = 0; i < n; i++) {
+            var btn = document.createElement('button');
+            btn.className = 'carousel-dot' + (i === current ? ' active' : '');
+            btn.setAttribute('aria-label', 'Page ' + (i+1));
+            (function(idx){ btn.onclick = function(){ goTo(idx); }; })(i);
+            dotsContainer.appendChild(btn);
+        }
+    }
+
+    function goTo(idx) {
+        var pp = getPerPage();
+        current = Math.max(0, Math.min(idx, totalPages() - 1));
+        var cardW = cards[0] ? cards[0].offsetWidth + 20 : 0;
+        track.style.transform = 'translateX(-' + (current * pp * cardW) + 'px)';
+        buildDots();
+    }
+
+    window.shiftCarousel = function(dir) { goTo(current + dir); };
+
+    buildDots();
+    window.addEventListener('resize', function(){ goTo(0); });
+
+    var autoplay = setInterval(function(){
+        var next = (current + 1) % totalPages();
+        goTo(next);
+    }, 5000);
+    track && track.addEventListener('mouseenter', function(){ clearInterval(autoplay); });
+})();
+</script>
+{% endif %}
 {% endblock %}
