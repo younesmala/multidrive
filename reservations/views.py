@@ -3,6 +3,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 
 from .emails import (
@@ -11,6 +12,7 @@ from .emails import (
     send_reservation_status_email,
 )
 
+from accounts.models import AccountStatus
 from payments.models import Payment
 from vehicles.models import Vehicle
 
@@ -50,6 +52,15 @@ def reserve_vehicle(request, vehicle_id):
     if vehicle.status != Vehicle.STATUS_AVAILABLE:
         messages.error(request, "Ce vehicule n'est plus disponible a la reservation.")
         return redirect("vehicles:vehicle_detail", vehicle_id=vehicle.id)
+
+    try:
+        acct = request.user.account_status
+        if acct.is_currently_banned:
+            until = acct.banned_until.strftime("%d/%m/%Y")
+            messages.error(request, _("Votre compte est suspendu jusqu'au %(until)s suite a des non-presentations. Vous ne pouvez pas effectuer de reservation.") % {"until": until})
+            return redirect("vehicles:vehicle_detail", vehicle_id=vehicle.id)
+    except AccountStatus.DoesNotExist:
+        pass
 
     existing = Reservation.objects.filter(
         user=request.user,
@@ -166,7 +177,8 @@ def cancel_reservation(request, reservation_id):
             payment.status = Payment.STATUS_REFUND_REQUESTED
             payment.admin_notif_read = False
             payment.user_status_read = False
-            payment.save(update_fields=["status", "admin_notif_read", "user_status_read", "updated_at"])
+            payment.refund_reason = request.POST.get("refund_reason", "").strip()
+            payment.save(update_fields=["status", "admin_notif_read", "user_status_read", "refund_reason", "updated_at"])
         send_cancellation_admin_notification(reservation)
         messages.warning(
             request,
