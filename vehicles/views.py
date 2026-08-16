@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
+from payments.models import Testimonial
 from .models import Favorite, Vehicle, VehicleCategory
 
 
@@ -92,6 +93,12 @@ def home(request):
     _attach_favorites(popular_vehicles, request.user)
     categories = VehicleCategory.objects.order_by("name")
 
+    testimonials = list(
+        Testimonial.objects.filter(is_visible=True, is_deleted=False)
+        .select_related("user")
+        .order_by("-created_at")[:12]
+    )
+
     return render(
         request,
         "vehicles/home.html",
@@ -100,6 +107,7 @@ def home(request):
             "popular_vehicles": popular_vehicles,
             "categories": categories,
             "available_count": Vehicle.objects.filter(status=Vehicle.STATUS_AVAILABLE).count(),
+            "testimonials": testimonials,
         },
     )
 

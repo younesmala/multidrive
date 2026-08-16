@@ -37,9 +37,6 @@
                         <a class="nav-link" href="{% url 'vehicles:vehicle_list' %}">{% trans "Catalogue" %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'payments:testimonial_list' %}">{% trans "Temoignages" %}</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{% url 'contact:contact_form' %}">{% trans "Contact" %}</a>
                     </li>
 
@@ -93,13 +90,17 @@
                         </li>
 
                         {% if request.user.is_staff %}
-                            <li class="nav-item ms-lg-1">
-                                <a class="nav-link nav-admin-link menu-link-with-badge" href="{% url 'accounts:admin_dashboard' %}">
-                                    <span>{% trans "Dashboard admin" %}</span>
-                                    {% if admin_pending_notifications %}
-                                        <span class="notification-badge">{{ admin_pending_notifications }}</span>
-                                    {% endif %}
+                            <li class="nav-item ms-lg-1" style="display:flex; align-items:center; gap:4px;">
+                                <a class="nav-link nav-admin-link" href="{% url 'accounts:admin_dashboard' %}">
+                                    {% trans "Dashboard admin" %}
                                 </a>
+                                {% if admin_pending_notifications %}
+                                    <a href="{% url 'accounts:admin_dashboard' %}#actions-rapides"
+                                       class="notification-badge"
+                                       style="text-decoration:none; position:static; display:inline-flex; align-items:center; justify-content:center;">
+                                        {{ admin_pending_notifications }}
+                                    </a>
+                                {% endif %}
                             </li>
                         {% endif %}
 
