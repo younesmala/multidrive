@@ -4,9 +4,15 @@
 {% block title %}{% trans "Dashboard admin" %} - MultiDrive{% endblock %}
 
 {% block content %}
-<section class="page-title">
-    <p class="eyebrow">{% trans "Administration" %}</p>
-    <h1>{% trans "Dashboard admin" %}</h1>
+<section class="page-title" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+    <div>
+        <p class="eyebrow">{% trans "Administration" %}</p>
+        <h1 style="margin:0;">{% trans "Dashboard admin" %}</h1>
+    </div>
+    <a href="#actions-rapides"
+       style="background:#1E3A8A; color:#fff; border-radius:8px; padding:10px 20px; font-size:.88rem; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:8px; scroll-behavior:smooth;">
+        {% trans "Actions rapides" %}
+    </a>
 </section>
 
 {% if messages %}
@@ -138,7 +144,7 @@
 {% endif %}
 
 {# ── 3. Actions rapides ── #}
-<section class="section" style="padding-bottom:0;">
+<section class="section" id="actions-rapides" style="padding-bottom:0;">
     <div class="section-heading">
         <div>
             <p class="eyebrow">{% trans "Raccourcis" %}</p>
@@ -205,12 +211,66 @@
                             {% trans "Acompte verse :" %} <strong>{{ payment.amount }} EUR</strong> —
                             {% trans "Annulation le" %} {{ payment.updated_at|date:"d/m/Y a H:i" }}
                         </small>
+                        {% if payment.refund_reason %}
+                        <div style="margin-top:8px; background:#f8f6f1; border-left:3px solid #b45309; padding:7px 12px; border-radius:0 4px 4px 0; font-size:0.88rem;">
+                            <strong style="font-size:0.78rem; text-transform:uppercase; letter-spacing:.5px; color:#b45309;">{% trans "Raison invoquee par le membre" %}</strong>
+                            <p style="margin:3px 0 0; color:#333;">{{ payment.refund_reason }}</p>
+                        </div>
+                        {% endif %}
                     </div>
                     <span class="status status-refund_requested">{% trans "Remboursement demande" %}</span>
                 </div>
 
-                <form method="post" action="{% url 'accounts:process_refund' payment.id %}" class="refund-form">
+                <form method="post" action="{% url 'accounts:process_refund' payment.id %}" class="refund-form" id="refund-form-{{ payment.id }}">
                     {% csrf_token %}
+
+                    {# Méthode de remboursement #}
+                    <div class="refund-form-field" style="margin-bottom:14px;">
+                        <label style="margin-bottom:6px; display:block;">{% trans "Methode de remboursement" %}</label>
+                        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:400; font-size:.9rem;">
+                                <input type="radio" name="refund_method" value="cash" checked
+                                       onchange="toggleBankFields('{{ payment.id }}', false)">
+                                💵 {% trans "Remboursement en especes" %}
+                            </label>
+                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:400; font-size:.9rem;">
+                                <input type="radio" name="refund_method" value="virement"
+                                       onchange="toggleBankFields('{{ payment.id }}', true)">
+                                🏦 {% trans "Virement bancaire" %}
+                            </label>
+                        </div>
+                    </div>
+
+                    {# Coordonnées bancaires (virement uniquement) #}
+                    {% with user_status=payment.reservation.user.account_status %}
+                    <div id="bank-fields-{{ payment.id }}"
+                         style="display:none; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:14px;">
+                        <p style="margin:0 0 10px; font-size:.82rem; font-weight:600; color:#374151;">🏦 {% trans "Coordonnees bancaires du client" %}</p>
+                        {% if user_status and user_status.bank_iban %}
+                        <div style="background:#ECFDF5; border:1px solid #6EE7B7; border-radius:6px; padding:8px 12px; margin-bottom:10px; font-size:.78rem; color:#065F46;">
+                            ✅ {% trans "Coordonnees enregistrees lors de l'inscription" %}
+                        </div>
+                        {% endif %}
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+                            <div>
+                                <label style="font-size:.78rem; color:#6B7280; display:block; margin-bottom:3px;">{% trans "Titulaire du compte" %}</label>
+                                <input type="text" name="bank_holder"
+                                       value="{% if user_status %}{{ user_status.bank_holder }}{% endif %}"
+                                       placeholder="Ex : Jean Dupont"
+                                       style="width:100%; padding:7px 10px; border:1px solid #D1D5DB; border-radius:6px; font-size:.85rem; box-sizing:border-box;">
+                            </div>
+                            <div>
+                                <label style="font-size:.78rem; color:#6B7280; display:block; margin-bottom:3px;">IBAN</label>
+                                <input type="text" name="bank_iban"
+                                       value="{% if user_status %}{{ user_status.bank_iban }}{% endif %}"
+                                       placeholder="Ex : BE68 5390 0754 7034"
+                                       style="width:100%; padding:7px 10px; border:1px solid #D1D5DB; border-radius:6px; font-size:.85rem; box-sizing:border-box; font-family:monospace;">
+                            </div>
+                        </div>
+                        <p style="margin:8px 0 0; font-size:.72rem; color:#9CA3AF;">{% trans "Ces informations seront enregistrees dans la note du remboursement." %}</p>
+                    </div>
+                    {% endwith %}
+
                     <div class="refund-form-row">
                         <div class="refund-form-field">
                             <label for="refund_amount_{{ payment.id }}">
@@ -219,6 +279,20 @@
                                     — {% trans "Acompte verse :" %} {{ payment.amount }} EUR
                                 </span>
                             </label>
+
+                            {# Raccourcis retenue #}
+                            <div style="display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px;">
+                                <span style="font-size:.75rem; color:#6B7280; align-self:center; margin-right:2px;">{% trans "Retenue :" %}</span>
+                                {% for pct in retenue_choices %}
+                                <button type="button"
+                                        onclick="applyRetenue('{{ payment.id }}', {{ payment.amount|stringformat:'.2f' }}, {{ pct }})"
+                                        style="background:#F3F4F6; border:1px solid #D1D5DB; border-radius:5px; padding:3px 10px; font-size:.78rem; cursor:pointer; font-weight:500;">
+                                    {{ pct }}%
+                                </button>
+                                {% endfor %}
+                                <span id="retenue-preview-{{ payment.id }}" style="font-size:.75rem; color:#374151; align-self:center; margin-left:4px;"></span>
+                            </div>
+
                             <input type="number" id="refund_amount_{{ payment.id }}"
                                    name="refund_amount" step="0.01" min="0"
                                    max="{{ payment.amount }}"
@@ -232,8 +306,12 @@
                                   rows="3"
                                   placeholder="{% trans 'Ex : Remboursement de 90 EUR apres retention de 10 % de frais administratifs conformement aux CGV.' %}"></textarea>
                     </div>
+
                     <div style="display:flex; gap:12px; align-items:center; margin-top:8px;">
-                        <button type="submit" class="btn-action btn-accept">{% trans "Valider le remboursement" %}</button>
+                        <button type="submit" class="btn-action btn-accept"
+                                onclick="return confirmRefund(this, '{{ payment.id }}')">
+                            {% trans "Valider le remboursement" %}
+                        </button>
                         <a class="button secondary" style="font-size:0.82rem;"
                            href="{% url 'admin:payments_payment_change' payment.id %}">
                             {% trans "Voir dans l'admin Django" %}
@@ -615,6 +693,34 @@
         body.style.display = isOpen ? 'none' : 'block';
         header.classList.toggle('open', !isOpen);
         chevron.style.transform = isOpen ? '' : 'rotate(180deg)';
+    }
+
+    function applyRetenue(paymentId, amount, pct) {
+        var retenue = Math.round(amount * pct) / 100;
+        var remb = Math.round((amount - retenue) * 100) / 100;
+        var input = document.getElementById('refund_amount_' + paymentId);
+        var preview = document.getElementById('retenue-preview-' + paymentId);
+        if (input) input.value = remb.toFixed(2);
+        if (preview) {
+            preview.textContent = pct > 0
+                ? '→ retenue ' + retenue.toFixed(2) + ' EUR, remb. ' + remb.toFixed(2) + ' EUR'
+                : '→ remboursement intégral';
+        }
+    }
+
+    function toggleBankFields(paymentId, show) {
+        var bankDiv = document.getElementById('bank-fields-' + paymentId);
+        var stripeInfo = document.getElementById('stripe-info-' + paymentId);
+        if (bankDiv) bankDiv.style.display = show ? 'block' : 'none';
+        if (stripeInfo) stripeInfo.style.display = show ? 'none' : 'block';
+    }
+
+    function confirmRefund(btn, paymentId) {
+        var form = document.getElementById('refund-form-' + paymentId);
+        var method = form.querySelector('input[name="refund_method"]:checked');
+        var methodVal = method ? method.value : 'cash';
+        var label = methodVal === 'virement' ? 'virement bancaire' : 'especes';
+        return confirm('Confirmer le remboursement par ' + label + ' ?');
     }
     </script>
 </section>

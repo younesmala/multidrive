@@ -2772,7 +2772,7 @@ msgstr "2. Legal basis for processing"
 msgid ""
 "Conformement a l'article 6 du RGPD, les traitements realises sur MultiDrive "
 "reposent sur les bases legales suivantes :"
-msgstr ""
+msgstr "In accordance with Article 6 of the GDPR, the processing carried out on MultiDrive is based on the following legal grounds:"
 
 #: .\vehicles\templates\vehicles\confidentialite.html:30
 msgid "Execution du contrat (art. 6.1.b)"
@@ -2906,7 +2906,7 @@ msgstr "Published after explicit consent and admin validation"
 msgid ""
 "Les mots de passe sont stockes sous forme de hachage irreversible (PBKDF2-"
 "SHA256). Aucun mot de passe n'est lisible par l'administration."
-msgstr ""
+msgstr "Passwords are stored as irreversible hashes (PBKDF2-SHA256). No password is readable by the administration."
 
 #: .\vehicles\templates\vehicles\confidentialite.html:103
 msgid "4. Duree de conservation"
@@ -3245,7 +3245,7 @@ msgid ""
 "prix, min 20 EUR, max 250 EUR) ou payer la totalite directement. Le paiement "
 "est securise via Stripe Checkout. Aucune donnee bancaire ne passe par nos "
 "serveurs."
-msgstr ""
+msgstr "Once the reservation is accepted, you can pay a deposit (20%% of the price, min. €20, max. €250) or pay the full amount directly. Payment is secured via Stripe Checkout. No banking data passes through our servers."
 
 #: .\vehicles\templates\vehicles\fonctionnement.html:71
 msgid "Finaliser et recevoir vos documents"
@@ -3745,3 +3745,121 @@ msgstr "e.g. +32 470 12 34 56"
 
 msgid "Numero de telephone (optionnel)"
 msgstr "Phone number (optional)"
+
+# ─── Non-présentation / ban system ───────────────────────────────────────────
+msgid "Politique de non-presentation"
+msgstr "No-show policy"
+
+msgid "En cas de non-presentation sans annulation prealable, un signalement sera enregistre sur votre compte. Au bout de 3 non-presentations, votre compte sera suspendu pendant 30 jours."
+msgstr "In case of no-show without prior cancellation, a report will be recorded on your account. After 3 no-shows, your account will be suspended for 30 days."
+
+msgid "En cas de non-presentation sans annulation prealable, un signalement sera enregistre sur votre compte. Au bout de 3 non-presentations, votre compte sera suspendu 30 jours et vous ne pourrez plus effectuer de reservations."
+msgstr "In case of no-show without prior cancellation, a report will be recorded on your account. After 3 no-shows, your account will be suspended for 30 days and you will no longer be able to make reservations."
+
+# ─── Réservations en cours (dashboard admin) ─────────────────────────────────
+msgid "Suivi"
+msgstr "Tracking"
+
+msgid "Reservations en cours"
+msgstr "Ongoing reservations"
+
+msgid "Reservations acceptees. En cas de non-presentation du client, signalez-le ici."
+msgstr "Accepted reservations. Report here if a client does not show up."
+
+msgid "RDV le"
+msgstr "Appointment on"
+
+msgid "Date non precisee"
+msgstr "Date not specified"
+
+msgid "non-presentation(s) au compteur"
+msgstr "no-show(s) on record"
+
+msgid "Signaler une non-presentation"
+msgstr "Report a no-show"
+
+# ─── Coordonnées bancaires ────────────────────────────────────────────────────
+msgid "Titulaire du compte bancaire"
+msgstr "Account holder"
+
+msgid "Ex : Jean Dupont"
+msgstr "e.g. Jean Dupont"
+
+msgid "Ex : BE68 5390 0754 7034"
+msgstr "e.g. BE68 5390 0754 7034"
+
+msgid "Coordonnees bancaires (optionnel)"
+msgstr "Bank details (optional)"
+
+msgid "Utilisees uniquement en cas de remboursement par virement bancaire."
+msgstr "Used only in case of refund by bank transfer."
+
+msgid "Modifier mes coordonnees bancaires (IBAN)"
+msgstr "Update my bank details (IBAN)"
+
+msgid "Titulaire"
+msgstr "Account holder"
+
+msgid "Utilises uniquement en cas de remboursement par virement bancaire. Ne sont jamais partages."
+msgstr "Used only for bank transfer refunds. Never shared."
+
+# ─── Checkbox CGV ─────────────────────────────────────────────────────────────
+# ─── En-têtes documents PDF ──────────────────────────────────────────────────
+msgid "N° BCE"
+msgstr "Company No."
+
+msgid "N° TVA"
+msgstr "VAT No."
+
+# ─── CGV article 6 : Non-présentation ────────────────────────────────────────
+msgid "6. Non-presentation et suspension de compte"
+msgstr "6. No-show policy and account suspension"
+
+msgid "Est consideree comme non-presentation toute situation ou le membre reserve un vehicule, obtient un rendez-vous valide, puis ne se presente pas sans avoir annule sa reservation au prealable."
+msgstr "A no-show is defined as any situation where a member reserves a vehicle, receives a confirmed appointment, and then fails to appear without prior cancellation."
+
+msgid "1re non-presentation : avertissement enregistre sur le compte."
+msgstr "1st no-show: warning recorded on the account."
+
+msgid "2e non-presentation : second avertissement. L'utilisateur est informe du risque de suspension."
+msgstr "2nd no-show: second warning. The user is informed of the risk of suspension."
+
+msgid "3e non-presentation : suspension automatique du compte pour une duree de 30 jours calendriers. Durant cette periode, aucune nouvelle reservation ne peut etre effectuee."
+msgstr "3rd no-show: automatic account suspension for 30 calendar days. During this period, no new reservation can be made."
+
+msgid "Le compteur de non-presentations est visible dans l'historique administrateur. Toute contestation doit etre formulee par email a multidrive25@gmail.com dans un delai de 7 jours suivant le signalement."
+msgstr "The no-show counter is visible in the administrator history. Any dispute must be submitted by email to multidrive25@gmail.com within 7 days of the report."
+
+msgid "En cas d'absence justifiee (force majeure, urgence medicale), le membre peut contacter l'administration pour demander la revision du signalement. La decision de l'administrateur est sans appel."
+msgstr "In case of justified absence (force majeure, medical emergency), the member may contact the administration to request a review of the report. The administrator's decision is final."
+
+msgid "J'accepte les conditions generales de vente"
+msgstr "I accept the terms and conditions of sale"
+
+msgid "J'accepte les"
+msgstr "I accept the"
+
+msgid "conditions generales de vente"
+msgstr "terms and conditions of sale"
+
+msgid "de MultiDrive."
+msgstr "of MultiDrive."
+
+# ─── Champ raison remboursement ──────────────────────────────────────────────
+msgid "Demande de remboursement"
+msgstr "Refund request"
+
+msgid "Raison de l'annulation"
+msgstr "Reason for cancellation"
+
+msgid "optionnel"
+msgstr "optional"
+
+msgid "Ex : changement de situation, vehicule plus adapte..."
+msgstr "E.g.: change of situation, vehicle no longer suitable..."
+
+msgid "Confirmer l'annulation"
+msgstr "Confirm cancellation"
+
+msgid "Raison invoquee par le membre"
+msgstr "Reason given by the member"

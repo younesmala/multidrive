@@ -41,6 +41,7 @@ class Payment(models.Model):
     )
     paid_at = models.DateTimeField(blank=True, null=True)
     refund_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    refund_reason = models.TextField(blank=True, default="")
     refund_note = models.TextField(blank=True, null=True)
     user_status_read = models.BooleanField(default=True)
     admin_notif_read = models.BooleanField(default=True)
@@ -54,6 +55,10 @@ class Payment(models.Model):
             models.Index(fields=["status"]),
             models.Index(fields=["created_at"]),
         ]
+
+    @property
+    def is_stripe_payment(self):
+        return bool(self.transaction_reference and self.transaction_reference.startswith("cs_"))
 
     def __str__(self):
         return f"Payment {self.amount} EUR for reservation #{self.reservation.id}"
