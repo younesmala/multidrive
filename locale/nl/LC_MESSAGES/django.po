@@ -3900,3 +3900,9 @@ msgstr "Annulering bevestigen"
 
 msgid "Raison invoquee par le membre"
 msgstr "Reden opgegeven door het lid"
+
+msgid "Le remboursement sera traite automatiquement via Stripe sur la carte originale du membre."
+msgstr "De terugbetaling wordt automatisch verwerkt via Stripe op de originele kaart van het lid."
+
+msgid "Ce paiement n'a pas de reference Stripe valide. Le remboursement sera enregistre dans le systeme mais devra etre effectue manuellement."
+msgstr "Deze betaling heeft geen geldige Stripe-referentie. De terugbetaling wordt geregistreerd in het systeem maar moet handmatig worden uitgevoerd."

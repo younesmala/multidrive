@@ -515,63 +515,96 @@ def process_refund(request, payment_id):
 
     raw = request.POST.get("refund_amount", "").replace(",", ".").strip()
     note = request.POST.get("refund_note", "").strip()
-    refund_method = request.POST.get("refund_method", "cash")
-    bank_iban = request.POST.get("bank_iban", "").strip()
-    bank_holder = request.POST.get("bank_holder", "").strip()
 
     try:
         refund_amount = Decimal(raw).quantize(Decimal("0.01"))
-        if refund_amount < Decimal("0"):
+        if refund_amount <= Decimal("0"):
             raise ValueError
     except (InvalidOperation, ValueError):
         messages.error(request, "Montant de remboursement invalide.")
         return redirect("accounts:admin_dashboard")
 
+    stripe_ok, stripe_result = _stripe_refund(payment, refund_amount)
+
     full_note = note
-    if refund_method == "virement" and (bank_iban or bank_holder):
-        bank_info = f"[Virement] IBAN : {bank_iban} — Titulaire : {bank_holder}"
-        full_note = f"{bank_info}\n{note}" if note else bank_info
+    if stripe_ok:
+        payment.stripe_refund_id = stripe_result
+    elif stripe_result is not None:
+        # Stripe a échoué — on note l'erreur mais on marque quand même comme remboursé
+        error_note = f"[Stripe échoué : {stripe_result}]"
+        full_note = f"{note}\n{error_note}".strip() if note else error_note
 
     payment.refund_amount = refund_amount
-    payment.refund_note = full_note if full_note else None
+    payment.refund_note = full_note or None
     payment.status = Payment.STATUS_REFUNDED
     payment.user_status_read = False
     payment.admin_notif_read = True
-    payment.save(update_fields=["refund_amount", "refund_note", "status", "user_status_read", "admin_notif_read", "updated_at"])
+    payment.save(update_fields=[
+        "refund_amount", "refund_note", "stripe_refund_id", "status",
+        "user_status_read", "admin_notif_read", "updated_at",
+    ])
 
     vehicle = payment.reservation.vehicle
     if vehicle.status != Vehicle.STATUS_AVAILABLE:
         vehicle.status = Vehicle.STATUS_AVAILABLE
         vehicle.save(update_fields=["status"])
 
-    username = payment.reservation.user.username
-    if refund_method == "virement":
-        iban_info = f" (IBAN : {bank_iban})" if bank_iban else ""
-        messages.success(request, f"Remboursement par virement de {refund_amount} EUR enregistre pour {username}{iban_info}. Effectuez le virement manuellement.")
-    else:
-        messages.success(request, f"Remboursement en especes de {refund_amount} EUR enregistre pour {username}.")
-
     _send_refund_email(payment)
+
+    username = payment.reservation.user.username
+    if stripe_ok:
+        messages.success(request, f"Remboursement Stripe de {refund_amount} EUR effectué pour {username} (réf. {stripe_result}).")
+    elif stripe_result is not None:
+        messages.warning(request, f"Remboursement de {refund_amount} EUR enregistré pour {username}. Stripe n'a pas pu traiter automatiquement — effectuez le remboursement manuellement.")
+    else:
+        messages.success(request, f"Remboursement de {refund_amount} EUR enregistré pour {username}.")
+
     return redirect("accounts:admin_dashboard")
 
 
 def _stripe_refund(payment, refund_amount):
     ref = payment.transaction_reference or ""
     if not ref.startswith("cs_"):
-        return False
+        return False, None  # Pas un paiement Stripe — remboursement manuel
+    pi_id = None
     try:
         stripe.api_key = settings.STRIPE_SECRET_KEY
         session = stripe.checkout.Session.retrieve(ref)
         pi_id = session.payment_intent
-        if pi_id:
-            stripe.Refund.create(
-                payment_intent=pi_id,
-                amount=int(refund_amount * 100),
+        if not pi_id:
+            return False, "Aucun PaymentIntent associé à cette session Stripe."
+        refund = stripe.Refund.create(
+            payment_intent=pi_id,
+            amount=int(refund_amount * 100),
+            reason="requested_by_customer",
+        )
+        return True, refund.id
+    except stripe.error.InvalidRequestError as e:
+        raw = str(e).lower()
+        if "greater than" in raw and "charge amount" in raw:
+            max_eur = _stripe_max_refundable(pi_id)
+            if max_eur is not None:
+                return False, (
+                    f"Le montant à rembourser ({refund_amount} EUR) dépasse le maximum "
+                    f"remboursable via Stripe ({max_eur:.2f} EUR). Ajustez le montant."
+                )
+            return False, (
+                f"Le montant ({refund_amount} EUR) dépasse la somme encaissée par Stripe. "
+                "Réduisez le montant et réessayez."
             )
-            return True
+        return False, "Paramètre invalide envoyé à Stripe. Vérifiez le montant saisi."
+    except stripe.error.StripeError:
+        return False, "Erreur lors du remboursement Stripe. Vérifiez les paramètres et réessayez."
     except Exception:
-        pass
-    return False
+        return False, "Erreur inattendue. Réessayez ou contactez le support."
+
+
+def _stripe_max_refundable(pi_id):
+    try:
+        pi = stripe.PaymentIntent.retrieve(pi_id)
+        return (pi.amount - pi.amount_refunded) / 100
+    except Exception:
+        return None
 
 
 def _admin_email():

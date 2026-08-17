@@ -43,6 +43,7 @@ class Payment(models.Model):
     refund_amount = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     refund_reason = models.TextField(blank=True, default="")
     refund_note = models.TextField(blank=True, null=True)
+    stripe_refund_id = models.CharField(max_length=50, blank=True, default="")
     user_status_read = models.BooleanField(default=True)
     admin_notif_read = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

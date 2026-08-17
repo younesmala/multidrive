@@ -3863,3 +3863,9 @@ msgstr "Confirm cancellation"
 
 msgid "Raison invoquee par le membre"
 msgstr "Reason given by the member"
+
+msgid "Le remboursement sera traite automatiquement via Stripe sur la carte originale du membre."
+msgstr "The refund will be processed automatically via Stripe to the member's original card."
+
+msgid "Ce paiement n'a pas de reference Stripe valide. Le remboursement sera enregistre dans le systeme mais devra etre effectue manuellement."
+msgstr "This payment has no valid Stripe reference. The refund will be recorded in the system but must be processed manually."

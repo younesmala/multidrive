@@ -224,52 +224,17 @@
                 <form method="post" action="{% url 'accounts:process_refund' payment.id %}" class="refund-form" id="refund-form-{{ payment.id }}">
                     {% csrf_token %}
 
-                    {# Méthode de remboursement #}
-                    <div class="refund-form-field" style="margin-bottom:14px;">
-                        <label style="margin-bottom:6px; display:block;">{% trans "Methode de remboursement" %}</label>
-                        <div style="display:flex; gap:20px; flex-wrap:wrap;">
-                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:400; font-size:.9rem;">
-                                <input type="radio" name="refund_method" value="cash" checked
-                                       onchange="toggleBankFields('{{ payment.id }}', false)">
-                                💵 {% trans "Remboursement en especes" %}
-                            </label>
-                            <label style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:400; font-size:.9rem;">
-                                <input type="radio" name="refund_method" value="virement"
-                                       onchange="toggleBankFields('{{ payment.id }}', true)">
-                                🏦 {% trans "Virement bancaire" %}
-                            </label>
-                        </div>
+                    {# Badge Stripe ou avertissement manuel #}
+                    {% if payment.is_stripe_payment %}
+                    <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; background:#F0FDF4; border:1px solid #86EFAC; border-radius:8px; margin-bottom:14px; font-size:.875rem;">
+                        <span style="background:#16A34A; color:#fff; font-size:.72rem; font-weight:700; padding:2px 8px; border-radius:4px; letter-spacing:.5px;">STRIPE</span>
+                        <span style="color:#166534;">{% trans "Le remboursement sera traite automatiquement via Stripe sur la carte originale du membre." %}</span>
                     </div>
-
-                    {# Coordonnées bancaires (virement uniquement) #}
-                    {% with user_status=payment.reservation.user.account_status %}
-                    <div id="bank-fields-{{ payment.id }}"
-                         style="display:none; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-bottom:14px;">
-                        <p style="margin:0 0 10px; font-size:.82rem; font-weight:600; color:#374151;">🏦 {% trans "Coordonnees bancaires du client" %}</p>
-                        {% if user_status and user_status.bank_iban %}
-                        <div style="background:#ECFDF5; border:1px solid #6EE7B7; border-radius:6px; padding:8px 12px; margin-bottom:10px; font-size:.78rem; color:#065F46;">
-                            ✅ {% trans "Coordonnees enregistrees lors de l'inscription" %}
-                        </div>
-                        {% endif %}
-                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                            <div>
-                                <label style="font-size:.78rem; color:#6B7280; display:block; margin-bottom:3px;">{% trans "Titulaire du compte" %}</label>
-                                <input type="text" name="bank_holder"
-                                       value="{% if user_status %}{{ user_status.bank_holder }}{% endif %}"
-                                       placeholder="Ex : Jean Dupont"
-                                       style="width:100%; padding:7px 10px; border:1px solid #D1D5DB; border-radius:6px; font-size:.85rem; box-sizing:border-box;">
-                            </div>
-                            <div>
-                                <label style="font-size:.78rem; color:#6B7280; display:block; margin-bottom:3px;">IBAN</label>
-                                <input type="text" name="bank_iban"
-                                       value="{% if user_status %}{{ user_status.bank_iban }}{% endif %}"
-                                       placeholder="Ex : BE68 5390 0754 7034"
-                                       style="width:100%; padding:7px 10px; border:1px solid #D1D5DB; border-radius:6px; font-size:.85rem; box-sizing:border-box; font-family:monospace;">
-                            </div>
-                        </div>
-                        <p style="margin:8px 0 0; font-size:.72rem; color:#9CA3AF;">{% trans "Ces informations seront enregistrees dans la note du remboursement." %}</p>
+                    {% else %}
+                    <div style="padding:10px 14px; background:#FEF9C3; border:1px solid #FDE047; border-radius:8px; margin-bottom:14px; font-size:.875rem; color:#854D0E;">
+                        {% trans "Ce paiement n'a pas de reference Stripe valide. Le remboursement sera enregistre dans le systeme mais devra etre effectue manuellement." %}
                     </div>
-                    {% endwith %}
+                    {% endif %}
 
                     <div class="refund-form-row">
                         <div class="refund-form-field">
@@ -628,7 +593,12 @@
         <div class="hist-body">
             {% for p in history_refunded_payments %}
             <div class="hist-row">
-                <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ p.reservation.user.username }} — {{ p.refund_amount|default:p.amount }} EUR</span>
+                <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+                    {{ p.reservation.user.username }} — {{ p.refund_amount|default:p.amount }} EUR
+                    {% if p.stripe_refund_id %}
+                        <span style="font-size:.72rem; color:#2563EB; font-family:monospace; margin-left:4px;" title="Stripe refund ID">{{ p.stripe_refund_id }}</span>
+                    {% endif %}
+                </span>
                 <span style="color:#aaa; flex-shrink:0;">{{ p.updated_at|date:"d/m/Y" }}</span>
             </div>
             {% empty %}
@@ -708,19 +678,10 @@
         }
     }
 
-    function toggleBankFields(paymentId, show) {
-        var bankDiv = document.getElementById('bank-fields-' + paymentId);
-        var stripeInfo = document.getElementById('stripe-info-' + paymentId);
-        if (bankDiv) bankDiv.style.display = show ? 'block' : 'none';
-        if (stripeInfo) stripeInfo.style.display = show ? 'none' : 'block';
-    }
-
     function confirmRefund(btn, paymentId) {
-        var form = document.getElementById('refund-form-' + paymentId);
-        var method = form.querySelector('input[name="refund_method"]:checked');
-        var methodVal = method ? method.value : 'cash';
-        var label = methodVal === 'virement' ? 'virement bancaire' : 'especes';
-        return confirm('Confirmer le remboursement par ' + label + ' ?');
+        var input = document.getElementById('refund_amount_' + paymentId);
+        var amount = input ? parseFloat(input.value).toFixed(2) : '?';
+        return confirm('Confirmer le remboursement de ' + amount + ' EUR via Stripe ?');
     }
     </script>
 </section>
