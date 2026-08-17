@@ -68,7 +68,7 @@ Plateforme web de vente de vehicules d'occasion, realisee dans le cadre d'un Tra
 - **Statistiques ventes** : revenus totaux, revenus du mois, ventes finalisees, acomptes en cours, vehicules vendus, top categories avec barres de progression
 - **Export CSV** des statistiques (revenus + detail des paiements + ventes par categorie)
 - **Moderation des temoignages** : validation avant publication, suppression directe depuis le dashboard
-- **Remboursements** : traitement avec montant + message pour le membre
+- **Remboursements via Stripe** : appel automatique `stripe.Refund.create()` depuis le dashboard — l'argent revient sur la carte originale du membre sans intervention manuelle. Calcul de retenue rapide (0 / 10 / 20 / 30 / 50 %). Badge vert "STRIPE" si paiement Stripe valide, alerte jaune sinon. ID du remboursement (`re_xxx`) stocké en base et visible dans l'historique. Si Stripe échoue (montant dépassé, session expirée), le remboursement est quand même enregistré avec une note d'erreur et un avertissement admin.
 - **Gestion des admins (superadmin uniquement)** :
   - Creer un compte administrateur (username, email, mot de passe provisoire)
   - Retirer les droits admin (redevient client)
