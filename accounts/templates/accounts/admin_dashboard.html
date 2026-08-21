@@ -119,11 +119,17 @@
 {# ── 3. Fil d'activite recente ── #}
 {% if activity_feed %}
 <section class="section" style="padding-bottom:0;">
-    <div style="background:#fff; border:1px solid #e2e2e2; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06);">
-        <div style="padding:16px 20px; border-bottom:1px solid #f0f0f0; display:flex; align-items:center; justify-content:space-between;">
+    <div data-bs-toggle="collapse" data-bs-target="#collapse-activity" aria-expanded="false" style="background:#fff; border:1px solid #e2e2e2; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06); cursor:pointer; user-select:none;">
+        <div style="padding:16px 20px; display:flex; align-items:center; justify-content:space-between;">
             <p style="margin:0; font-size:.72rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#666;">{% trans "Derniers mouvements" %}</p>
-            <span style="font-size:.78rem; color:#999;">{% trans "10 derniers evenements" %}</span>
+            <span style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:.78rem; color:#999;">{% trans "10 derniers evenements" %}</span>
+                <i class="fa-solid fa-chevron-down" style="font-size:.72rem; color:#aaa; transition:transform .2s;"></i>
+            </span>
         </div>
+    </div>
+    <div class="collapse" id="collapse-activity">
+    <div style="background:#fff; border:1px solid #e2e2e2; border-top:none; border-radius:0 0 10px 10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06);">
         {% for event in activity_feed %}
         <a href="{{ event.url }}" style="display:flex; align-items:center; gap:14px; padding:12px 20px; border-bottom:1px solid #f7f7f7; text-decoration:none; transition:background .15s; {% if forloop.last %}border-bottom:none;{% endif %}" onmouseover="this.style.background='#f8f9ff'" onmouseout="this.style.background='transparent'">
             <div style="width:34px; height:34px; border-radius:50%; background:{{ event.color }}18; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
@@ -139,6 +145,7 @@
             </span>
         </a>
         {% endfor %}
+    </div>
     </div>
 </section>
 {% endif %}
@@ -292,14 +299,17 @@
 {# ── 5. Temoignages en attente de validation ── #}
 {% if pending_testimonials %}
 <section class="section" style="padding-bottom:0;">
-    <div class="section-heading">
+    <div class="section-heading" data-bs-toggle="collapse" data-bs-target="#collapse-pending-testimonials" aria-expanded="true" style="cursor:pointer; user-select:none;">
         <div>
             <p class="eyebrow">{% trans "Moderation" %}</p>
-            <h2>{% trans "Temoignages en attente" %} <span style="background:#FEF3C7; color:#92400E; font-size:.75rem; font-weight:700; padding:2px 10px; border-radius:99px; vertical-align:middle;">{{ pending_testimonial_count }}</span></h2>
+            <h2>{% trans "Temoignages en attente" %} <span style="background:#FEF3C7; color:#92400E; font-size:.75rem; font-weight:700; padding:2px 10px; border-radius:99px; vertical-align:middle;">{{ pending_testimonial_count }}</span>
+                <i class="fa-solid fa-chevron-down" style="font-size:.75rem; margin-left:8px; transition:transform .2s;"></i>
+            </h2>
         </div>
         <p>{% trans "Validez ou supprimez les temoignages avant publication." %}</p>
     </div>
 
+    <div class="collapse show" id="collapse-pending-testimonials">
     <div style="background:#fff; border:1px solid #FDE68A; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06);">
         {% for t in pending_testimonials %}
         <div style="display:flex; align-items:flex-start; gap:16px; padding:16px 20px; border-bottom:1px solid #FEF3C7; {% if forloop.last %}border-bottom:none;{% endif %}">
@@ -360,20 +370,24 @@
         </div>
         {% endfor %}
     </div>
+    </div>
 </section>
 {% endif %}
 
 {# ── 5b. Temoignages publies ── #}
 {% if published_testimonials %}
 <section class="section" style="padding-bottom:0;">
-    <div class="section-heading">
+    <div class="section-heading" data-bs-toggle="collapse" data-bs-target="#collapse-published-testimonials" aria-expanded="false" style="cursor:pointer; user-select:none;">
         <div>
             <p class="eyebrow">{% trans "Moderation" %}</p>
-            <h2>{% trans "Temoignages publies" %}</h2>
+            <h2>{% trans "Temoignages publies" %}
+                <i class="fa-solid fa-chevron-down" style="font-size:.75rem; margin-left:8px; transition:transform .2s;"></i>
+            </h2>
         </div>
-        <a href="{% url 'payments:testimonial_list' %}" class="button secondary" style="font-size:.85rem;">{% trans "Voir la page publique" %}</a>
+        <a href="{% url 'payments:testimonial_list' %}" class="button secondary" style="font-size:.85rem;" onclick="event.stopPropagation()">{% trans "Voir la page publique" %}</a>
     </div>
 
+    <div class="collapse" id="collapse-published-testimonials">
     <div style="background:#fff; border:1px solid #e2e2e2; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,.06);">
         {% for t in published_testimonials %}
         <div style="display:flex; align-items:flex-start; gap:16px; padding:16px 20px; border-bottom:1px solid #f7f7f7; {% if forloop.last %}border-bottom:none;{% endif %}">
@@ -428,6 +442,7 @@
             </form>
         </div>
         {% endfor %}
+    </div>
     </div>
 </section>
 {% endif %}

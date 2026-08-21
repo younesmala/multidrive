@@ -47,14 +47,7 @@
             {% endif %}
 
             {% for field in form %}
-                {% if field.name == "bank_holder" %}
-                <p style="margin:20px 0 8px; font-size:.78rem; font-weight:600; color:#6B7280; text-transform:uppercase; letter-spacing:.05em;">
-                    {% trans "Coordonnees bancaires (optionnel)" %}
-                </p>
-                <p style="margin:0 0 12px; font-size:.78rem; color:#9CA3AF;">
-                    {% trans "Utilisees uniquement en cas de remboursement par virement bancaire." %}
-                </p>
-                {% endif %}
+                {% if field.name != "bank_holder" and field.name != "bank_iban" %}
                 {% if field.name == "accepted_cgv" %}
                 <div style="margin-top:20px;">
                     <label for="{{ field.id_for_label }}" style="display:flex; align-items:center; gap:10px; cursor:pointer; padding:12px 14px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px;">
@@ -80,6 +73,7 @@
                         <span class="field-error">{{ error }}</span>
                     {% endfor %}
                 </label>
+                {% endif %}
                 {% endif %}
             {% endfor %}
 
