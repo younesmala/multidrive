@@ -58,31 +58,6 @@
                     </button>
                 </form>
             </details>
-
-            <details style="margin-top:1rem;">
-                <summary style="cursor:pointer; font-size:.88rem; color:#1E3A8A; font-weight:600;">
-                    {% trans "Modifier mes coordonnees bancaires (IBAN)" %}
-                </summary>
-                <form method="post" action="{% url 'accounts:update_bank' %}" style="margin-top:.75rem;">
-                    {% csrf_token %}
-                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
-                        <div>
-                            <label style="font-size:.8rem; color:#6B7280; display:block; margin-bottom:3px;">{% trans "Titulaire" %}</label>
-                            <input type="text" name="bank_holder" value="{{ account_status.bank_holder }}"
-                                   placeholder="Ex : Jean Dupont"
-                                   style="width:100%; padding:7px 10px; border:1px solid #D1D5DB; border-radius:6px; font-size:.85rem; box-sizing:border-box;">
-                        </div>
-                        <div>
-                            <label style="font-size:.8rem; color:#6B7280; display:block; margin-bottom:3px;">IBAN</label>
-                            <input type="text" name="bank_iban" value="{{ account_status.bank_iban }}"
-                                   placeholder="Ex : BE68 5390 0754 7034"
-                                   style="width:100%; padding:7px 10px; border:1px solid #D1D5DB; border-radius:6px; font-size:.85rem; box-sizing:border-box; font-family:monospace;">
-                        </div>
-                    </div>
-                    <p style="margin:0 0 8px; font-size:.75rem; color:#9CA3AF;">{% trans "Utilises uniquement en cas de remboursement par virement bancaire. Ne sont jamais partages." %}</p>
-                    <button type="submit" style="background:#1E3A8A; color:#fff; border:none; border-radius:6px; padding:7px 18px; font-size:.85rem; cursor:pointer;">{% trans "Enregistrer" %}</button>
-                </form>
-            </details>
         </article>
 
         <article class="account-card">
