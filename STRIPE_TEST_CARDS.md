@@ -71,4 +71,4 @@ Dashboard Stripe (mode test) :
 
 ---
 
-*Document de test interne — ne pas partager publiquement.*
+*Document destine aux tests de paiement Stripe en environnement de demonstration.*

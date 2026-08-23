@@ -137,8 +137,9 @@ Pagination : 20 resultats par page (`?page=N`)
 ## Lancer le projet en local
 
 ```powershell
-cd C:\Users\elmal\OneDrive\Desktop\TFE_MultiDrive\multidrive
-..\venv\Scripts\python.exe manage.py runserver 127.0.0.1:8001
+git clone https://github.com/younesmala/multidrive.git
+cd multidrive
+venv\Scripts\python.exe manage.py runserver 127.0.0.1:8001
 ```
 
 URLs utiles :
@@ -150,6 +151,15 @@ http://127.0.0.1:8001/api/docs/ Documentation Swagger
 ```
 
 ## Comptes de test
+
+### Comptes destines au jury (soutenance)
+
+| Role | Username | Password |
+|---|---|---|
+| Membre | Jury_user | Testjury123 |
+| Administrateur | Jury | Testjury123 |
+
+### Autres comptes de developpement
 
 | Role | Username | Password |
 |---|---|---|

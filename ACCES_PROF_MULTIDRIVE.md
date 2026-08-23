@@ -41,8 +41,8 @@ Fonctionnalites testables :
 ### B. Membre
 
 ```text
-username: client_adam_001
-password: client1234
+username: Jury_user
+password: Testjury123
 ```
 
 Fonctionnalites testables :
@@ -60,8 +60,8 @@ Fonctionnalites testables :
 ### C. Administrateur
 
 ```text
-username: admin
-password: admin1234
+username: Jury
+password: Testjury123
 ```
 
 Fonctionnalites testables :
@@ -95,6 +95,6 @@ est une URL de test locale utilisee sur la machine de demonstration.
 
 ```text
 Visiteur       : consultation sans connexion
-Membre         : client_adam_001 / client1234
-Administrateur : admin / admin1234
+Membre         : Jury_user / Testjury123
+Administrateur : Jury / Testjury123
 ```
